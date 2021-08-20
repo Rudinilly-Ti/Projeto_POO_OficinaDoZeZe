@@ -59,7 +59,7 @@ public class OrcamentoVO{
         int mes = dataInicio.get(Calendar.MONTH);
         int ano = dataInicio.get(Calendar.YEAR);
 
-        if ((ano > 0) && (mes >= 0 && mes <= 11) && (ano > 0)) {
+        if ((dia > 0 && dia <= 31) && (mes >= 0 && mes <= 11) && (ano > 0)) {
             
             //Se a verificação tiver sucesso, os valores serão atribuidos a essas variaveis.
             diaInicio = dia;
@@ -79,7 +79,7 @@ public class OrcamentoVO{
         int mes = dataFim .get(Calendar.MONTH);
         int ano = dataFim.get(Calendar.YEAR);
 
-        if ((ano > 0) && (mes >= 0 && mes <= 11) && (ano > 0)) {
+        if ((dia > 0 && dia <= 31) && (mes >= 0 && mes <= 11) && (ano > 0)) {
             if (dia >= diaInicio && mes >= mesInicio && ano >= anoInicio) 
                 this.dataFim = dataFim;
             else System.out.println("Data inicial está após a data final inserida. Digite novamente.\n");
