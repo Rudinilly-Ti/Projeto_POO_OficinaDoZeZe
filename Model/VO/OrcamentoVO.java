@@ -49,14 +49,7 @@ public class OrcamentoVO{
     }
 
     public void setDataInicio(Calendar dataInicio) {
-        int dia = dataInicio.get(Calendar.DAY_OF_MONTH);
-        int mes = dataInicio.get(Calendar.MONTH);
-        int ano = dataInicio.get(Calendar.YEAR);
-
-        if ((dia > 0 && dia <= 31) && (mes >= 0 && mes <= 11) && (ano > 0)) {
-            this.dataInicio = dataInicio;
-        }
-        else System.out.println("Data inválida.\n");
+        this.dataInicio = dataInicio;
     }
 
     public Calendar getDataFim() {
@@ -64,16 +57,11 @@ public class OrcamentoVO{
     }
 
     public void setDataFim(Calendar dataFim) {
-        int dia = dataFim.get(Calendar.DAY_OF_MONTH);
-        int mes = dataFim .get(Calendar.MONTH);
-        int ano = dataFim.get(Calendar.YEAR);
-
-        if ((dia > 0 && dia <= 31) && (mes >= 0 && mes <= 11) && (ano > 0)) {
-            if (dia >= diaInicio && mes >= mesInicio && ano >= anoInicio) 
-                this.dataFim = dataFim;
-            else System.out.println("Data inicial está após a data final inserida. Digite novamente.\n");
+        
+        if (dataFim.compareTo(dataInicio) >= 0) {
+            this.dataFim = dataFim;
         }
-        else System.out.println("Data inválida.\n");
+        else System.out.println("A data inicial está após a data final inserida. Digite novamente.");
     }
 
     public PecaVO[] getPeca() {
