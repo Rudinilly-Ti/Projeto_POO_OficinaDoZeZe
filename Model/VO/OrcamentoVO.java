@@ -5,19 +5,13 @@ public class OrcamentoVO{
     private int qntPeca;
     private int qntServico;
     private double valor;
-    private Calendar dataInicio = Calendar.getInstance();
-    private Calendar dataFim = Calendar.getInstance();
+    private Calendar dataInicio;
+    private Calendar dataFim;
     private PecaVO [] peca = new PecaVO[qntPeca];
     private ClienteVO cliente = new ClienteVO();
     private ServicoVO [] servico = new ServicoVO[qntServico];
     private AutomovelVO carro = new AutomovelVO();
-
-    /*Variaveis que serão usadas para verificar se a 
-    data final está após ou no mesmo dia da inicial;*/
-    private int diaInicio;
-    private int mesInicio;
-    private int anoInicio;
-
+    
     public int getQntPeca() {
         return qntPeca;
     }
@@ -60,11 +54,6 @@ public class OrcamentoVO{
         int ano = dataInicio.get(Calendar.YEAR);
 
         if ((dia > 0 && dia <= 31) && (mes >= 0 && mes <= 11) && (ano > 0)) {
-            
-            //Se a verificação tiver sucesso, os valores serão atribuidos a essas variaveis.
-            diaInicio = dia;
-            mesInicio = mes;
-            anoInicio = ano;
             this.dataInicio = dataInicio;
         }
         else System.out.println("Data inválida.\n");
