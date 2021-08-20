@@ -69,8 +69,6 @@ public class AutomovelVO {
     }
 
     public void setDono(ClienteVO dono) {
-        if (!dono.isBlank()) {
         this.dono = dono;
-        }
     }
 }
