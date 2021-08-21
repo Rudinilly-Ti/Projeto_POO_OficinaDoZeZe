@@ -49,7 +49,7 @@ public class OrcamentoVO{
     }
 
     public void setDataInicio(Calendar dataInicio) {
-        int dia = dataInicio.get(Calendar.DATE);
+        int dia = dataInicio.get(Calendar.DAY_OF_MONTH);
         int mes = dataInicio.get(Calendar.MONTH);
         int ano = dataInicio.get(Calendar.YEAR);
 
@@ -65,7 +65,7 @@ public class OrcamentoVO{
 
     public void setDataFim(Calendar dataFim) {
         
-        int dia = dataFim.get(Calendar.DATE); 
+        int dia = dataFim.get(Calendar.DAY_OF_MONTH); 
         int mes = dataFim.get(Calendar.MONTH);
         int ano = dataFim.get(Calendar.YEAR);
 
