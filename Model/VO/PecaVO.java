@@ -2,7 +2,7 @@ package Model.VO;
 
 public class PecaVO {
     private String nome;
-    private double preço;
+    private double preco;
     private String fabricante;
 
     public String getNome() {
@@ -16,13 +16,13 @@ public class PecaVO {
         else System.out.println("Nome inválido.\n");
     }
 
-    public double getPreço() {
-        return preço;
+    public double getPreco() {
+        return preco;
     }
 
-    public void setPreço(double preçotmp) {
-        if (preçotmp > 0) {
-            preço = preçotmp;
+    public void setPreco(double precotmp) {
+        if (precotmp > 0) {
+            preco = precotmp;
         }
         else System.out.println("Valor inválido.\n");
     }
