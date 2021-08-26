@@ -2,11 +2,20 @@ package Model.VO;
 
 public class ClienteVO {
   private String nome;
-  private String endereço;
+  private String endereco;
   private String cpf;
 
+  public ClienteVO(String nome, String endereco, String cpf) {
+    setNome(nome);
+    setEndereco(endereco);
+    setCPF(cpf);
+  }
+
+  public ClienteVO() {
+  }
+
   public String getNome() {
-    return this.nome;
+    return nome;
   }
 
   public void setNome(String nome) {
@@ -17,20 +26,20 @@ public class ClienteVO {
     }
   }
 
-  public String getEndereço() {
-    return this.endereço;
+  public String getEndereco() {
+    return endereco;
   }
 
-  public void setEndereço(String endereço) {
-    if (!endereço.isBlank()) {
-      this.endereço = endereço;
+  public void setEndereco(String endereco) {
+    if (!endereco.isBlank()) {
+      this.endereco = endereco;
     }else {
       System.out.println("Endereço invalido");
     }
   }
 
   public String getCPF() {
-    return this.cpf;
+    return cpf;
   }
 
   public void setCPF(String cpf) {
