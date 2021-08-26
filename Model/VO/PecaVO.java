@@ -5,6 +5,16 @@ public class PecaVO {
     private double preco;
     private String fabricante;
 
+    public PecaVO(String nome, double preco, String fabricante){
+        setNome(nome);
+        setPreco(preco);
+        setFabricante(fabricante);
+    }
+
+    public PecaVO(){
+
+    }
+
     public String getNome() {
         return nome;
     }
