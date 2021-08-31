@@ -12,7 +12,7 @@ public class ServicoVO {
         setPreco(preco);
     }
 
-    public ServicoVO{
+    public ServicoVO(){
     
     }
 
