@@ -1,39 +1,17 @@
 package Model.VO;
 import java.util.Calendar;
+import java.util.List;
+import java.util.ArrayList;
 
 public class OrcamentoVO{
-    private int qntPeca;
-    private int qntServico;
     private double valor;
     private Calendar dataInicio;
     private Calendar dataFim;
-    private PecaVO [] peca = new PecaVO[qntPeca];
+    private List<PecaVO> peca = new ArrayList<PecaVO>();
     private ClienteVO cliente = new ClienteVO();
-    private ServicoVO [] servico = new ServicoVO[qntServico];
+    private List<ServicoVO> servico = new ArrayList<ServicoVO>();
     private AutomovelVO carro = new AutomovelVO();
     
-    public int getQntPeca() {
-        return qntPeca;
-    }
-
-    public void setQntPeca(int qntPeca) {
-        if (qntPeca >= 0) {
-            this.qntPeca = qntPeca;
-        }
-        else System.out.println("Quantidade de peça(s) inválida.\n");
-    }
-
-    public int getQntServico() {
-        return qntServico;
-    }
-
-    public void setQntServico(int qntServico) {
-        if (qntServico >= 0) {
-            this.qntServico = qntServico;
-        }
-        else System.out.println("Quantidade de serviço(s) inválida.\n");
-    }
-
     public double getValor() {
         return valor;
     }
@@ -78,11 +56,11 @@ public class OrcamentoVO{
         else System.out.println("Data inválida.\n");
     }
 
-    public PecaVO[] getPeca() {
+    public List<PecaVO> getPeca() {
         return peca;
     }
 
-    public void setPeca(PecaVO[] peca) {
+    public void setPeca(List<PecaVO> peca) {
         this.peca = peca;
     }
 
@@ -94,11 +72,11 @@ public class OrcamentoVO{
         this.cliente = cliente;
     }
 
-    public ServicoVO[] getServico() {
+    public List<ServicoVO> getServico() {
         return servico;
     }
 
-    public void setServico(ServicoVO[] servico) {
+    public void setServico(List<ServicoVO> servico) {
         this.servico = servico;
     }
 
