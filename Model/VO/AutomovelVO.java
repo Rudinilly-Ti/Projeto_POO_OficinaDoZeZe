@@ -17,7 +17,7 @@ public class AutomovelVO {
         setPlaca(placa);
         setAno(ano);
         setQuilometragem(quilometragem);
-        setDono(cliente);
+        setCliente(cliente);
     }
 
     public AutomovelVO{
