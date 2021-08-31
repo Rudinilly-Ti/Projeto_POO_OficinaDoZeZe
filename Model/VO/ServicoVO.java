@@ -1,9 +1,18 @@
 package Model.VO;
 public class ServicoVO {
 
+    // atributos
     private String nome;
     private double preco;
+    
 
+    // construtor da classe
+    public ServicoVO(String nome, double preco){
+        setNome(nome);
+        setPreco(preco);
+    }
+
+    // set's e get's da classe
     public String getNome(){
         return nome;
     }    

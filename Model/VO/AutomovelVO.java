@@ -1,13 +1,26 @@
 package Model.VO;
 public class AutomovelVO {
 
+    // atributos
+
     private String marca;
     private String cor;
     private String placa;
     private int ano;
     private double quilometragem;
-    private ClienteVO dono = new ClienteVO();
+    private ClienteVO cliente = new ClienteVO();
+    
+    // construtor
+    public AutomovelVO(String marca, String cor, String placa, int ano, double quilometragem, ClienteVO cliente){
+        setMarca(marca);
+        setCor(cor);
+        setPlaca(placa);
+        setAno(ano);
+        setQuilometragem(quilometragem);
+        setDono(cliente);
+    }
 
+    // set's e get's da classe
     public String getMarca() {
         return marca;
     } 
@@ -64,11 +77,11 @@ public class AutomovelVO {
             System.out.println("Valor inválido, tente novamente!\n");
     }   
 
-    public ClienteVO getDono() {
-        return dono;
+    public ClienteVO getCliente() {
+        return cliente;
     }
 
-    public void setDono(ClienteVO dono) {
-        this.dono = dono;
+    public void setCliente(ClienteVO cliente) {
+        this.cliente = cliente;
     }
 }
