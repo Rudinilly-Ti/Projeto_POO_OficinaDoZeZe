@@ -20,7 +20,7 @@ public class AutomovelVO {
         setCliente(cliente);
     }
 
-    public AutomovelVO{
+    public AutomovelVO(){
     
     }
 
