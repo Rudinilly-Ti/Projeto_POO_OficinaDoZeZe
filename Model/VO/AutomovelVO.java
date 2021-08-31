@@ -20,6 +20,10 @@ public class AutomovelVO {
         setDono(cliente);
     }
 
+    public AutomovelVO{
+    
+    }
+
     // set's e get's da classe
     public String getMarca() {
         return marca;

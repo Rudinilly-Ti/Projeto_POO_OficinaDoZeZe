@@ -12,6 +12,10 @@ public class ServicoVO {
         setPreco(preco);
     }
 
+    public ServicoVO{
+    
+    }
+
     // set's e get's da classe
     public String getNome(){
         return nome;
