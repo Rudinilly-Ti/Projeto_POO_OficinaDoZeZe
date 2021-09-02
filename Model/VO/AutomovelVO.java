@@ -1,4 +1,5 @@
 package Model.VO;
+
 public class AutomovelVO {
 
     // atributos
@@ -20,7 +21,7 @@ public class AutomovelVO {
         setDono(cliente);
     }
 
-    public AutomovelVO{
+    public AutomovelVO(){
     
     }
 

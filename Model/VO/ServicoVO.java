@@ -1,4 +1,5 @@
 package Model.VO;
+
 public class ServicoVO {
 
     // atributos
@@ -12,7 +13,7 @@ public class ServicoVO {
         setPreco(preco);
     }
 
-    public ServicoVO{
+    public ServicoVO(){
     
     }
 
