@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public class BaseDAO {
     Connection conn = null;
     String url = "jdbc:postgresql://localhost:5432/oficina";
-    String user = "<SeuUser>";
-    String senha = "<SuaSenha>";
+    String user = "Zeze2021";
+    String senha = "oficina2021";
     
     public Connection getConnection(){
         if(conn == null){

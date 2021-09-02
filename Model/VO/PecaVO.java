@@ -4,11 +4,19 @@ public class PecaVO {
     private String nome;
     private double preco;
     private String fabricante;
+    private Long id;
 
     public PecaVO(String nome, double preco, String fabricante){
         setNome(nome);
         setPreco(preco);
         setFabricante(fabricante);
+    }
+
+    public PecaVO(String nome, double preco, String fabricante, Long id){
+        setNome(nome);
+        setPreco(preco);
+        setFabricante(fabricante);
+        setId(id);
     }
 
     public PecaVO(){
@@ -46,5 +54,13 @@ public class PecaVO {
             fabricante = fabricantetmp;
         }
         else System.out.println("Nome de fabricante inválido.\n");
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

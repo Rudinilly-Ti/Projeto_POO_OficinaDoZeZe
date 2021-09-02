@@ -48,6 +48,7 @@ public class OrcamentoVO{
         int ano = dataFim.get(Calendar.YEAR);
 
         if ((dia > 0 && dia <= 31) && (mes >= 0 && mes <= 11) && (ano > 0)) {
+            //Testando se a data final submetida é igual ou superior à inicial do período.
             if (dataFim.compareTo(dataInicio) >= 0) {
                 this.dataFim = dataFim;
             }
