@@ -104,7 +104,7 @@ public class UsuarioDAO extends BaseDAO {
       while (rs.next()) {
         UsuarioVO uvo = new UsuarioVO();
         uvo.setId(rs.getLong("id"));
-        uvo.setLogin("login");
+        uvo.setLogin(rs.getString("login"));
         uvo.setSenha(rs.getString("senha"));
         uvo.setCargo(rs.getString("cargo"));
         usuarios.add(uvo);
