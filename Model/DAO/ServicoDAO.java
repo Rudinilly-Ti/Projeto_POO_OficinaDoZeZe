@@ -1,5 +1,5 @@
 package Model.DAO;
-
+import Model.VO.ServicoVO;
 import Model.DAO.BaseDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
