@@ -1,6 +1,7 @@
 package Model.VO;
 
 public class UsuarioVO {
+  private Long id;
   private String login;
   private String senha;
   private String cargo;
@@ -12,6 +13,14 @@ public class UsuarioVO {
   }
 
   public UsuarioVO() {
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getLogin() {
