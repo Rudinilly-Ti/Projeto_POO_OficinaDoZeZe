@@ -1,4 +1,5 @@
 package Model.DAO;
+import Model.VO.AutomovelVO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
