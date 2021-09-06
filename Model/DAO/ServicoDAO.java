@@ -1,6 +1,5 @@
 package Model.DAO;
 import Model.VO.ServicoVO;
-import Model.DAO.BaseDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,9 +20,9 @@ public class ServicoDAO extends BaseDAO{
 
         try {
             ptst = conn.prepareStatement(sql);
-            ptst.setString(1, servico.setNome());
-            ptst.setDouble(2, servico.setPreco());
-            ptst.setLong(3, servico.setId());
+            ptst.setString(1, servico.getNome());
+            ptst.setDouble(2, servico.getPreco());
+            ptst.setLong(3, servico.getId());
             ptst.execute();
         } catch (SQLException e) {
             //TODO: handle exception
@@ -40,7 +39,7 @@ public class ServicoDAO extends BaseDAO{
 
         try {
             ptst = conn.prepareStatement(sql);
-            ptst.setString(1, servico.getId());
+            ptst.setLong(1, servico.getId());
             ptst.executeUpdate();
         } catch (SQLException e) {
             //TODO: handle exception
@@ -113,7 +112,7 @@ public class ServicoDAO extends BaseDAO{
 
         try {
             ptst = conn.prepareStatement(sql);
-            ptst.setNome(1, servico.getNome());
+            ptst.setString(1, servico.getNome());
             ptst.setLong(2, servico.getId());
             ptst.executeUpdate();
         } catch (SQLException e) {

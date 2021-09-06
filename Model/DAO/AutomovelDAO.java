@@ -12,20 +12,18 @@ import Model.DAO.BaseDAO;
 public class AutomovelDAO extends BaseDAO{
     
     // ----- Inserir ------
-    public void inserir(AutomvelVO carro){
+    public void inserir(AutomovelVO carro){
         Connection conn = getConnection();
         String sql = "insert into Automovel (cor, placa, ano, quilometragem, nome, enderecom cpf) values (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ptst;
 
         try{
             ptst = conn.prepareStatement(sql);
-            ptst.setString(1, carro.setCor());
-            ptst.setString(2, carro.setPlaca());
-            ptst.setInt(3, carro.setAno());
-            ptst.setDouble(4, carro.setQuilometragem());
-            ptst.setString(5, carro.cliente.setNome());
-            ptst.setString(6, carro.cliente.setEndereco());
-            ptst.setString(7, carro.cliente.setCPF());
+            ptst.setString(1, carro.getCor());
+            ptst.setString(2, carro.getPlaca());
+            ptst.setInt(3, carro.getAno());
+            ptst.setDouble(4, carro.getQuilometragem());
+            ptst.setLong(5, carro.getCliente().getId());
             ptst.execute();
         } catch(SQLException e){
             e.printStackTrace();
@@ -54,7 +52,7 @@ public class AutomovelDAO extends BaseDAO{
         String sql = "select * from Automovel";
         Statement st;
         ResultSet rs;
-        List<AutomvelVO> carros = new ArrayList<AutomovelVO>();
+        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
         AutomovelVO car = new AutomovelVO();
 
         try{
