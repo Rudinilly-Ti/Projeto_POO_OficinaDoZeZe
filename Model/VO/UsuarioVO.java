@@ -20,7 +20,12 @@ public class UsuarioVO {
   }
 
   public void setId(Long id) {
-    this.id = id;
+    if(id > 0){
+      this.id = id;
+    }
+    else {
+      System.out.println("Valor de Id inválido.\n");
+    }
   }
 
   public String getLogin() {
