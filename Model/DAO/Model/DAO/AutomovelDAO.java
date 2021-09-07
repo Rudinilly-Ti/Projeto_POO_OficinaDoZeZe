@@ -155,34 +155,4 @@ public class AutomovelDAO extends BaseDAO{
             e.printStackTrace();
         }
     }
-    public void editarNome(AutomovelVO carro){
-
-        Connection conn = getConnection();
-        String sql = "update from Automovel set nome = ? where id = ?";
-        PreparedStatement ptst;
-
-        try {
-            ptst = conn.prepareStatement(sql);
-            ptst.setString(1, carro.getCliente().getNome());
-            ptst.setLong(2, carro.getCliente().getId());
-            ptst.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    public void editarEndereco(AutomovelVO carro){
-
-        Connection conn = getConnection();
-        String sql = "update from Automovel set endereco = ? where id = ?";
-        PreparedStatement ptst;
-
-        try {
-            ptst = conn.prepareStatement(sql);
-            ptst.setString(1, carro.getCliente().getEndereco());
-            ptst.setLong(2, carro.getCliente().getId());
-            ptst.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }
