@@ -67,7 +67,8 @@ public class AutomovelDAO extends BaseDAO{
                 car.setPlaca(rs.getString("Placa"));
                 car.setAno(rs.getInt("Ano"));
                 car.setQuilometragem(rs.getDouble("Quilometragem"));
-                car.getCliente().setId(rs.getLong("ID"));
+                car.getCliente().setId(rs.getLong("Id_cliente"));
+                car.setId(rs.getLong("Id"));
                 carros.add(car);
             }
         } catch(SQLException e){
@@ -86,7 +87,7 @@ public class AutomovelDAO extends BaseDAO{
         try {
             ptst = conn.prepareStatement(sql);
             ptst.setString(1, carro.getMarca());
-            ptst.setLong(2, carro.getCliente().getId());
+            ptst.setLong(2, carro.getId());
             ptst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -102,7 +103,7 @@ public class AutomovelDAO extends BaseDAO{
         try {
             ptst = conn.prepareStatement(sql);
             ptst.setString(1, carro.getCor());
-            ptst.setLong(2, carro.getCliente().getId());
+            ptst.setLong(2, carro.getId());
             ptst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -118,7 +119,7 @@ public class AutomovelDAO extends BaseDAO{
         try {
             ptst = conn.prepareStatement(sql);
             ptst.setString(1, carro.getPlaca());
-            ptst.setLong(2, carro.getCliente().getId());
+            ptst.setLong(2, carro.getId());
             ptst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -133,7 +134,7 @@ public class AutomovelDAO extends BaseDAO{
         try {
             ptst = conn.prepareStatement(sql);
             ptst.setInt(1, carro.getAno());
-            ptst.setLong(2, carro.getCliente().getId());
+            ptst.setLong(2, carro.getId());
             ptst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -149,7 +150,7 @@ public class AutomovelDAO extends BaseDAO{
         try {
             ptst = conn.prepareStatement(sql);
             ptst.setDouble(1, carro.getQuilometragem());
-            ptst.setLong(2, carro.getCliente().getId());
+            ptst.setLong(2, carro.getId());
             ptst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
