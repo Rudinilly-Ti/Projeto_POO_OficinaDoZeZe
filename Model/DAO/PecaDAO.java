@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PecaDAO extends BaseDAO{
-    PecaVO vo;
-
+    
     //Inserção
     public void inserir(PecaVO vo){
         conn = getConnection();

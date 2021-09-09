@@ -28,8 +28,11 @@ public class PecaVO {
     }
 
     public void setNome(String nometmp) {
-        if (!nometmp.isBlank()) {
-            nome = nometmp;
+        if(nometmp != null){
+            if (!(nometmp.isBlank())) {
+                nome = nometmp;
+            }
+            else System.out.println("Nome inválido.\n");
         }
         else System.out.println("Nome inválido.\n");
     }
@@ -50,8 +53,11 @@ public class PecaVO {
     }
     
     public void setFabricante(String fabricantetmp) {
-        if (!fabricantetmp.isBlank()) {
-            fabricante = fabricantetmp;
+        if(fabricantetmp != null){
+            if (!(fabricantetmp.isBlank())) {
+                fabricante = fabricantetmp;
+            }
+            else System.out.println("Nome de fabricante inválido.\n");
         }
         else System.out.println("Nome de fabricante inválido.\n");
     }
