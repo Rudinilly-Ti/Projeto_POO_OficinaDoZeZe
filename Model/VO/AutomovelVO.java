@@ -1,7 +1,6 @@
 package Model.VO;
 
 public class AutomovelVO {
-
     // atributos
 
     private String marca;
