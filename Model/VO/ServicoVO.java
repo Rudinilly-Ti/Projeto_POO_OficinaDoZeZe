@@ -1,7 +1,6 @@
 package Model.VO;
 
 public class ServicoVO {
-
     // atributos
     private String nome;
     private double preco;
@@ -24,11 +23,15 @@ public class ServicoVO {
     }    
 
     public void setNome(String nome){
-        if(!nome.isBlank()){
-            this.nome = nome;
-        }
-        else
-            System.out.println("Nome inválido");
+    	if(nome != null) {
+    		if(!nome.isBlank()){
+                this.nome = nome;
+            }
+            else
+                System.out.println("Nome inválido");
+    	}
+    	else
+    		System.out.println("Nome com valor nulo !");
     }
 
     public double getPreco(){

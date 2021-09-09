@@ -1,7 +1,6 @@
 package Model.VO;
 
 public class AutomovelVO {
-
     // atributos
 
     private String marca;
@@ -10,7 +9,7 @@ public class AutomovelVO {
     private int ano;
     private double quilometragem;
     private ClienteVO cliente = new ClienteVO();
-    private Long id;
+    private long idAutomovel;
     
     // construtor
     public AutomovelVO(String marca, String cor, String placa, int ano, double quilometragem, ClienteVO cliente){
@@ -33,9 +32,15 @@ public class AutomovelVO {
 
     public void setMarca(String marca) {
 
-        if(!marca.isBlank()){
-            this.marca = marca;
-        }
+    	if(marca != null) {
+    		if(!marca.isBlank()){
+                this.marca = marca;
+            }
+    		else
+    			System.out.println("Marca inválida!");
+    	}
+    	else
+    		System.out.println("Marca com valor nulo!");
     }
 
     public String getCor() {
@@ -43,9 +48,15 @@ public class AutomovelVO {
     }
 
     public void setCor(String cor) {
-        if(!cor.isBlank()){
-            this.cor = cor;
-        }
+    	if(cor != null) {
+    		if(!cor.isBlank()){
+                this.cor = cor;
+            }
+            else
+            	System.out.println("Cor inválida!");
+    	}
+    	else
+    		System.out.println("Cor com valor nulo!");
     }
 
     public String getPlaca() {
@@ -53,9 +64,15 @@ public class AutomovelVO {
     }
 
     public void setPlaca(String placa) {
-        if(!placa.isBlank()){
-            this.placa = placa;
-        }
+    	if(placa != null) {
+    		if(!placa.isBlank()){
+                this.placa = placa;
+            }
+            else
+            	System.out.println("Placa inválida!");
+    	}
+    	else
+    		System.out.println("Placa com valor nulo!");
     }
 
     public int getAno() {
@@ -63,12 +80,10 @@ public class AutomovelVO {
     }
 
     public void setAno(int ano) {
-        if(ano > 0){
-            this.ano = ano;
-
-        }       
+        if(ano > 0)
+           this.ano = ano;       
         else
-            System.out.println("Valor inválido, tente novamente!\n");
+           System.out.println("Valor inválido, tente novamente!");
     }
 
     public double getQuilometragem() {
@@ -76,11 +91,11 @@ public class AutomovelVO {
     }
 
     public void setQuilometragem(double quilometragem) {
-        if (quilometragem > 0) {
+        if (quilometragem >= 0) {
             this.quilometragem = quilometragem;
         }
         else
-            System.out.println("Valor inválido, tente novamente!\n");
+            System.out.println("Valor inválido, tente novamente!");
     }   
 
     public ClienteVO getCliente() {
@@ -91,16 +106,14 @@ public class AutomovelVO {
         this.cliente = cliente;
     }
 
-    public Long getId() {
-        return id;
-    }
+	public long getIdAutomovel() {
+		return idAutomovel;
+	}
 
-    public void setId(Long id) {
-        if(id > 0){
-            this.id = id;
-        }
-        else{
-            System.out.println("Valor de Id inválido.\n");
-        }
-    }
+	public void setIdAutomovel(long idAutomovel) {
+		if(idAutomovel > 0)
+			this.idAutomovel = idAutomovel;
+		else
+			System.out.println("ID incorreto!");
+	}
 }
