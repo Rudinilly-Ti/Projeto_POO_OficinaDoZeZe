@@ -11,7 +11,21 @@ public class OrcamentoVO {
     private ClienteVO cliente = new ClienteVO();
     private List<ServicoVO> servico = new ArrayList<ServicoVO>();
     private AutomovelVO carro = new AutomovelVO();
-    
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        if(id > 0){
+            this.id = id;
+        }
+        else{
+            System.out.println("Valor de Id inválido.\n");
+        }
+    }
+
     public double getValor() {
         return valor;
     }
@@ -62,7 +76,11 @@ public class OrcamentoVO {
     }
 
     public void setPeca(List<PecaVO> peca) {
-        this.peca = peca;
+        for(PecaVO vo:peca){
+            if(vo != null){
+                this.peca.add(vo);
+            }
+        }
     }
 
     public ClienteVO getCliente() {
@@ -70,7 +88,12 @@ public class OrcamentoVO {
     }
 
     public void setCliente(ClienteVO cliente) {
-        this.cliente = cliente;
+        if(cliente != null){
+            this.cliente = cliente;
+        }
+        else{
+            System.out.println("Dado inválido.\n");
+        }
     }
 
     public List<ServicoVO> getServico() {
@@ -78,7 +101,11 @@ public class OrcamentoVO {
     }
 
     public void setServico(List<ServicoVO> servico) {
-        this.servico = servico;
+        for(ServicoVO vo:servico){
+            if(vo != null){
+                this.servico.add(vo);
+            }
+        }
     }
 
     public AutomovelVO getCarro() {
@@ -86,6 +113,11 @@ public class OrcamentoVO {
     }
 
     public void setCarro(AutomovelVO carro) {
-        this.carro = carro;
+        if(carro != null){
+            this.carro = carro;
+        }
+        else{
+            System.out.println("Dado inválido.\n");
+        }
     }
 }
