@@ -10,6 +10,7 @@ public class AutomovelVO {
     private int ano;
     private double quilometragem;
     private ClienteVO cliente = new ClienteVO();
+    private Long id;
     
     // construtor
     public AutomovelVO(String marca, String cor, String placa, int ano, double quilometragem, ClienteVO cliente){
@@ -88,5 +89,18 @@ public class AutomovelVO {
 
     public void setCliente(ClienteVO cliente) {
         this.cliente = cliente;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        if(id > 0){
+            this.id = id;
+        }
+        else{
+            System.out.println("Valor de Id inválido.\n");
+        }
     }
 }
