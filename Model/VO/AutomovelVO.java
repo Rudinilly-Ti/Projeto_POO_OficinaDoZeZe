@@ -9,7 +9,7 @@ public class AutomovelVO {
     private int ano;
     private double quilometragem;
     private ClienteVO cliente = new ClienteVO();
-    private long idAutomovel;
+    private Long id;
     
     // construtor
     public AutomovelVO(String marca, String cor, String placa, int ano, double quilometragem, ClienteVO cliente){
@@ -106,13 +106,13 @@ public class AutomovelVO {
         this.cliente = cliente;
     }
 
-	public long getIdAutomovel() {
-		return idAutomovel;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdAutomovel(long idAutomovel) {
-		if(idAutomovel > 0)
-			this.idAutomovel = idAutomovel;
+	public void setId(Long id) {
+		if(id > 0)
+			this.id = id;
 		else
 			System.out.println("ID incorreto!");
 	}
