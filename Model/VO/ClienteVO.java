@@ -20,7 +20,7 @@ public class ClienteVO {
   }
 
   public void setId(Long id) {
-    if(id > 0){
+    if(id > 0 && id != null){
       this.id = id;
     }
     else {
@@ -33,7 +33,7 @@ public class ClienteVO {
   }
 
   public void setNome(String nome) {
-    if (!nome.isBlank()) {
+    if (!nome.isBlank() && nome != null) {
       this.nome = nome;
     }else {
       System.out.println("Nome invalido");
@@ -45,7 +45,7 @@ public class ClienteVO {
   }
 
   public void setEndereco(String endereco) {
-    if (!endereco.isBlank()) {
+    if (!endereco.isBlank() && endereco != null) {
       this.endereco = endereco;
     }else {
       System.out.println("Endereço invalido");
@@ -57,7 +57,7 @@ public class ClienteVO {
   }
 
   public void setCPF(String cpf) {
-    if (!cpf.isBlank()) {
+    if (!cpf.isBlank() && cpf != null) {
       this.cpf = cpf; 
     }else {
       System.out.println("CPF invalido");
