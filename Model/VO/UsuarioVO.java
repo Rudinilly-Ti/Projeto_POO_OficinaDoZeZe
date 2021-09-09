@@ -20,7 +20,7 @@ public class UsuarioVO {
   }
 
   public void setId(Long id) {
-    if(id > 0){
+    if(id > 0 && id != null){
       this.id = id;
     }
     else {
@@ -33,7 +33,7 @@ public class UsuarioVO {
   }
 
   public void setLogin(String login) {
-    if (!login.isBlank()) {
+    if (!login.isBlank() && login != null) {
       this.login = login;  
     }else {
       System.out.println("Login invalido");
@@ -45,7 +45,7 @@ public class UsuarioVO {
   }
 
   public void setSenha(String senha) {
-    if (!senha.isBlank()) {
+    if (!senha.isBlank() && senha != null) {
     this.senha = senha;
     }else {
       System.out.println("Senha invalido");
@@ -57,7 +57,7 @@ public class UsuarioVO {
   }
 
   public void setCargo(String cargo) {
-    if (!cargo.isBlank()) {
+    if (!cargo.isBlank() && cargo!= null) {
       this.cargo = cargo;
     }else {
       System.out.println("Cargo invalido");
