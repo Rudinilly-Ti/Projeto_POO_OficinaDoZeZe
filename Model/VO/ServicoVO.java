@@ -1,4 +1,4 @@
-package Model.VO;
+package model.vo;
 
 public class ServicoVO {
     // atributos
@@ -44,11 +44,11 @@ public class ServicoVO {
         }
     }
 
-    public Long getId(){
+    public long getId(){
         return id;
     }
 
-    public void setId(Long id){
+    public void setId(long id){
         if(id > 0){
             this.id = id;
         }
