@@ -1,4 +1,4 @@
-package model.vo;
+package Model.VO;
 
 public class ServicoVO {
     // atributos
