@@ -94,7 +94,7 @@ public class PecaDAO extends BaseDAO{
     }
 
     //Alteração
-    public void editarByNome(PecaVO vo){
+    public void editarNome(PecaVO vo){
         conn = getConnection();
         String sql = "update Peca set nome = ? where id = ?";
         PreparedStatement pdst;
@@ -108,7 +108,7 @@ public class PecaDAO extends BaseDAO{
             e.printStackTrace();
         }
     }
-    public void editarByPreco(PecaVO vo){
+    public void editarPreco(PecaVO vo){
         conn = getConnection();
         String sql = "update Peca set preco = ? where id = ?";
         PreparedStatement pdst;
@@ -122,7 +122,7 @@ public class PecaDAO extends BaseDAO{
             e.printStackTrace();
         }
     }
-    public void editarByFabricante(PecaVO vo){
+    public void editarFabricante(PecaVO vo){
         conn = getConnection();
         String sql = "update Peca set fabricante = ? where id = ?";
         PreparedStatement pdst;
