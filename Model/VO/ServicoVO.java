@@ -44,11 +44,11 @@ public class ServicoVO {
         }
     }
 
-    public long getId(){
+    public Long getId(){
         return id;
     }
 
-    public void setId(long id){
+    public void setId(Long id){
         if(id > 0){
             this.id = id;
         }
