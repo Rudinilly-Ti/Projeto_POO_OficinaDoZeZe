@@ -29,7 +29,7 @@ public class OrcamentoDAO extends BaseDAO{
             pdst = conn.prepareStatement(sql);
             pdst.setLong(1, vo.getId());
             pdst.setLong(2, vo.getCliente().getId());
-            pdst.setLong(3, vo.getCarro().getId());
+            pdst.setLong(3, vo.getCarro().getID());
             
             for(PecaVO pvo: vo.getPeca()){
                 idPecas.add(pvo.getId());
@@ -124,7 +124,7 @@ public class OrcamentoDAO extends BaseDAO{
                 OrcamentoVO orcVo = new OrcamentoVO();
                 orcVo.setId(rs.getLong("Id"));
                 orcVo.getCliente().setId(rs.getLong("Id"));
-                orcVo.getCarro().setId(rs.getLong("Id"));
+                orcVo.getCarro().setID(rs.getLong("Id"));
                 
                 Array pArray = rs.getArray("id_peca");
                 Array sArray = rs.getArray("id_servico");
@@ -161,7 +161,7 @@ public class OrcamentoDAO extends BaseDAO{
     }
 
     //Alteração
-    public void editarByValor(OrcamentoVO vo){
+    public void editarValor(OrcamentoVO vo){
         conn = getConnection();
         String sql = "update Orcamento set valor = ? where id = ?";
         PreparedStatement pdst;
@@ -176,7 +176,7 @@ public class OrcamentoDAO extends BaseDAO{
         }
     }
 
-    public void editarByDataInicial(OrcamentoVO vo){
+    public void editarDataInicial(OrcamentoVO vo){
         conn = getConnection();
         String sql = "update Orcamento set data_inicio = ? where id = ?";
         PreparedStatement pdst;
@@ -192,7 +192,7 @@ public class OrcamentoDAO extends BaseDAO{
         }
     }
 
-    public void editarByDataFinal(OrcamentoVO vo){
+    public void editarDataFinal(OrcamentoVO vo){
         conn = getConnection();
         String sql = "update Orcamento set data_fim = ? where id = ?";
         PreparedStatement pdst;
@@ -200,6 +200,72 @@ public class OrcamentoDAO extends BaseDAO{
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setDate(1, DateSqlFim);
+            pdst.setLong(2, vo.getId());
+            pdst.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public void editarClienteId(OrcamentoVO vo){
+        conn = getConnection();
+        String sql = "update Orcamento set id_cliente = ? where id = ?";
+        PreparedStatement pdst;
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getCliente().getId());
+            pdst.setLong(2, vo.getId());
+            pdst.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public void editarAutomovelId(OrcamentoVO vo){
+        conn = getConnection();
+        String sql = "update Orcamento set id_automovel = ? where id = ?";
+        PreparedStatement pdst;
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getCarro().getID());
+            pdst.setLong(2, vo.getId());
+            pdst.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public void editarPecaId(OrcamentoVO vo){
+        conn = getConnection();
+        String sql = "update Orcamento set id_peca = ? where id = ?";
+        PreparedStatement pdst;
+        List<Long> idPecas;
+        try {
+            idPecas = new ArrayList<Long>();
+            pdst = conn.prepareStatement(sql);
+            for(PecaVO pvo: vo.getPeca()){
+                idPecas.add(pvo.getId());
+            }
+            pdst.setArray(1, conn.createArrayOf("integer", idPecas.toArray()));
+            pdst.setLong(2, vo.getId());
+            pdst.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public void editarServicoId(OrcamentoVO vo){
+        conn = getConnection();
+        String sql = "update Orcamento set id_servico = ? where id = ?";
+        PreparedStatement pdst;
+        List<Long> idServicos;
+        try {
+            idServicos = new ArrayList<Long>();
+            pdst = conn.prepareStatement(sql);
+            for(ServicoVO svo: vo.getServico()){
+                idServicos.add(svo.getId());
+            }
+            pdst.setArray(1, conn.createArrayOf("integer", idServicos.toArray()));
             pdst.setLong(2, vo.getId());
             pdst.executeUpdate();
         } catch (SQLException e) {
