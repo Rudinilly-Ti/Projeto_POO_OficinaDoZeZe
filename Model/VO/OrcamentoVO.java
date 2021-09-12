@@ -18,7 +18,7 @@ public class OrcamentoVO {
     }
 
     public void setId(Long id) {
-        if(id > 0){
+        if(id > 0 && id != null){
             this.id = id;
         }
         else{
