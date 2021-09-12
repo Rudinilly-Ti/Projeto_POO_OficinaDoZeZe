@@ -120,7 +120,7 @@ public class ClienteDAO extends BaseDAO {
   }
 
   //Alteração
-  public void editarByNome(ClienteVO vo) {
+  public void editarNome(ClienteVO vo) {
     conn = getConnection();
     String sql = "UPDATE cliente SET nome = ? WHERE id = ?";
     PreparedStatement pdst;
@@ -134,7 +134,7 @@ public class ClienteDAO extends BaseDAO {
     }
   }
 
-  public void editarByEndereco(ClienteVO vo) {
+  public void editarEndereco(ClienteVO vo) {
     conn = getConnection();
     String sql = "UPDATE cliente SET endereco = ? WHERE id = ?";
     PreparedStatement pdst;
@@ -148,7 +148,7 @@ public class ClienteDAO extends BaseDAO {
     }
   }
 
-  public void editarByCPF(ClienteVO vo) {
+  public void editarCPF(ClienteVO vo) {
     conn = getConnection();
     String sql = "UPDATE cliente SET cpf = ? WHERE id = ?";
     PreparedStatement pdst;
