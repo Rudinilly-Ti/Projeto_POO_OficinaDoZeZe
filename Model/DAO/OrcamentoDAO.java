@@ -114,7 +114,8 @@ public class OrcamentoDAO extends BaseDAO{
         Statement st;
         ResultSet rs;
         List<OrcamentoVO> orcamentos = new ArrayList<OrcamentoVO>();
-        Integer idServicos[], idPecas[];
+        PecaVO pvo = new PecaVO();
+        ServicoVO svo = new ServicoVO();
         Calendar dataIni = Calendar.getInstance();
         Calendar dataFim = Calendar.getInstance();
         try {
@@ -123,27 +124,22 @@ public class OrcamentoDAO extends BaseDAO{
             while (rs.next()) {
                 OrcamentoVO orcVo = new OrcamentoVO();
                 orcVo.setId(rs.getLong("Id"));
-                orcVo.getCliente().setId(rs.getLong("Id"));
-                orcVo.getCarro().setID(rs.getLong("Id"));
+                orcVo.getCliente().setId(rs.getLong("Id_cliente"));
+                orcVo.getCarro().setID(rs.getLong("Id_automovel"));
                 
                 Array pArray = rs.getArray("id_peca");
                 Array sArray = rs.getArray("id_servico");
-                idPecas = (Integer[])pArray.getArray();
-                idServicos = (Integer[])sArray.getArray();
-
-                for (int i = 0; i < idPecas.length; i++) {
-                    for(PecaVO pvo: orcVo.getPeca()){
-                        pvo.setId(new Long(idPecas[i]));
-                        orcVo.getPeca().add(pvo);
-                    }
+                
+                for(Integer id: (Integer[])pArray.getArray()){
+                    pvo.setId(new Long(id));
+                    orcVo.getPeca().add(pvo);
+                }
+                
+                for(Integer id: (Integer[])sArray.getArray()){
+                    svo.setId(new Long(id));
+                    orcVo.getServico().add(svo);
                 }
 
-                for (int i = 0; i < idServicos.length; i++) {
-                    for(ServicoVO svo: orcVo.getServico()){
-                        svo.setId(new Long(idServicos[i]));
-                        orcVo.getServico().add(svo);
-                    }
-                }
                 orcVo.setValor(rs.getDouble("valor"));
                 
                 dataIni.setTime(rs.getDate("data_inicio"));
