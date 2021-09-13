@@ -15,7 +15,7 @@ public class AutomovelDAO extends BaseDAO{
     // ----- Inserir ------
     public void inserir(AutomovelVO carro){ // OK
         Connection conn = getConnection();
-        String sql = "insert into Automovel (Marca, Cor, Placa, Ano, Quilometragem, Cliente, ID) values (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into Automovel (Marca, Cor, Placa, Ano, Quilometragem, id_cliente) values (?, ?, ?, ?, ?, ?)";
         PreparedStatement ptst;
 
         try{
@@ -26,7 +26,6 @@ public class AutomovelDAO extends BaseDAO{
             ptst.setInt(4, carro.getAno());
             ptst.setDouble(5, carro.getQuilometragem());
             ptst.setLong(6, carro.getCliente().getId());
-            ptst.setLong(7, carro.getID());
             ptst.execute();
         } catch(SQLException e){
             e.printStackTrace();
@@ -35,7 +34,7 @@ public class AutomovelDAO extends BaseDAO{
 
     
     // ----- Remover -------
-    public void removerByIdCarro(AutomovelVO carro){ // OK
+    public void removerById(AutomovelVO carro){ // OK
         Connection conn = getConnection();
         String sql = "delete from Automovel where id = ?";
         PreparedStatement ptst;
@@ -51,7 +50,7 @@ public class AutomovelDAO extends BaseDAO{
     
     public void removerByIdCliente(AutomovelVO carro){ // OK
         Connection conn = getConnection();
-        String sql = "delete from Automovel where id = ?";
+        String sql = "delete from Automovel where id_cliente = ?";
         PreparedStatement ptst;
 
         try{
@@ -83,7 +82,7 @@ public class AutomovelDAO extends BaseDAO{
                 car.setPlaca(rs.getString("Placa"));
                 car.setAno(rs.getInt("Ano"));
                 car.setQuilometragem(rs.getDouble("Quilometragem"));
-                car.getCliente().setId(rs.getLong("Cliente"));
+                car.getCliente().setId(rs.getLong("id_cliente"));
                 car.setID(rs.getLong("ID"));
                 carros.add(car);
             }
@@ -119,7 +118,7 @@ public class AutomovelDAO extends BaseDAO{
         try {
             ptst = conn.prepareStatement(sql);
             ptst.setString(1, carro.getCor());
-            ptst.setLong(2, carro.getCliente().getId());
+            ptst.setLong(2, carro.getID());
             ptst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -135,7 +134,7 @@ public class AutomovelDAO extends BaseDAO{
         try {
             ptst = conn.prepareStatement(sql);
             ptst.setString(1, carro.getPlaca());
-            ptst.setLong(2, carro.getCliente().getId());
+            ptst.setLong(2, carro.getID());
             ptst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -150,7 +149,7 @@ public class AutomovelDAO extends BaseDAO{
         try {
             ptst = conn.prepareStatement(sql);
             ptst.setInt(1, carro.getAno());
-            ptst.setLong(2, carro.getCliente().getId());
+            ptst.setLong(2, carro.getID());
             ptst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -166,21 +165,21 @@ public class AutomovelDAO extends BaseDAO{
         try {
             ptst = conn.prepareStatement(sql);
             ptst.setDouble(1, carro.getQuilometragem());
-            ptst.setLong(2, carro.getCliente().getId());
+            ptst.setLong(2, carro.getID());
             ptst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
-    public void editarByClienteId(AutomovelVO carro) {
+    public void editarClienteId(AutomovelVO carro) {
     	Connection conn = getConnection();
-    	String sql = "update Automovel set ID_Carro = ? where Cliente = ?";
+    	String sql = "update Automovel set id_cliente = ? where id = ?";
     	PreparedStatement ptst;
     	try {
     		ptst = conn.prepareStatement(sql);
-            ptst.setLong(1, carro.getID());
-            ptst.setLong(2, carro.getCliente().getId());
+            ptst.setLong(1, carro.getCliente().getId());
+            ptst.setLong(2, carro.getID());
             ptst.executeUpdate();
     	} catch(SQLException e){
     		 e.printStackTrace();

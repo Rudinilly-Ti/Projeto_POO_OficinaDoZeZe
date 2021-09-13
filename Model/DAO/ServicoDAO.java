@@ -16,14 +16,13 @@ public class ServicoDAO extends BaseDAO{
     public void inserir(ServicoVO servico){
 
         Connection conn = getConnection();
-        String sql = "insert into Servico (nome, preco, id) values (?, ?, ?)";
+        String sql = "insert into Servico (nome, preco) values (?, ?)";
         PreparedStatement ptst;
 
         try {
             ptst = conn.prepareStatement(sql);
             ptst.setString(1, servico.getNome());
             ptst.setDouble(2, servico.getPreco());
-            ptst.setLong(3, servico.getId());
             ptst.execute();
         } catch (SQLException e) {
             //TODO: handle exception
