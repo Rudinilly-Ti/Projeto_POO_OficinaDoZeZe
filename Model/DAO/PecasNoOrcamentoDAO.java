@@ -84,6 +84,136 @@ public class PecasNoOrcamentoDAO extends BaseDAO{
         return pecas;
     }
 
+    public List<PecasNoOrcamentoVO> findByValor(PecasNoOrcamentoVO vo){
+        conn = getConnection();
+        String sql = "select * from PecasNoOrcamento where valor = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<PecasNoOrcamentoVO> pecas = new ArrayList<PecasNoOrcamentoVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setDouble(1, vo.getValor());
+            rs = pdst.executeQuery();
+            while (rs.next()) {
+                PecasNoOrcamentoVO pvo = new PecasNoOrcamentoVO();
+                pvo.setValor(rs.getDouble("valor"));
+                pvo.setQuantidade(rs.getInt("quantidade"));
+                pvo.getPeca().setId(rs.getLong("id_peca"));
+                pvo.getOrcamento().setId(rs.getLong("id_orcamento"));
+                pvo.setId(rs.getLong("id"));
+                pecas.add(pvo);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return pecas;
+    }
+
+    public List<PecasNoOrcamentoVO> findByQuantidade(PecasNoOrcamentoVO vo){
+        conn = getConnection();
+        String sql = "select * from PecasNoOrcamento where quantidade = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<PecasNoOrcamentoVO> pecas = new ArrayList<PecasNoOrcamentoVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setInt(1, vo.getQuantidade());
+            rs = pdst.executeQuery();
+            while (rs.next()) {
+                PecasNoOrcamentoVO pvo = new PecasNoOrcamentoVO();
+                pvo.setValor(rs.getDouble("valor"));
+                pvo.setQuantidade(rs.getInt("quantidade"));
+                pvo.getPeca().setId(rs.getLong("id_peca"));
+                pvo.getOrcamento().setId(rs.getLong("id_orcamento"));
+                pvo.setId(rs.getLong("id"));
+                pecas.add(pvo);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return pecas;
+    }
+
+    public List<PecasNoOrcamentoVO> findByPecaId(PecasNoOrcamentoVO vo){
+        conn = getConnection();
+        String sql = "select * from PecasNoOrcamento where id_peca = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<PecasNoOrcamentoVO> pecas = new ArrayList<PecasNoOrcamentoVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getPeca().getId());
+            rs = pdst.executeQuery();
+            while (rs.next()) {
+                PecasNoOrcamentoVO pvo = new PecasNoOrcamentoVO();
+                pvo.setValor(rs.getDouble("valor"));
+                pvo.setQuantidade(rs.getInt("quantidade"));
+                pvo.getPeca().setId(rs.getLong("id_peca"));
+                pvo.getOrcamento().setId(rs.getLong("id_orcamento"));
+                pvo.setId(rs.getLong("id"));
+                pecas.add(pvo);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return pecas;
+    }
+
+    public List<PecasNoOrcamentoVO> findByOrcamentoId(PecasNoOrcamentoVO vo){
+        conn = getConnection();
+        String sql = "select * from PecasNoOrcamento where id_orcamento = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<PecasNoOrcamentoVO> pecas = new ArrayList<PecasNoOrcamentoVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getOrcamento().getId());
+            rs = pdst.executeQuery();
+            while (rs.next()) {
+                PecasNoOrcamentoVO pvo = new PecasNoOrcamentoVO();
+                pvo.setValor(rs.getDouble("valor"));
+                pvo.setQuantidade(rs.getInt("quantidade"));
+                pvo.getPeca().setId(rs.getLong("id_peca"));
+                pvo.getOrcamento().setId(rs.getLong("id_orcamento"));
+                pvo.setId(rs.getLong("id"));
+                pecas.add(pvo);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return pecas;
+    }
+
+    public List<PecasNoOrcamentoVO> findById(PecasNoOrcamentoVO vo){
+        conn = getConnection();
+        String sql = "select * from PecasNoOrcamento where id = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<PecasNoOrcamentoVO> pecas = new ArrayList<PecasNoOrcamentoVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getId());
+            rs = pdst.executeQuery();
+            while (rs.next()) {
+                PecasNoOrcamentoVO pvo = new PecasNoOrcamentoVO();
+                pvo.setValor(rs.getDouble("valor"));
+                pvo.setQuantidade(rs.getInt("quantidade"));
+                pvo.getPeca().setId(rs.getLong("id_peca"));
+                pvo.getOrcamento().setId(rs.getLong("id_orcamento"));
+                pvo.setId(rs.getLong("id"));
+                pecas.add(pvo);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return pecas;
+    }
+
     //Alteração
     public void editarValor(PecasNoOrcamentoVO vo){
         conn = getConnection();

@@ -63,24 +63,154 @@ public class ServicosNoOrcamentoDAO extends BaseDAO{
         String sql = "select * from ServicosNoOrcamento";
         Statement st;
         ResultSet rs;
-        List<ServicosNoOrcamentoVO> pecas = new ArrayList<ServicosNoOrcamentoVO>();
+        List<ServicosNoOrcamentoVO> servicos = new ArrayList<ServicosNoOrcamentoVO>();
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);
             while (rs.next()) {
-                ServicosNoOrcamentoVO pvo = new ServicosNoOrcamentoVO();
-                pvo.setValor(rs.getDouble("valor"));
-                pvo.setQuantidade(rs.getInt("quantidade"));
-                pvo.getServico().setId(rs.getLong("id_servico"));
-                pvo.getOrcamento().setId(rs.getLong("id_orcamento"));
-                pvo.setId(rs.getLong("id"));
-                pecas.add(pvo);
+                ServicosNoOrcamentoVO svo = new ServicosNoOrcamentoVO();
+                svo.setValor(rs.getDouble("valor"));
+                svo.setQuantidade(rs.getInt("quantidade"));
+                svo.getServico().setId(rs.getLong("id_servico"));
+                svo.getOrcamento().setId(rs.getLong("id_orcamento"));
+                svo.setId(rs.getLong("id"));
+                servicos.add(svo);
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return pecas;
+        return servicos;
+    }
+
+    public List<ServicosNoOrcamentoVO> findByValor(ServicosNoOrcamentoVO vo){
+        conn = getConnection();
+        String sql = "select * from ServicosNoOrcamento where valor = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<ServicosNoOrcamentoVO> servicos = new ArrayList<ServicosNoOrcamentoVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setDouble(1, vo.getValor());
+            rs = pdst.executeQuery();
+            while (rs.next()) {
+                ServicosNoOrcamentoVO svo = new ServicosNoOrcamentoVO();
+                svo.setValor(rs.getDouble("valor"));
+                svo.setQuantidade(rs.getInt("quantidade"));
+                svo.getServico().setId(rs.getLong("id_servico"));
+                svo.getOrcamento().setId(rs.getLong("id_orcamento"));
+                svo.setId(rs.getLong("id"));
+                servicos.add(svo);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return servicos;
+    }
+
+    public List<ServicosNoOrcamentoVO> findByQuantidade(ServicosNoOrcamentoVO vo){
+        conn = getConnection();
+        String sql = "select * from ServicosNoOrcamento where quantidade = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<ServicosNoOrcamentoVO> servicos = new ArrayList<ServicosNoOrcamentoVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setInt(1, vo.getQuantidade());
+            rs = pdst.executeQuery();
+            while (rs.next()) {
+                ServicosNoOrcamentoVO svo = new ServicosNoOrcamentoVO();
+                svo.setValor(rs.getDouble("valor"));
+                svo.setQuantidade(rs.getInt("quantidade"));
+                svo.getServico().setId(rs.getLong("id_servico"));
+                svo.getOrcamento().setId(rs.getLong("id_orcamento"));
+                svo.setId(rs.getLong("id"));
+                servicos.add(svo);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return servicos;
+    }
+
+    public List<ServicosNoOrcamentoVO> findByServicoId(ServicosNoOrcamentoVO vo){
+        conn = getConnection();
+        String sql = "select * from ServicosNoOrcamento where id_servico = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<ServicosNoOrcamentoVO> servicos = new ArrayList<ServicosNoOrcamentoVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getServico().getId());
+            rs = pdst.executeQuery();
+            while (rs.next()) {
+                ServicosNoOrcamentoVO svo = new ServicosNoOrcamentoVO();
+                svo.setValor(rs.getDouble("valor"));
+                svo.setQuantidade(rs.getInt("quantidade"));
+                svo.getServico().setId(rs.getLong("id_servico"));
+                svo.getOrcamento().setId(rs.getLong("id_orcamento"));
+                svo.setId(rs.getLong("id"));
+                servicos.add(svo);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return servicos;
+    }
+
+    public List<ServicosNoOrcamentoVO> findByOrcamentoId(ServicosNoOrcamentoVO vo){
+        conn = getConnection();
+        String sql = "select * from ServicosNoOrcamento where id_orcamento = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<ServicosNoOrcamentoVO> servicos = new ArrayList<ServicosNoOrcamentoVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getOrcamento().getId());
+            rs = pdst.executeQuery();
+            while (rs.next()) {
+                ServicosNoOrcamentoVO svo = new ServicosNoOrcamentoVO();
+                svo.setValor(rs.getDouble("valor"));
+                svo.setQuantidade(rs.getInt("quantidade"));
+                svo.getServico().setId(rs.getLong("id_servico"));
+                svo.getOrcamento().setId(rs.getLong("id_orcamento"));
+                svo.setId(rs.getLong("id"));
+                servicos.add(svo);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return servicos;
+    }
+
+    public List<ServicosNoOrcamentoVO> findById(ServicosNoOrcamentoVO vo){
+        conn = getConnection();
+        String sql = "select * from ServicosNoOrcamento where id = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<ServicosNoOrcamentoVO> servicos = new ArrayList<ServicosNoOrcamentoVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getId());
+            rs = pdst.executeQuery();
+            while (rs.next()) {
+                ServicosNoOrcamentoVO svo = new ServicosNoOrcamentoVO();
+                svo.setValor(rs.getDouble("valor"));
+                svo.setQuantidade(rs.getInt("quantidade"));
+                svo.getServico().setId(rs.getLong("id_servico"));
+                svo.getOrcamento().setId(rs.getLong("id_orcamento"));
+                svo.setId(rs.getLong("id"));
+                servicos.add(svo);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return servicos;
     }
 
     //Alteração
