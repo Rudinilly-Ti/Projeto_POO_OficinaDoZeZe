@@ -6,7 +6,8 @@ public class UsuarioVO {
   private String senha;
   private String cargo;
 
-  public UsuarioVO(String login, String senha, String cargo) {
+  public UsuarioVO(Long id, String login, String senha, String cargo) {
+    setId(id);
     setLogin(login);
     setSenha(senha);
     setCargo(cargo);

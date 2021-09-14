@@ -103,6 +103,78 @@ public class ServicoDAO extends BaseDAO{
         return servicos;
     }
 
+    public List<ServicoVO> findById(ServicoVO vo){
+        Connection conn = getConnection();
+        String sql = "select * from Servico where id = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<ServicoVO> servicos = new ArrayList<ServicoVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getId());
+            rs = pdst.executeQuery();
+            while(rs.next()){
+            	ServicoVO service = new ServicoVO();
+                service.setNome(rs.getString("Nome"));
+                service.setPreco(rs.getDouble("Preco"));
+                service.setId(rs.getLong("Id"));
+                servicos.add(service);
+            }
+        } catch (SQLException e) {
+            //TODO: handle exception
+            e.printStackTrace();
+        }
+        return servicos;
+    }
+
+    public List<ServicoVO> findByNome(ServicoVO vo){
+        Connection conn = getConnection();
+        String sql = "select * from Servico where nome = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<ServicoVO> servicos = new ArrayList<ServicoVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setString(1, vo.getNome());
+            rs = pdst.executeQuery();
+            while(rs.next()){
+            	ServicoVO service = new ServicoVO();
+                service.setNome(rs.getString("Nome"));
+                service.setPreco(rs.getDouble("Preco"));
+                service.setId(rs.getLong("Id"));
+                servicos.add(service);
+            }
+        } catch (SQLException e) {
+            //TODO: handle exception
+            e.printStackTrace();
+        }
+        return servicos;
+    }
+
+    public List<ServicoVO> findByPreco(ServicoVO vo){
+        Connection conn = getConnection();
+        String sql = "select * from Servico where preco = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<ServicoVO> servicos = new ArrayList<ServicoVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setDouble(1, vo.getPreco());
+            rs = pdst.executeQuery();
+            while(rs.next()){
+            	ServicoVO service = new ServicoVO();
+                service.setNome(rs.getString("Nome"));
+                service.setPreco(rs.getDouble("Preco"));
+                service.setId(rs.getLong("Id"));
+                servicos.add(service);
+            }
+        } catch (SQLException e) {
+            //TODO: handle exception
+            e.printStackTrace();
+        }
+        return servicos;
+    }
+
     // ------ editar -------
     public void editarNomeById(ServicoVO servico){
 
