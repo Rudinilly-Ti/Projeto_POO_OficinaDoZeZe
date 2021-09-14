@@ -112,7 +112,7 @@ public class ServicosNoOrcamentoDAO extends BaseDAO{
             e.printStackTrace();
         }
     }
-    public void editarPecaId(ServicosNoOrcamentoVO vo){
+    public void editarServicoId(ServicosNoOrcamentoVO vo){
         conn = getConnection();
         String sql = "update ServicosNoOrcamento set id_servico = ? where id = ?";
         PreparedStatement pdst;
