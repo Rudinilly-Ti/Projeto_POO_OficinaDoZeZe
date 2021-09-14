@@ -6,7 +6,8 @@ public class ClienteVO {
   private String endereco;
   private String cpf;
 
-  public ClienteVO(String nome, String endereco, String cpf) {
+  public ClienteVO(Long id, String nome, String endereco, String cpf) {
+    setId(id);
     setNome(nome);
     setEndereco(endereco);
     setCPF(cpf);
