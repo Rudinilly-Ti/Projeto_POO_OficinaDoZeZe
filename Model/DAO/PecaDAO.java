@@ -13,14 +13,13 @@ public class PecaDAO extends BaseDAO{
     //Inserção
     public void inserir(PecaVO vo){
         conn = getConnection();
-        String sql = "insert into Peca (nome,preco,fabricante,id) values (?,?,?,?)";
+        String sql = "insert into Peca (nome,preco,fabricante) values (?,?,?)";
         PreparedStatement pdst;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setString(1, vo.getNome());
             pdst.setDouble(2, vo.getPreco());
             pdst.setString(3, vo.getFabricante());
-            pdst.setLong(4, vo.getId());
             pdst.execute();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
