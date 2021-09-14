@@ -1,15 +1,11 @@
 package Model.VO;
 import java.util.Calendar;
-import java.util.List;
-import java.util.ArrayList;
 
 public class OrcamentoVO {
     private double valor;
     private Calendar dataInicio;
     private Calendar dataFim;
-    private List<PecaVO> peca = new ArrayList<PecaVO>();
     private ClienteVO cliente = new ClienteVO();
-    private List<ServicoVO> servico = new ArrayList<ServicoVO>();
     private AutomovelVO carro = new AutomovelVO();
     private Long id;
 
@@ -71,18 +67,6 @@ public class OrcamentoVO {
         else System.out.println("Data inválida.\n");
     }
 
-    public List<PecaVO> getPeca() {
-        return peca;
-    }
-
-    public void setPeca(List<PecaVO> peca) {
-        for(PecaVO vo:peca){
-            if(vo != null){
-                this.peca.add(vo);
-            }
-        }
-    }
-
     public ClienteVO getCliente() {
         return cliente;
     }
@@ -92,19 +76,7 @@ public class OrcamentoVO {
             this.cliente = cliente;
         }
         else{
-            System.out.println("Dado inválido.\n");
-        }
-    }
-
-    public List<ServicoVO> getServico() {
-        return servico;
-    }
-
-    public void setServico(List<ServicoVO> servico) {
-        for(ServicoVO vo:servico){
-            if(vo != null){
-                this.servico.add(vo);
-            }
+            System.out.println("Cliente inválido.\n");
         }
     }
 
@@ -117,7 +89,7 @@ public class OrcamentoVO {
             this.carro = carro;
         }
         else{
-            System.out.println("Dado inválido.\n");
+            System.out.println("Carro inválido.\n");
         }
     }
 }

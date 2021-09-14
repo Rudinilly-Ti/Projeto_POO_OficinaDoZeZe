@@ -119,7 +119,7 @@ public class UsuarioDAO extends BaseDAO {
   }
 
   //Alteração
-  public void editarByLogin(UsuarioVO vo) {
+  public void editarLogin(UsuarioVO vo) {
     conn = getConnection();
     String sql = "UPDATE usuario SET login = ? WHERE id = ?";
     PreparedStatement pdst;
@@ -133,7 +133,7 @@ public class UsuarioDAO extends BaseDAO {
     }
   }
 
-  public void editarBySenha(UsuarioVO vo) {
+  public void editarSenha(UsuarioVO vo) {
     conn = getConnection();
     String sql = "UPDATE usuario SET senha = ? WHERE id = ?";
     PreparedStatement pdst;
@@ -147,7 +147,7 @@ public class UsuarioDAO extends BaseDAO {
     }
   }
 
-  public void editarByCargo(UsuarioVO vo) {
+  public void editarCargo(UsuarioVO vo) {
     conn = getConnection();
     String sql = "UPDATE usuario SET cargo = ? WHERE id = ?";
     PreparedStatement pdst;

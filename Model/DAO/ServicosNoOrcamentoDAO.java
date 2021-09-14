@@ -1,26 +1,26 @@
 package Model.DAO;
 
-import Model.VO.PecaVO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import Model.VO.ServicosNoOrcamentoVO;
 
-public class PecaDAO extends BaseDAO{
+public class ServicosNoOrcamentoDAO extends BaseDAO{
     
     //Inserção
-    public void inserir(PecaVO vo){
+    public void inserir(ServicosNoOrcamentoVO vo){
         conn = getConnection();
-        String sql = "insert into Peca (nome,preco,fabricante,id) values (?,?,?,?)";
+        String sql = "insert into ServicosNoOrcamento (id_servico,id_orcamento,valor,quantidade) values (?,?,?,?)";
         PreparedStatement pdst;
         try {
             pdst = conn.prepareStatement(sql);
-            pdst.setString(1, vo.getNome());
-            pdst.setDouble(2, vo.getPreco());
-            pdst.setString(3, vo.getFabricante());
-            pdst.setLong(4, vo.getId());
+            pdst.setLong(1, vo.getServico().getId());
+            pdst.setLong(2, vo.getOrcamento().getId());
+            pdst.setDouble(3, vo.getValor());
+            pdst.setInt(4, vo.getQuantidade());
             pdst.execute();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -29,52 +29,27 @@ public class PecaDAO extends BaseDAO{
     }
 
     //Remoção
-    public void removerByNome(PecaVO vo){
+    public void removerByValor(ServicosNoOrcamentoVO vo){
         conn = getConnection();
-        String sql = "delete from Peca where nome = ?";
+        String sql = "delete from ServicosNoOrcamento where valor = ?";
         PreparedStatement pdst;
         try {
             pdst = conn.prepareStatement(sql);
-            pdst.setString(1, vo.getNome());
+            pdst.setDouble(1, vo.getValor());
             pdst.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
-    public void removerById(PecaVO vo){
+
+    public void removerByQuantidade(ServicosNoOrcamentoVO vo){
         conn = getConnection();
-        String sql = "delete from Peca where id = ?";
+        String sql = "delete from ServicosNoOrcamento where quantidade = ?";
         PreparedStatement pdst;
         try {
             pdst = conn.prepareStatement(sql);
-            pdst.setLong(1, vo.getId());
-            pdst.executeUpdate();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-    public void removerByPreco(PecaVO vo){
-        conn = getConnection();
-        String sql = "delete from Peca where preco = ?";
-        PreparedStatement pdst;
-        try {
-            pdst = conn.prepareStatement(sql);
-            pdst.setDouble(1, vo.getPreco());
-            pdst.executeUpdate();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-    public void removerByFabricante(PecaVO vo){
-        conn = getConnection();
-        String sql = "delete from Peca where fabricante = ?";
-        PreparedStatement pdst;
-        try {
-            pdst = conn.prepareStatement(sql);
-            pdst.setString(1, vo.getFabricante());
+            pdst.setInt(1, vo.getQuantidade());
             pdst.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -83,20 +58,21 @@ public class PecaDAO extends BaseDAO{
     }
 
     //Listagem
-    public List<PecaVO> listar(){
+    public List<ServicosNoOrcamentoVO> listar(){
         conn = getConnection();
-        String sql = "select * from Peca";
+        String sql = "select * from ServicosNoOrcamento";
         Statement st;
         ResultSet rs;
-        List<PecaVO> pecas = new ArrayList<PecaVO>();
+        List<ServicosNoOrcamentoVO> pecas = new ArrayList<ServicosNoOrcamentoVO>();
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);
             while (rs.next()) {
-                PecaVO pvo = new PecaVO();
-                pvo.setNome(rs.getString("nome"));
-                pvo.setPreco(rs.getDouble("preco"));
-                pvo.setFabricante(rs.getString("fabricante"));
+                ServicosNoOrcamentoVO pvo = new ServicosNoOrcamentoVO();
+                pvo.setValor(rs.getDouble("valor"));
+                pvo.setQuantidade(rs.getInt("quantidade"));
+                pvo.getServico().setId(rs.getLong("id_servico"));
+                pvo.getOrcamento().setId(rs.getLong("id_orcamento"));
                 pvo.setId(rs.getLong("id"));
                 pecas.add(pvo);
             }
@@ -108,13 +84,13 @@ public class PecaDAO extends BaseDAO{
     }
 
     //Alteração
-    public void editarNome(PecaVO vo){
+    public void editarValor(ServicosNoOrcamentoVO vo){
         conn = getConnection();
-        String sql = "update Peca set nome = ? where id = ?";
+        String sql = "update ServicosNoOrcamento set valor = ? where id = ?";
         PreparedStatement pdst;
         try {
             pdst = conn.prepareStatement(sql);
-            pdst.setString(1, vo.getNome());
+            pdst.setDouble(1, vo.getValor());
             pdst.setLong(2, vo.getId());
             pdst.executeUpdate();
         } catch (SQLException e) {
@@ -122,13 +98,13 @@ public class PecaDAO extends BaseDAO{
             e.printStackTrace();
         }
     }
-    public void editarPreco(PecaVO vo){
+    public void editarQuantidade(ServicosNoOrcamentoVO vo){
         conn = getConnection();
-        String sql = "update Peca set preco = ? where id = ?";
+        String sql = "update ServicosNoOrcamento set quantidade = ? where id = ?";
         PreparedStatement pdst;
         try {
             pdst = conn.prepareStatement(sql);
-            pdst.setDouble(1, vo.getPreco());
+            pdst.setInt(1, vo.getQuantidade());
             pdst.setLong(2, vo.getId());
             pdst.executeUpdate();
         } catch (SQLException e) {
@@ -136,13 +112,27 @@ public class PecaDAO extends BaseDAO{
             e.printStackTrace();
         }
     }
-    public void editarFabricante(PecaVO vo){
+    public void editarPecaId(ServicosNoOrcamentoVO vo){
         conn = getConnection();
-        String sql = "update Peca set fabricante = ? where id = ?";
+        String sql = "update ServicosNoOrcamento set id_servico = ? where id = ?";
         PreparedStatement pdst;
         try {
             pdst = conn.prepareStatement(sql);
-            pdst.setString(1, vo.getFabricante());
+            pdst.setLong(1, vo.getServico().getId());
+            pdst.setLong(2, vo.getId());
+            pdst.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public void editarOrcamentoId(ServicosNoOrcamentoVO vo){
+        conn = getConnection();
+        String sql = "update ServicosNoOrcamento set id_orcamento = ? where id = ?";
+        PreparedStatement pdst;
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getOrcamento().getId());
             pdst.setLong(2, vo.getId());
             pdst.executeUpdate();
         } catch (SQLException e) {

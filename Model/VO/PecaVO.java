@@ -11,14 +11,7 @@ public class PecaVO {
         setPreco(preco);
         setFabricante(fabricante);
     }
-
-    public PecaVO(String nome, double preco, String fabricante, Long id){
-        setNome(nome);
-        setPreco(preco);
-        setFabricante(fabricante);
-        setId(id);
-    }
-
+    
     public PecaVO(){
 
     }

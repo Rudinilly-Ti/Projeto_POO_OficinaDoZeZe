@@ -16,14 +16,13 @@ public class ServicoDAO extends BaseDAO{
     public void inserir(ServicoVO servico){
 
         Connection conn = getConnection();
-        String sql = "insert into Servico (nome, preco, id) values (?, ?, ?)";
+        String sql = "insert into Servico (nome, preco) values (?, ?)";
         PreparedStatement ptst;
 
         try {
             ptst = conn.prepareStatement(sql);
             ptst.setString(1, servico.getNome());
             ptst.setDouble(2, servico.getPreco());
-            ptst.setLong(3, servico.getId());
             ptst.execute();
         } catch (SQLException e) {
             //TODO: handle exception
@@ -87,11 +86,11 @@ public class ServicoDAO extends BaseDAO{
         Statement st;
         ResultSet rs;
         List<ServicoVO> servicos = new ArrayList<ServicoVO>();
-        ServicoVO service = new ServicoVO();
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);
             while(rs.next()){
+            	ServicoVO service = new ServicoVO();
                 service.setNome(rs.getString("Nome"));
                 service.setPreco(rs.getDouble("Preco"));
                 service.setId(rs.getLong("Id"));
@@ -108,7 +107,7 @@ public class ServicoDAO extends BaseDAO{
     public void editarNomeById(ServicoVO servico){
 
         Connection conn = getConnection();
-        String sql = "update from Servico set nome = ? where id = ?";
+        String sql = "update Servico set nome = ? where id = ?";
         PreparedStatement ptst;
 
         try {
@@ -125,7 +124,7 @@ public class ServicoDAO extends BaseDAO{
     public void editarPrecoById(ServicoVO servico){
         
         Connection conn = getConnection();
-        String sql = "update from Servico set preco = ? where id = ?";
+        String sql = "update Servico set preco = ? where id = ?";
         PreparedStatement ptst;
 
         try {
@@ -134,21 +133,6 @@ public class ServicoDAO extends BaseDAO{
             ptst.setLong(2, servico.getId());
             ptst.executeUpdate();
         } catch (SQLException e){
-            e.printStackTrace();
-        }
-    }
-    public void editarIdByNome(ServicoVO servico){
-    
-        Connection conn = getConnection();
-        String sql = "update from Servico set id = ? where nome = ?";
-        PreparedStatement ptst;
-
-        try{
-            ptst = conn.prepareStatement(sql);
-            ptst.setLong(1, servico.getId());
-            ptst.setString(2, servico.getNome());
-            ptst.executeUpdate();
-        } catch(SQLException e){
             e.printStackTrace();
         }
     }

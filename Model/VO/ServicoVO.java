@@ -7,7 +7,7 @@ public class ServicoVO {
     private Long id; 
 
     // construtor da classe
-    public ServicoVO(String nome, double preco, long id){
+    public ServicoVO(String nome, double preco, Long id){
         setNome(nome);
         setPreco(preco);
         setId(id);

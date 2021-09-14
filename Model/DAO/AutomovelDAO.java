@@ -7,14 +7,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 import Model.VO.AutomovelVO;
 
 public class AutomovelDAO extends BaseDAO{
     
     // ----- Inserir ------
-    public void inserir(AutomovelVO carro){
+    public void inserir(AutomovelVO carro){ // OK
         Connection conn = getConnection();
-        String sql = "insert into Automovel (Marca, Cor, Placa, Ano, Quilometragem, ID) values (?, ?, ?, ?, ?, ?)";
+        String sql = "insert into Automovel (Marca, Cor, Placa, Ano, Quilometragem, id_cliente) values (?, ?, ?, ?, ?, ?)";
         PreparedStatement ptst;
 
         try{
@@ -33,9 +34,23 @@ public class AutomovelDAO extends BaseDAO{
 
     
     // ----- Remover -------
-    public void removerById(AutomovelVO carro){
+    public void removerById(AutomovelVO carro){ // OK
         Connection conn = getConnection();
         String sql = "delete from Automovel where id = ?";
+        PreparedStatement ptst;
+
+        try{
+            ptst = conn.prepareStatement(sql);
+            ptst.setLong(1, carro.getID());
+            ptst.executeUpdate();
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void removerByIdCliente(AutomovelVO carro){ // OK
+        Connection conn = getConnection();
+        String sql = "delete from Automovel where id_cliente = ?";
         PreparedStatement ptst;
 
         try{
@@ -48,27 +63,27 @@ public class AutomovelDAO extends BaseDAO{
     }
 
     // ---- listar ----
-    public List<AutomovelVO> listar(){
+    public List<AutomovelVO> listar(){ // OK
 
         Connection conn = getConnection();
         String sql = "select * from Automovel";
         Statement st;
         ResultSet rs;
         List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
-        AutomovelVO car = new AutomovelVO();
 
         try{
             st = conn.createStatement();
             rs = st.executeQuery(sql);
 
             while(rs.next()){
+            	AutomovelVO car = new AutomovelVO();
                 car.setMarca(rs.getString("Marca"));
                 car.setCor(rs.getString("Cor"));
                 car.setPlaca(rs.getString("Placa"));
                 car.setAno(rs.getInt("Ano"));
                 car.setQuilometragem(rs.getDouble("Quilometragem"));
-                car.getCliente().setId(rs.getLong("Id_cliente"));
-                car.setId(rs.getLong("Id"));
+                car.getCliente().setId(rs.getLong("id_cliente"));
+                car.setID(rs.getLong("ID"));
                 carros.add(car);
             }
         } catch(SQLException e){
@@ -78,82 +93,96 @@ public class AutomovelDAO extends BaseDAO{
     }
 
     // Editar
-    public void editarMarca(AutomovelVO carro){
+    public void editarMarca(AutomovelVO carro){ // OK
 
         Connection conn = getConnection();
-        String sql = "update from Automovel set marca = ? where id = ?";
+        String sql = "update Automovel set marca = ? where id = ?";
         PreparedStatement ptst;
 
         try {
             ptst = conn.prepareStatement(sql);
             ptst.setString(1, carro.getMarca());
-            ptst.setLong(2, carro.getId());
+            ptst.setLong(2, carro.getCliente().getId());
             ptst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void editarCor(AutomovelVO carro){
+    public void editarCor(AutomovelVO carro){ // OK
 
         Connection conn = getConnection();
-        String sql = "update from Automovel set cor = ? where id = ?";
+        String sql = "update Automovel set cor = ? where id = ?";
         PreparedStatement ptst;
 
         try {
             ptst = conn.prepareStatement(sql);
             ptst.setString(1, carro.getCor());
-            ptst.setLong(2, carro.getId());
+            ptst.setLong(2, carro.getID());
             ptst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void editarPlaca(AutomovelVO carro){
+    public void editarPlaca(AutomovelVO carro){ // OK
 
         Connection conn = getConnection();
-        String sql = "update from Automovel set placa = ? where id = ?";
+        String sql = "update Automovel set placa = ? where id = ?";
         PreparedStatement ptst;
 
         try {
             ptst = conn.prepareStatement(sql);
             ptst.setString(1, carro.getPlaca());
-            ptst.setLong(2, carro.getId());
+            ptst.setLong(2, carro.getID());
             ptst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public void editarAno(AutomovelVO carro){
+    public void editarAno(AutomovelVO carro){ // OK
 
         Connection conn = getConnection();
-        String sql = "update from Automovel set ano = ? where id = ?";
+        String sql = "update Automovel set ano = ? where id = ?";
         PreparedStatement ptst;
 
         try {
             ptst = conn.prepareStatement(sql);
             ptst.setInt(1, carro.getAno());
-            ptst.setLong(2, carro.getId());
+            ptst.setLong(2, carro.getID());
             ptst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void editarQuilometragem(AutomovelVO carro){
+    public void editarQuilometragem(AutomovelVO carro){ // OK
 
         Connection conn = getConnection();
-        String sql = "update from Automovel set quilometragem = ? where id = ?";
+        String sql = "update Automovel set quilometragem = ? where id = ?";
         PreparedStatement ptst;
 
         try {
             ptst = conn.prepareStatement(sql);
             ptst.setDouble(1, carro.getQuilometragem());
-            ptst.setLong(2, carro.getId());
+            ptst.setLong(2, carro.getID());
             ptst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void editarClienteId(AutomovelVO carro) {
+    	Connection conn = getConnection();
+    	String sql = "update Automovel set id_cliente = ? where id = ?";
+    	PreparedStatement ptst;
+    	try {
+    		ptst = conn.prepareStatement(sql);
+            ptst.setLong(1, carro.getCliente().getId());
+            ptst.setLong(2, carro.getID());
+            ptst.executeUpdate();
+    	} catch(SQLException e){
+    		 e.printStackTrace();
+    	}
     }
 }

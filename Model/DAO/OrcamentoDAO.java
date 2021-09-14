@@ -1,10 +1,6 @@
 package Model.DAO;
 
 import Model.VO.OrcamentoVO;
-import Model.VO.PecaVO;
-import Model.VO.ServicoVO;
-
-import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,38 +8,24 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.sql.Date;
 
 public class OrcamentoDAO extends BaseDAO{
     
     //Inserção
     public void inserir(OrcamentoVO vo){
         conn = getConnection();
-        String sql = "insert into Orcamento (id,id_cliente,id_automovel,id_peca,id_servico,valor,data_inicio,data_fim) values (?,?,?,?,?,?,?,?)";
+        String sql = "insert into Orcamento (id_cliente,id_automovel,valor,data_inicio,data_fim) values (?,?,?,?,?)";
         PreparedStatement pdst;
-        List<Long> idPecas, idServicos;
         java.sql.Date DateSqlIni = new java.sql.Date(vo.getDataInicio().getTimeInMillis());
         java.sql.Date DateSqlFim = new java.sql.Date(vo.getDataFim().getTimeInMillis());
         try {
-            idPecas = new ArrayList<Long>();
-            idServicos = new ArrayList<Long>(); 
             pdst = conn.prepareStatement(sql);
-            pdst.setLong(1, vo.getId());
-            pdst.setLong(2, vo.getCliente().getId());
-            pdst.setLong(3, vo.getCarro().getId());
-            
-            for(PecaVO pvo: vo.getPeca()){
-                idPecas.add(pvo.getId());
-            }
-            pdst.setArray(4, conn.createArrayOf("integer", idPecas.toArray()));
-            
-            for(ServicoVO svo: vo.getServico()){
-                idServicos.add(svo.getId());
-            }
-            pdst.setArray(5, conn.createArrayOf("integer", idServicos.toArray()));
-
-            pdst.setDouble(6, vo.getValor());
-            pdst.setDate(7, DateSqlIni);
-            pdst.setDate(8, DateSqlFim);
+            pdst.setLong(1, vo.getCliente().getId());
+            pdst.setLong(2, vo.getCarro().getID());
+            pdst.setDouble(3, vo.getValor());
+            pdst.setDate(4, DateSqlIni);
+            pdst.setDate(5, DateSqlFim);
             pdst.execute();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -114,43 +96,25 @@ public class OrcamentoDAO extends BaseDAO{
         Statement st;
         ResultSet rs;
         List<OrcamentoVO> orcamentos = new ArrayList<OrcamentoVO>();
-        Integer idServicos[], idPecas[];
-        Calendar dataIni = Calendar.getInstance();
-        Calendar dataFim = Calendar.getInstance();
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);
             while (rs.next()) {
                 OrcamentoVO orcVo = new OrcamentoVO();
+                Calendar dataIni = Calendar.getInstance();
+                Calendar dataFim = Calendar.getInstance();
+
                 orcVo.setId(rs.getLong("Id"));
-                orcVo.getCliente().setId(rs.getLong("Id"));
-                orcVo.getCarro().setId(rs.getLong("Id"));
-                
-                Array pArray = rs.getArray("id_peca");
-                Array sArray = rs.getArray("id_servico");
-                idPecas = (Integer[])pArray.getArray();
-                idServicos = (Integer[])sArray.getArray();
-
-                for (int i = 0; i < idPecas.length; i++) {
-                    for(PecaVO pvo: orcVo.getPeca()){
-                        pvo.setId(new Long(idPecas[i]));
-                        orcVo.getPeca().add(pvo);
-                    }
-                }
-
-                for (int i = 0; i < idServicos.length; i++) {
-                    for(ServicoVO svo: orcVo.getServico()){
-                        svo.setId(new Long(idServicos[i]));
-                        orcVo.getServico().add(svo);
-                    }
-                }
+                orcVo.getCliente().setId(rs.getLong("Id_cliente"));
+                orcVo.getCarro().setID(rs.getLong("Id_automovel"));
                 orcVo.setValor(rs.getDouble("valor"));
                 
-                dataIni.setTime(rs.getDate("data_inicio"));
+                dataIni.setTimeInMillis(rs.getDate("data_inicio").getTime());
                 orcVo.setDataInicio(dataIni);
-                dataFim.setTime(rs.getDate("data_fim"));
+                
+                dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
                 orcVo.setDataFim(dataFim);
-
+                
                 orcamentos.add(orcVo);
             }
         } catch (SQLException e) {
@@ -161,7 +125,7 @@ public class OrcamentoDAO extends BaseDAO{
     }
 
     //Alteração
-    public void editarByValor(OrcamentoVO vo){
+    public void editarValor(OrcamentoVO vo){
         conn = getConnection();
         String sql = "update Orcamento set valor = ? where id = ?";
         PreparedStatement pdst;
@@ -176,7 +140,7 @@ public class OrcamentoDAO extends BaseDAO{
         }
     }
 
-    public void editarByDataInicial(OrcamentoVO vo){
+    public void editarDataInicial(OrcamentoVO vo){
         conn = getConnection();
         String sql = "update Orcamento set data_inicio = ? where id = ?";
         PreparedStatement pdst;
@@ -192,7 +156,7 @@ public class OrcamentoDAO extends BaseDAO{
         }
     }
 
-    public void editarByDataFinal(OrcamentoVO vo){
+    public void editarDataFinal(OrcamentoVO vo){
         conn = getConnection();
         String sql = "update Orcamento set data_fim = ? where id = ?";
         PreparedStatement pdst;
@@ -200,6 +164,34 @@ public class OrcamentoDAO extends BaseDAO{
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setDate(1, DateSqlFim);
+            pdst.setLong(2, vo.getId());
+            pdst.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public void editarClienteId(OrcamentoVO vo){
+        conn = getConnection();
+        String sql = "update Orcamento set id_cliente = ? where id = ?";
+        PreparedStatement pdst;
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getCliente().getId());
+            pdst.setLong(2, vo.getId());
+            pdst.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public void editarAutomovelId(OrcamentoVO vo){
+        conn = getConnection();
+        String sql = "update Orcamento set id_automovel = ? where id = ?";
+        PreparedStatement pdst;
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getCarro().getID());
             pdst.setLong(2, vo.getId());
             pdst.executeUpdate();
         } catch (SQLException e) {
