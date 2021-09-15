@@ -142,12 +142,14 @@ public class PecaDAO extends BaseDAO{
             pdst.setString(1, vo.getNome());
             rs = pdst.executeQuery();
             while (rs.next()) {
-                PecaVO pvo = new PecaVO();
-                pvo.setNome(rs.getString("nome"));
-                pvo.setPreco(rs.getDouble("preco"));
-                pvo.setFabricante(rs.getString("fabricante"));
-                pvo.setId(rs.getLong("id"));
-                pecas.add(pvo);
+                    if (rs.getString("nome") != null) {
+                    PecaVO pvo = new PecaVO();
+                    pvo.setNome(rs.getString("nome"));
+                    pvo.setPreco(rs.getDouble("preco"));
+                    pvo.setFabricante(rs.getString("fabricante"));
+                    pvo.setId(rs.getLong("id"));
+                    pecas.add(pvo);
+                }
             }
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -167,13 +169,15 @@ public class PecaDAO extends BaseDAO{
             pdst.setString(1, vo.getFabricante());
             rs = pdst.executeQuery();
             while (rs.next()) {
-                PecaVO pvo = new PecaVO();
-                pvo.setNome(rs.getString("nome"));
-                pvo.setPreco(rs.getDouble("preco"));
-                pvo.setFabricante(rs.getString("fabricante"));
-                pvo.setId(rs.getLong("id"));
-                pecas.add(pvo);
-            }
+                if (rs.getString("fabricante") != null) {
+                    PecaVO pvo = new PecaVO();
+                    pvo.setNome(rs.getString("nome"));
+                    pvo.setPreco(rs.getDouble("preco"));
+                    pvo.setFabricante(rs.getString("fabricante"));
+                    pvo.setId(rs.getLong("id"));
+                    pecas.add(pvo);
+                }
+            }   
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

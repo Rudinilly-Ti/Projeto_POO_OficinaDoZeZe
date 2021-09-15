@@ -138,11 +138,13 @@ public class ServicoDAO extends BaseDAO{
             pdst.setString(1, vo.getNome());
             rs = pdst.executeQuery();
             while(rs.next()){
-            	ServicoVO service = new ServicoVO();
-                service.setNome(rs.getString("Nome"));
-                service.setPreco(rs.getDouble("Preco"));
-                service.setId(rs.getLong("Id"));
-                servicos.add(service);
+                if (rs.getString("nome") != null) {
+                    ServicoVO service = new ServicoVO();
+                    service.setNome(rs.getString("Nome"));
+                    service.setPreco(rs.getDouble("Preco"));
+                    service.setId(rs.getLong("Id"));
+                    servicos.add(service);
+                }
             }
         } catch (SQLException e) {
             //TODO: handle exception

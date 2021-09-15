@@ -156,13 +156,14 @@ public class UsuarioDAO extends BaseDAO {
       pdst.setString(1, vo.getLogin());
       rs = pdst.executeQuery();
       while (rs.next()) {
-        UsuarioVO uvo = new UsuarioVO();
-        uvo.setId(rs.getLong("id"));
-        uvo.setLogin(rs.getString("login"));
-        uvo.setSenha(rs.getString("senha"));
-        uvo.setCargo(rs.getString("cargo"));
-        usuarios.add(uvo);
-
+        if (rs.getString("login") != null) {
+          UsuarioVO uvo = new UsuarioVO();
+          uvo.setId(rs.getLong("id"));
+          uvo.setLogin(rs.getString("login"));
+          uvo.setSenha(rs.getString("senha"));
+          uvo.setCargo(rs.getString("cargo"));
+          usuarios.add(uvo);
+        }
       }
     } catch (SQLException e) {
       //TODO: handle exception
@@ -183,13 +184,14 @@ public class UsuarioDAO extends BaseDAO {
       pdst.setString(1, vo.getCargo());
       rs = pdst.executeQuery();
       while (rs.next()) {
-        UsuarioVO uvo = new UsuarioVO();
-        uvo.setId(rs.getLong("id"));
-        uvo.setLogin(rs.getString("login"));
-        uvo.setSenha(rs.getString("senha"));
-        uvo.setCargo(rs.getString("cargo"));
-        usuarios.add(uvo);
-
+        if (rs.getString("cargo") != null) {
+          UsuarioVO uvo = new UsuarioVO();
+          uvo.setId(rs.getLong("id"));
+          uvo.setLogin(rs.getString("login"));
+          uvo.setSenha(rs.getString("senha"));
+          uvo.setCargo(rs.getString("cargo"));
+          usuarios.add(uvo);
+        }
       }
     } catch (SQLException e) {
       //TODO: handle exception

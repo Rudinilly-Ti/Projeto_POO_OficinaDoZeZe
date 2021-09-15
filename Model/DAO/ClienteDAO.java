@@ -159,13 +159,15 @@ public class ClienteDAO extends BaseDAO {
       rs = pdst.executeQuery();
 
       while (rs.next()) {
-        ClienteVO cvo = new ClienteVO();
-        cvo.setId(rs.getLong("id"));
-        cvo.setNome(rs.getString("nome"));
-        cvo.setEndereco(rs.getString("endereco"));
-        cvo.setCPF(rs.getString("cpf"));
-        clientes.add(cvo);
+        if (rs.getString("nome") != null) {
+          ClienteVO cvo = new ClienteVO();
+          cvo.setId(rs.getLong("id"));
+          cvo.setNome(rs.getString("nome"));
+          cvo.setEndereco(rs.getString("endereco"));
+          cvo.setCPF(rs.getString("cpf"));
+          clientes.add(cvo);
 
+        }
       }
     } catch (SQLException e) {
       //TODO: handle exception
@@ -187,13 +189,15 @@ public class ClienteDAO extends BaseDAO {
       rs = pdst.executeQuery();
 
       while (rs.next()) {
-        ClienteVO cvo = new ClienteVO();
-        cvo.setId(rs.getLong("id"));
-        cvo.setNome(rs.getString("nome"));
-        cvo.setEndereco(rs.getString("endereco"));
-        cvo.setCPF(rs.getString("cpf"));
-        clientes.add(cvo);
+        if (rs.getString("endereco") != null) {
+          ClienteVO cvo = new ClienteVO();
+          cvo.setId(rs.getLong("id"));
+          cvo.setNome(rs.getString("nome"));
+          cvo.setEndereco(rs.getString("endereco"));
+          cvo.setCPF(rs.getString("cpf"));
+          clientes.add(cvo);
 
+        }
       }
     } catch (SQLException e) {
       //TODO: handle exception
@@ -215,13 +219,15 @@ public class ClienteDAO extends BaseDAO {
       rs = pdst.executeQuery();
 
       while (rs.next()) {
-        ClienteVO cvo = new ClienteVO();
-        cvo.setId(rs.getLong("id"));
-        cvo.setNome(rs.getString("nome"));
-        cvo.setEndereco(rs.getString("endereco"));
-        cvo.setCPF(rs.getString("cpf"));
-        clientes.add(cvo);
+        if (rs.getString("cpf") != null) {
+          ClienteVO cvo = new ClienteVO();
+          cvo.setId(rs.getLong("id"));
+          cvo.setNome(rs.getString("nome"));
+          cvo.setEndereco(rs.getString("endereco"));
+          cvo.setCPF(rs.getString("cpf"));
+          clientes.add(cvo);
 
+        }
       }
     } catch (SQLException e) {
       //TODO: handle exception
