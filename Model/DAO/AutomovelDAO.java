@@ -266,6 +266,34 @@ public class AutomovelDAO extends BaseDAO{
         return carros;
     }
 
+    public List<AutomovelVO> findByClienteId(AutomovelVO vo){ // OK
+
+        conn = getConnection();
+        String sql = "select * from Automovel where id_cliente = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getCliente().getId());
+            rs = pdst.executeQuery();
+            while(rs.next()){
+                AutomovelVO car = new AutomovelVO();
+                car.setMarca(rs.getString("Marca"));
+                car.setCor(rs.getString("Cor"));
+                car.setPlaca(rs.getString("Placa"));
+                car.setAno(rs.getInt("Ano"));
+                car.setQuilometragem(rs.getDouble("Quilometragem"));
+                car.getCliente().setId(rs.getLong("id_cliente"));
+                car.setID(rs.getLong("ID"));
+                carros.add(car);
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return carros;
+    }
+
     // Editar
     public void editarMarca(AutomovelVO carro){ // OK
 
