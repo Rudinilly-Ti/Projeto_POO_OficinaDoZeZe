@@ -106,6 +106,110 @@ public class PecaDAO extends BaseDAO{
         return pecas;
     }
 
+    public List<PecaVO> findById(PecaVO vo){
+        conn = getConnection();
+        String sql = "select * from Peca where id = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<PecaVO> pecas = new ArrayList<PecaVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getId());
+            rs = pdst.executeQuery();
+            while (rs.next()) {
+                PecaVO pvo = new PecaVO();
+                pvo.setNome(rs.getString("nome"));
+                pvo.setPreco(rs.getDouble("preco"));
+                pvo.setFabricante(rs.getString("fabricante"));
+                pvo.setId(rs.getLong("id"));
+                pecas.add(pvo);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return pecas;
+    }
+
+    public List<PecaVO> findByNome(PecaVO vo){
+        conn = getConnection();
+        String sql = "select * from Peca where nome = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<PecaVO> pecas = new ArrayList<PecaVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setString(1, vo.getNome());
+            rs = pdst.executeQuery();
+            while (rs.next()) {
+                    if (rs.getString("nome") != null) {
+                    PecaVO pvo = new PecaVO();
+                    pvo.setNome(rs.getString("nome"));
+                    pvo.setPreco(rs.getDouble("preco"));
+                    pvo.setFabricante(rs.getString("fabricante"));
+                    pvo.setId(rs.getLong("id"));
+                    pecas.add(pvo);
+                }
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return pecas;
+    }
+
+    public List<PecaVO> findByFabricante(PecaVO vo){
+        conn = getConnection();
+        String sql = "select * from Peca where fabricante = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<PecaVO> pecas = new ArrayList<PecaVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setString(1, vo.getFabricante());
+            rs = pdst.executeQuery();
+            while (rs.next()) {
+                if (rs.getString("fabricante") != null) {
+                    PecaVO pvo = new PecaVO();
+                    pvo.setNome(rs.getString("nome"));
+                    pvo.setPreco(rs.getDouble("preco"));
+                    pvo.setFabricante(rs.getString("fabricante"));
+                    pvo.setId(rs.getLong("id"));
+                    pecas.add(pvo);
+                }
+            }   
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return pecas;
+    }
+
+    public List<PecaVO> findByPreco(PecaVO vo){
+        conn = getConnection();
+        String sql = "select * from Peca where preco = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<PecaVO> pecas = new ArrayList<PecaVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setDouble(1, vo.getPreco());
+            rs = pdst.executeQuery();
+            while (rs.next()) {
+                PecaVO pvo = new PecaVO();
+                pvo.setNome(rs.getString("nome"));
+                pvo.setPreco(rs.getDouble("preco"));
+                pvo.setFabricante(rs.getString("fabricante"));
+                pvo.setId(rs.getLong("id"));
+                pecas.add(pvo);
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return pecas;
+    }
+
     //Alteração
     public void editarNome(PecaVO vo){
         conn = getConnection();

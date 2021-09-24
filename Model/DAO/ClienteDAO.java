@@ -119,6 +119,124 @@ public class ClienteDAO extends BaseDAO {
     return clientes;
   }
 
+  public List<ClienteVO> findById(ClienteVO vo) {
+    conn = getConnection();
+    String sql = "SELECT * FROM cliente WHERE id = ?";
+    PreparedStatement pdst;
+    ResultSet rs;
+    List<ClienteVO> clientes = new ArrayList<ClienteVO>();
+    try {
+      pdst = conn.prepareStatement(sql);
+      pdst.setLong(1, vo.getId());
+      rs = pdst.executeQuery();
+
+      while (rs.next()) {
+        ClienteVO cvo = new ClienteVO();
+        cvo.setId(rs.getLong("id"));
+        cvo.setNome(rs.getString("nome"));
+        cvo.setEndereco(rs.getString("endereco"));
+        cvo.setCPF(rs.getString("cpf"));
+        clientes.add(cvo);
+
+      }
+    } catch (SQLException e) {
+      //TODO: handle exception
+      e.printStackTrace();
+    }
+
+    return clientes;
+  }
+
+  public List<ClienteVO> findByNome(ClienteVO vo) {
+    conn = getConnection();
+    String sql = "SELECT * FROM cliente WHERE nome = ?";
+    PreparedStatement pdst;
+    ResultSet rs;
+    List<ClienteVO> clientes = new ArrayList<ClienteVO>();
+    try {
+      pdst = conn.prepareStatement(sql);
+      pdst.setString(1, vo.getNome());
+      rs = pdst.executeQuery();
+
+      while (rs.next()) {
+        if (rs.getString("nome") != null) {
+          ClienteVO cvo = new ClienteVO();
+          cvo.setId(rs.getLong("id"));
+          cvo.setNome(rs.getString("nome"));
+          cvo.setEndereco(rs.getString("endereco"));
+          cvo.setCPF(rs.getString("cpf"));
+          clientes.add(cvo);
+
+        }
+      }
+    } catch (SQLException e) {
+      //TODO: handle exception
+      e.printStackTrace();
+    }
+
+    return clientes;
+  }
+
+  public List<ClienteVO> findByEndereco(ClienteVO vo) {
+    conn = getConnection();
+    String sql = "SELECT * FROM cliente WHERE endereco = ?";
+    PreparedStatement pdst;
+    ResultSet rs;
+    List<ClienteVO> clientes = new ArrayList<ClienteVO>();
+    try {
+      pdst = conn.prepareStatement(sql);
+      pdst.setString(1, vo.getEndereco());
+      rs = pdst.executeQuery();
+
+      while (rs.next()) {
+        if (rs.getString("endereco") != null) {
+          ClienteVO cvo = new ClienteVO();
+          cvo.setId(rs.getLong("id"));
+          cvo.setNome(rs.getString("nome"));
+          cvo.setEndereco(rs.getString("endereco"));
+          cvo.setCPF(rs.getString("cpf"));
+          clientes.add(cvo);
+
+        }
+      }
+    } catch (SQLException e) {
+      //TODO: handle exception
+      e.printStackTrace();
+    }
+
+    return clientes;
+  }
+
+  public List<ClienteVO> findByCPF(ClienteVO vo) {
+    conn = getConnection();
+    String sql = "SELECT * FROM cliente WHERE cpf = ?";
+    PreparedStatement pdst;
+    ResultSet rs;
+    List<ClienteVO> clientes = new ArrayList<ClienteVO>();
+    try {
+      pdst = conn.prepareStatement(sql);
+      pdst.setString(1, vo.getCPF());
+      rs = pdst.executeQuery();
+
+      while (rs.next()) {
+        if (rs.getString("cpf") != null) {
+          ClienteVO cvo = new ClienteVO();
+          cvo.setId(rs.getLong("id"));
+          cvo.setNome(rs.getString("nome"));
+          cvo.setEndereco(rs.getString("endereco"));
+          cvo.setCPF(rs.getString("cpf"));
+          clientes.add(cvo);
+
+        }
+      }
+    } catch (SQLException e) {
+      //TODO: handle exception
+      e.printStackTrace();
+    }
+
+    return clientes;
+  }
+
   //Alteração
   public void editarNome(ClienteVO vo) {
     conn = getConnection();

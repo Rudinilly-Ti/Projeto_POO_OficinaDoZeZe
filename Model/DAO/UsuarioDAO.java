@@ -94,9 +94,9 @@ public class UsuarioDAO extends BaseDAO {
   public List<UsuarioVO> listar() {
     conn = getConnection();
     String sql = "SELECT * FROM usuario";
+    List<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
     Statement st;
     ResultSet rs;
-    List<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
     try {
       st = conn.createStatement();
       rs = st.executeQuery(sql);
@@ -109,6 +109,89 @@ public class UsuarioDAO extends BaseDAO {
         uvo.setCargo(rs.getString("cargo"));
         usuarios.add(uvo);
 
+      }
+    } catch (SQLException e) {
+      //TODO: handle exception
+      e.printStackTrace();
+    }
+
+    return usuarios;
+  }
+
+  public List<UsuarioVO> findById(UsuarioVO vo) {
+    conn = getConnection();
+    String sql = "SELECT * FROM usuario WHERE id = ?";
+    List<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
+    PreparedStatement pdst;
+    ResultSet rs;
+    try {
+      pdst = conn.prepareStatement(sql);
+      pdst.setLong(1, vo.getId());
+      rs = pdst.executeQuery();
+      while (rs.next()) {
+        UsuarioVO uvo = new UsuarioVO();
+        uvo.setId(rs.getLong("id"));
+        uvo.setLogin(rs.getString("login"));
+        uvo.setSenha(rs.getString("senha"));
+        uvo.setCargo(rs.getString("cargo"));
+        usuarios.add(uvo);
+
+      }
+    } catch (SQLException e) {
+      //TODO: handle exception
+      e.printStackTrace();
+    }
+
+    return usuarios;
+  }
+
+  public List<UsuarioVO> findByLogin(UsuarioVO vo) {
+    conn = getConnection();
+    String sql = "SELECT * FROM usuario WHERE login = ?";
+    List<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
+    PreparedStatement pdst;
+    ResultSet rs;
+    try {
+      pdst = conn.prepareStatement(sql);
+      pdst.setString(1, vo.getLogin());
+      rs = pdst.executeQuery();
+      while (rs.next()) {
+        if (rs.getString("login") != null) {
+          UsuarioVO uvo = new UsuarioVO();
+          uvo.setId(rs.getLong("id"));
+          uvo.setLogin(rs.getString("login"));
+          uvo.setSenha(rs.getString("senha"));
+          uvo.setCargo(rs.getString("cargo"));
+          usuarios.add(uvo);
+        }
+      }
+    } catch (SQLException e) {
+      //TODO: handle exception
+      e.printStackTrace();
+    }
+
+    return usuarios;
+  }
+
+  public List<UsuarioVO> findByCargo(UsuarioVO vo) {
+    conn = getConnection();
+    String sql = "SELECT * FROM usuario WHERE cargo = ?";
+    List<UsuarioVO> usuarios = new ArrayList<UsuarioVO>();
+    PreparedStatement pdst;
+    ResultSet rs;
+    try {
+      pdst = conn.prepareStatement(sql);
+      pdst.setString(1, vo.getCargo());
+      rs = pdst.executeQuery();
+      while (rs.next()) {
+        if (rs.getString("cargo") != null) {
+          UsuarioVO uvo = new UsuarioVO();
+          uvo.setId(rs.getLong("id"));
+          uvo.setLogin(rs.getString("login"));
+          uvo.setSenha(rs.getString("senha"));
+          uvo.setCargo(rs.getString("cargo"));
+          usuarios.add(uvo);
+        }
       }
     } catch (SQLException e) {
       //TODO: handle exception
