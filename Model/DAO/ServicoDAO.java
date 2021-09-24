@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ServicoDAO extends BaseDAO{
+public class ServicoDAO extends BaseDAO<ServicoVO>{
     
     // ----- Inserir ------
     public void inserir(ServicoVO servico){
@@ -47,84 +47,70 @@ public class ServicoDAO extends BaseDAO{
         }
     }
 
-    public void removerByName(ServicoVO servico){
+    // public void removerByName(ServicoVO servico){
         
-        Connection conn = getConnection();
-        String sql = "delete from Servico where nome = ?";
-        PreparedStatement ptst;
+    //     Connection conn = getConnection();
+    //     String sql = "delete from Servico where nome = ?";
+    //     PreparedStatement ptst;
 
-        try{
+    //     try{
             
-            ptst = conn.prepareStatement(sql);
-            ptst.setString(1, servico.getNome());
-            ptst.executeUpdate();
-        } catch (SQLException e){
-            e.printStackTrace();
-        }
-    }
+    //         ptst = conn.prepareStatement(sql);
+    //         ptst.setString(1, servico.getNome());
+    //         ptst.executeUpdate();
+    //     } catch (SQLException e){
+    //         e.printStackTrace();
+    //     }
+    // }
 
-    public void removerByPrice(ServicoVO servico){
+    // public void removerByPrice(ServicoVO servico){
 
-        Connection conn = getConnection();
-        String sql = "delete from Servico where preco = ?";
-        PreparedStatement ptst;
+    //     Connection conn = getConnection();
+    //     String sql = "delete from Servico where preco = ?";
+    //     PreparedStatement ptst;
 
-        try {
-            ptst = conn.prepareStatement(sql);
-            ptst.setDouble(1, servico.getPreco());
-            ptst.executeUpdate();
-        } catch (SQLException e) {
-            //TODO: handle exception
-            e.printStackTrace();
-        }
-    }
+    //     try {
+    //         ptst = conn.prepareStatement(sql);
+    //         ptst.setDouble(1, servico.getPreco());
+    //         ptst.executeUpdate();
+    //     } catch (SQLException e) {
+    //         //TODO: handle exception
+    //         e.printStackTrace();
+    //     }
+    // }
 
     // ----- Listar ------
-    public List<ServicoVO> listar(){
+    public ResultSet listar(){
         Connection conn = getConnection();
         String sql = "select * from Servico";
         Statement st;
-        ResultSet rs;
-        List<ServicoVO> servicos = new ArrayList<ServicoVO>();
+        ResultSet rs = null;
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);
-            while(rs.next()){
-            	ServicoVO service = new ServicoVO();
-                service.setNome(rs.getString("Nome"));
-                service.setPreco(rs.getDouble("Preco"));
-                service.setId(rs.getLong("Id"));
-                servicos.add(service);
-            }
+            
         } catch (SQLException e) {
             //TODO: handle exception
             e.printStackTrace();
         }
-        return servicos;
+        return rs;
     }
 
-    public List<ServicoVO> findById(ServicoVO vo){
+    public ResultSet findById(ServicoVO vo){
         Connection conn = getConnection();
         String sql = "select * from Servico where id = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<ServicoVO> servicos = new ArrayList<ServicoVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setLong(1, vo.getId());
             rs = pdst.executeQuery();
-            while(rs.next()){
-            	ServicoVO service = new ServicoVO();
-                service.setNome(rs.getString("Nome"));
-                service.setPreco(rs.getDouble("Preco"));
-                service.setId(rs.getLong("Id"));
-                servicos.add(service);
-            }
+            
         } catch (SQLException e) {
             //TODO: handle exception
             e.printStackTrace();
         }
-        return servicos;
+        return rs;
     }
 
     public List<ServicoVO> findByNome(ServicoVO vo){

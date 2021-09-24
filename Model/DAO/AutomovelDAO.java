@@ -10,7 +10,7 @@ import java.util.List;
 
 import Model.VO.AutomovelVO;
 
-public class AutomovelDAO extends BaseDAO{
+public class AutomovelDAO extends BaseDAO<AutomovelVO>{
     
     // ----- Inserir ------
     public void inserir(AutomovelVO carro){ // OK
@@ -48,48 +48,36 @@ public class AutomovelDAO extends BaseDAO{
         }
     }
     
-    public void removerByIdCliente(AutomovelVO carro){ // OK
-        Connection conn = getConnection();
-        String sql = "delete from Automovel where id_cliente = ?";
-        PreparedStatement ptst;
+    // public void removerByIdCliente(AutomovelVO carro){ // OK
+    //     Connection conn = getConnection();
+    //     String sql = "delete from Automovel where id_cliente = ?";
+    //     PreparedStatement ptst;
 
-        try{
-            ptst = conn.prepareStatement(sql);
-            ptst.setLong(1, carro.getCliente().getId());
-            ptst.executeUpdate();
-        } catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
+    //     try{
+    //         ptst = conn.prepareStatement(sql);
+    //         ptst.setLong(1, carro.getCliente().getId());
+    //         ptst.executeUpdate();
+    //     } catch(SQLException e){
+    //         e.printStackTrace();
+    //     }
+    // }
 
     // ---- listar ----
-    public List<AutomovelVO> listar(){ // OK
+    public ResultSet listar(){ // OK
 
         Connection conn = getConnection();
         String sql = "select * from Automovel";
         Statement st;
-        ResultSet rs;
-        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        ResultSet rs = null;
 
         try{
             st = conn.createStatement();
             rs = st.executeQuery(sql);
 
-            while(rs.next()){
-            	AutomovelVO car = new AutomovelVO();
-                car.setMarca(rs.getString("Marca"));
-                car.setCor(rs.getString("Cor"));
-                car.setPlaca(rs.getString("Placa"));
-                car.setAno(rs.getInt("Ano"));
-                car.setQuilometragem(rs.getDouble("Quilometragem"));
-                car.getCliente().setId(rs.getLong("id_cliente"));
-                car.setID(rs.getLong("ID"));
-                carros.add(car);
-            }
         } catch(SQLException e){
             e.printStackTrace();
         }
-        return carros;
+        return rs;
     }
 
     public List<AutomovelVO> findByMarca(AutomovelVO vo){ // OK
@@ -238,60 +226,38 @@ public class AutomovelDAO extends BaseDAO{
         return carros;
     }
 
-    public List<AutomovelVO> findById(AutomovelVO vo){ // OK
+    public ResultSet findById(AutomovelVO vo){ // OK
 
         conn = getConnection();
         String sql = "select * from Automovel where id = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setLong(1, vo.getID());
             rs = pdst.executeQuery();
-            while(rs.next()){
-                AutomovelVO car = new AutomovelVO();
-                car.setMarca(rs.getString("Marca"));
-                car.setCor(rs.getString("Cor"));
-                car.setPlaca(rs.getString("Placa"));
-                car.setAno(rs.getInt("Ano"));
-                car.setQuilometragem(rs.getDouble("Quilometragem"));
-                car.getCliente().setId(rs.getLong("id_cliente"));
-                car.setID(rs.getLong("ID"));
-                carros.add(car);
-            }
+           
         } catch(SQLException e){
             e.printStackTrace();
         }
-        return carros;
+        return rs;
     }
 
-    public List<AutomovelVO> findByClienteId(AutomovelVO vo){ // OK
+    public ResultSet findByClienteId(AutomovelVO vo){ // OK
 
         conn = getConnection();
         String sql = "select * from Automovel where id_cliente = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setLong(1, vo.getCliente().getId());
             rs = pdst.executeQuery();
-            while(rs.next()){
-                AutomovelVO car = new AutomovelVO();
-                car.setMarca(rs.getString("Marca"));
-                car.setCor(rs.getString("Cor"));
-                car.setPlaca(rs.getString("Placa"));
-                car.setAno(rs.getInt("Ano"));
-                car.setQuilometragem(rs.getDouble("Quilometragem"));
-                car.getCliente().setId(rs.getLong("id_cliente"));
-                car.setID(rs.getLong("ID"));
-                carros.add(car);
-            }
+           
         } catch(SQLException e){
             e.printStackTrace();
         }
-        return carros;
+        return rs;
     }
 
     // Editar

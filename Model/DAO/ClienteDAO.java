@@ -4,12 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import Model.VO.ClienteVO;
 
-public class ClienteDAO extends BaseDAO {
+public class ClienteDAO extends BaseDAO<ClienteVO> {
   
   //Inserção
   public void inserir(ClienteVO vo) {
@@ -22,8 +20,11 @@ public class ClienteDAO extends BaseDAO {
       pdst.setString(1, vo.getNome());
       pdst.setString(2, vo.getEndereco());
       pdst.setString(3, vo.getCPF());
-      pdst.execute();
+      int affectedRows = pdst.executeUpdate();
 
+      if (affectedRows == 0) {
+        throw new SQLException("A inserção falhou, nenhuma linha foi alterada");
+      }
     } catch (SQLException e) {
       //TODO: handle exception
       e.printStackTrace();
@@ -46,195 +47,137 @@ public class ClienteDAO extends BaseDAO {
     }
   }
 
-  public void removerByNome(ClienteVO vo) {
-    conn = getConnection();
-    String sql = "DELETE FROM cliente WHERE nome = ?";
-    PreparedStatement pdst;
+  // public void removerByNome(ClienteVO vo) {
+  //   conn = getConnection();
+  //   String sql = "DELETE FROM cliente WHERE nome = ?";
+  //   PreparedStatement pdst;
    
-    try {
-      pdst = conn.prepareStatement(sql);
-      pdst.setString(1, vo.getNome());
-      pdst.executeUpdate();
-    } catch (SQLException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-  }
+  //   try {
+  //     pdst = conn.prepareStatement(sql);
+  //     pdst.setString(1, vo.getNome());
+  //     pdst.executeUpdate();
+  //   } catch (SQLException e) {
+  //     // TODO Auto-generated catch block
+  //     e.printStackTrace();
+  //   }
+  // }
 
-  public void removerByEndereco(ClienteVO vo) {
-    conn = getConnection();
-    String sql = "DELETE FROM cliente WHERE endereco = ?";
-    PreparedStatement pdst;
+  // public void removerByEndereco(ClienteVO vo) {
+  //   conn = getConnection();
+  //   String sql = "DELETE FROM cliente WHERE endereco = ?";
+  //   PreparedStatement pdst;
    
-    try {
-      pdst = conn.prepareStatement(sql);
-      pdst.setString(1, vo.getEndereco());
-      pdst.executeUpdate();
-    } catch (SQLException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-  }
+  //   try {
+  //     pdst = conn.prepareStatement(sql);
+  //     pdst.setString(1, vo.getEndereco());
+  //     pdst.executeUpdate();
+  //   } catch (SQLException e) {
+  //     // TODO Auto-generated catch block
+  //     e.printStackTrace();
+  //   }
+  // }
 
-  public void removerByCPF(ClienteVO vo) {
-    conn = getConnection();
-    String sql = "DELETE FROM cliente WHERE cpf = ?";
-    PreparedStatement pdst;
+  // public void removerByCPF(ClienteVO vo) {
+  //   conn = getConnection();
+  //   String sql = "DELETE FROM cliente WHERE cpf = ?";
+  //   PreparedStatement pdst;
    
-    try {
-      pdst = conn.prepareStatement(sql);
-      pdst.setString(1, vo.getCPF());
-      pdst.executeUpdate();
-    } catch (SQLException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    } 
-  }
+  //   try {
+  //     pdst = conn.prepareStatement(sql);
+  //     pdst.setString(1, vo.getCPF());
+  //     pdst.executeUpdate();
+  //   } catch (SQLException e) {
+  //     // TODO Auto-generated catch block
+  //     e.printStackTrace();
+  //   } 
+  // }
 
   //Listagem
-  public List<ClienteVO> listar() {
+  public ResultSet listar() {
     conn = getConnection();
     String sql = "SELECT * FROM cliente";
     Statement st;
-    ResultSet rs;
-    List<ClienteVO> clientes = new ArrayList<ClienteVO>();
+    ResultSet rs = null;
     try {
       st = conn.createStatement();
       rs = st.executeQuery(sql);
-
-      while (rs.next()) {
-        ClienteVO cvo = new ClienteVO();
-        cvo.setId(rs.getLong("id"));
-        cvo.setNome(rs.getString("nome"));
-        cvo.setEndereco(rs.getString("endereco"));
-        cvo.setCPF(rs.getString("cpf"));
-        clientes.add(cvo);
-
-      }
     } catch (SQLException e) {
       //TODO: handle exception
       e.printStackTrace();
     }
 
-    return clientes;
+    return rs;
   }
 
-  public List<ClienteVO> findById(ClienteVO vo) {
+  public ResultSet findById(ClienteVO vo) {
     conn = getConnection();
     String sql = "SELECT * FROM cliente WHERE id = ?";
     PreparedStatement pdst;
-    ResultSet rs;
-    List<ClienteVO> clientes = new ArrayList<ClienteVO>();
+    ResultSet rs = null;
     try {
       pdst = conn.prepareStatement(sql);
       pdst.setLong(1, vo.getId());
       rs = pdst.executeQuery();
 
-      while (rs.next()) {
-        ClienteVO cvo = new ClienteVO();
-        cvo.setId(rs.getLong("id"));
-        cvo.setNome(rs.getString("nome"));
-        cvo.setEndereco(rs.getString("endereco"));
-        cvo.setCPF(rs.getString("cpf"));
-        clientes.add(cvo);
-
-      }
     } catch (SQLException e) {
       //TODO: handle exception
       e.printStackTrace();
     }
 
-    return clientes;
+    return rs;
   }
 
-  public List<ClienteVO> findByNome(ClienteVO vo) {
+  public ResultSet findByNome(ClienteVO vo) {
     conn = getConnection();
     String sql = "SELECT * FROM cliente WHERE nome = ?";
     PreparedStatement pdst;
-    ResultSet rs;
-    List<ClienteVO> clientes = new ArrayList<ClienteVO>();
+    ResultSet rs = null;
     try {
       pdst = conn.prepareStatement(sql);
       pdst.setString(1, vo.getNome());
       rs = pdst.executeQuery();
-
-      while (rs.next()) {
-        if (rs.getString("nome") != null) {
-          ClienteVO cvo = new ClienteVO();
-          cvo.setId(rs.getLong("id"));
-          cvo.setNome(rs.getString("nome"));
-          cvo.setEndereco(rs.getString("endereco"));
-          cvo.setCPF(rs.getString("cpf"));
-          clientes.add(cvo);
-
-        }
-      }
     } catch (SQLException e) {
       //TODO: handle exception
       e.printStackTrace();
     }
 
-    return clientes;
+    return rs;
   }
 
-  public List<ClienteVO> findByEndereco(ClienteVO vo) {
+  public ResultSet findByEndereco(ClienteVO vo) {
     conn = getConnection();
     String sql = "SELECT * FROM cliente WHERE endereco = ?";
     PreparedStatement pdst;
-    ResultSet rs;
-    List<ClienteVO> clientes = new ArrayList<ClienteVO>();
+    ResultSet rs = null;
     try {
       pdst = conn.prepareStatement(sql);
       pdst.setString(1, vo.getEndereco());
       rs = pdst.executeQuery();
 
-      while (rs.next()) {
-        if (rs.getString("endereco") != null) {
-          ClienteVO cvo = new ClienteVO();
-          cvo.setId(rs.getLong("id"));
-          cvo.setNome(rs.getString("nome"));
-          cvo.setEndereco(rs.getString("endereco"));
-          cvo.setCPF(rs.getString("cpf"));
-          clientes.add(cvo);
-
-        }
-      }
     } catch (SQLException e) {
       //TODO: handle exception
       e.printStackTrace();
     }
 
-    return clientes;
+    return rs;
   }
 
-  public List<ClienteVO> findByCPF(ClienteVO vo) {
+  public ResultSet findByCPF(ClienteVO vo) {
     conn = getConnection();
     String sql = "SELECT * FROM cliente WHERE cpf = ?";
     PreparedStatement pdst;
-    ResultSet rs;
-    List<ClienteVO> clientes = new ArrayList<ClienteVO>();
+    ResultSet rs = null;
     try {
       pdst = conn.prepareStatement(sql);
       pdst.setString(1, vo.getCPF());
       rs = pdst.executeQuery();
 
-      while (rs.next()) {
-        if (rs.getString("cpf") != null) {
-          ClienteVO cvo = new ClienteVO();
-          cvo.setId(rs.getLong("id"));
-          cvo.setNome(rs.getString("nome"));
-          cvo.setEndereco(rs.getString("endereco"));
-          cvo.setCPF(rs.getString("cpf"));
-          clientes.add(cvo);
-
-        }
-      }
     } catch (SQLException e) {
       //TODO: handle exception
       e.printStackTrace();
     }
 
-    return clientes;
+    return rs;
   }
 
   //Alteração

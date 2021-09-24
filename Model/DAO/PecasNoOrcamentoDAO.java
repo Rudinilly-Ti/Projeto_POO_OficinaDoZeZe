@@ -4,12 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import Model.VO.PecasNoOrcamentoVO;
 
-public class PecasNoOrcamentoDAO extends BaseDAO{
+public class PecasNoOrcamentoDAO extends BaseDAO<PecasNoOrcamentoVO>{
     
     //Inserção
     public void inserir(PecasNoOrcamentoVO vo){
@@ -30,13 +28,13 @@ public class PecasNoOrcamentoDAO extends BaseDAO{
     }
 
     //Remoção
-    public void removerByValor(PecasNoOrcamentoVO vo){
+    public void removerById(PecasNoOrcamentoVO vo){
         conn = getConnection();
-        String sql = "delete from PecasNoOrcamento where valor = ?";
+        String sql = "delete from PecasNoOrcamento where id = ?";
         PreparedStatement pdst;
         try {
             pdst = conn.prepareStatement(sql);
-            pdst.setDouble(1, vo.getValor());
+            pdst.setLong(1, vo.getId());
             pdst.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -44,13 +42,13 @@ public class PecasNoOrcamentoDAO extends BaseDAO{
         }
     }
 
-    public void removerByQuantidade(PecasNoOrcamentoVO vo){
+    public void removerByOrcamentoId(PecasNoOrcamentoVO vo){
         conn = getConnection();
-        String sql = "delete from PecasNoOrcamento where quantidade = ?";
+        String sql = "delete from PecasNoOrcamento where id_orcamento = ?";
         PreparedStatement pdst;
         try {
             pdst = conn.prepareStatement(sql);
-            pdst.setInt(1, vo.getQuantidade());
+            pdst.setLong(1, vo.getOrcamento().getId());
             pdst.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -59,159 +57,109 @@ public class PecasNoOrcamentoDAO extends BaseDAO{
     }
 
     //Listagem
-    public List<PecasNoOrcamentoVO> listar(){
+    public ResultSet listar(){
         conn = getConnection();
         String sql = "select * from PecasNoOrcamento";
         Statement st;
-        ResultSet rs;
-        List<PecasNoOrcamentoVO> pecas = new ArrayList<PecasNoOrcamentoVO>();
+        ResultSet rs = null;
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);
-            while (rs.next()) {
-                PecasNoOrcamentoVO pvo = new PecasNoOrcamentoVO();
-                pvo.setValor(rs.getDouble("valor"));
-                pvo.setQuantidade(rs.getInt("quantidade"));
-                pvo.getPeca().setId(rs.getLong("id_peca"));
-                pvo.getOrcamento().setId(rs.getLong("id_orcamento"));
-                pvo.setId(rs.getLong("id"));
-                pecas.add(pvo);
-            }
+            
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return pecas;
+        return rs;
     }
 
-    public List<PecasNoOrcamentoVO> findByValor(PecasNoOrcamentoVO vo){
+    public ResultSet findByValor(PecasNoOrcamentoVO vo){
         conn = getConnection();
         String sql = "select * from PecasNoOrcamento where valor = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<PecasNoOrcamentoVO> pecas = new ArrayList<PecasNoOrcamentoVO>();
+        ResultSet rs = null;
+        
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setDouble(1, vo.getValor());
             rs = pdst.executeQuery();
-            while (rs.next()) {
-                PecasNoOrcamentoVO pvo = new PecasNoOrcamentoVO();
-                pvo.setValor(rs.getDouble("valor"));
-                pvo.setQuantidade(rs.getInt("quantidade"));
-                pvo.getPeca().setId(rs.getLong("id_peca"));
-                pvo.getOrcamento().setId(rs.getLong("id_orcamento"));
-                pvo.setId(rs.getLong("id"));
-                pecas.add(pvo);
-            }
+            
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return pecas;
+        return rs;
     }
 
-    public List<PecasNoOrcamentoVO> findByQuantidade(PecasNoOrcamentoVO vo){
+    public ResultSet findByQuantidade(PecasNoOrcamentoVO vo){
         conn = getConnection();
         String sql = "select * from PecasNoOrcamento where quantidade = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<PecasNoOrcamentoVO> pecas = new ArrayList<PecasNoOrcamentoVO>();
+        ResultSet rs = null;
+        
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setInt(1, vo.getQuantidade());
             rs = pdst.executeQuery();
-            while (rs.next()) {
-                PecasNoOrcamentoVO pvo = new PecasNoOrcamentoVO();
-                pvo.setValor(rs.getDouble("valor"));
-                pvo.setQuantidade(rs.getInt("quantidade"));
-                pvo.getPeca().setId(rs.getLong("id_peca"));
-                pvo.getOrcamento().setId(rs.getLong("id_orcamento"));
-                pvo.setId(rs.getLong("id"));
-                pecas.add(pvo);
-            }
+            
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return pecas;
+        return rs;
     }
 
-    public List<PecasNoOrcamentoVO> findByPecaId(PecasNoOrcamentoVO vo){
+    public ResultSet findByPecaId(PecasNoOrcamentoVO vo){
         conn = getConnection();
         String sql = "select * from PecasNoOrcamento where id_peca = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<PecasNoOrcamentoVO> pecas = new ArrayList<PecasNoOrcamentoVO>();
+        ResultSet rs = null;
+        
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setLong(1, vo.getPeca().getId());
             rs = pdst.executeQuery();
-            while (rs.next()) {
-                PecasNoOrcamentoVO pvo = new PecasNoOrcamentoVO();
-                pvo.setValor(rs.getDouble("valor"));
-                pvo.setQuantidade(rs.getInt("quantidade"));
-                pvo.getPeca().setId(rs.getLong("id_peca"));
-                pvo.getOrcamento().setId(rs.getLong("id_orcamento"));
-                pvo.setId(rs.getLong("id"));
-                pecas.add(pvo);
-            }
+            
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return pecas;
+        return rs;
     }
 
-    public List<PecasNoOrcamentoVO> findByOrcamentoId(PecasNoOrcamentoVO vo){
+    public ResultSet findByOrcamentoId(PecasNoOrcamentoVO vo){
         conn = getConnection();
         String sql = "select * from PecasNoOrcamento where id_orcamento = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<PecasNoOrcamentoVO> pecas = new ArrayList<PecasNoOrcamentoVO>();
+        ResultSet rs = null;
+        
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setLong(1, vo.getOrcamento().getId());
             rs = pdst.executeQuery();
-            while (rs.next()) {
-                PecasNoOrcamentoVO pvo = new PecasNoOrcamentoVO();
-                pvo.setValor(rs.getDouble("valor"));
-                pvo.setQuantidade(rs.getInt("quantidade"));
-                pvo.getPeca().setId(rs.getLong("id_peca"));
-                pvo.getOrcamento().setId(rs.getLong("id_orcamento"));
-                pvo.setId(rs.getLong("id"));
-                pecas.add(pvo);
-            }
+            
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return pecas;
+        return rs;
     }
 
-    public List<PecasNoOrcamentoVO> findById(PecasNoOrcamentoVO vo){
+    public ResultSet findById(PecasNoOrcamentoVO vo){
         conn = getConnection();
         String sql = "select * from PecasNoOrcamento where id = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<PecasNoOrcamentoVO> pecas = new ArrayList<PecasNoOrcamentoVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setLong(1, vo.getId());
             rs = pdst.executeQuery();
-            while (rs.next()) {
-                PecasNoOrcamentoVO pvo = new PecasNoOrcamentoVO();
-                pvo.setValor(rs.getDouble("valor"));
-                pvo.setQuantidade(rs.getInt("quantidade"));
-                pvo.getPeca().setId(rs.getLong("id_peca"));
-                pvo.getOrcamento().setId(rs.getLong("id_orcamento"));
-                pvo.setId(rs.getLong("id"));
-                pecas.add(pvo);
-            }
+           
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return pecas;
+        return rs;
     }
 
     //Alteração

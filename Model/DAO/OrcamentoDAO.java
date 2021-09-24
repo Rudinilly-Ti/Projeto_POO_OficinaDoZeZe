@@ -5,11 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-public class OrcamentoDAO extends BaseDAO{
+public class OrcamentoDAO extends BaseDAO<OrcamentoVO>{
     
     //Inserção
     public void inserir(OrcamentoVO vo){
@@ -46,293 +42,167 @@ public class OrcamentoDAO extends BaseDAO{
             e.printStackTrace();
         }
     }
-    public void removerByValor(OrcamentoVO vo){
-        conn = getConnection();
-        String sql = "delete from Orcamento where valor = ?";
-        PreparedStatement pdst;
-        try {
-            pdst = conn.prepareStatement(sql);
-            pdst.setDouble(1, vo.getValor());
-            pdst.executeUpdate();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-    public void removerByDataInicial(OrcamentoVO vo){
-        conn = getConnection();
-        String sql = "delete from Orcamento where data_inicio = ?";
-        PreparedStatement pdst;
-        java.sql.Date DateSqlIni = new java.sql.Date(vo.getDataInicio().getTimeInMillis());
-        try {
-            pdst = conn.prepareStatement(sql);
-            pdst.setDate(1, DateSqlIni);
-            pdst.executeUpdate();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-    public void removerByDataFinal(OrcamentoVO vo){
-        conn = getConnection();
-        String sql = "delete from Orcamento where data_fim = ?";
-        PreparedStatement pdst;
-        java.sql.Date DateSqlFim = new java.sql.Date(vo.getDataFim().getTimeInMillis());
-        try {
-            pdst = conn.prepareStatement(sql);
-            pdst.setDate(1, DateSqlFim);
-            pdst.executeUpdate();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
+    // public void removerByValor(OrcamentoVO vo){
+    //     conn = getConnection();
+    //     String sql = "delete from Orcamento where valor = ?";
+    //     PreparedStatement pdst;
+    //     try {
+    //         pdst = conn.prepareStatement(sql);
+    //         pdst.setDouble(1, vo.getValor());
+    //         pdst.executeUpdate();
+    //     } catch (SQLException e) {
+    //         // TODO Auto-generated catch block
+    //         e.printStackTrace();
+    //     }
+    // }
+    // public void removerByDataInicial(OrcamentoVO vo){
+    //     conn = getConnection();
+    //     String sql = "delete from Orcamento where data_inicio = ?";
+    //     PreparedStatement pdst;
+    //     java.sql.Date DateSqlIni = new java.sql.Date(vo.getDataInicio().getTimeInMillis());
+    //     try {
+    //         pdst = conn.prepareStatement(sql);
+    //         pdst.setDate(1, DateSqlIni);
+    //         pdst.executeUpdate();
+    //     } catch (SQLException e) {
+    //         // TODO Auto-generated catch block
+    //         e.printStackTrace();
+    //     }
+    // }
+    // public void removerByDataFinal(OrcamentoVO vo){
+    //     conn = getConnection();
+    //     String sql = "delete from Orcamento where data_fim = ?";
+    //     PreparedStatement pdst;
+    //     java.sql.Date DateSqlFim = new java.sql.Date(vo.getDataFim().getTimeInMillis());
+    //     try {
+    //         pdst = conn.prepareStatement(sql);
+    //         pdst.setDate(1, DateSqlFim);
+    //         pdst.executeUpdate();
+    //     } catch (SQLException e) {
+    //         // TODO Auto-generated catch block
+    //         e.printStackTrace();
+    //     }
+    // }
 
     //Listagem
-    public List<OrcamentoVO> listar(){
+    public ResultSet listar(){
         conn = getConnection();
         String sql = "select * from Orcamento";
         Statement st;
-        ResultSet rs;
-        List<OrcamentoVO> orcamentos = new ArrayList<OrcamentoVO>();
+        ResultSet rs = null;
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);
-            while (rs.next()) {
-                OrcamentoVO orcVo = new OrcamentoVO();
-                Calendar dataIni = Calendar.getInstance();
-                Calendar dataFim = Calendar.getInstance();
-
-                orcVo.setId(rs.getLong("Id"));
-                orcVo.getCliente().setId(rs.getLong("Id_cliente"));
-                orcVo.getCarro().setID(rs.getLong("Id_automovel"));
-                orcVo.setValor(rs.getDouble("valor"));
-                
-                dataIni.setTimeInMillis(rs.getDate("data_inicio").getTime());
-                orcVo.setDataInicio(dataIni);
-                
-                dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
-                orcVo.setDataFim(dataFim);
-                
-                orcamentos.add(orcVo);
-            }
+            
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return orcamentos;
+        return rs;
     }
 
-    public List<OrcamentoVO> findById(OrcamentoVO vo){
+    public ResultSet findById(OrcamentoVO vo){
         conn = getConnection();
         String sql = "select * from Orcamento where id = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<OrcamentoVO> orcamentos = new ArrayList<OrcamentoVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setLong(1, vo.getId());
             rs = pdst.executeQuery();
-            while (rs.next()) {
-                OrcamentoVO orcVo = new OrcamentoVO();
-                Calendar dataIni = Calendar.getInstance();
-                Calendar dataFim = Calendar.getInstance();
-
-                orcVo.setId(rs.getLong("Id"));
-                orcVo.getCliente().setId(rs.getLong("Id_cliente"));
-                orcVo.getCarro().setID(rs.getLong("Id_automovel"));
-                orcVo.setValor(rs.getDouble("valor"));
-                
-                dataIni.setTimeInMillis(rs.getDate("data_inicio").getTime());
-                orcVo.setDataInicio(dataIni);
-                
-                dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
-                orcVo.setDataFim(dataFim);
-                
-                orcamentos.add(orcVo);
-            }
+           
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return orcamentos;
+        return rs;
     }
 
-    public List<OrcamentoVO> findByClienteId(OrcamentoVO vo){
+    public ResultSet findByClienteId(OrcamentoVO vo){
         conn = getConnection();
         String sql = "select * from Orcamento where id_cliente = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<OrcamentoVO> orcamentos = new ArrayList<OrcamentoVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setLong(1, vo.getCliente().getId());
             rs = pdst.executeQuery();
-            while (rs.next()) {
-                OrcamentoVO orcVo = new OrcamentoVO();
-                Calendar dataIni = Calendar.getInstance();
-                Calendar dataFim = Calendar.getInstance();
-
-                orcVo.setId(rs.getLong("Id"));
-                orcVo.getCliente().setId(rs.getLong("Id_cliente"));
-                orcVo.getCarro().setID(rs.getLong("Id_automovel"));
-                orcVo.setValor(rs.getDouble("valor"));
-                
-                dataIni.setTimeInMillis(rs.getDate("data_inicio").getTime());
-                orcVo.setDataInicio(dataIni);
-                
-                dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
-                orcVo.setDataFim(dataFim);
-                
-                orcamentos.add(orcVo);
-            }
+           
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return orcamentos;
+        return rs;
     }
 
-    public List<OrcamentoVO> findByAutomovelId(OrcamentoVO vo){
+    public ResultSet findByAutomovelId(OrcamentoVO vo){
         conn = getConnection();
         String sql = "select * from Orcamento where id_automovel = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<OrcamentoVO> orcamentos = new ArrayList<OrcamentoVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setLong(1, vo.getCarro().getID());
             rs = pdst.executeQuery();
-            while (rs.next()) {
-                OrcamentoVO orcVo = new OrcamentoVO();
-                Calendar dataIni = Calendar.getInstance();
-                Calendar dataFim = Calendar.getInstance();
-
-                orcVo.setId(rs.getLong("Id"));
-                orcVo.getCliente().setId(rs.getLong("Id_cliente"));
-                orcVo.getCarro().setID(rs.getLong("Id_automovel"));
-                orcVo.setValor(rs.getDouble("valor"));
-                
-                dataIni.setTimeInMillis(rs.getDate("data_inicio").getTime());
-                orcVo.setDataInicio(dataIni);
-                
-                dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
-                orcVo.setDataFim(dataFim);
-                
-                orcamentos.add(orcVo);
-            }
+           
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return orcamentos;
+        return rs;
     }
 
-    public List<OrcamentoVO> findByValor(OrcamentoVO vo){
+    public ResultSet findByValor(OrcamentoVO vo){
         conn = getConnection();
         String sql = "select * from Orcamento where valor = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<OrcamentoVO> orcamentos = new ArrayList<OrcamentoVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setDouble(1, vo.getValor());
             rs = pdst.executeQuery();
-            while (rs.next()) {
-                OrcamentoVO orcVo = new OrcamentoVO();
-                Calendar dataIni = Calendar.getInstance();
-                Calendar dataFim = Calendar.getInstance();
-
-                orcVo.setId(rs.getLong("Id"));
-                orcVo.getCliente().setId(rs.getLong("Id_cliente"));
-                orcVo.getCarro().setID(rs.getLong("Id_automovel"));
-                orcVo.setValor(rs.getDouble("valor"));
-                
-                dataIni.setTimeInMillis(rs.getDate("data_inicio").getTime());
-                orcVo.setDataInicio(dataIni);
-                
-                dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
-                orcVo.setDataFim(dataFim);
-                
-                orcamentos.add(orcVo);
-            }
+           
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return orcamentos;
+        return rs;
     }
 
-    public List<OrcamentoVO> findByDataInicio(OrcamentoVO vo){
+    public ResultSet findByDataInicio(OrcamentoVO vo){
         conn = getConnection();
         String sql = "select * from Orcamento where data_inicio = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<OrcamentoVO> orcamentos = new ArrayList<OrcamentoVO>();
+        ResultSet rs = null;
         java.sql.Date DateSqlIni = new java.sql.Date(vo.getDataInicio().getTimeInMillis());
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setDate(1, DateSqlIni);
             rs = pdst.executeQuery();
-            while (rs.next()) {
-                OrcamentoVO orcVo = new OrcamentoVO();
-                Calendar dataIni = Calendar.getInstance();
-                Calendar dataFim = Calendar.getInstance();
-
-                orcVo.setId(rs.getLong("Id"));
-                orcVo.getCliente().setId(rs.getLong("Id_cliente"));
-                orcVo.getCarro().setID(rs.getLong("Id_automovel"));
-                orcVo.setValor(rs.getDouble("valor"));
-                
-                dataIni.setTimeInMillis(rs.getDate("data_inicio").getTime());
-                orcVo.setDataInicio(dataIni);
-                
-                dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
-                orcVo.setDataFim(dataFim);
-                
-                orcamentos.add(orcVo);
-            }
+            
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return orcamentos;
+        return rs;
     }
 
-    public List<OrcamentoVO> findByDataFinal(OrcamentoVO vo){
+    public ResultSet findByDataFinal(OrcamentoVO vo){
         conn = getConnection();
         String sql = "select * from Orcamento where data_fim = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<OrcamentoVO> orcamentos = new ArrayList<OrcamentoVO>();
+        ResultSet rs = null;
         java.sql.Date DateSqlFim = new java.sql.Date(vo.getDataFim().getTimeInMillis());
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setDate(1, DateSqlFim);
             rs = pdst.executeQuery();
-            while (rs.next()) {
-                OrcamentoVO orcVo = new OrcamentoVO();
-                Calendar dataIni = Calendar.getInstance();
-                Calendar dataFim = Calendar.getInstance();
-
-                orcVo.setId(rs.getLong("Id"));
-                orcVo.getCliente().setId(rs.getLong("Id_cliente"));
-                orcVo.getCarro().setID(rs.getLong("Id_automovel"));
-                orcVo.setValor(rs.getDouble("valor"));
-                
-                dataIni.setTimeInMillis(rs.getDate("data_inicio").getTime());
-                orcVo.setDataInicio(dataIni);
-                
-                dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
-                orcVo.setDataFim(dataFim);
-                
-                orcamentos.add(orcVo);
-            }
+            
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return orcamentos;
+        return rs;
     }
 
     //Alteração
