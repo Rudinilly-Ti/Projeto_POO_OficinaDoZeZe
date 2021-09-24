@@ -1,20 +1,11 @@
 package Model.VO;
 
-public class UsuarioVO {
+public abstract class UsuarioVO {
   private Long id;
   private String login;
   private String senha;
-  private String cargo;
 
-  public UsuarioVO(Long id, String login, String senha, String cargo) {
-    setId(id);
-    setLogin(login);
-    setSenha(senha);
-    setCargo(cargo);
-  }
-
-  public UsuarioVO() {
-  }
+  public abstract void oficina();
 
   public Long getId() {
     return id;
@@ -50,18 +41,6 @@ public class UsuarioVO {
       this.senha = senha;
     }else {
       System.out.println("Senha invalido");
-    }
-  }
-
-  public String getCargo() {
-    return cargo;
-  }
-
-  public void setCargo(String cargo) {
-    if (!cargo.isBlank() && cargo!= null) {
-      this.cargo = cargo;
-    }else {
-      System.out.println("Cargo invalido");
     }
   }
 }
