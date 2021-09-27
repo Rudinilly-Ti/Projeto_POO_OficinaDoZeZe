@@ -2,6 +2,7 @@ package Model.DAO;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -26,6 +27,75 @@ public class FuncionarioDAO extends UsuarioDAO<FuncionarioVO>{
       }
     } catch (Exception e) {
       //TODO: handle exception
+    }
+  }
+
+  //Listagem
+  public ResultSet findByDataAdmissao(FuncionarioVO vo){
+    conn = getConnection();
+    String sql = "select * from funcionario where data_admissao = ?";
+    PreparedStatement pdst;
+    ResultSet rs = null;
+    java.sql.Date DateAdm = new java.sql.Date(vo.getDataDeAdmissao().getTimeInMillis());
+    try {
+        super.findById(vo);
+        pdst = conn.prepareStatement(sql);
+        pdst.setDate(1, DateAdm);
+        rs = pdst.executeQuery();
+        
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+    return rs;
+  }
+
+  public ResultSet findBySalario(FuncionarioVO vo){
+    conn = getConnection();
+    String sql = "select * from funcionario where salario = ?";
+    PreparedStatement pdst;
+    ResultSet rs = null;
+    try {
+        super.findById(vo);
+        pdst = conn.prepareStatement(sql);
+        pdst.setDouble(1, vo.getSalario());
+        rs = pdst.executeQuery();
+        
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+    return rs;
+  }
+
+  //Alteração
+  public void editarSalario(FuncionarioVO vo) {
+    conn = getConnection();
+    String sql = "UPDATE funcionario SET salario = ? WHERE id_usuario = ?";
+    PreparedStatement pdst;
+    try {
+      pdst = conn.prepareStatement(sql);
+      pdst.setDouble(1, vo.getSalario());
+      pdst.setLong(2, vo.getId());
+      pdst.executeUpdate();
+    } catch ( SQLException e) {
+      //TODO: handle exception
+      e.printStackTrace();
+    }
+  }
+  public void editarDataAdmissao(FuncionarioVO vo) {
+    conn = getConnection();
+    String sql = "UPDATE funcionario SET data_admissao = ? WHERE id_usuario = ?";
+    PreparedStatement pdst;
+    java.sql.Date DataAdm = new java.sql.Date(vo.getDataDeAdmissao().getTimeInMillis());
+    try {
+      pdst = conn.prepareStatement(sql);
+      pdst.setDate(1, DataAdm);
+      pdst.setLong(2, vo.getId());
+      pdst.executeUpdate();
+    } catch ( SQLException e) {
+      //TODO: handle exception
+      e.printStackTrace();
     }
   }
 }

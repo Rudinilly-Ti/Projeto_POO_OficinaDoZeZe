@@ -160,6 +160,7 @@ public class UsuarioDAO<VO extends UsuarioVO> extends BaseDAO<VO> {
       pdst = conn.prepareStatement(sql);
       pdst.setString(1, vo.getLogin());
       pdst.setLong(2, vo.getId());
+      pdst.executeUpdate();
     } catch ( SQLException e) {
       //TODO: handle exception
       e.printStackTrace();
@@ -174,6 +175,7 @@ public class UsuarioDAO<VO extends UsuarioVO> extends BaseDAO<VO> {
       pdst = conn.prepareStatement(sql);
       pdst.setString(1, vo.getSenha());
       pdst.setLong(2, vo.getId());
+      pdst.executeUpdate();
     } catch ( SQLException e) {
       //TODO: handle exception
       e.printStackTrace();
