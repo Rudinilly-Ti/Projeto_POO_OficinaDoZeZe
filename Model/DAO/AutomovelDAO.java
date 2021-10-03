@@ -10,7 +10,7 @@ import java.util.List;
 
 import Model.VO.AutomovelVO;
 
-public class AutomovelDAO extends BaseDAO{
+public class AutomovelDAO extends BaseDAO<AutomovelVO>{
     
     // ----- Inserir ------
     public void inserir(AutomovelVO carro){ // OK
@@ -48,35 +48,141 @@ public class AutomovelDAO extends BaseDAO{
         }
     }
     
-    public void removerByIdCliente(AutomovelVO carro){ // OK
-        Connection conn = getConnection();
-        String sql = "delete from Automovel where id_cliente = ?";
-        PreparedStatement ptst;
+    // public void removerByIdCliente(AutomovelVO carro){ // OK
+    //     Connection conn = getConnection();
+    //     String sql = "delete from Automovel where id_cliente = ?";
+    //     PreparedStatement ptst;
 
-        try{
-            ptst = conn.prepareStatement(sql);
-            ptst.setLong(1, carro.getCliente().getId());
-            ptst.executeUpdate();
-        } catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
+    //     try{
+    //         ptst = conn.prepareStatement(sql);
+    //         ptst.setLong(1, carro.getCliente().getId());
+    //         ptst.executeUpdate();
+    //     } catch(SQLException e){
+    //         e.printStackTrace();
+    //     }
+    // }
 
     // ---- listar ----
-    public List<AutomovelVO> listar(){ // OK
+    public ResultSet listar(){ // OK
 
         Connection conn = getConnection();
         String sql = "select * from Automovel";
         Statement st;
-        ResultSet rs;
-        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        ResultSet rs = null;
 
         try{
             st = conn.createStatement();
             rs = st.executeQuery(sql);
 
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public List<AutomovelVO> findByMarca(AutomovelVO vo){ // OK
+
+        conn = getConnection();
+        String sql = "select * from Automovel where marca = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setString(1, vo.getMarca());
+            rs = pdst.executeQuery();
             while(rs.next()){
-            	AutomovelVO car = new AutomovelVO();
+            	if(rs.getString("marca") != null){
+                    AutomovelVO car = new AutomovelVO();
+                    car.setMarca(rs.getString("Marca"));
+                    car.setCor(rs.getString("Cor"));
+                    car.setPlaca(rs.getString("Placa"));
+                    car.setAno(rs.getInt("Ano"));
+                    car.setQuilometragem(rs.getDouble("Quilometragem"));
+                    car.getCliente().setId(rs.getLong("id_cliente"));
+                    car.setID(rs.getLong("ID"));
+                    carros.add(car);
+                }
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return carros;
+    }
+
+    public List<AutomovelVO> findByCor(AutomovelVO vo){ // OK
+
+        conn = getConnection();
+        String sql = "select * from Automovel where cor = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setString(1, vo.getCor());
+            rs = pdst.executeQuery();
+            while(rs.next()){
+            	if(rs.getString("cor") != null){
+                    AutomovelVO car = new AutomovelVO();
+                    car.setMarca(rs.getString("Marca"));
+                    car.setCor(rs.getString("Cor"));
+                    car.setPlaca(rs.getString("Placa"));
+                    car.setAno(rs.getInt("Ano"));
+                    car.setQuilometragem(rs.getDouble("Quilometragem"));
+                    car.getCliente().setId(rs.getLong("id_cliente"));
+                    car.setID(rs.getLong("ID"));
+                    carros.add(car);
+                }
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return carros;
+    }
+
+    public List<AutomovelVO> findByPlaca(AutomovelVO vo){ // OK
+
+        conn = getConnection();
+        String sql = "select * from Automovel where placa = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setString(1, vo.getPlaca());
+            rs = pdst.executeQuery();
+            while(rs.next()){
+            	if(rs.getString("placa") != null){
+                    AutomovelVO car = new AutomovelVO();
+                    car.setMarca(rs.getString("Marca"));
+                    car.setCor(rs.getString("Cor"));
+                    car.setPlaca(rs.getString("Placa"));
+                    car.setAno(rs.getInt("Ano"));
+                    car.setQuilometragem(rs.getDouble("Quilometragem"));
+                    car.getCliente().setId(rs.getLong("id_cliente"));
+                    car.setID(rs.getLong("ID"));
+                    carros.add(car);
+                }
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return carros;
+    }
+
+    public List<AutomovelVO> findByAno(AutomovelVO vo){ // OK
+
+        conn = getConnection();
+        String sql = "select * from Automovel where ano = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setInt(1, vo.getAno());
+            rs = pdst.executeQuery();
+            while(rs.next()){
+                AutomovelVO car = new AutomovelVO();
                 car.setMarca(rs.getString("Marca"));
                 car.setCor(rs.getString("Cor"));
                 car.setPlaca(rs.getString("Placa"));
@@ -90,6 +196,68 @@ public class AutomovelDAO extends BaseDAO{
             e.printStackTrace();
         }
         return carros;
+    }
+
+    public List<AutomovelVO> findByQuilometragem(AutomovelVO vo){ // OK
+
+        conn = getConnection();
+        String sql = "select * from Automovel where quilometragem = ?";
+        PreparedStatement pdst;
+        ResultSet rs;
+        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setDouble(1, vo.getQuilometragem());
+            rs = pdst.executeQuery();
+            while(rs.next()){
+                AutomovelVO car = new AutomovelVO();
+                car.setMarca(rs.getString("Marca"));
+                car.setCor(rs.getString("Cor"));
+                car.setPlaca(rs.getString("Placa"));
+                car.setAno(rs.getInt("Ano"));
+                car.setQuilometragem(rs.getDouble("Quilometragem"));
+                car.getCliente().setId(rs.getLong("id_cliente"));
+                car.setID(rs.getLong("ID"));
+                carros.add(car);
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return carros;
+    }
+
+    public ResultSet findById(AutomovelVO vo){ // OK
+
+        conn = getConnection();
+        String sql = "select * from Automovel where id = ?";
+        PreparedStatement pdst;
+        ResultSet rs = null;
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getID());
+            rs = pdst.executeQuery();
+           
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet findByClienteId(AutomovelVO vo){ // OK
+
+        conn = getConnection();
+        String sql = "select * from Automovel where id_cliente = ?";
+        PreparedStatement pdst;
+        ResultSet rs = null;
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getCliente().getId());
+            rs = pdst.executeQuery();
+           
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return rs;
     }
 
     // Editar

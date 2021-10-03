@@ -2,9 +2,10 @@ package Model.DAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BaseDAO {
+public abstract class BaseDAO<VO> implements BaseInterDAO<VO>{
     Connection conn = null;
     String url = "jdbc:postgresql://localhost:5432/oficina";
     String user = "Zeze2021";
@@ -22,4 +23,23 @@ public class BaseDAO {
         }
         else return conn;
     }
+
+    public void closeConnection() {
+        if (conn != null) {
+            try {
+               conn.close(); 
+            } catch (SQLException e) {
+                //TODO: handle exception
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public abstract void inserir(VO entity) throws SQLException;
+    public abstract void removerById(VO entity) throws SQLException;
+    public abstract ResultSet listar() throws SQLException;
+    public abstract ResultSet findById(VO entity)  throws SQLException;
 }
+=======
+}
+
