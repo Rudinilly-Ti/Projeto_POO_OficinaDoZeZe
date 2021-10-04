@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import Model.VO.AutomovelVO;
 
@@ -80,150 +78,84 @@ public class AutomovelDAO extends BaseDAO<AutomovelVO>{
         return rs;
     }
 
-    public List<AutomovelVO> findByMarca(AutomovelVO vo){ // OK
+    public ResultSet findByMarca(AutomovelVO vo){ // OK
 
         conn = getConnection();
         String sql = "select * from Automovel where marca = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setString(1, vo.getMarca());
             rs = pdst.executeQuery();
-            while(rs.next()){
-            	if(rs.getString("marca") != null){
-                    AutomovelVO car = new AutomovelVO();
-                    car.setMarca(rs.getString("Marca"));
-                    car.setCor(rs.getString("Cor"));
-                    car.setPlaca(rs.getString("Placa"));
-                    car.setAno(rs.getInt("Ano"));
-                    car.setQuilometragem(rs.getDouble("Quilometragem"));
-                    car.getCliente().setId(rs.getLong("id_cliente"));
-                    car.setID(rs.getLong("ID"));
-                    carros.add(car);
-                }
-            }
         } catch(SQLException e){
             e.printStackTrace();
         }
-        return carros;
+        return rs;
     }
 
-    public List<AutomovelVO> findByCor(AutomovelVO vo){ // OK
+    public ResultSet findByCor(AutomovelVO vo){ // OK
 
         conn = getConnection();
         String sql = "select * from Automovel where cor = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setString(1, vo.getCor());
             rs = pdst.executeQuery();
-            while(rs.next()){
-            	if(rs.getString("cor") != null){
-                    AutomovelVO car = new AutomovelVO();
-                    car.setMarca(rs.getString("Marca"));
-                    car.setCor(rs.getString("Cor"));
-                    car.setPlaca(rs.getString("Placa"));
-                    car.setAno(rs.getInt("Ano"));
-                    car.setQuilometragem(rs.getDouble("Quilometragem"));
-                    car.getCliente().setId(rs.getLong("id_cliente"));
-                    car.setID(rs.getLong("ID"));
-                    carros.add(car);
-                }
-            }
         } catch(SQLException e){
             e.printStackTrace();
         }
-        return carros;
+        return rs;
     }
 
-    public List<AutomovelVO> findByPlaca(AutomovelVO vo){ // OK
+    public ResultSet findByPlaca(AutomovelVO vo){ // OK
 
         conn = getConnection();
         String sql = "select * from Automovel where placa = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setString(1, vo.getPlaca());
             rs = pdst.executeQuery();
-            while(rs.next()){
-            	if(rs.getString("placa") != null){
-                    AutomovelVO car = new AutomovelVO();
-                    car.setMarca(rs.getString("Marca"));
-                    car.setCor(rs.getString("Cor"));
-                    car.setPlaca(rs.getString("Placa"));
-                    car.setAno(rs.getInt("Ano"));
-                    car.setQuilometragem(rs.getDouble("Quilometragem"));
-                    car.getCliente().setId(rs.getLong("id_cliente"));
-                    car.setID(rs.getLong("ID"));
-                    carros.add(car);
-                }
-            }
         } catch(SQLException e){
             e.printStackTrace();
         }
-        return carros;
+        return rs;
     }
 
-    public List<AutomovelVO> findByAno(AutomovelVO vo){ // OK
+    public ResultSet findByAno(AutomovelVO vo){ // OK
 
         conn = getConnection();
         String sql = "select * from Automovel where ano = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setInt(1, vo.getAno());
             rs = pdst.executeQuery();
-            while(rs.next()){
-                AutomovelVO car = new AutomovelVO();
-                car.setMarca(rs.getString("Marca"));
-                car.setCor(rs.getString("Cor"));
-                car.setPlaca(rs.getString("Placa"));
-                car.setAno(rs.getInt("Ano"));
-                car.setQuilometragem(rs.getDouble("Quilometragem"));
-                car.getCliente().setId(rs.getLong("id_cliente"));
-                car.setID(rs.getLong("ID"));
-                carros.add(car);
-            }
         } catch(SQLException e){
             e.printStackTrace();
         }
-        return carros;
+        return rs;
     }
 
-    public List<AutomovelVO> findByQuilometragem(AutomovelVO vo){ // OK
+    public ResultSet findByQuilometragem(AutomovelVO vo){ // OK
 
         conn = getConnection();
         String sql = "select * from Automovel where quilometragem = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setDouble(1, vo.getQuilometragem());
             rs = pdst.executeQuery();
-            while(rs.next()){
-                AutomovelVO car = new AutomovelVO();
-                car.setMarca(rs.getString("Marca"));
-                car.setCor(rs.getString("Cor"));
-                car.setPlaca(rs.getString("Placa"));
-                car.setAno(rs.getInt("Ano"));
-                car.setQuilometragem(rs.getDouble("Quilometragem"));
-                car.getCliente().setId(rs.getLong("id_cliente"));
-                car.setID(rs.getLong("ID"));
-                carros.add(car);
-            }
         } catch(SQLException e){
             e.printStackTrace();
         }
-        return carros;
+        return rs;
     }
 
     public ResultSet findById(AutomovelVO vo){ // OK

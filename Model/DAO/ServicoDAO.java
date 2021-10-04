@@ -6,9 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class ServicoDAO extends BaseDAO<ServicoVO>{
     
@@ -113,54 +110,36 @@ public class ServicoDAO extends BaseDAO<ServicoVO>{
         return rs;
     }
 
-    public List<ServicoVO> findByNome(ServicoVO vo){
+    public ResultSet findByNome(ServicoVO vo){
         Connection conn = getConnection();
         String sql = "select * from Servico where nome = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<ServicoVO> servicos = new ArrayList<ServicoVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setString(1, vo.getNome());
             rs = pdst.executeQuery();
-            while(rs.next()){
-                if (rs.getString("nome") != null) {
-                    ServicoVO service = new ServicoVO();
-                    service.setNome(rs.getString("Nome"));
-                    service.setPreco(rs.getDouble("Preco"));
-                    service.setId(rs.getLong("Id"));
-                    servicos.add(service);
-                }
-            }
         } catch (SQLException e) {
             //TODO: handle exception
             e.printStackTrace();
         }
-        return servicos;
+        return rs;
     }
 
-    public List<ServicoVO> findByPreco(ServicoVO vo){
+    public ResultSet findByPreco(ServicoVO vo){
         Connection conn = getConnection();
         String sql = "select * from Servico where preco = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<ServicoVO> servicos = new ArrayList<ServicoVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setDouble(1, vo.getPreco());
             rs = pdst.executeQuery();
-            while(rs.next()){
-            	ServicoVO service = new ServicoVO();
-                service.setNome(rs.getString("Nome"));
-                service.setPreco(rs.getDouble("Preco"));
-                service.setId(rs.getLong("Id"));
-                servicos.add(service);
-            }
         } catch (SQLException e) {
             //TODO: handle exception
             e.printStackTrace();
         }
-        return servicos;
+        return rs;
     }
 
     // ------ editar -------
