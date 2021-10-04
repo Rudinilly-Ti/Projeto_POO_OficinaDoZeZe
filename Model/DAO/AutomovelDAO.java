@@ -80,13 +80,13 @@ public class AutomovelDAO extends BaseDAO<AutomovelVO>{
         return rs;
     }
 
-    public List<AutomovelVO> findByMarca(AutomovelVO vo){ // OK
+    public ResultSet findByMarca(AutomovelVO vo){ // OK
 
         conn = getConnection();
         String sql = "select * from Automovel where marca = ?";
         PreparedStatement pdst;
         ResultSet rs;
-        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        <AutomovelVO> carros = new ArrayList<AutomovelVO>();
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setString(1, vo.getMarca());
@@ -110,13 +110,13 @@ public class AutomovelDAO extends BaseDAO<AutomovelVO>{
         return carros;
     }
 
-    public List<AutomovelVO> findByCor(AutomovelVO vo){ // OK
+    public ResultSet findByCor(AutomovelVO vo){ // OK
 
         conn = getConnection();
         String sql = "select * from Automovel where cor = ?";
         PreparedStatement pdst;
         ResultSet rs;
-        List<AutomovelVO> carros = new ArrayList<AutomovelVO>();
+        <AutomovelVO> carros = new ArrayList<AutomovelVO>();
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setString(1, vo.getCor());
@@ -140,7 +140,7 @@ public class AutomovelDAO extends BaseDAO<AutomovelVO>{
         return carros;
     }
 
-    public List<AutomovelVO> findByPlaca(AutomovelVO vo){ // OK
+    public ResultSet findByPlaca(AutomovelVO vo){ // OK
 
         conn = getConnection();
         String sql = "select * from Automovel where placa = ?";
@@ -170,7 +170,7 @@ public class AutomovelDAO extends BaseDAO<AutomovelVO>{
         return carros;
     }
 
-    public List<AutomovelVO> findByAno(AutomovelVO vo){ // OK
+    public ResultSet findByAno(AutomovelVO vo){ // OK
 
         conn = getConnection();
         String sql = "select * from Automovel where ano = ?";
@@ -198,7 +198,7 @@ public class AutomovelDAO extends BaseDAO<AutomovelVO>{
         return carros;
     }
 
-    public List<AutomovelVO> findByQuilometragem(AutomovelVO vo){ // OK
+    public ResultSet findByQuilometragem(AutomovelVO vo){ // OK
 
         conn = getConnection();
         String sql = "select * from Automovel where quilometragem = ?";
