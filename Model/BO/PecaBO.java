@@ -8,7 +8,7 @@ import Exceptions.*;
 import Model.DAO.PecaDAO;
 import Model.VO.PecaVO;
 
-public class PecaBO implements baseInterBO<PecaVO>{
+public class PecaBO implements BaseInterBO<PecaVO>{
 	PecaDAO dao = new PecaDAO();
 	
 	//inserir
@@ -16,7 +16,7 @@ public class PecaBO implements baseInterBO<PecaVO>{
         ResultSet rs = dao.findById(vo);
         try {
             if (rs.next()) {
-                throw new InsertException("Impossível cadastrar, pois já existe automóvel com essa placa.\n");
+                throw new InsertException("Impossível cadastrar, pois já existe automóvel com esse ID.\n");
             }
             else{
                 dao.inserir(vo);
@@ -56,7 +56,7 @@ public class PecaBO implements baseInterBO<PecaVO>{
         PecaVO vo2 = new PecaVO();
         try {
             if (!rs.next()) {
-                throw new FindException("Não foi encotrado nenhum carro com esse Id.\n");
+                throw new FindException("Não foi encotrado nenhum carro com esse nome.\n");
             }
             else{
                 while(rs.next()){
@@ -79,7 +79,7 @@ public class PecaBO implements baseInterBO<PecaVO>{
         PecaVO vo2 = new PecaVO();
         try {
             if (!rs.next()) {
-                throw new FindException("Não foi encotrado nenhum carro com esse Id.\n");
+                throw new FindException("Não foi encotrado nenhum carro com esse preço.\n");
             }
             else{
                 while(rs.next()){
@@ -102,7 +102,7 @@ public class PecaBO implements baseInterBO<PecaVO>{
         PecaVO vo2 = new PecaVO();
         try {
             if (!rs.next()) {
-                throw new FindException("Não foi encotrado nenhum carro com esse Id.\n");
+                throw new FindException("Não foi encotrado nenhum carro com esse fabricante.\n");
             }
             else{
                 while(rs.next()){
