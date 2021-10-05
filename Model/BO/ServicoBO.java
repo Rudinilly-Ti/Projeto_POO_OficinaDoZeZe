@@ -16,7 +16,7 @@ public class ServicoBO implements BaseInterBO<ServicoVO> {
         ResultSet rs = dao.findById(vo);
         try {
             if (rs.next()) {
-                throw new InsertException("Impossível cadastrar, pois já existe automóvel com esse ID.\n");
+                throw new InsertException("Impossível cadastrar, pois já existe um serviço com esse ID.\n");
             }
             else{
                 dao.inserir(vo);
@@ -33,7 +33,7 @@ public class ServicoBO implements BaseInterBO<ServicoVO> {
         ServicoVO vo2 = new ServicoVO();
         try {
             if (!rs.next()) {
-                throw new FindException("Não foi encotrado nenhum carro com esse Id.\n");
+                throw new FindException("Não foi encotrado nenhum serviço com esse Id.\n");
             }
             else{
                 while(rs.next()){
@@ -55,7 +55,7 @@ public class ServicoBO implements BaseInterBO<ServicoVO> {
         ServicoVO vo2 = new ServicoVO();
         try {
             if (!rs.next()) {
-                throw new FindException("Não foi encotrado nenhum carro com ess nome.\n");
+                throw new FindException("Não foi encotrado nenhum serviço com esse nome.\n");
             }
             else{
                 while(rs.next()){
@@ -77,7 +77,7 @@ public class ServicoBO implements BaseInterBO<ServicoVO> {
         ServicoVO vo2 = new ServicoVO();
         try {
             if (!rs.next()) {
-                throw new FindException("Não foi encotrado nenhum carro com esse preço.\n");
+                throw new FindException("Não foi encotrado nenhum serviço com esse preço.\n");
             }
             else{
                 while(rs.next()){
