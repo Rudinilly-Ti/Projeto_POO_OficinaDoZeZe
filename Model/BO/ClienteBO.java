@@ -12,10 +12,10 @@ public class ClienteBO implements BaseInterBO<ClienteVO>{
 	ClienteDAO dao = new ClienteDAO();
 	//inserir
     public void inserir(ClienteVO vo) throws InsertException{
-        ResultSet rs = dao.findById(vo);
+        ResultSet rs = dao.findByCPF(vo);
         try {
             if (rs.next()) {
-                throw new InsertException("Impossível cadastrar, pois já existe um cliente com esse ID.\n");
+                throw new InsertException("Impossível cadastrar, pois já existe um cliente com esse CPF.\n");
             }
             else{
                 dao.inserir(vo);
@@ -122,9 +122,12 @@ public class ClienteBO implements BaseInterBO<ClienteVO>{
     public void editarCPF(ClienteVO vo){
         dao.editarCPF(vo);
     }
+    
     public void editarEndereco(ClienteVO vo){
         dao.editarEndereco(vo);
-    } public void editarNome(ClienteVO vo){
+    } 
+    
+    public void editarNome(ClienteVO vo){
         dao.editarNome(vo);
     }
 }
