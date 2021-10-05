@@ -13,10 +13,10 @@ public class PecaBO implements BaseInterBO<PecaVO>{
 	
 	//inserir
     public void inserir(PecaVO vo) throws InsertException{
-        ResultSet rs = dao.findById(vo);
+        ResultSet rs = dao.findByNome(vo);
         try {
             if (rs.next()) {
-                throw new InsertException("Impossível cadastrar, pois já existe uma peça com esse ID.\n");
+                throw new InsertException("Impossível cadastrar, pois já existe uma peça com esse nome.\n");
             }
             else{
                 dao.inserir(vo);
@@ -57,29 +57,6 @@ public class PecaBO implements BaseInterBO<PecaVO>{
         try {
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhuma peça com esse nome.\n");
-            }
-            else{
-                while(rs.next()){
-                    vo2.setId(rs.getLong("id"));
-                    vo2.setNome(rs.getString("nome"));
-                    vo2.setPreco(rs.getDouble("preco"));
-                    vo2.setFabricante(rs.getString("fabricante"));
-                    lista.add(vo2);
-                }
-            }
-        } catch (SQLException e) {
-            throw new FindException(e.getMessage());
-        }
-        return lista;
-    }
-    
-    public List<PecaVO> buscarPorPreco (PecaVO vo) throws FindException{
-        ResultSet rs = dao.findByPreco(vo);
-        List<PecaVO> lista = new ArrayList<PecaVO>();
-        PecaVO vo2 = new PecaVO();
-        try {
-            if (!rs.next()) {
-                throw new FindException("Não foi encotrado nenhuma peça com esse preço.\n");
             }
             else{
                 while(rs.next()){
@@ -143,12 +120,16 @@ public class PecaBO implements BaseInterBO<PecaVO>{
     }
     
   //Alteração
+    
     public void editarNome(PecaVO vo){
         dao.editarNome(vo);
     }
+    
     public void editarPreco(PecaVO vo){
         dao.editarPreco(vo);
-    }public void editarFabricante(PecaVO vo){
+    }
+    
+    public void editarFabricante(PecaVO vo){
         dao.editarFabricante(vo);
     }
 	
