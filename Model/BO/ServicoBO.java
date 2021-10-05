@@ -8,7 +8,7 @@ import Exceptions.*;
 import Model.DAO.ServicoDAO;
 import Model.VO.ServicoVO;
 
-public class ServicoBO implements baseInterBO<ServicoVO> {
+public class ServicoBO implements BaseInterBO<ServicoVO> {
 	ServicoDAO dao = new ServicoDAO();
     
     //inserir
@@ -16,7 +16,7 @@ public class ServicoBO implements baseInterBO<ServicoVO> {
         ResultSet rs = dao.findById(vo);
         try {
             if (rs.next()) {
-                throw new InsertException("Impossível cadastrar, pois já existe automóvel com essa placa.\n");
+                throw new InsertException("Impossível cadastrar, pois já existe automóvel com esse ID.\n");
             }
             else{
                 dao.inserir(vo);
@@ -55,7 +55,7 @@ public class ServicoBO implements baseInterBO<ServicoVO> {
         ServicoVO vo2 = new ServicoVO();
         try {
             if (!rs.next()) {
-                throw new FindException("Não foi encotrado nenhum carro com essa placa.\n");
+                throw new FindException("Não foi encotrado nenhum carro com ess nome.\n");
             }
             else{
                 while(rs.next()){
@@ -77,7 +77,7 @@ public class ServicoBO implements baseInterBO<ServicoVO> {
         ServicoVO vo2 = new ServicoVO();
         try {
             if (!rs.next()) {
-                throw new FindException("Não foi encotrado nenhum carro com esse dono.\n");
+                throw new FindException("Não foi encotrado nenhum carro com esse preço.\n");
             }
             else{
                 while(rs.next()){
