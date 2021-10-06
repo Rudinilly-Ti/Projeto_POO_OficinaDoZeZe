@@ -117,7 +117,7 @@ public class ClienteBO implements BaseInterBO<ClienteVO>{
     }
     
   //Remoção por id
-    public void deletar(ClienteVO vo){
+    public void deletar(ClienteVO vo) throws DeleteException {
     	ResultSet rs = dao.findById(vo);
         try {
             if (!rs.next()) {
@@ -132,30 +132,18 @@ public class ClienteBO implements BaseInterBO<ClienteVO>{
     }
 
   //Alteração
-    public void editarCPF(ClienteVO vo){
-    	ResultSet rs = dao.findById(vo);
-        try {
-            if (!rs.next()) {
-                throw new UpgradeException("Impossível editar, pois não existe um cliente com esse ID.\n");
-            }
-            else{
-            	dao.editarCPF(vo);
-            }
-        } catch (SQLException e) {
+    public void editarCPF(ClienteVO vo) throws UpgradeException{
+    	try {
+    		dao.editarCPF(vo);
+        } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
     
-    public void editarEndereco(ClienteVO vo){
-    	ResultSet rs = dao.findById(vo);
+    public void editarEndereco(ClienteVO vo) throws UpgradeException{
         try {
-            if (!rs.next()) {
-                throw new UpgradeException("Impossível editar, pois não existe um cliente com esse ID.\n");
-            }
-            else{
-            	dao.editarEndereco(vo);
-            }
-        } catch (SQLException e) {
+        	dao.editarEndereco(vo);
+        } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     } 
