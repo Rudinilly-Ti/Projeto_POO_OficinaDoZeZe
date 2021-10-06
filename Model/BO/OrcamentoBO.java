@@ -238,7 +238,7 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
             throw new UpgradeException(e.getMessage());
         }
     }
-    public void editarAutomovelId(OrcamentoVO vo){
+    public void editarAutomovelId(OrcamentoVO vo) throws UpgradeException{
         try {
             dao.editarAutomovelId(vo);
         } catch (Exception e) {
