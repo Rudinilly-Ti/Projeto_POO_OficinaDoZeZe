@@ -85,7 +85,12 @@ public class AutomovelDAO extends BaseDAO<AutomovelVO>{
         conn = getConnection();
         String sql = "select * from Automovel where marca = ?";
         PreparedStatement pdst;
+<<<<<<< HEAD
         ResultSet rs = null;
+=======
+        ResultSet rs;
+        <AutomovelVO> carros = new ArrayList<AutomovelVO>();
+>>>>>>> b0a61ee88c4aa49ddbba601919a3c84af1be69d8
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setString(1, vo.getMarca());
@@ -101,7 +106,12 @@ public class AutomovelDAO extends BaseDAO<AutomovelVO>{
         conn = getConnection();
         String sql = "select * from Automovel where cor = ?";
         PreparedStatement pdst;
+<<<<<<< HEAD
         ResultSet rs = null;
+=======
+        ResultSet rs;
+        <AutomovelVO> carros = new ArrayList<AutomovelVO>();
+>>>>>>> b0a61ee88c4aa49ddbba601919a3c84af1be69d8
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setString(1, vo.getCor());
