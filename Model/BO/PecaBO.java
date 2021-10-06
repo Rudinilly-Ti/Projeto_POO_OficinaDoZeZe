@@ -118,7 +118,7 @@ public class PecaBO implements BaseInterBO<PecaVO>{
     }
     
   //Remoção por id
-    public void deletar(PecaVO vo){
+    public void deletar(PecaVO vo) throws DeleteException{
     	ResultSet rs = dao.findById(vo);
         try {
             if (!rs.next()) {
@@ -134,44 +134,26 @@ public class PecaBO implements BaseInterBO<PecaVO>{
     
   //Alteração
     
-    public void editarNome(PecaVO vo){
-    	ResultSet rs = dao.findById(vo);
+    public void editarNome(PecaVO vo) throws UpgradeException{
         try {
-            if (!rs.next()) {
-                throw new UpgradeException("Impossível editar, pois não existe uma peça com esse ID.\n");
-            }
-            else{
-            	dao.editarNome(vo);
-            }
-        } catch (SQLException e) {
+        	dao.editarNome(vo);
+        } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
     
-    public void editarPreco(PecaVO vo){
-    	ResultSet rs = dao.findById(vo);
+    public void editarPreco(PecaVO vo) throws UpgradeException{
         try {
-            if (!rs.next()) {
-                throw new UpgradeException("Impossível editar, pois não existe uma peça com esse ID.\n");
-            }
-            else{
-            	dao.editarPreco(vo);
-            }
-        } catch (SQLException e) {
+        	dao.editarPreco(vo);
+        } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
     
-    public void editarFabricante(PecaVO vo){
-    	ResultSet rs = dao.findById(vo);
+    public void editarFabricante(PecaVO vo) throws UpgradeException{
         try {
-            if (!rs.next()) {
-                throw new UpgradeException("Impossível editar, pois não existe uma peça com esse ID.\n");
-            }
-            else{
-            	dao.editarFabricante(vo);
-            }
-        } catch (SQLException e) {
+        	dao.editarFabricante(vo);
+        } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
