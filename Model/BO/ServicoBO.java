@@ -92,7 +92,7 @@ public class ServicoBO implements BaseInterBO<ServicoVO> {
 
     //Remoção por id
     
-    public void deletar(ServicoVO vo) {
+    public void deletar(ServicoVO vo) throws DeleteException {
     	ResultSet rs = dao.findById(vo);
         try {
             if (!rs.next()) {
@@ -109,29 +109,17 @@ public class ServicoBO implements BaseInterBO<ServicoVO> {
     //Alteração
     
     public void editarNome(ServicoVO vo) throws UpgradeException{
-    	ResultSet rs = dao.findById(vo);
         try {
-            if (!rs.next()) {
-                throw new UpgradeException("Impossível editar, pois não existe um serviço com esse ID.\n");
-            }
-            else{
-            	dao.editarNomeById(vo);
-            }
-        } catch (SQLException e) {
+        	dao.editarNomeById(vo);
+        } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
     
     public void editarPreco(ServicoVO vo) throws UpgradeException{
-    	ResultSet rs = dao.findById(vo);
         try {
-            if (!rs.next()) {
-                throw new UpgradeException("Impossível editar, pois não existe um serviço com esse ID.\n");
-            }
-            else{
-            	 dao.editarPrecoById(vo);
-            }
-        } catch (SQLException e) {
+        	dao.editarPrecoById(vo);
+        } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
