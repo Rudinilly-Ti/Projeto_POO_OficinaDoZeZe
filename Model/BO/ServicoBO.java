@@ -28,16 +28,16 @@ public class ServicoBO implements BaseInterBO<ServicoVO> {
 
     //listagem
     public List<ServicoVO> buscarPorId (ServicoVO vo) throws FindException{
-    	ResultSet rs = dao.findById(vo);
         List<ServicoVO> lista = new ArrayList<ServicoVO>();
-        ServicoVO vo2 = new ServicoVO();
         try {
+        	ResultSet rs = dao.findById(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhum serviço com esse Id.\n");
             }
             else{
-            	rs = dao.listar();
+            	rs = dao.findById(vo);
                 while(rs.next()){
+                	ServicoVO vo2 = new ServicoVO();
                     vo2.setId(rs.getLong("id"));
                     vo2.setNome(rs.getString("nome"));
                     vo2.setPreco(rs.getDouble("preco"));
@@ -51,16 +51,16 @@ public class ServicoBO implements BaseInterBO<ServicoVO> {
     }
 
     public List<ServicoVO> buscarPorNome (ServicoVO vo) throws FindException{
-    	ResultSet rs = dao.findByNome(vo);
         List<ServicoVO> lista = new ArrayList<ServicoVO>();
-        ServicoVO vo2 = new ServicoVO();
         try {
+        	ResultSet rs = dao.findByNome(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhum serviço com esse nome.\n");
             }
             else{
-            	rs = dao.listar();
+            	rs = dao.findByNome(vo);
                 while(rs.next()){
+                	ServicoVO vo2 = new ServicoVO();
                 	vo2.setId(rs.getLong("id"));
                     vo2.setNome(rs.getString("nome"));
                     vo2.setPreco(rs.getDouble("preco"));
@@ -74,12 +74,11 @@ public class ServicoBO implements BaseInterBO<ServicoVO> {
     }
         
     public List<ServicoVO> listar() throws FindException{
-    	ResultSet rs = dao.listar();
     	List<ServicoVO> lista = new ArrayList<ServicoVO>();
-        ServicoVO vo2 = new ServicoVO();
         try {
-        	rs = dao.listar();
+        	ResultSet rs = dao.listar();
             while(rs.next()){
+                ServicoVO vo2 = new ServicoVO();
             	vo2.setId(rs.getLong("id"));
                 vo2.setNome(rs.getString("nome"));
                 vo2.setPreco(rs.getDouble("preco"));
