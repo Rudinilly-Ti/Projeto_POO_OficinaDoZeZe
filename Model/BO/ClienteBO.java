@@ -27,16 +27,16 @@ public class ClienteBO implements BaseInterBO<ClienteVO>{
     
   //listagem
     public List<ClienteVO> buscarPorId (ClienteVO vo) throws FindException{
-    	ResultSet rs = dao.findById(vo);
         List<ClienteVO> lista = new ArrayList<ClienteVO>();
-        ClienteVO vo2 = new ClienteVO();
         try {
+        	ResultSet rs = dao.findById(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhum cliente com esse Id.\n");
             }
             else{
-            	rs = dao.listar();
+            	rs = dao.findById(vo);
                 while(rs.next()){
+                	ClienteVO vo2 = new ClienteVO();
                     vo2.setId(rs.getLong("id"));
                     vo2.setNome(rs.getString("nome"));
                     vo2.setEndereco(rs.getString("endereco"));
@@ -51,16 +51,16 @@ public class ClienteBO implements BaseInterBO<ClienteVO>{
     }
     
     public List<ClienteVO> buscarPorNome (ClienteVO vo) throws FindException{
-    	ResultSet rs = dao.findByNome(vo);
         List<ClienteVO> lista = new ArrayList<ClienteVO>();
-        ClienteVO vo2 = new ClienteVO();
         try {
+        	ResultSet rs = dao.findByNome(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhum cliente com esse nome.\n");
             }
             else{
-            	rs = dao.listar();
+            	rs = dao.findByNome(vo);
                 while(rs.next()){
+                	ClienteVO vo2 = new ClienteVO();
                     vo2.setId(rs.getLong("id"));
                     vo2.setNome(rs.getString("nome"));
                     vo2.setEndereco(rs.getString("endereco"));
@@ -75,16 +75,16 @@ public class ClienteBO implements BaseInterBO<ClienteVO>{
     }
     
     public List<ClienteVO> buscarPorEndereco (ClienteVO vo) throws FindException{
-    	ResultSet rs = dao.findByEndereco(vo);
         List<ClienteVO> lista = new ArrayList<ClienteVO>();
-        ClienteVO vo2 = new ClienteVO();
         try {
+        	ResultSet rs = dao.findByEndereco(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhum cliente com esse endereço.\n");
             }
             else{
-            	rs = dao.listar();
+            	rs = dao.findByEndereco(vo);
                 while(rs.next()){
+                	ClienteVO vo2 = new ClienteVO();
                     vo2.setId(rs.getLong("id"));
                     vo2.setNome(rs.getString("nome"));
                     vo2.setEndereco(rs.getString("endereco"));
@@ -99,12 +99,11 @@ public class ClienteBO implements BaseInterBO<ClienteVO>{
     }
     
     public List<ClienteVO> listar() throws FindException{
-    	ResultSet rs = dao.listar();
         List<ClienteVO> lista = new ArrayList<ClienteVO>();
-        ClienteVO vo2 = new ClienteVO();
         try {
-        	rs = dao.listar();
+        	ResultSet rs = dao.listar();
             while(rs.next()){
+            	 ClienteVO vo2 = new ClienteVO();
             	 vo2.setId(rs.getLong("id"));
                  vo2.setNome(rs.getString("nome"));
                  vo2.setEndereco(rs.getString("endereco"));
@@ -161,16 +160,10 @@ public class ClienteBO implements BaseInterBO<ClienteVO>{
         }
     } 
     
-    public void editarNome(ClienteVO vo){
-    	ResultSet rs = dao.findById(vo);
+    public void editarNome(ClienteVO vo) throws UpgradeException{
         try {
-            if (!rs.next()) {
-                throw new UpgradeException("Impossível editar, pois não existe um cliente com esse ID.\n");
-            }
-            else{
-            	dao.editarNome(vo);
-            }
-        } catch (SQLException e) {
+        	dao.editarNome(vo);
+        } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
