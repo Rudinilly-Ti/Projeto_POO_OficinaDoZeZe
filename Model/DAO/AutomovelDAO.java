@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import Model.VO.AutomovelVO;
 
@@ -86,11 +84,15 @@ public class AutomovelDAO extends BaseDAO<AutomovelVO>{
         String sql = "select * from Automovel where marca = ?";
         PreparedStatement pdst;
 <<<<<<< HEAD
+<<<<<<< HEAD
         ResultSet rs = null;
 =======
         ResultSet rs;
         <AutomovelVO> carros = new ArrayList<AutomovelVO>();
 >>>>>>> b0a61ee88c4aa49ddbba601919a3c84af1be69d8
+=======
+        ResultSet rs = null;
+>>>>>>> BO
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setString(1, vo.getMarca());
@@ -107,11 +109,15 @@ public class AutomovelDAO extends BaseDAO<AutomovelVO>{
         String sql = "select * from Automovel where cor = ?";
         PreparedStatement pdst;
 <<<<<<< HEAD
+<<<<<<< HEAD
         ResultSet rs = null;
 =======
         ResultSet rs;
         <AutomovelVO> carros = new ArrayList<AutomovelVO>();
 >>>>>>> b0a61ee88c4aa49ddbba601919a3c84af1be69d8
+=======
+        ResultSet rs = null;
+>>>>>>> BO
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setString(1, vo.getCor());
@@ -164,7 +170,10 @@ public class AutomovelDAO extends BaseDAO<AutomovelVO>{
             pdst = conn.prepareStatement(sql);
             pdst.setDouble(1, vo.getQuilometragem());
             rs = pdst.executeQuery();
+<<<<<<< HEAD
 
+=======
+>>>>>>> BO
         } catch(SQLException e){
             e.printStackTrace();
         }

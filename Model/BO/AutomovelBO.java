@@ -132,5 +132,22 @@ public class AutomovelBO implements BaseInterBO<AutomovelVO>{
     }
 
     //Alteração
-
+    public void editarPlaca(AutomovelVO vo){
+        dao.editarPlaca(vo);
+    }
+    public void editarMarca(AutomovelVO vo){
+        dao.editarMarca(vo);
+    }
+    public void editarCor(AutomovelVO vo){
+        dao.editarCor(vo);
+    }
+    public void editarAno(AutomovelVO vo){
+        dao.editarAno(vo);
+    }
+    public void editarClienteId(AutomovelVO vo){
+        dao.editarClienteId(vo);
+    }
+    public void editarQuilometragem(AutomovelVO vo){
+        dao.editarQuilometragem(vo);
+    }
 }
