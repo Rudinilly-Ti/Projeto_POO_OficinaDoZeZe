@@ -28,16 +28,16 @@ public class PecaBO implements BaseInterBO<PecaVO>{
     
   //listagem
     public List<PecaVO> buscarPorId (PecaVO vo) throws FindException{
-    	ResultSet rs = dao.findById(vo);
         List<PecaVO> lista = new ArrayList<PecaVO>();
-        PecaVO vo2 = new PecaVO();
         try {
+        	ResultSet rs = dao.findById(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhuma peça com esse Id.\n");
             }
             else{
-            	rs = dao.listar();
+            	rs = dao.findById(vo);
                 while(rs.next()){
+                	PecaVO vo2 = new PecaVO();
                     vo2.setId(rs.getLong("id"));
                     vo2.setNome(rs.getString("nome"));
                     vo2.setPreco(rs.getDouble("preco"));
@@ -52,16 +52,16 @@ public class PecaBO implements BaseInterBO<PecaVO>{
     }
     
     public List<PecaVO> buscarPorNome (PecaVO vo) throws FindException{
-    	ResultSet rs = dao.findByNome(vo);
         List<PecaVO> lista = new ArrayList<PecaVO>();
-        PecaVO vo2 = new PecaVO();
         try {
+        	ResultSet rs = dao.findByNome(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhuma peça com esse nome.\n");
             }
             else{
-            	rs = dao.listar();
+            	rs = dao.findByNome(vo);
                 while(rs.next()){
+                	PecaVO vo2 = new PecaVO();
                     vo2.setId(rs.getLong("id"));
                     vo2.setNome(rs.getString("nome"));
                     vo2.setPreco(rs.getDouble("preco"));
@@ -76,16 +76,16 @@ public class PecaBO implements BaseInterBO<PecaVO>{
     }
     
     public List<PecaVO> buscarPorFabricante (PecaVO vo) throws FindException{
-    	ResultSet rs = dao.findByFabricante(vo);
         List<PecaVO> lista = new ArrayList<PecaVO>();
-        PecaVO vo2 = new PecaVO();
         try {
+        	ResultSet rs = dao.findByFabricante(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhuma peça com esse fabricante.\n");
             }
             else{
-            	rs = dao.listar();
+            	rs = dao.findByFabricante(vo);
                 while(rs.next()){
+                	PecaVO vo2 = new PecaVO();
                     vo2.setId(rs.getLong("id"));
                     vo2.setNome(rs.getString("nome"));
                     vo2.setPreco(rs.getDouble("preco"));
@@ -100,12 +100,11 @@ public class PecaBO implements BaseInterBO<PecaVO>{
     }
     
     public List<PecaVO> listar() throws FindException{
-    	ResultSet rs = dao.listar();
         List<PecaVO> lista = new ArrayList<PecaVO>();
-        PecaVO vo2 = new PecaVO();
         try {
+        	ResultSet rs = dao.listar();
         	 while(rs.next()){
-        		 rs = dao.listar();
+        		 PecaVO vo2 = new PecaVO();
                  vo2.setId(rs.getLong("id"));
                  vo2.setNome(rs.getString("nome"));
                  vo2.setPreco(rs.getDouble("preco"));
