@@ -64,10 +64,10 @@ public class ServicosNoOrcamentoBO {
     public List<ServicosNoOrcamentoVO> listar() throws FindException{
         ResultSet rs;
         List<ServicosNoOrcamentoVO> lista = new ArrayList<ServicosNoOrcamentoVO>();
-        ServicosNoOrcamentoVO vo = new ServicosNoOrcamentoVO();
         try {
             rs = dao.listar();
             while(rs.next()){
+                ServicosNoOrcamentoVO vo = new ServicosNoOrcamentoVO();
                 vo.setId(rs.getLong("id"));
                 vo.setQuantidade(rs.getInt("quantidade"));
                 vo.setValor(rs.getDouble("valor"));
@@ -106,7 +106,7 @@ public class ServicosNoOrcamentoBO {
             throw new UpgradeException(e.getMessage());
         }
     }
-    public void editarPecaId(ServicosNoOrcamentoVO vo) throws UpgradeException{
+    public void editarServicoId(ServicosNoOrcamentoVO vo) throws UpgradeException{
         try {
             dao.editarServicoId(vo);
         } catch (Exception e) {
