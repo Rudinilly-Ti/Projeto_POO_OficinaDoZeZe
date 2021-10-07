@@ -106,10 +106,11 @@ public class PecasNoOrcamentoBO implements BaseInterBO<PecasNoOrcamentoVO>{
     public List<PecasNoOrcamentoVO> listar() throws FindException{
         ResultSet rs;
         List<PecasNoOrcamentoVO> lista = new ArrayList<PecasNoOrcamentoVO>();
-        PecasNoOrcamentoVO vo = new PecasNoOrcamentoVO();
+        
         try {
             rs = dao.listar();
             while(rs.next()){
+                PecasNoOrcamentoVO vo = new PecasNoOrcamentoVO();
                 vo.setId(rs.getLong("id"));
                 vo.setQuantidade(rs.getInt("quantidade"));
                 vo.setValor(rs.getDouble("valor"));
