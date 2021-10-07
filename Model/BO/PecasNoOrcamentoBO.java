@@ -79,21 +79,14 @@ public class PecasNoOrcamentoBO implements BaseInterBO<PecasNoOrcamentoVO>{
                     PecasNoOrcamentoVO vo = new PecasNoOrcamentoVO();
                     vo.getOrcamento().setId(rs.getLong("id"));//Passa o valor do id inserido para o id de orcamento em pecas no orcamento;
                     rs2 = dao.findByOrcamentoId(vo);
-
-                    if (!rs2.next()) {
-                        throw new FindException("Não foi encotrado nenhum .\n");
-                    }
-                    else{
-                        rs2 = dao.findByOrcamentoId(vo);
-                        while(rs2.next()){
-                            PecasNoOrcamentoVO vo2 = new PecasNoOrcamentoVO();
-                            vo2.setId(rs2.getLong("id"));
-                            vo2.setQuantidade(rs2.getInt("quantidade"));
-                            vo2.setValor(rs2.getDouble("valor"));
-                            vo2.getOrcamento().setId(rs2.getLong("id_orcamento"));
-                            vo2.getPeca().setId(rs2.getLong("id_peca"));
-                            lista.add(vo2);
-                        }
+                    while(rs2.next()){
+                        PecasNoOrcamentoVO vo2 = new PecasNoOrcamentoVO();
+                        vo2.setId(rs2.getLong("id"));
+                        vo2.setQuantidade(rs2.getInt("quantidade"));
+                        vo2.setValor(rs2.getDouble("valor"));
+                        vo2.getOrcamento().setId(rs2.getLong("id_orcamento"));
+                        vo2.getPeca().setId(rs2.getLong("id_peca"));
+                        lista.add(vo2);
                     }
                 }
             }
