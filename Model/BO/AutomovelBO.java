@@ -36,6 +36,7 @@ public class AutomovelBO implements BaseInterBO<AutomovelVO>{
                 throw new FindException("Não foi encotrado nenhum carro com esse Id.\n");
             }
             else{
+                rs = dao.findById(vo);
                 while(rs.next()){
                     AutomovelVO vo2 = new AutomovelVO();
                     vo2.setID(rs.getLong("id"));
@@ -62,6 +63,7 @@ public class AutomovelBO implements BaseInterBO<AutomovelVO>{
                 throw new FindException("Não foi encotrado nenhum carro com essa placa.\n");
             }
             else{
+                rs = dao.findByPlaca(vo);
                 while(rs.next()){
                     AutomovelVO vo2 = new AutomovelVO();
                     vo2.setID(rs.getLong("id"));
