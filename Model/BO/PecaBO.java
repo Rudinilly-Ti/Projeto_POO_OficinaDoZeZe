@@ -28,16 +28,16 @@ public class PecaBO implements BaseInterBO<PecaVO>{
     
   //listagem
     public List<PecaVO> buscarPorId (PecaVO vo) throws FindException{
-    	ResultSet rs = dao.findById(vo);
         List<PecaVO> lista = new ArrayList<PecaVO>();
-        PecaVO vo2 = new PecaVO();
         try {
+        	ResultSet rs = dao.findById(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhuma peça com esse Id.\n");
             }
             else{
-            	rs = dao.listar();
+            	rs = dao.findById(vo);
                 while(rs.next()){
+                	PecaVO vo2 = new PecaVO();
                     vo2.setId(rs.getLong("id"));
                     vo2.setNome(rs.getString("nome"));
                     vo2.setPreco(rs.getDouble("preco"));
@@ -52,16 +52,16 @@ public class PecaBO implements BaseInterBO<PecaVO>{
     }
     
     public List<PecaVO> buscarPorNome (PecaVO vo) throws FindException{
-    	ResultSet rs = dao.findByNome(vo);
         List<PecaVO> lista = new ArrayList<PecaVO>();
-        PecaVO vo2 = new PecaVO();
         try {
+        	ResultSet rs = dao.findByNome(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhuma peça com esse nome.\n");
             }
             else{
-            	rs = dao.listar();
+            	rs = dao.findByNome(vo);
                 while(rs.next()){
+                	PecaVO vo2 = new PecaVO();
                     vo2.setId(rs.getLong("id"));
                     vo2.setNome(rs.getString("nome"));
                     vo2.setPreco(rs.getDouble("preco"));
@@ -76,16 +76,16 @@ public class PecaBO implements BaseInterBO<PecaVO>{
     }
     
     public List<PecaVO> buscarPorFabricante (PecaVO vo) throws FindException{
-    	ResultSet rs = dao.findByFabricante(vo);
         List<PecaVO> lista = new ArrayList<PecaVO>();
-        PecaVO vo2 = new PecaVO();
         try {
+        	ResultSet rs = dao.findByFabricante(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhuma peça com esse fabricante.\n");
             }
             else{
-            	rs = dao.listar();
+            	rs = dao.findByFabricante(vo);
                 while(rs.next()){
+                	PecaVO vo2 = new PecaVO();
                     vo2.setId(rs.getLong("id"));
                     vo2.setNome(rs.getString("nome"));
                     vo2.setPreco(rs.getDouble("preco"));
@@ -100,12 +100,11 @@ public class PecaBO implements BaseInterBO<PecaVO>{
     }
     
     public List<PecaVO> listar() throws FindException{
-    	ResultSet rs = dao.listar();
         List<PecaVO> lista = new ArrayList<PecaVO>();
-        PecaVO vo2 = new PecaVO();
         try {
+        	ResultSet rs = dao.listar();
         	 while(rs.next()){
-        		 rs = dao.listar();
+        		 PecaVO vo2 = new PecaVO();
                  vo2.setId(rs.getLong("id"));
                  vo2.setNome(rs.getString("nome"));
                  vo2.setPreco(rs.getDouble("preco"));
@@ -119,7 +118,7 @@ public class PecaBO implements BaseInterBO<PecaVO>{
     }
     
   //Remoção por id
-    public void deletar(PecaVO vo){
+    public void deletar(PecaVO vo) throws DeleteException{
     	ResultSet rs = dao.findById(vo);
         try {
             if (!rs.next()) {
@@ -135,44 +134,26 @@ public class PecaBO implements BaseInterBO<PecaVO>{
     
   //Alteração
     
-    public void editarNome(PecaVO vo){
-    	ResultSet rs = dao.findById(vo);
+    public void editarNome(PecaVO vo) throws UpgradeException{
         try {
-            if (!rs.next()) {
-                throw new UpgradeException("Impossível editar, pois não existe uma peça com esse ID.\n");
-            }
-            else{
-            	dao.editarNome(vo);
-            }
-        } catch (SQLException e) {
+        	dao.editarNome(vo);
+        } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
     
-    public void editarPreco(PecaVO vo){
-    	ResultSet rs = dao.findById(vo);
+    public void editarPreco(PecaVO vo) throws UpgradeException{
         try {
-            if (!rs.next()) {
-                throw new UpgradeException("Impossível editar, pois não existe uma peça com esse ID.\n");
-            }
-            else{
-            	dao.editarPreco(vo);
-            }
-        } catch (SQLException e) {
+        	dao.editarPreco(vo);
+        } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
     
-    public void editarFabricante(PecaVO vo){
-    	ResultSet rs = dao.findById(vo);
+    public void editarFabricante(PecaVO vo) throws UpgradeException{
         try {
-            if (!rs.next()) {
-                throw new UpgradeException("Impossível editar, pois não existe uma peça com esse ID.\n");
-            }
-            else{
-            	dao.editarFabricante(vo);
-            }
-        } catch (SQLException e) {
+        	dao.editarFabricante(vo);
+        } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
