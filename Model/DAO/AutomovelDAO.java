@@ -182,7 +182,7 @@ public class AutomovelDAO extends BaseDAO<AutomovelVO>{
 
         ptst = conn.prepareStatement(sql);
         ptst.setString(1, carro.getMarca());
-        ptst.setLong(2, carro.getCliente().getId());
+        ptst.setLong(2, carro.getID());
         ptst.executeUpdate();
     }
 
