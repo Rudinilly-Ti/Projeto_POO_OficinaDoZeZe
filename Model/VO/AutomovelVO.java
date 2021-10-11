@@ -1,5 +1,7 @@
 package Model.VO;
 
+import Exceptions.SetterException;
+
 public class AutomovelVO {
     // atributos
 
@@ -32,16 +34,15 @@ public class AutomovelVO {
     } 
 
     public void setMarca(String marca) {
-
     	if(marca != null) {
     		if(!marca.isBlank()){
                 this.marca = marca;
             }
     		else
-    			System.out.println("Marca inválida!");
+    			throw new SetterException("Marca de automóvel inválida.(Vazio)");
     	}
     	else
-    		System.out.println("Marca com valor nulo!");
+    		throw new SetterException("Marca de autómovel inválida. (Nulo)");
     }
 
     public String getCor() {
@@ -54,10 +55,10 @@ public class AutomovelVO {
                 this.cor = cor;
             }
             else
-            	System.out.println("Cor inválida!");
+            	throw new SetterException("Cor de automóvel inválida. (Vazio)");
     	}
     	else
-    		System.out.println("Cor com valor nulo!");
+    		throw new SetterException("Cor de automóvel inválida. (Nulo)");
     }
 
     public String getPlaca() {
@@ -70,10 +71,10 @@ public class AutomovelVO {
                 this.placa = placa;
             }
             else
-            	System.out.println("Placa inválida!");
+            	throw new SetterException("Placa de autómovel inválida. (Vazio)");
     	}
     	else
-    		System.out.println("Placa com valor nulo!");
+    		throw new SetterException("Placa de automóvel inválida. (Nulo)");
     }
 
     public int getAno() {
@@ -84,7 +85,7 @@ public class AutomovelVO {
         if(ano > 0)
            this.ano = ano;       
         else
-           System.out.println("Valor inválido, tente novamente!");
+        	throw new SetterException("Ano do automóvel inválido. (Valor negativo)");
     }
 
     public double getQuilometragem() {
@@ -96,7 +97,7 @@ public class AutomovelVO {
             this.quilometragem = quilometragem;
         }
         else
-            System.out.println("Valor inválido, tente novamente!");
+        	throw new SetterException("Quilometragem de automóvel inválida. (Valor negativo)");
     }   
 
     public ClienteVO getCliente() {
@@ -104,7 +105,11 @@ public class AutomovelVO {
     }
 
     public void setCliente(ClienteVO cliente) {
-        this.cliente = cliente;
+    	if(cliente.getId() > 0) {
+    		this.cliente = cliente;
+    	}
+    	else
+    		throw new SetterException("ID de cliente inválido. (valor negativo)");
     }
 
 	public Long getID() {
@@ -115,6 +120,6 @@ public class AutomovelVO {
 		if(ID > 0)
 			this.ID = ID;
 		else
-			System.out.println("ID incorreto!");
+			throw new SetterException("ID de automóvel inválido. (Valor negativo)");
 	}
 }
