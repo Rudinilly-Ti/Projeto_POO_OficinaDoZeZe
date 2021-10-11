@@ -1,5 +1,7 @@
 package Model.VO;
 
+import Exceptions.SetterException;
+
 public class ServicosNoOrcamentoVO {
     private double valor;
     private int quantidade;
@@ -15,7 +17,7 @@ public class ServicosNoOrcamentoVO {
         if (quantidade > 0) {
             this.quantidade = quantidade;
         }
-        else System.out.println("Quantidade inválida.\n");
+        else throw new SetterException("Quantidade inválida.\n");
     }
 
     public double getValor() {
@@ -26,7 +28,7 @@ public class ServicosNoOrcamentoVO {
         if (valor > 0) {
             this.valor = valor;
         }
-        else System.out.println("Valor inválido.\n");
+        else throw new SetterException("Valor inválido.\n");
     }
 
     public Long getId() {
@@ -38,7 +40,7 @@ public class ServicosNoOrcamentoVO {
             this.id = id;
         }
         else {
-            System.out.println("Valor de Id inválido.\n");
+            throw new SetterException("Valor de Id inválido.\n");
         }
     }
 
@@ -51,7 +53,7 @@ public class ServicosNoOrcamentoVO {
             this.servico = servico;
         }
         else{
-            System.out.println("Serviço inválido.\n");
+            throw new SetterException("Serviço inválido.\n");
         }
     }
 
@@ -64,7 +66,7 @@ public class ServicosNoOrcamentoVO {
             this.orcamento = orcamento;
         }
         else{
-            System.out.println("Orçamento inválido.\n");
+            throw new SetterException("Orçamento inválido.\n");
         }
     }
 }

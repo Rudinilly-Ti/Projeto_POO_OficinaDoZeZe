@@ -1,4 +1,5 @@
 package Model.VO;
+import Exceptions.SetterException;
 
 public class PecaVO {
     private String nome;
@@ -25,9 +26,9 @@ public class PecaVO {
             if (!(nometmp.isBlank())) {
                 nome = nometmp;
             }
-            else System.out.println("Nome inválido.\n");
+            else throw new SetterException("Nome inválido.\n");
         }
-        else System.out.println("Nome inválido.\n");
+        else throw new SetterException("Nome inválido.\n");
     }
 
     public double getPreco() {
@@ -38,7 +39,7 @@ public class PecaVO {
         if (precotmp > 0) {
             preco = precotmp;
         }
-        else System.out.println("Valor inválido.\n");
+        else throw new SetterException("Valor inválido.\n");
     }
 
     public String getFabricante() {
@@ -50,9 +51,9 @@ public class PecaVO {
             if (!(fabricantetmp.isBlank())) {
                 fabricante = fabricantetmp;
             }
-            else System.out.println("Nome de fabricante inválido.\n");
+            else throw new SetterException("Nome de fabricante inválido.\n");
         }
-        else System.out.println("Nome de fabricante inválido.\n");
+        else throw new SetterException("Nome de fabricante inválido.\n");
     }
 
     public Long getId() {
@@ -64,7 +65,7 @@ public class PecaVO {
             this.id = id;
         }
         else {
-            System.out.println("Valor de Id inválido.\n");
+            throw new SetterException("Valor de Id inválido.\n");
         }
     }
 }
