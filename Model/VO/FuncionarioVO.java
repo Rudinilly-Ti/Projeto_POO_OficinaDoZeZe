@@ -1,5 +1,6 @@
 package Model.VO;
 
+import Exceptions.SetterException;
 import java.util.Calendar;
 
 public class FuncionarioVO extends UsuarioVO {
@@ -28,7 +29,7 @@ public class FuncionarioVO extends UsuarioVO {
             this.salario = salario;
         }
         else{
-            System.out.println("Valor inválido.\n");
+            throw new SetterException("Valor inválido.");
         }
     }
     
@@ -43,7 +44,7 @@ public class FuncionarioVO extends UsuarioVO {
                 this.dataDeAdmissao = dataDeAdmissao; 
             }
         }
-        else System.out.println("Data inválida.\n");
+        else throw new SetterException("Data inválida.");
     }
 
     public Calendar getDataDeAdmissao() {
