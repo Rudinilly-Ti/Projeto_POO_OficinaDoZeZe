@@ -1,4 +1,5 @@
 package Model.VO;
+import Exceptions.SetterException;
 
 public abstract class UsuarioVO {
   private Long id;
@@ -16,7 +17,7 @@ public abstract class UsuarioVO {
       this.id = id;
     }
     else {
-      System.out.println("Valor de Id inválido.\n");
+      throw new SetterException("Valor de Id inválido.");
     }
   }
 
@@ -28,7 +29,7 @@ public abstract class UsuarioVO {
     if (!login.isBlank() && login != null) {
       this.login = login;  
     }else {
-      System.out.println("Login invalido");
+      throw new SetterException("Login invalido");
     }
   }
 
@@ -40,7 +41,7 @@ public abstract class UsuarioVO {
     if (!senha.isBlank() && senha != null) {
       this.senha = senha;
     }else {
-      System.out.println("Senha invalido");
+      throw new SetterException("Senha invalido");
     }
   }
 }

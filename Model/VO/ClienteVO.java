@@ -1,4 +1,5 @@
 package Model.VO;
+import Exceptions.SetterException;
 
 public class ClienteVO {
   private Long id;
@@ -25,7 +26,7 @@ public class ClienteVO {
       this.id = id;
     }
     else {
-      System.out.println("Valor de Id inválido.\n");
+      throw new SetterException("Valor de Id inválido.");
     }
   }
 
@@ -37,7 +38,7 @@ public class ClienteVO {
     if (!nome.isBlank() && nome != null) {
       this.nome = nome;
     }else {
-      System.out.println("Nome invalido");
+      throw new SetterException("Nome invalido");
     }
   }
 
@@ -49,7 +50,7 @@ public class ClienteVO {
     if (!endereco.isBlank() && endereco != null) {
       this.endereco = endereco;
     }else {
-      System.out.println("Endereço invalido");
+      throw new SetterException("Endereço invalido");
     }
   }
 
@@ -61,7 +62,7 @@ public class ClienteVO {
     if (!cpf.isBlank() && cpf != null) {
       this.cpf = cpf; 
     }else {
-      System.out.println("CPF invalido");
+      throw new SetterException("CPF invalido");
     }
   }
 }
