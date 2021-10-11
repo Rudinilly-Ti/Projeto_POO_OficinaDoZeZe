@@ -1,5 +1,6 @@
 package Model.VO;
 import java.util.Calendar;
+import Exceptions.SetterException;
 
 public class OrcamentoVO {
     private double valor;
@@ -18,7 +19,7 @@ public class OrcamentoVO {
             this.id = id;
         }
         else{
-            System.out.println("Valor de Id inválido.\n");
+            throw new SetterException("Valor de Id inválido.\n");
         }
     }
 
@@ -29,7 +30,8 @@ public class OrcamentoVO {
     public void setValor(double valor) {
         if (valor > 0) {
             this.valor = valor;    
-        } else System.out.println("Valor inválido.\n");
+        } 
+        else throw new SetterException("Valor inválido.");
     }
 
     public Calendar getDataInicio() {
@@ -44,7 +46,8 @@ public class OrcamentoVO {
         if ((dia > 0 && dia <= 31) && (mes >= 0 && mes <= 11) && (ano > 0)) {
             this.dataInicio = dataInicio;
         }
-        else System.out.println("Data inválida.\n");
+        else throw new SetterException("Data inválida.");
+        
     }
 
     public Calendar getDataFim() {
@@ -62,9 +65,9 @@ public class OrcamentoVO {
             if (dataFim.compareTo(dataInicio) >= 0) {
                 this.dataFim = dataFim;
             }
-            else System.out.println("A data inicial está após a data final inserida. Digite novamente.");
+            else throw new SetterException("A data inicial está após a data final inserida. Digite novamente.");
         }
-        else System.out.println("Data inválida.\n");
+        else throw new SetterException("Data inválida.\n");
     }
 
     public ClienteVO getCliente() {
@@ -76,7 +79,7 @@ public class OrcamentoVO {
             this.cliente = cliente;
         }
         else{
-            System.out.println("Cliente inválido.\n");
+            throw new SetterException("Cliente inválido.\n");
         }
     }
 
@@ -89,7 +92,7 @@ public class OrcamentoVO {
             this.carro = carro;
         }
         else{
-            System.out.println("Carro inválido.\n");
+            throw new SetterException("Carro inválido.\n");
         }
     }
 }
