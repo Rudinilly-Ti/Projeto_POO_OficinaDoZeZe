@@ -1,5 +1,7 @@
 package Model.VO;
 
+import Exceptions.SetterException;
+
 public class ServicoVO {
     // atributos
     private String nome;
@@ -28,10 +30,10 @@ public class ServicoVO {
                 this.nome = nome;
             }
             else
-                System.out.println("Nome inválido");
+            	throw new SetterException("Nome de serviço inválido. (Vazio)");
     	}
     	else
-    		System.out.println("Nome com valor nulo !");
+    		throw new SetterException("Nome de serviço inválido. (Nulo)");
     }
 
     public double getPreco(){
@@ -42,6 +44,8 @@ public class ServicoVO {
         if(preco > 0){
             this.preco = preco;
         }
+        else
+        	throw new SetterException("Preço de serviço inválido. (Valor negativo)");
     }
 
     public Long getId(){
@@ -52,8 +56,7 @@ public class ServicoVO {
         if(id > 0){
             this.id = id;
         }
-        else {
-            System.out.println("Valor de Id inválido.\n");
-        }
+        else
+        	throw new SetterException("ID de serviço inválido. (Valor negativo)");
     }
 }
