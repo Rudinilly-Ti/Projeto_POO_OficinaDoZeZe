@@ -19,11 +19,7 @@ public class OrcamentoVO {
             this.id = id;
         }
         else{
-<<<<<<< HEAD
-            throw new SetterException("Valor de Id inválido.\n");
-=======
             throw new SetterException("Valor de Id inválido.");
->>>>>>> 9ec1e8cd93337f6e7bf185974c2a7e84d222a1e2
         }
     }
 
@@ -34,12 +30,7 @@ public class OrcamentoVO {
     public void setValor(double valor) {
         if (valor > 0) {
             this.valor = valor;    
-<<<<<<< HEAD
-        } 
-        else throw new SetterException("Valor inválido.");
-=======
         } else throw new SetterException("Valor inválido.");
->>>>>>> 9ec1e8cd93337f6e7bf185974c2a7e84d222a1e2
     }
 
     public Calendar getDataInicio() {
@@ -55,10 +46,6 @@ public class OrcamentoVO {
             this.dataInicio = dataInicio;
         }
         else throw new SetterException("Data inválida.");
-<<<<<<< HEAD
-        
-=======
->>>>>>> 9ec1e8cd93337f6e7bf185974c2a7e84d222a1e2
     }
 
     public Calendar getDataFim() {
@@ -78,11 +65,7 @@ public class OrcamentoVO {
             }
             else throw new SetterException("A data inicial está após a data final inserida. Digite novamente.");
         }
-<<<<<<< HEAD
-        else throw new SetterException("Data inválida.\n");
-=======
         else throw new SetterException("Data inválida.");
->>>>>>> 9ec1e8cd93337f6e7bf185974c2a7e84d222a1e2
     }
 
     public ClienteVO getCliente() {
@@ -94,11 +77,7 @@ public class OrcamentoVO {
             this.cliente = cliente;
         }
         else{
-<<<<<<< HEAD
-            throw new SetterException("Cliente inválido.\n");
-=======
             throw new SetterException("Ciente inválido.");
->>>>>>> 9ec1e8cd93337f6e7bf185974c2a7e84d222a1e2
         }
     }
 
@@ -111,11 +90,7 @@ public class OrcamentoVO {
             this.carro = carro;
         }
         else{
-<<<<<<< HEAD
-            throw new SetterException("Carro inválido.\n");
-=======
             throw new SetterException("Carro inválido.");
->>>>>>> 9ec1e8cd93337f6e7bf185974c2a7e84d222a1e2
         }
     }
 }
