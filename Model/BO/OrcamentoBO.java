@@ -200,6 +200,68 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
         return lista;
     }
 
+    public List<OrcamentoVO> buscarPorSituaçãoDoPagamento(OrcamentoVO vo) throws FindException{
+        List<OrcamentoVO> lista = new ArrayList<OrcamentoVO>();
+        try {
+            ResultSet rs = dao.findByPagamentoEfetuado(vo);
+            if (!rs.next()) {
+                throw new FindException("Não foi encotrado nenhum orçamento com o pagamento nessa situação.\n");
+            }
+            else{
+                rs = dao.findById(vo); 
+                while(rs.next()){
+                    OrcamentoVO vo2 = new OrcamentoVO();
+                    Calendar dataIni = Calendar.getInstance();
+                    Calendar dataFim = Calendar.getInstance();
+
+                    vo2.setId(rs.getLong("id"));
+                    dataIni.setTimeInMillis(rs.getDate("data_inicio").getTime());
+                    vo2.setDataInicio(dataIni);
+                    dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
+                    vo2.setDataFim(dataFim);
+                    vo2.setValor(rs.getDouble("valor"));
+                    vo2.getCarro().setID(rs.getLong("id_automovel"));
+                    vo2.getCliente().setId(rs.getLong("id_cliente"));
+                    lista.add(vo2);
+                }
+            }
+        } catch (Exception e) {
+            throw new FindException(e.getMessage());
+        }
+        return lista;
+    }
+
+    public List<OrcamentoVO> buscarPorSituaçãoDoServico(OrcamentoVO vo) throws FindException{
+        List<OrcamentoVO> lista = new ArrayList<OrcamentoVO>();
+        try {
+            ResultSet rs = dao.findByServicoConcluido(vo);
+            if (!rs.next()) {
+                throw new FindException("Não foi encotrado nenhum orçamento com o serviço nessa situação.\n");
+            }
+            else{
+                rs = dao.findById(vo); 
+                while(rs.next()){
+                    OrcamentoVO vo2 = new OrcamentoVO();
+                    Calendar dataIni = Calendar.getInstance();
+                    Calendar dataFim = Calendar.getInstance();
+
+                    vo2.setId(rs.getLong("id"));
+                    dataIni.setTimeInMillis(rs.getDate("data_inicio").getTime());
+                    vo2.setDataInicio(dataIni);
+                    dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
+                    vo2.setDataFim(dataFim);
+                    vo2.setValor(rs.getDouble("valor"));
+                    vo2.getCarro().setID(rs.getLong("id_automovel"));
+                    vo2.getCliente().setId(rs.getLong("id_cliente"));
+                    lista.add(vo2);
+                }
+            }
+        } catch (Exception e) {
+            throw new FindException(e.getMessage());
+        }
+        return lista;
+    }
+
     //Remoção por id
     public void deletar(OrcamentoVO vo) throws DeleteException{
         try {
@@ -246,21 +308,24 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
         }
     }
 
-    //Espaço para métodos que não acessam o BD
-
     //Registrar pagamento
-    public boolean registrarPagamento(OrcamentoVO vo){
+    public void registrarPagamento(OrcamentoVO vo) throws UpgradeException{
         //Quando invocado no programa significa que o pagamento foi efetuado
-        final boolean pagamento = true;
-
-        return pagamento;
+        try {
+            dao.editarPagamentoEfetuado(vo);
+        } catch (Exception e) {
+            throw new UpgradeException(e.getMessage());
+        }
     }
 
-    //Finalizar serviço
-    public boolean finalizarServico(OrcamentoVO vo){
+    //Finalizar serviço e cadastrar Data final do serviço
+    public void finalizarServico(OrcamentoVO vo) throws UpgradeException{
         //Quando invocado no programa significa que o serviço foi finalizado
-        final boolean servico = true;
-
-        return servico;
+        try {
+            dao.editarServicoConcluido(vo);
+            dao.editarDataFinal(vo);
+        } catch (Exception e) {
+            throw new UpgradeException(e.getMessage());
+        }
     }
 }

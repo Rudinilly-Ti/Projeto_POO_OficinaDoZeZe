@@ -8,7 +8,33 @@ public class OrcamentoVO {
     private Calendar dataFim;
     private ClienteVO cliente = new ClienteVO();
     private AutomovelVO carro = new AutomovelVO();
+    private Boolean servicoConcluido;
+    private Boolean pagamentoEfetuado;
     private Long id;
+
+    public Boolean getServicoConcluido() {
+        return servicoConcluido;
+    }
+
+    public void setServicoConcluido(Boolean servicoConcluido) {
+        if (servicoConcluido != null) {
+            this.servicoConcluido = servicoConcluido;
+        } else {
+            throw new SetterException("Nenhum valor inserido para a situação do serviço.");
+        }
+    }
+
+    public Boolean getPagamentoEfetuado() {
+        return pagamentoEfetuado;
+    }
+
+    public void setPagamentoEfetuado(Boolean pagamentoEfetuado) {
+        if (pagamentoEfetuado != null) {
+            this.pagamentoEfetuado = pagamentoEfetuado;
+        } else {
+            throw new SetterException("Nenhum valor inserido para a situação do pagamento.");
+        }
+    }
 
     public Long getId() {
         return id;
