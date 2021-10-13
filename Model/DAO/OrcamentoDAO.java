@@ -158,6 +158,32 @@ public class OrcamentoDAO extends BaseDAO<OrcamentoVO>{
         return rs;
     }
 
+    public ResultSet findByServicoConcluido(OrcamentoVO vo) throws Exception{
+        conn = getConnection();
+        String sql = "select * from Orcamento where ServicoConcluido = ?";
+        PreparedStatement pdst;
+        ResultSet rs = null;
+
+        pdst = conn.prepareStatement(sql);
+        pdst.setBoolean(1, vo.getServicoConcluido());
+        rs = pdst.executeQuery();
+        
+        return rs;
+    }
+
+    public ResultSet findByPagamentoEfetuado(OrcamentoVO vo) throws Exception{
+        conn = getConnection();
+        String sql = "select * from Orcamento where PagamentoEfetuado = ?";
+        PreparedStatement pdst;
+        ResultSet rs = null;
+
+        pdst = conn.prepareStatement(sql);
+        pdst.setBoolean(1, vo.getPagamentoEfetuado());
+        rs = pdst.executeQuery();
+        
+        return rs;
+    }
+
     //Alteração
     public void editarValor(OrcamentoVO vo) throws Exception{
         conn = getConnection();
@@ -212,6 +238,28 @@ public class OrcamentoDAO extends BaseDAO<OrcamentoVO>{
         
         pdst = conn.prepareStatement(sql);
         pdst.setLong(1, vo.getCarro().getID());
+        pdst.setLong(2, vo.getId());
+        pdst.executeUpdate();
+    }
+
+    public void editarServicoConcluido(OrcamentoVO vo) throws Exception{
+        conn = getConnection();
+        String sql = "update Orcamento set ServicoConcluido = ? where id = ?";
+        PreparedStatement pdst;
+        
+        pdst = conn.prepareStatement(sql);
+        pdst.setBoolean(1, vo.getServicoConcluido());
+        pdst.setLong(2, vo.getId());
+        pdst.executeUpdate();
+    }
+
+    public void editarPagamentoEfetuado(OrcamentoVO vo) throws Exception{
+        conn = getConnection();
+        String sql = "update Orcamento set PagamentoEfetuado = ? where id = ?";
+        PreparedStatement pdst;
+        
+        pdst = conn.prepareStatement(sql);
+        pdst.setBoolean(1, vo.getPagamentoEfetuado());
         pdst.setLong(2, vo.getId());
         pdst.executeUpdate();
     }
