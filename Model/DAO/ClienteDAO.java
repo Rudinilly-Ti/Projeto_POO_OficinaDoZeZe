@@ -189,6 +189,8 @@ public class ClienteDAO extends BaseDAO<ClienteVO> {
       pdst = conn.prepareStatement(sql);
       pdst.setString(1, vo.getNome());
       pdst.setLong(2, vo.getId());
+      pdst.executeUpdate();
+
     } catch ( SQLException e) {
       //TODO: handle exception
       e.printStackTrace();
@@ -203,6 +205,8 @@ public class ClienteDAO extends BaseDAO<ClienteVO> {
       pdst = conn.prepareStatement(sql);
       pdst.setString(1, vo.getEndereco());
       pdst.setLong(2, vo.getId());
+      pdst.executeUpdate();
+
     } catch ( SQLException e) {
       //TODO: handle exception
       e.printStackTrace();
@@ -217,6 +221,8 @@ public class ClienteDAO extends BaseDAO<ClienteVO> {
       pdst = conn.prepareStatement(sql);
       pdst.setString(1, vo.getCPF());
       pdst.setLong(2, vo.getId());
+      pdst.executeUpdate();
+      
     } catch ( SQLException e) {
       //TODO: handle exception
       e.printStackTrace();

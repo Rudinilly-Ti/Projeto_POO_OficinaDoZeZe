@@ -38,7 +38,6 @@ public class FuncionarioDAO extends UsuarioDAO<FuncionarioVO>{
     ResultSet rs = null;
     java.sql.Date DateAdm = new java.sql.Date(vo.getDataDeAdmissao().getTimeInMillis());
     try {
-        super.findById(vo);
         pdst = conn.prepareStatement(sql);
         pdst.setDate(1, DateAdm);
         rs = pdst.executeQuery();
@@ -68,8 +67,26 @@ public class FuncionarioDAO extends UsuarioDAO<FuncionarioVO>{
     return rs;
   }
 
+  public ResultSet findByIdUsuario(FuncionarioVO vo){
+    conn = getConnection();
+    String sql = "select * from funcionario where id_usuario = ?";
+    PreparedStatement pdst;
+    ResultSet rs = null;
+    try {
+        super.findById(vo);
+        pdst = conn.prepareStatement(sql);
+        pdst.setLong(1, vo.getId());
+        rs = pdst.executeQuery();
+        
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+    return rs;
+  }
+
   //Alteração
-  public void editarSalario(FuncionarioVO vo) {
+  public void editarSalario(FuncionarioVO vo)  {
     conn = getConnection();
     String sql = "UPDATE funcionario SET salario = ? WHERE id_usuario = ?";
     PreparedStatement pdst;

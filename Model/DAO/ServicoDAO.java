@@ -6,9 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class ServicoDAO extends BaseDAO<ServicoVO>{
     
@@ -16,7 +13,7 @@ public class ServicoDAO extends BaseDAO<ServicoVO>{
     public void inserir(ServicoVO servico){
 
         Connection conn = getConnection();
-        String sql = "insert into Servico (nome, preco) values (?, ?)";
+        String sql = "insert into servico (nome, preco) values (?, ?)";
         PreparedStatement ptst;
 
         try {
@@ -34,7 +31,7 @@ public class ServicoDAO extends BaseDAO<ServicoVO>{
     public void removerById(ServicoVO servico){
 
         Connection conn = getConnection();
-        String sql = "delete from Servico where id = ?";
+        String sql = "delete from servico where id = ?";
         PreparedStatement ptst;
 
         try {
@@ -82,7 +79,7 @@ public class ServicoDAO extends BaseDAO<ServicoVO>{
     // ----- Listar ------
     public ResultSet listar(){
         Connection conn = getConnection();
-        String sql = "select * from Servico";
+        String sql = "select * from servico";
         Statement st;
         ResultSet rs = null;
         try {
@@ -98,7 +95,7 @@ public class ServicoDAO extends BaseDAO<ServicoVO>{
 
     public ResultSet findById(ServicoVO vo){
         Connection conn = getConnection();
-        String sql = "select * from Servico where id = ?";
+        String sql = "select * from servico where id = ?";
         PreparedStatement pdst;
         ResultSet rs = null;
         try {
@@ -113,61 +110,43 @@ public class ServicoDAO extends BaseDAO<ServicoVO>{
         return rs;
     }
 
-    public List<ServicoVO> findByNome(ServicoVO vo){
+    public ResultSet findByNome(ServicoVO vo){
         Connection conn = getConnection();
-        String sql = "select * from Servico where nome = ?";
+        String sql = "select * from servico where nome = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<ServicoVO> servicos = new ArrayList<ServicoVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setString(1, vo.getNome());
             rs = pdst.executeQuery();
-            while(rs.next()){
-                if (rs.getString("nome") != null) {
-                    ServicoVO service = new ServicoVO();
-                    service.setNome(rs.getString("Nome"));
-                    service.setPreco(rs.getDouble("Preco"));
-                    service.setId(rs.getLong("Id"));
-                    servicos.add(service);
-                }
-            }
         } catch (SQLException e) {
             //TODO: handle exception
             e.printStackTrace();
         }
-        return servicos;
+        return rs;
     }
 
-    public List<ServicoVO> findByPreco(ServicoVO vo){
+    public ResultSet findByPreco(ServicoVO vo){
         Connection conn = getConnection();
-        String sql = "select * from Servico where preco = ?";
+        String sql = "select * from servico where preco = ?";
         PreparedStatement pdst;
-        ResultSet rs;
-        List<ServicoVO> servicos = new ArrayList<ServicoVO>();
+        ResultSet rs = null;
         try {
             pdst = conn.prepareStatement(sql);
             pdst.setDouble(1, vo.getPreco());
             rs = pdst.executeQuery();
-            while(rs.next()){
-            	ServicoVO service = new ServicoVO();
-                service.setNome(rs.getString("Nome"));
-                service.setPreco(rs.getDouble("Preco"));
-                service.setId(rs.getLong("Id"));
-                servicos.add(service);
-            }
         } catch (SQLException e) {
             //TODO: handle exception
             e.printStackTrace();
         }
-        return servicos;
+        return rs;
     }
 
     // ------ editar -------
     public void editarNomeById(ServicoVO servico){
 
         Connection conn = getConnection();
-        String sql = "update Servico set nome = ? where id = ?";
+        String sql = "update servico set nome = ? where id = ?";
         PreparedStatement ptst;
 
         try {
@@ -184,7 +163,7 @@ public class ServicoDAO extends BaseDAO<ServicoVO>{
     public void editarPrecoById(ServicoVO servico){
         
         Connection conn = getConnection();
-        String sql = "update Servico set preco = ? where id = ?";
+        String sql = "update servico set preco = ? where id = ?";
         PreparedStatement ptst;
 
         try {
