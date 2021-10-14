@@ -73,7 +73,6 @@ public class FuncionarioDAO extends UsuarioDAO<FuncionarioVO>{
     PreparedStatement pdst;
     ResultSet rs = null;
     try {
-        super.findById(vo);
         pdst = conn.prepareStatement(sql);
         pdst.setLong(1, vo.getId());
         rs = pdst.executeQuery();

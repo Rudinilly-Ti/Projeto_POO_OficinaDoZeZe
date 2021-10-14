@@ -1,12 +1,12 @@
 package Model.VO;
 import Exceptions.SetterException;
 
-public abstract class UsuarioVO {
+public class UsuarioVO {
   private Long id;
   private String login;
   private String senha;
 
-  public abstract void oficina();
+  public void oficina() {};
 
   public Long getId() {
     return id;
