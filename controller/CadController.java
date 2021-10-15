@@ -11,6 +11,8 @@ import view.Telas;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.collections.FXCollections;
@@ -39,6 +41,12 @@ public class CadController implements Initializable{
     private Label cadError;
 
     @FXML
+    private TextField cadSenhaVisivel;
+
+    @FXML
+    private CheckBox mostrarCadSenha;
+
+    @FXML
     public void voltarParaLogin(ActionEvent event) throws Exception{
         Telas.telaLogin();
     }
@@ -49,10 +57,17 @@ public class CadController implements Initializable{
         
         try {
             if (cargo.compareTo("Funcionário") == 0) {
+                cadError.setVisible(false);
                 FuncionarioBO funcBO = new FuncionarioBO();
                 FuncionarioVO funcVO = new FuncionarioVO();
                 funcVO.setLogin(cadUsuario.getText());
-                funcVO.setSenha(cadSenha.getText());
+                
+                if (mostrarCadSenha.isSelected()) {    
+                    funcVO.setSenha(cadSenhaVisivel.getText());
+                } else {
+                    funcVO.setSenha(cadSenha.getText());
+                }
+                
                 funcVO.setSalario(0.1);
     
                 Calendar calAdm = Calendar.getInstance();
@@ -66,10 +81,16 @@ public class CadController implements Initializable{
             }
             else{
                 if (cargo.compareTo("Chefe") == 0)  {
+                    cadError.setVisible(false);
                     ChefeBO chefeBO = new ChefeBO();
                     ChefeVO chefeVO = new ChefeVO();
                     chefeVO.setLogin(cadUsuario.getText());
-                    chefeVO.setSenha(cadSenha.getText());
+                    
+                    if (mostrarCadSenha.isSelected()) {    
+                        chefeVO.setSenha(cadSenhaVisivel.getText());
+                    } else {
+                        chefeVO.setSenha(cadSenha.getText());
+                    }
         
                     chefeBO.inserir(chefeVO);
                 }
@@ -97,5 +118,19 @@ public class CadController implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
         ObservableList<String> cargos = FXCollections.observableArrayList("Funcionário","Chefe");
         menuCargos.setItems(cargos);
+    }
+
+    @FXML
+    void mudarVisibilidade(ActionEvent event) {
+        if(mostrarCadSenha.isSelected()){
+            cadSenhaVisivel.setText(cadSenha.getText());
+            cadSenhaVisivel.setVisible(true);
+            cadSenha.setVisible(false);
+        }
+        else{
+            cadSenha.setText(cadSenhaVisivel.getText());
+            cadSenha.setVisible(true);
+            cadSenhaVisivel.setVisible(false);
+        }
     }
 }
