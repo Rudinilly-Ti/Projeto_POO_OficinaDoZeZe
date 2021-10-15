@@ -8,6 +8,7 @@ import Model.VO.ChefeVO;
 import Model.VO.UsuarioVO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -25,20 +26,36 @@ public class LoginController{
     @FXML
     private TextField login;
 
+    @FXML
+    private CheckBox mostrarSenha;
+
+    @FXML
+    private TextField senhaVisivel;
+
     UsuarioBO usuBO = new UsuarioBO();
 
     @FXML
     public void autenticar(ActionEvent event){
         UsuarioVO usuVO = new UsuarioVO();
         usuVO.setLogin(login.getText());
-        usuVO.setSenha(senha.getText());
+        
+        if (mostrarSenha.isSelected()) {    
+            usuVO.setSenha(senhaVisivel.getText());
+        } else {
+            usuVO.setSenha(senha.getText());
+        }
+        
         try {
             UsuarioVO autenticado = usuBO.autenticar(usuVO);
             if (autenticado instanceof ChefeVO){
                 //abrir menu de chefe
+
+                errorLogin.setVisible(false);
             }
             else{
                 //abrir menu de funcionario
+
+                errorLogin.setVisible(false);
             }
         } catch (AuthenticationException e) {
             errorLogin.setText("Usuário e/ou senha inválidos!");
@@ -51,4 +68,17 @@ public class LoginController{
         Telas.TelaCadastro();
     }
 
+    @FXML
+    void mudarVisibilidade(ActionEvent event) {
+        if(mostrarSenha.isSelected()){
+            senhaVisivel.setText(senha.getText());
+            senhaVisivel.setVisible(true);
+            senha.setVisible(false);
+        }
+        else{
+            senha.setText(senhaVisivel.getText());
+            senha.setVisible(true);
+            senhaVisivel.setVisible(false);
+        }
+    }
 }
