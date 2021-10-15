@@ -32,21 +32,16 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.effect.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ImageInput?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: D0D0D0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: D0D0D0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="100.0" prefWidth="1440.0" style="-fx-background-color: fafafa;">
          <children>
@@ -85,5 +80,10 @@
             </Label>
          </children>
       </AnchorPane>
+      <Button fx:id="clientButton" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="288.0" style="-fx-cursor: pointer;" text="Clientes" />
+      <Button fx:id="pecaButton" layoutX="288.0" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="288.0" text="Peças" />
+      <Button fx:id="automovelButton" layoutX="576.0" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="288.0" text="Automoveis" />
+      <Button fx:id="servicoButton" layoutX="864.0" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="288.0" text="Serviços" />
+      <Button fx:id="orcamentoButton" layoutX="1152.0" layoutY="100.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="288.0" text="Orçamentos" />
    </children>
 </Pane>
