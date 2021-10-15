@@ -53,7 +53,7 @@ public class UsuarioBO implements BaseInterBO<UsuarioVO> {
           } 
   
         }  else throw new AuthenticationException("Autenticação falhou");
-      }
+      }else throw new AuthenticationException("Autenticação falhou");
     } catch (SQLException e) {
       e.printStackTrace();
     }
