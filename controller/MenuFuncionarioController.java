@@ -2,8 +2,7 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
+import view.Telas;
 
 public class MenuFuncionarioController {
 
@@ -17,13 +16,10 @@ public class MenuFuncionarioController {
     private Button botaoPecas; // Direciona para busca de peças
 
     @FXML
-    private ImageView botaoSair; // sai do programa
+    private Button botaoSair; // sai do programa
 
     @FXML
     private Button botaoServico; // Direciona para busca de serviços
-
-    @FXML
-    private Label nomeDoUsuario; // aparece o nome do funcionario
 
     @FXML
     void PesquisarServicos(ActionEvent event) { // Direciona para busca de serviços
@@ -46,8 +42,8 @@ public class MenuFuncionarioController {
     }
 
     @FXML
-    void sair(ActionEvent event) { // sai do programa
-
+    void sair(ActionEvent event) throws Exception{ // sai do programa
+        Telas.telaLogin();
     }
 
 }

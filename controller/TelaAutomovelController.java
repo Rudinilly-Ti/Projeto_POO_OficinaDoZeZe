@@ -5,12 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import view.Telas;
-import Model.BO.AutomovelBO;
-import Model.VO.AutomovelVO;
-import Model.DAO.AutomovelDAO;
-
-
 
 public class TelaAutomovelController {
 
