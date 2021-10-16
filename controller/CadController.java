@@ -7,11 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import view.Telas;
-
 import java.net.URL;
 import java.util.Calendar;
 import java.util.ResourceBundle;
-
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -45,6 +43,8 @@ public class CadController implements Initializable{
     @FXML
     private CheckBox mostrarCadSenha;
 
+    static String textoLogin;
+
     @FXML
     public void voltarParaLogin(ActionEvent event) throws Exception{
         Telas.telaLogin();
@@ -60,6 +60,7 @@ public class CadController implements Initializable{
                 FuncionarioBO funcBO = new FuncionarioBO();
                 FuncionarioVO funcVO = new FuncionarioVO();
                 funcVO.setLogin(cadUsuario.getText());
+                textoLogin = funcVO.getLogin();
                 
                 if (mostrarCadSenha.isSelected()) {    
                     funcVO.setSenha(cadSenhaVisivel.getText());
@@ -77,6 +78,8 @@ public class CadController implements Initializable{
                 funcVO.setDataDeAdmissao(calAdm);
     
                 funcBO.inserir(funcVO);
+                LoginController c = new LoginController();
+                c.receberCad(textoLogin);
                 Telas.MenuFuncionario();
             }
             else{
@@ -85,6 +88,7 @@ public class CadController implements Initializable{
                     ChefeBO chefeBO = new ChefeBO();
                     ChefeVO chefeVO = new ChefeVO();
                     chefeVO.setLogin(cadUsuario.getText());
+                    textoLogin = chefeVO.getLogin();
                     
                     if (mostrarCadSenha.isSelected()) {    
                         chefeVO.setSenha(cadSenhaVisivel.getText());
@@ -93,6 +97,8 @@ public class CadController implements Initializable{
                     }
         
                     chefeBO.inserir(chefeVO);
+                    LoginController c = new LoginController();
+                    c.receberCad(textoLogin);
                     Telas.MenuChefe();
                 }
             }

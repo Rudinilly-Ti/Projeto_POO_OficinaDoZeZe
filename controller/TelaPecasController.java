@@ -8,16 +8,7 @@ import javafx.scene.control.TextField;
 
 public class TelaPecasController {
     @FXML
-    private TextField Fabricante;
-
-    @FXML
-    private TextField NomePeca;
-
-    @FXML
-    private TextField PlacaAutomovel;
-
-    @FXML
-    private Button adicionarPeca;
+    private Label nomeDoUsuario;
 
     @FXML
     private Button botaoAutomoveis;
@@ -26,68 +17,77 @@ public class TelaPecasController {
     private Button botaoCliente;
 
     @FXML
-    private Button botaoFabricante;
-
-    @FXML
-    private Button botaoNomePeca;
-
-    @FXML
     private Button botaoPecas;
 
     @FXML
-    private Button botaoPesquisarPlaca;
+    private TextField NomePeca;
 
     @FXML
-    private Button botaoSair;
+    private TextField Fabricante;
+
+    @FXML
+    private TextField PlacaAutomovel;
+
+    @FXML
+    private Button botaoPesqFabricante;
+
+    @FXML
+    private Button botaoPesqPlaca;
 
     @FXML
     private Button botaoServico;
 
     @FXML
-    private Label nomeDoUsuario;
+    private Button botaoAddPeca;
 
     @FXML
-    void PesquisarServicos(ActionEvent event) { // redireciona para tela servicos
+    private Button botaoSair;
+
+    @FXML
+    private Button botaoPesqNome;
+
+    @FXML
+    void voltarParaMenu(ActionEvent event) {
 
     }
 
     @FXML
-    void inserirPeca(ActionEvent event) { // cadastra outra peca
+    void pesquisarCliente(ActionEvent event) {
 
     }
 
     @FXML
-    void pesquisarCarros(ActionEvent event) { // redireciona para tela automoveis
+    void pesquisarPecas(ActionEvent event) {
 
     }
 
     @FXML
-    void pesquisarCliente(ActionEvent event) { // redireciona para tela clientes
+    void pesquisarCarros(ActionEvent event) {
 
     }
 
     @FXML
-    void pesquisarPecaPorFabricante(ActionEvent event) { // pesquisa peca
+    void PesquisarServicos(ActionEvent event) {
 
     }
 
     @FXML
-    void pesquisarPecaPorNome(ActionEvent event) { // pesquisa peça
+    void pesquisarNome(ActionEvent event) {
 
     }
 
     @FXML
-    void pesquisarPecaPorPlaca(ActionEvent event) { // pesquisa peca
+    void pesquisarPlaca(ActionEvent event) {
 
     }
 
     @FXML
-    void pesquisarPecas(ActionEvent event) { // acontece nada, pois já está na tela de peças
+    void pesquisarFabricante(ActionEvent event) {
 
     }
 
     @FXML
-    void voltarParaMenu(ActionEvent event) { // volta para o menu
+    void adicionarPeca(ActionEvent event) {
 
     }
 }

@@ -3,12 +3,16 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.text.Text;
 import view.Telas;
 
 public class MainPageChefeController{
 
     @FXML
     private Button automovelButton;
+
+    @FXML
+    private Text loginUser;
     
     @FXML
     private Button clienteButton;
@@ -27,6 +31,22 @@ public class MainPageChefeController{
 
     @FXML
     private Button botaoSair;
+
+    @FXML
+    public void initialize() {
+        LoginController c = new LoginController();
+        receberLogin(c.retornarLogin());
+    }
+
+    @FXML
+    public void receberLogin(String login){
+        loginUser.setText(login);
+    }
+
+    @FXML
+    public void receberCadastro(String login){
+        loginUser.setText(login);
+    }
 
     @FXML
     void chamarTelaAutomoveis(ActionEvent event) {

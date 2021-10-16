@@ -53,6 +53,16 @@
    <children>
       <AnchorPane prefHeight="100.0" prefWidth="1440.0" style="-fx-background-color: fafafa;">
          <children>
+            <Label layoutX="100.0" layoutY="35.0" text="Olá,">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="40.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@user_12.png" />
+               </image>
+            </ImageView>
             <ImageView fitHeight="40.0" fitWidth="42.0" layoutX="-6.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" x="550.0" y="20.0">
                <image>
                   <Image url="@Engrenagens.png" />
@@ -63,11 +73,11 @@
                   <Image url="@LetreiroWithoutShadow.png" />
                </image>
             </ImageView>
-            <Label fx:id="userLogin" layoutX="143.0" layoutY="40.0">
+            <Text fx:id="loginUser" layoutX="135.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample Text">
                <font>
                   <Font size="18.0" />
                </font>
-            </Label>
+            </Text>
             <Button fx:id="botaoSair" layoutX="1365.0" layoutY="30.0" mnemonicParsing="false" onAction="#sair" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
                <cursor>
                   <Cursor fx:constant="HAND" />

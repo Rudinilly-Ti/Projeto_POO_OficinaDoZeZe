@@ -30,11 +30,13 @@ public class LoginController{
     private TextField senhaVisivel;
 
     UsuarioBO usuBO = new UsuarioBO();
+    static String textoLogin;
 
     @FXML
     public void autenticar(ActionEvent event){
         UsuarioVO usuVO = new UsuarioVO();
         usuVO.setLogin(login.getText());
+        textoLogin = usuVO.getLogin();
         
         if (mostrarSenha.isSelected()) {    
             usuVO.setSenha(senhaVisivel.getText());
@@ -61,6 +63,16 @@ public class LoginController{
     @FXML
     public void cadastrar(ActionEvent event) throws Exception{
         Telas.TelaCadastro();
+    }
+
+    @FXML
+    public String retornarLogin(){
+        return textoLogin;
+    }
+
+    @FXML
+    public void receberCad(String cad){
+        textoLogin = cad;
     }
 
     @FXML

@@ -7,49 +7,47 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 public class TelaClienteController {
-    //componentes do cliente
-    @FXML
-    private Button openCad;
-   
-    @FXML
-    private Pane cadCliente;
+  @FXML
+  private TextField enderecoCliente;
 
-    @FXML
-    private Button cancelButton;
+  @FXML
+  private Button orcamentoButton;
 
-    @FXML
-    private Button finishCadButton;
+  @FXML
+  private Button openCad;
 
-    @FXML
-    private TextField nomeCliente;
+  @FXML
+  private TextField cpfCliente;
 
-    @FXML
-    private TextField sobrenomeCliente;
+  @FXML
+  private Button cancelButton;
 
-    @FXML
-    private TextField cpfCliente;
+  @FXML
+  private TextField sobrenomeCliente;
 
-    @FXML
-    private TextField enderecoCliente;
+  @FXML
+  private Button finishCadButton;
 
-    // componentes do menu
-    @FXML
-    private Button clienteButton;
- 
-    @FXML
-    private Button automovelButton;
+  @FXML
+  private Button servicoButton;
 
-    @FXML
-    private Button funcionarioButton;
+  @FXML
+  private Button automovelButton;
 
-    @FXML
-    private Button orcamentoButton;
+  @FXML
+  private Pane cadCliente;
 
-    @FXML
-    private Button pecaButton;
+  @FXML
+  private TextField nomeCliente;
 
-    @FXML
-    private Button servicoButton;
+  @FXML
+  private Button clienteButton;
+
+  @FXML
+  private Button pecaButton;
+
+  @FXML
+  private Button funcionarioButton;
 
     // metodos do menu
     @FXML

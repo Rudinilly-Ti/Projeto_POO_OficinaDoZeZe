@@ -32,6 +32,14 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.SubScene?>
 <?import javafx.scene.control.Button?>
@@ -46,7 +54,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: D0D0D0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaClienteController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: D0D0D0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaClienteController">
    <children>
       <AnchorPane prefHeight="100.0" prefWidth="1440.0" style="-fx-background-color: fafafa;">
          <children>
@@ -60,35 +68,18 @@
                   <Image url="@LetreiroWithoutShadow.png" />
                </image>
             </ImageView>
-            <Button layoutX="1365.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="Button">
-               <effect>
-                  <ImageInput>
-                     <source>
-                        <Image url="file:/C:/Users/Rudinilly/Documents/Projeto_POO_OficinaDoZeZe/view/VE/exit%2012.png" />
-                     </source>
-                  </ImageInput>
-               </effect>
+            <Button layoutX="1365.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@exit%2012.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Button layoutX="45.0" layoutY="25.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button">
-               <effect>
-                  <ImageInput>
-                     <source>
-                        <Image url="file:/C:/Users/Rudinilly/Documents/Projeto_POO_OficinaDoZeZe/view/VE/user_12.png" />
-                     </source>
-                  </ImageInput>
-               </effect>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Label layoutX="107.0" layoutY="36.0" text="Olá, ">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
          </children>
       </AnchorPane>
       <Button fx:id="clienteButton" layoutX="1.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarTelaClientes" prefHeight="50.0" prefWidth="240.0" text="Clientes">

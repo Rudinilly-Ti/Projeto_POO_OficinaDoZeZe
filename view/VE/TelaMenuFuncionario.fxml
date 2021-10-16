@@ -49,6 +49,11 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuFuncionarioController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="101.0" stroke="BLACK" strokeType="INSIDE" width="1440.0" />
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="40.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@user_12.png" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="40.0" fitWidth="42.0" layoutX="566.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Engrenagens.png" />
@@ -59,6 +64,16 @@
             <Image url="@LetreiroWithoutShadow.png" />
          </image>
       </ImageView>
+      <Label layoutX="100.0" layoutY="35.0" text="Olá,">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Text fx:id="userLogin" layoutX="135.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample Text">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
       <Button fx:id="botaoSair" layoutX="1365.0" layoutY="30.0" mnemonicParsing="false" onAction="#sair" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
