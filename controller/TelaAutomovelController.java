@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 public class TelaAutomovelController {
 
@@ -41,6 +42,30 @@ public class TelaAutomovelController {
     @FXML
     private Label nomeDoUsuario; // label, na qual irá aparecer o nome do usuário
 
+    @FXML
+    private Button botaoCadastrarNovoCarro;
+
+    @FXML
+    private Button botaoVoltar;
+
+    @FXML
+    private TextField carroAnoNovo;
+
+    @FXML
+    private TextField carroCorNova;
+
+    @FXML
+    private TextField carroMarcaNova;
+
+    @FXML
+    private TextField carroPlacaNova;
+
+    @FXML
+    private TextField carroQuilometragemNova;
+
+    @FXML
+    private Pane telaDeCadastro;
+
 /*=====================================================================================*/
 
     @FXML
@@ -49,7 +74,7 @@ public class TelaAutomovelController {
     }
 
     @FXML
-    void inserirCarro(ActionEvent event) { // inserir novos carros
+    void inserirCarro(ActionEvent event) { // redireciona para tela de cadastrar novos carros
 
     }
 
@@ -81,5 +106,15 @@ public class TelaAutomovelController {
     @FXML
     void voltarParaMenu(ActionEvent event) throws Exception { // encaminha para TelaMenu
         //Telas.menu();
+    }
+
+    @FXML
+    void cadastrarNovoCarro(ActionEvent event) { // cadastra novo carro
+
+    }
+
+    @FXML
+    void voltarTelaAutomovel(ActionEvent event) { // volta para tela de automovel
+
     }
 }
