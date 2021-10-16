@@ -17,7 +17,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import Exceptions.InsertException;
 import Model.BO.ChefeBO;
 import Model.BO.FuncionarioBO;
 import Model.VO.ChefeVO;
@@ -78,6 +77,7 @@ public class CadController implements Initializable{
                 funcVO.setDataDeAdmissao(calAdm);
     
                 funcBO.inserir(funcVO);
+                Telas.MenuFuncionario();
             }
             else{
                 if (cargo.compareTo("Chefe") == 0)  {
@@ -93,9 +93,10 @@ public class CadController implements Initializable{
                     }
         
                     chefeBO.inserir(chefeVO);
+                    Telas.MenuChefe();
                 }
             }
-        } catch (InsertException e) {
+        } catch (Exception e) {
             cadError.setText("Usuário já existe no sistema!");
             cadError.setVisible(true);
         }

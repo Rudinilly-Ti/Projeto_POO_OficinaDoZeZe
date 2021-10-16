@@ -1,8 +1,5 @@
 package controller;
 
-
-
-import Exceptions.AuthenticationException;
 import Model.BO.UsuarioBO;
 import Model.VO.ChefeVO;
 import Model.VO.UsuarioVO;
@@ -48,16 +45,14 @@ public class LoginController{
         try {
             UsuarioVO autenticado = usuBO.autenticar(usuVO);
             if (autenticado instanceof ChefeVO){
-                //abrir menu de chefe
-
                 errorLogin.setVisible(false);
+                Telas.MenuChefe();
             }
             else{
-                //abrir menu de funcionario
-
                 errorLogin.setVisible(false);
+                Telas.MenuFuncionario();
             }
-        } catch (AuthenticationException e) {
+        } catch (Exception e) {
             errorLogin.setText("Usuário e/ou senha inválidos!");
             errorLogin.setVisible(true);
         }
@@ -69,7 +64,7 @@ public class LoginController{
     }
 
     @FXML
-    void mudarVisibilidade(ActionEvent event) {
+    public void mudarVisibilidade(ActionEvent event) {
         if(mostrarSenha.isSelected()){
             senhaVisivel.setText(senha.getText());
             senhaVisivel.setVisible(true);

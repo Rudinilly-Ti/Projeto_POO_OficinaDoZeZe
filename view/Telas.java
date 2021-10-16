@@ -1,7 +1,7 @@
 package view;
 
+import Model.VO.UsuarioVO;
 import javafx.application.Application;
-import controller.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -33,6 +33,20 @@ public class Telas extends Application{
     
     public static void TelaCadastro() throws Exception{
         Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaCadastro.fxml"));
+        Scene cena = new Scene(root);
+
+        primaryStage.setScene(cena);
+    }
+
+    public static void MenuChefe() throws Exception{
+        Parent root = FXMLLoader.load(Telas.class.getResource("VE/MenuChefe.fxml"));
+        Scene cena = new Scene(root);
+
+        primaryStage.setScene(cena);
+    }
+
+    public static void MenuFuncionario() throws Exception{
+        Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaMenuFuncionario.fxml"));
         Scene cena = new Scene(root);
 
         primaryStage.setScene(cena);

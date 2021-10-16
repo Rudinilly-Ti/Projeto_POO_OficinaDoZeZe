@@ -3,12 +3,13 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import view.Telas;
 
-public class MainPageChefeController {
+public class MainPageChefeController{
 
     @FXML
     private Button automovelButton;
-
+    
     @FXML
     private Button clienteButton;
 
@@ -23,6 +24,9 @@ public class MainPageChefeController {
 
     @FXML
     private Button servicoButton;
+
+    @FXML
+    private Button botaoSair;
 
     @FXML
     void chamarTelaAutomoveis(ActionEvent event) {
@@ -53,5 +57,9 @@ public class MainPageChefeController {
     void chamarTelaServicos(ActionEvent event) {
 
     }
-
+    
+    @FXML
+    void sair(ActionEvent event) throws Exception{ // sai do programa
+        Telas.telaLogin();
+    }
 }
