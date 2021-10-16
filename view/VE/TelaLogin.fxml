@@ -32,6 +32,8 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -73,27 +75,49 @@
                <font>
                   <Font size="24.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
             </PasswordField>
             <TextField fx:id="login" layoutX="95.0" layoutY="104.0" prefHeight="40.0" prefWidth="340.0" promptText="Login" style="-fx-background-color: #e8e8e8; -fx-border-color: #d0d0d0; -fx-border-width: 2px 2px 2px 2px;">
                <font>
                   <Font size="24.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
             </TextField>
             <Button fx:id="botaoCad" layoutX="314.0" layoutY="380.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="30.0" prefWidth="121.0" style="-fx-background-color: #ABA8A8;" text="Cadastrar" textAlignment="CENTER" textFill="MAROON">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="botaoEntrar" layoutX="45.0" layoutY="380.0" mnemonicParsing="false" onAction="#autenticar" prefHeight="30.0" prefWidth="121.0" style="-fx-background-color: #800000;" text="Entrar" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Label fx:id="errorLogin" layoutX="95.0" layoutY="286.0" prefHeight="20.0" prefWidth="340.0" textFill="MAROON" visible="false">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <CheckBox fx:id="mostrarSenha" layoutX="338.0" layoutY="278.0" mnemonicParsing="false" onAction="#mudarVisibilidade" text="Mostrar senha">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </CheckBox>
+            <TextField fx:id="senhaVisivel" layoutX="95.0" layoutY="215.0" prefHeight="40.0" prefWidth="340.0" promptText="Senha" style="-fx-background-color: #e8e8e8; -fx-border-color: #d0d0d0; -fx-border-width: 2px 2px 2px 2px;" visible="false">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
          </children>
       </AnchorPane>
    </children>

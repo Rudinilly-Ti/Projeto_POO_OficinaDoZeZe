@@ -32,6 +32,7 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -78,29 +79,57 @@
                <font>
                   <Font size="24.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
             </PasswordField>
             <TextField fx:id="cadUsuario" layoutX="130.0" layoutY="57.0" prefHeight="40.0" prefWidth="440.0" promptText="Digite o login de acesso" style="-fx-background-color: #e8e8e8; -fx-border-color: #d0d0d0; -fx-border-width: 2px 2px 2px 2px;">
                <font>
                   <Font size="24.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
             </TextField>
             <Button fx:id="botaoVoltar" layoutX="449.0" layoutY="410.0" mnemonicParsing="false" onAction="#voltarParaLogin" prefHeight="30.0" prefWidth="121.0" style="-fx-background-color: #ABA8A8;" text="Voltar" textAlignment="CENTER" textFill="MAROON">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="botaoCadastrar" layoutX="73.0" layoutY="410.0" mnemonicParsing="false" onAction="#cadELogin" prefHeight="30.0" prefWidth="230.0" style="-fx-background-color: #800000;" text="Cadastrar-se " textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <ComboBox fx:id="menuCargos" layoutX="130.0" layoutY="248.0" onAction="#cargoSelecionado" prefHeight="40.0" prefWidth="220.0" promptText="Selecione um cargo" style="-fx-border-color: #d0d0d0; -fx-border-width: 2px 2px 2px 2px; -fx-background-color: #e8e8e8;" />
+            <ComboBox fx:id="menuCargos" layoutX="130.0" layoutY="248.0" onAction="#cargoSelecionado" prefHeight="40.0" prefWidth="220.0" promptText="Selecione um cargo" style="-fx-border-color: #d0d0d0; -fx-border-width: 2px 2px 2px 2px; -fx-background-color: #e8e8e8;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ComboBox>
             <DatePicker fx:id="dataAdm" layoutX="130.0" layoutY="325.0" prefHeight="40.0" prefWidth="220.0" promptText="Selecione a data de admissão" visible="false" />
             <Label fx:id="cadError" layoutX="130.0" layoutY="214.0" text="Label" textFill="MAROON" visible="false">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <TextField fx:id="cadSenhaVisivel" layoutX="130.0" layoutY="147.0" prefHeight="40.0" prefWidth="440.0" promptText="Digite a senha" style="-fx-background-color: #e8e8e8; -fx-border-color: #d0d0d0; -fx-border-width: 2px 2px 2px 2px;" visible="false">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="TEXT" />
+               </cursor>
+            </TextField>
+            <CheckBox fx:id="mostrarCadSenha" layoutX="473.0" layoutY="216.0" mnemonicParsing="false" onAction="#mudarVisibilidade" text="Mostrar senha">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </CheckBox>
          </children>
       </AnchorPane>
    </children>

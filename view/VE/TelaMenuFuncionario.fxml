@@ -32,6 +32,13 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -39,14 +46,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuFuncionarioController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="101.0" stroke="BLACK" strokeType="INSIDE" width="1440.0" />
-      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="22.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@user_12.png" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="40.0" fitWidth="42.0" layoutX="566.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Engrenagens.png" />
@@ -57,14 +59,17 @@
             <Image url="@LetreiroWithoutShadow.png" />
          </image>
       </ImageView>
-      <Button fx:id="botaoSair" layoutX="1350.0" layoutY="40.0" mnemonicParsing="false" onAction="#sair" prefHeight="40.0" prefWidth="56.0">
+      <Button fx:id="botaoSair" layoutX="1365.0" layoutY="30.0" mnemonicParsing="false" onAction="#sair" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@exit%201.png" />
+                  <Image url="@exit%2012.png" />
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="botaoCliente" layoutY="101.0" mnemonicParsing="false" onAction="#pesquisarCliente" prefHeight="50.0" prefWidth="359.0" text="Clientes">
          <graphic>
@@ -79,7 +84,7 @@
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@searching%202.png" />
+                  <Image url="@peca.png" />
                </image>
             </ImageView>
          </graphic>
@@ -88,7 +93,7 @@
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@pngegg%201.png" />
+                  <Image url="@auto.png" />
                </image>
             </ImageView>
          </graphic>
@@ -97,11 +102,10 @@
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@SeekPng%201.png" />
+                  <Image url="@serv.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Label fx:id="nomeDoUsuario" layoutX="85.0" layoutY="43.0" prefHeight="17.0" prefWidth="100.0" />
    </children>
 </Pane>
