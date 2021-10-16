@@ -44,11 +44,6 @@ public class MainPageChefeController{
     }
 
     @FXML
-    public void receberCadastro(String login){
-        loginUser.setText(login);
-    }
-
-    @FXML
     void chamarTelaAutomoveis(ActionEvent event) {
 
     }

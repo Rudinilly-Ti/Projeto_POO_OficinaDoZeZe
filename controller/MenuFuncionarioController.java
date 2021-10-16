@@ -37,11 +37,6 @@ public class MenuFuncionarioController {
     }
 
     @FXML
-    public void receberCadastro(String login){
-        userLogin.setText(login);
-    }
-
-    @FXML
     void PesquisarServicos(ActionEvent event) { // Direciona para busca de serviços
 
     }
