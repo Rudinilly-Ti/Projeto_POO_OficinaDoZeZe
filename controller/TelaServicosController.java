@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 public class TelaServicosController {
     @FXML
@@ -36,12 +37,27 @@ public class TelaServicosController {
     private Label nomeDoUsuario;
 
     @FXML
+    private Pane telaDeCadastro;
+
+    @FXML
+    private TextField NomeServicoNovo;
+
+    @FXML
+    private TextField ValorServicoNovo;
+
+    @FXML
+    private Button botaoCadastrarServico;
+
+    @FXML
+    private Button voltarParaTelaServico;
+
+    @FXML
     void PesquisarServicos(ActionEvent event) { // acontece nada, pois já está na tela servicos
 
     }
 
     @FXML
-    void inserirServico(ActionEvent event) { // cadastra um novo servico
+    void inserirServico(ActionEvent event) { // abre a tela de cadastrar um novo servico
 
     }
 
@@ -67,6 +83,16 @@ public class TelaServicosController {
 
     @FXML
     void voltarParaMenu(ActionEvent event) { // sai
+
+    }
+
+    @FXML
+    void cadastrarNovoServico(ActionEvent event) { // cadastra novo serviço
+
+    }
+
+    @FXML
+    void voltarTelaServico(ActionEvent event) { // volta para tela de serviço
 
     }
 }
