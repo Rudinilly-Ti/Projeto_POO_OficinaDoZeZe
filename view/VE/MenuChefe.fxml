@@ -32,24 +32,17 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.ImageInput?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: D0D0D0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainPageChefeController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: D0D0D0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainPageChefeController">
    <children>
       <AnchorPane prefHeight="100.0" prefWidth="1440.0" style="-fx-background-color: fafafa;">
          <children>
@@ -92,7 +85,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <Button fx:id="clienteButton" layoutX="1.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarTelaClientes" prefHeight="50.0" prefWidth="240.0" text="Clientes">
+      <Button fx:id="clienteButton" layoutX="1.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarTelaClientes" prefHeight="50.0" prefWidth="288.0" text="Clientes">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -104,7 +97,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="pecaButton" layoutX="480.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarTelaPecas" prefHeight="50.0" prefWidth="240.0" text="Peças">
+      <Button fx:id="pecaButton" layoutX="576.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarTelaPecas" prefHeight="50.0" prefWidth="288.0" text="Peças">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -116,7 +109,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="automovelButton" layoutX="240.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarTelaAutomoveis" prefHeight="50.0" prefWidth="240.0" text="Automoveis">
+      <Button fx:id="automovelButton" layoutX="288.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarTelaAutomoveis" prefHeight="50.0" prefWidth="288.0" text="Automoveis">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -128,7 +121,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="servicoButton" layoutX="720.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarTelaServicos" prefHeight="50.0" prefWidth="240.0" text="Serviços">
+      <Button fx:id="servicoButton" layoutX="864.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarTelaServicos" prefHeight="50.0" prefWidth="288.0" text="Serviços">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -140,7 +133,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="orcamentoButton" layoutX="1200.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarTelaOrcamentos" prefHeight="50.0" prefWidth="240.0" text="Orçamentos">
+      <Button fx:id="orcamentoButton" layoutX="1152.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarTelaOrcamentos" prefHeight="50.0" prefWidth="288.0" text="Orçamentos">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -148,18 +141,6 @@
             <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@orca.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="funcionarioButton" layoutX="960.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarTelaFuncionarios" prefHeight="50.0" prefWidth="240.0" text="Funcionários">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@funcionarios.png" />
                </image>
             </ImageView>
          </graphic>
