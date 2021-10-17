@@ -243,6 +243,11 @@ public class TelaOrcamentoController {
     }
 
     @FXML
+    void pesquisarDataInicial(ActionEvent event) {
+
+    }
+
+    @FXML
     void pesquisarPecas(ActionEvent event) throws Exception{
         Telas.TelaPecas();
     }
