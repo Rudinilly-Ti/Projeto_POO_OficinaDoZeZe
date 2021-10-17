@@ -49,6 +49,34 @@ public class TelaClienteController {
   @FXML
   private Button funcionarioButton;
 
+  //componentes atualizar
+  @FXML
+  private Pane attCliente;
+
+  @FXML
+  private Button cancelAttButton;
+
+  @FXML
+  private TextField cpfClienteAtt;
+
+  @FXML
+  private TextField idCliente;
+
+  @FXML
+  private TextField enderecoClienteAtt;
+
+  @FXML
+  private Button finishAttButton;
+
+  @FXML
+  private TextField nomeClienteAtt;
+
+  @FXML
+  private Button openAttButton;
+
+  @FXML
+  private TextField sobrenomeClienteAtt;
+
     // metodos do menu
     @FXML
     void chamarTelaAutomoveis(ActionEvent event) {
@@ -80,7 +108,28 @@ public class TelaClienteController {
 
     }
 
-    //metodos do cliente
+    //metodos atualizar
+    @FXML
+    void openAtt(ActionEvent event) {
+      attCliente.setVisible(true);
+    }
+
+    
+    @FXML
+    void closeAtt(ActionEvent event) {
+      nomeClienteAtt.setText("");
+      sobrenomeCliente.setText("");
+      enderecoClienteAtt.setText("");
+      cpfClienteAtt.setText("");
+      idCliente.setText("");
+      attCliente.setVisible(false);
+    }
+
+    @FXML
+    void finishAtt(ActionEvent event) {
+      closeAtt(event);
+    }
+    //metodos cadastrar
     @FXML
     void openCadClient(ActionEvent event) {
       cadCliente.setVisible(true);

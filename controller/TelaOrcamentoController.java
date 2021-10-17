@@ -3,12 +3,15 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 public class TelaOrcamentoController {
-    
+
     @FXML
     private TextField Placa;
 
@@ -20,6 +23,9 @@ public class TelaOrcamentoController {
 
     @FXML
     private Button adicionarOrcamento;
+
+    @FXML
+    private Button botaoSair;
 
     @FXML
     private Button botaoAutomoveis;
@@ -37,13 +43,7 @@ public class TelaOrcamentoController {
     private Button botaoPesquisarDataFinal;
 
     @FXML
-    private Button botaoPesquisarDataInicial;
-
-    @FXML
     private Button botaoPesquisarPlaca;
-
-    @FXML
-    private ImageView botaoSair;
 
     @FXML
     private Button botaoServico;
@@ -53,17 +53,165 @@ public class TelaOrcamentoController {
 
     @FXML
     private TextField dono;
-
+    
     @FXML
     private Label nomeDoUsuario;
+    
+    // componentes cadastrar
+    @FXML
+    private Pane cadOrcamento;
+     
+    @FXML
+    private TextField automovelOrca;
+    
+    @FXML
+    private TextField pecaToAdd;
 
     @FXML
-    void PesquisarServicos(ActionEvent event) {
+    private TextField servicoToAdd;
+    
+    @FXML
+    private Button addPecaButton;
+
+    @FXML
+    private Button addServicoButton;
+
+    @FXML
+    private Button finishCadButton;
+    
+    @FXML
+    private Button openCadButton;
+   
+    @FXML
+    private Button closeCadButton;
+
+    //componentes atualizar
+    @FXML
+    private Pane attOrcamento;
+
+    @FXML
+    private Button openAttButton;
+
+    @FXML
+    private TextField automovelOrcaAtt;
+
+    @FXML
+    private TextField pecaToAddAtt;
+
+    @FXML
+    private TextField servicoToAddAtt;
+
+    @FXML
+    private TextField idOrcamento;
+
+    @FXML
+    private Button closeAttButton;
+
+    @FXML
+    private Button finishAttButton;
+
+    //componentes relatorio
+    @FXML
+    private ScrollPane relatorioPainel;
+
+    @FXML
+    private DatePicker dataFinal;
+
+    @FXML
+    private DatePicker dataInicial;
+
+    @FXML
+    private AnchorPane painelAncoraRelatorio;
+    
+    @FXML
+    private Button gerarRelatorioButton;
+
+    @FXML
+    private Button openRelatorioButton;
+
+    @FXML
+    private Button closeRelatorioButton;
+
+    //metodos cadastrar
+    @FXML
+    void openCad(ActionEvent event) {
+        cadOrcamento.setVisible(true);
+    }
+
+    @FXML
+    void closeCad(ActionEvent event) {
+        automovelOrca.setText("");
+        pecaToAdd.setText("");
+        servicoToAdd.setText("");
+        cadOrcamento.setVisible(false);
+    }
+
+    @FXML
+    void addPeca(ActionEvent event) {
+    
+    }
+
+    @FXML
+    void addServico(ActionEvent event) {
+
+    }
+ 
+    @FXML
+    void finishCad(ActionEvent event) {
+        closeCad(event);
+    }
+
+    //metodos atualizar
+    @FXML
+    void openAtt(ActionEvent event) {
+        attOrcamento.setVisible(true);
+    }
+
+    @FXML
+    void closeAtt(ActionEvent event) {
+        idOrcamento.setText("");
+        automovelOrcaAtt.setText("");
+        pecaToAddAtt.setText("");
+        servicoToAddAtt.setText("");
+        attOrcamento.setVisible(false);
+    }
+
+    @FXML
+    void addPecaAtt(ActionEvent event) {
+       
+    }
+
+    @FXML
+    void addServicoAtt(ActionEvent event) {
 
     }
 
     @FXML
-    void inserirOrcamento(ActionEvent event) {
+    void finishAtt(ActionEvent event) {
+        closeAtt(event);
+    }
+
+    //metodos relatorio
+    @FXML
+    void closeRelatorio(ActionEvent event) {
+        dataInicial.setValue(null);
+        dataFinal.setValue(null);
+        relatorioPainel.setVisible(false);
+    }
+
+    @FXML
+    void gerarRelatorio(ActionEvent event) {
+        closeRelatorio(event);
+    }
+
+    @FXML
+    void openRelatorio(ActionEvent event) {
+        relatorioPainel.setVisible(true);
+    }
+
+    //metodos pesquisar
+    @FXML
+    void PesquisarServicos(ActionEvent event) {
 
     }
 
@@ -79,11 +227,6 @@ public class TelaOrcamentoController {
 
     @FXML
     void pesquisarDataFinal(ActionEvent event) {
-
-    }
-
-    @FXML
-    void pesquisarDataInicial(ActionEvent event) {
 
     }
 
