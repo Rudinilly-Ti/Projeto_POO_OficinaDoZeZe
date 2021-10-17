@@ -46,9 +46,6 @@ public class TelaClienteController {
   @FXML
   private Button pecaButton;
 
-  @FXML
-  private Button funcionarioButton;
-
   //componentes atualizar
   @FXML
   private Pane attCliente;
@@ -85,11 +82,6 @@ public class TelaClienteController {
 
     @FXML
     void chamarTelaClientes(ActionEvent event) {
-
-    }
-
-    @FXML
-    void chamarTelaFuncionarios(ActionEvent event) {
 
     }
 

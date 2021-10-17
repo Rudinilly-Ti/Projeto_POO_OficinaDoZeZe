@@ -18,9 +18,6 @@ public class MainPageChefeController{
     private Button clienteButton;
 
     @FXML
-    private Button funcionarioButton;
-
-    @FXML
     private Button orcamentoButton;
 
     @FXML
@@ -50,11 +47,6 @@ public class MainPageChefeController{
 
     @FXML
     void chamarTelaClientes(ActionEvent event) {
-
-    }
-
-    @FXML
-    void chamarTelaFuncionarios(ActionEvent event) {
 
     }
 
