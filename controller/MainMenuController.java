@@ -1,24 +1,20 @@
 package controller;
+
 import Model.VO.ChefeVO;
 import Model.VO.UsuarioVO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import view.Telas;
 
-public class TelaAutomovelController {
+public class MainMenuController{
 
     @FXML
-    private TextField carroCorNova;
+    private Button orcamentoButtonChefe;
 
     @FXML
-    private TextField carroPlacaNova;
-
-    @FXML
-    private TextField dono;
+    private Text loginUser;
 
     @FXML
     private Button servicoButtonChefe;
@@ -30,51 +26,22 @@ public class TelaAutomovelController {
     private Button clienteButtonChefe;
 
     @FXML
-    private Button automovelButtonFunc;
-
-    @FXML
-    private Pane telaDeCadastro;
-
-    @FXML
-    private Button automovelButtonChefe;
-
-    @FXML
-    private Button pecaButtonChefe;
-
-    @FXML
-    private Text userLogin;
-
-    @FXML
-    private Button orcamentoButtonChefe;
-
-    @FXML
     private Button pecaButtonFunc;
 
     @FXML
-    private TextField carroMarcaNova;
+    private Button automovelButtonFunc;
 
     @FXML
     private Button clienteButtonFunc;
 
     @FXML
-    private TextField Placa;
-
-    @FXML
-    private Button botaoCadastrarNovoCarro;
-
-    @FXML
-    private Button botaoVoltar;
+    private Button automovelButtonChefe;
 
     @FXML
     private Button botaoSair;
 
     @FXML
-    private TextField carroAnoNovo;
-
-    @FXML
-    private TextField carroQuilometragemNova;
-
-/*=====================================================================================*/
+    private Button pecaButtonChefe;
 
     @FXML
     public void initialize() {
@@ -85,7 +52,7 @@ public class TelaAutomovelController {
 
     @FXML
     public void receberLogin(String login){
-        userLogin.setText(login);
+        loginUser.setText(login);
     }
 
     @FXML
@@ -117,40 +84,6 @@ public class TelaAutomovelController {
         }
     }
 
-    //menu cadastro
-
-    @FXML
-    void cadastrarNovoCarro(ActionEvent event) {
-
-    }
-
-    @FXML
-    void voltarTelaAutomovel(ActionEvent event) {
-
-    }
-
-    //menu funcionario
-
-    @FXML
-    void chamarFuncCliente(ActionEvent event) throws Exception{
-        Telas.telaCliente();
-    }
-
-    @FXML
-    void chamarFuncPeca(ActionEvent event) throws Exception{
-        Telas.telaPecas();
-    }
-
-    @FXML
-    void chamarFuncServ(ActionEvent event) throws Exception{
-        Telas.telaServico();
-    }
-
-    @FXML
-    void chamarFuncAuto(ActionEvent event){
-        
-    }
-
     //menu chefe
 
     @FXML
@@ -164,6 +97,11 @@ public class TelaAutomovelController {
     }
 
     @FXML
+    void chamarChefeAuto(ActionEvent event) throws Exception{
+        Telas.telaAutomovel();
+    }
+
+    @FXML
     void chamarChefeServ(ActionEvent event) throws Exception{
         Telas.telaServico();
     }
@@ -173,15 +111,30 @@ public class TelaAutomovelController {
         Telas.telaOrcamento();
     }
 
+    //menu funcionario
+
     @FXML
-    void chamarChefeAuto(ActionEvent event){
-        
+    void chamarFuncCliente(ActionEvent event) throws Exception{
+        Telas.telaCliente();
     }
 
-    //logout
+    @FXML
+    void chamarFuncAuto(ActionEvent event) throws Exception{
+        Telas.telaAutomovel();
+    }
 
     @FXML
-    void sair(ActionEvent event) throws Exception { //volta para o login
+    void chamarFuncPeca(ActionEvent event) throws Exception{
+        Telas.telaPecas();
+    }
+
+    @FXML
+    void chamarFuncServ(ActionEvent event) throws Exception{
+        Telas.telaServico();
+    }
+
+    @FXML
+    void sair(ActionEvent event) throws Exception{ // sai do programa
         Telas.telaLogin();
     }
 }

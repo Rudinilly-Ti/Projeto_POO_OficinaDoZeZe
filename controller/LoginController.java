@@ -2,6 +2,7 @@ package controller;
 
 import Model.BO.UsuarioBO;
 import Model.VO.ChefeVO;
+import Model.VO.FuncionarioVO;
 import Model.VO.UsuarioVO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -31,6 +32,7 @@ public class LoginController{
 
     UsuarioBO usuBO = new UsuarioBO();
     static String textoLogin;
+    static UsuarioVO usuario;
 
     @FXML
     public void autenticar(ActionEvent event){
@@ -48,11 +50,13 @@ public class LoginController{
             UsuarioVO autenticado = usuBO.autenticar(usuVO);
             if (autenticado instanceof ChefeVO){
                 errorLogin.setVisible(false);
-                Telas.MenuChefe();
+                usuario = new ChefeVO();
+                Telas.mainMenu();
             }
             else{
                 errorLogin.setVisible(false);
-                Telas.MenuFuncionario();
+                usuario = new FuncionarioVO();
+                Telas.mainMenu();
             }
         } catch (Exception e) {
             errorLogin.setText("Usuário e/ou senha inválidos!");
@@ -62,7 +66,7 @@ public class LoginController{
 
     @FXML
     public void cadastrar(ActionEvent event) throws Exception{
-        Telas.TelaCadastro();
+        Telas.telaCadastro();
     }
 
     @FXML
@@ -71,8 +75,22 @@ public class LoginController{
     }
 
     @FXML
+    public UsuarioVO retornarUsuario(){
+        return usuario;
+    }
+
+    @FXML
     public void receberCad(String cad){
         textoLogin = cad;
+    }
+
+    @FXML
+    public void receberUserCad(UsuarioVO vo){
+        if (vo instanceof ChefeVO) {
+            usuario = new ChefeVO();
+        } else {
+            usuario = new FuncionarioVO();   
+        }
     }
 
     @FXML

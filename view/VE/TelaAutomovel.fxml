@@ -51,18 +51,18 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaAutomovelController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="101.0" stroke="BLACK" strokeType="INSIDE" width="1440.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1440.0" />
       <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="45.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@user_12.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="40.0" fitWidth="42.0" layoutX="566.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="40.0" fitWidth="42.0" layoutX="-6.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" x="550.0" y="20.0">
          <image>
             <Image url="@Engrenagens.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="46.0" fitWidth="240.0" layoutX="614.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitWidth="250.0" layoutX="2.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" x="593.0" y="27.0">
          <image>
             <Image url="@LetreiroWithoutShadow.png" />
          </image>
@@ -79,7 +79,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="botaoCliente" layoutY="101.0" mnemonicParsing="false" onAction="#pesquisarCliente" prefHeight="50.0" prefWidth="359.0" text="Clientes">
+      <Button fx:id="clienteButtonFunc" layoutY="100.0" mnemonicParsing="false" onAction="#chamarFuncCliente" prefHeight="50.0" prefWidth="360.0" text="Clientes">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -91,7 +91,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="botaoPecas" layoutX="359.0" layoutY="101.0" mnemonicParsing="false" onAction="#pesquisarPecas" prefHeight="50.0" prefWidth="359.0" text="Peças">
+      <Button fx:id="pecaButtonFunc" layoutX="720.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarFuncPeca" prefHeight="50.0" prefWidth="360.0" text="Peças">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -103,7 +103,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="botaoAutomoveis" layoutX="718.0" layoutY="101.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="365.0" text="Automoveis">
+      <Button fx:id="automovelButtonFunc" layoutX="360.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarFuncAuto" prefHeight="50.0" prefWidth="360.0" text="Automoveis">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -115,7 +115,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="botaoServico" layoutX="1081.0" layoutY="101.0" mnemonicParsing="false" onAction="#PesquisarServicos" prefHeight="50.0" prefWidth="359.0" text="Serviços">
+      <Button fx:id="servicoButtonFunc" layoutX="1080.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarFuncServ" prefHeight="50.0" prefWidth="360.0" text="Serviços">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -127,8 +127,8 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="138.0" layoutX="214.0" layoutY="181.0" stroke="BLACK" strokeType="INSIDE" width="1040.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="447.0" layoutX="214.0" layoutY="339.0" stroke="BLACK" strokeType="INSIDE" width="1040.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="138.0" layoutX="214.0" layoutY="181.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1040.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="447.0" layoutX="214.0" layoutY="339.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1040.0" />
       <Label layoutX="100.0" layoutY="35.0" prefHeight="27.0" prefWidth="33.0" text="Olá,">
          <font>
             <Font size="18.0" />
@@ -250,6 +250,66 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+      </Button>
+      <Button fx:id="clienteButtonChefe" layoutY="100.0" mnemonicParsing="false" onAction="#chamarChefeCliente" prefHeight="50.0" prefWidth="288.0" text="Clientes">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@SeekPng_1.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="pecaButtonChefe" layoutX="576.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarChefePeca" prefHeight="50.0" prefWidth="288.0" text="Peças">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@peca.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="automovelButtonChefe" layoutX="288.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarChefeAuto" prefHeight="50.0" prefWidth="288.0" text="Automoveis">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@auto.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="servicoButtonChefe" layoutX="864.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarChefeServ" prefHeight="50.0" prefWidth="288.0" text="Serviços">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@serv.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="orcamentoButtonChefe" layoutX="1152.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarOrcamento" prefHeight="50.0" prefWidth="288.0" text="Orçamentos">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@orca.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
    </children>
 </Pane>

@@ -14,124 +14,124 @@ import view.Telas;
 public class TelaOrcamentoController {
 
     @FXML
-    private TextField Placa;
-
-    @FXML
-    private Text userLogin;
-
-    @FXML
-    private TextField Placa1;
-
-    @FXML
     private TextField Placa11;
 
     @FXML
-    private Button adicionarOrcamento;
+    private Button finishAttButton;
 
     @FXML
-    private Button botaoSair;
+    private Button servicoButtonChefe;
 
     @FXML
-    private Button botaoAutomoveis;
+    private Button gerarRelatorioButton;
 
     @FXML
-    private Button botaoCliente;
-
-    @FXML
-    private Button botaoPecas;
-
-    @FXML
-    private Button botaoPesquisarCliente;
-
-    @FXML
-    private Button botaoPesquisarDataFinal;
-
-    @FXML
-    private Button botaoPesquisarDataInicial;
-
-    @FXML
-    private Button botaoPesquisarPlaca;
-
-    @FXML
-    private Button botaoServico;
-
-    @FXML
-    private TextField dono;
-        
-    // componentes cadastrar
-    @FXML
-    private Pane cadOrcamento;
-     
-    @FXML
-    private TextField automovelOrca;
-    
-    @FXML
-    private TextField pecaToAdd;
-
-    @FXML
-    private TextField servicoToAdd;
-    
-    @FXML
-    private Button addPecaButton;
-
-    @FXML
-    private Button addServicoButton;
-
-    @FXML
-    private Button finishCadButton;
-    
-    @FXML
-    private Button openCadButton;
-   
-    @FXML
-    private Button closeCadButton;
-
-    //componentes atualizar
-    @FXML
-    private Pane attOrcamento;
-
-    @FXML
-    private Button openAttButton;
-
-    @FXML
-    private TextField automovelOrcaAtt;
-
-    @FXML
-    private TextField pecaToAddAtt;
+    private Button clienteButtonChefe;
 
     @FXML
     private TextField servicoToAddAtt;
 
     @FXML
-    private TextField idOrcamento;
+    private Button automovelButtonChefe;
+
+    @FXML
+    private ScrollPane relatorioPainel;
+
+    @FXML
+    private Button addPecaButton;
+
+    @FXML
+    private TextField Placa1;
+
+    @FXML
+    private AnchorPane painelAncoraRelatorio;
+
+    @FXML
+    private Button pecaButtonChefe;
+
+    @FXML
+    private TextField servicoToAdd;
+
+    @FXML
+    private Button addServicoButton;
 
     @FXML
     private Button closeAttButton;
 
     @FXML
-    private Button finishAttButton;
+    private Button openRelatorioButton;
 
-    //componentes relatorio
     @FXML
-    private ScrollPane relatorioPainel;
+    private Button addPecaAttButton;
+
+    @FXML
+    private Button finishCadButton;
+
+    @FXML
+    private Button closeRelatorioButton;
+
+    @FXML
+    private Pane attOrcamento;
+
+    @FXML
+    private Button botaoPesquisarDataInicial;
+
+    @FXML
+    private TextField pecaToAddAtt;
+
+    @FXML
+    private Button openAttButton;
 
     @FXML
     private DatePicker dataFinal;
 
     @FXML
+    private Button botaoPesquisarCliente;
+
+    @FXML
+    private TextField automovelOrcaAtt;
+
+    @FXML
+    private TextField dono;
+
+    @FXML
+    private Button addServicoAttButton;
+
+    @FXML
+    private Pane cadOrcamento;
+
+    @FXML
+    private TextField automovelOrca;
+
+    @FXML
+    private Button openCadButton;
+
+    @FXML
+    private Text userLogin;
+
+    @FXML
+    private TextField idOrcamento;
+
+    @FXML
+    private Button closeCadButton;
+
+    @FXML
+    private Button botaoPesquisarDataFinal;
+
+    @FXML
+    private TextField Placa;
+
+    @FXML
+    private TextField pecaToAdd;
+
+    @FXML
     private DatePicker dataInicial;
 
     @FXML
-    private AnchorPane painelAncoraRelatorio;
-    
-    @FXML
-    private Button gerarRelatorioButton;
+    private Button botaoSair;
 
     @FXML
-    private Button openRelatorioButton;
-
-    @FXML
-    private Button closeRelatorioButton;
+    private Button botaoPesquisarPlaca;
 
     @FXML
     public void initialize() {
@@ -140,11 +140,12 @@ public class TelaOrcamentoController {
     }
 
     @FXML
-    public void receberLogin(String login){ //Exibe o nome do usuário
+    public void receberLogin(String login){
         userLogin.setText(login);
     }
 
     //metodos cadastrar
+
     @FXML
     void openCad(ActionEvent event) {
         cadOrcamento.setVisible(true);
@@ -174,6 +175,7 @@ public class TelaOrcamentoController {
     }
 
     //metodos atualizar
+
     @FXML
     void openAtt(ActionEvent event) {
         attOrcamento.setVisible(true);
@@ -204,6 +206,7 @@ public class TelaOrcamentoController {
     }
 
     //metodos relatorio
+
     @FXML
     void closeRelatorio(ActionEvent event) {
         dataInicial.setValue(null);
@@ -222,20 +225,6 @@ public class TelaOrcamentoController {
     }
 
     //metodos pesquisar
-    @FXML
-    void PesquisarServicos(ActionEvent event) throws Exception{
-        Telas.TelaServico();
-    }
-
-    @FXML
-    void pesquisarCarros(ActionEvent event) throws Exception{
-        Telas.TelaAutomovel();
-    }
-
-    @FXML
-    void pesquisarCliente(ActionEvent event) throws Exception{
-        Telas.TelaCliente();
-    }
 
     @FXML
     void pesquisarDataFinal(ActionEvent event) {
@@ -248,13 +237,35 @@ public class TelaOrcamentoController {
     }
 
     @FXML
-    void pesquisarPecas(ActionEvent event) throws Exception{
-        Telas.TelaPecas();
+    void pesquisarPlaca(ActionEvent event) {
+
     }
 
     @FXML
-    void pesquisarPlaca(ActionEvent event) {
+    void pesquisarCliente(ActionEvent event) {
 
+    }
+
+    //menu chefe
+
+    @FXML
+    void chamarChefePeca(ActionEvent event) throws Exception{
+        Telas.telaPecas();
+    }
+
+    @FXML
+    void chamarChefeAuto(ActionEvent event) throws Exception{
+        Telas.telaAutomovel();
+    }
+
+    @FXML
+    void chamarChefeServ(ActionEvent event) throws Exception{
+        Telas.telaServico();
+    }
+
+    @FXML
+    void chamarChefeCliente(ActionEvent event) throws Exception{
+        Telas.telaCliente();
     }
 
     //sair

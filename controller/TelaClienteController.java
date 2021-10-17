@@ -1,5 +1,7 @@
 package controller;
 
+import Model.VO.ChefeVO;
+import Model.VO.UsuarioVO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,116 +12,181 @@ import view.Telas;
 
 public class TelaClienteController {
   @FXML
-  private TextField enderecoCliente;
+    private Button finishAttButton;
 
-  @FXML
-  private Text userLogin;
+    @FXML
+    private Button cancelAttButton;
 
-  @FXML
-  private Button botaoSair;
+    @FXML
+    private Button servicoButtonChefe;
 
-  @FXML
-  private Button orcamentoButton;
+    @FXML
+    private Button clienteButtonChefe;
 
-  @FXML
-  private Button openCad;
+    @FXML
+    private TextField enderecoClienteAtt;
 
-  @FXML
-  private TextField cpfCliente;
+    @FXML
+    private TextField nomeClienteAtt;
 
-  @FXML
-  private Button cancelButton;
+    @FXML
+    private Button automovelButtonFunc;
 
-  @FXML
-  private TextField sobrenomeCliente;
+    @FXML
+    private Button automovelButtonChefe;
 
-  @FXML
-  private Button finishCadButton;
+    @FXML
+    private Button pecaButtonChefe;
 
-  @FXML
-  private Button servicoButton;
+    @FXML
+    private Button orcamentoButtonChefe;
 
-  @FXML
-  private Button automovelButton;
+    @FXML
+    private TextField cpfClienteAtt;
 
-  @FXML
-  private Pane cadCliente;
+    @FXML
+    private Button cancelButton;
 
-  @FXML
-  private TextField nomeCliente;
+    @FXML
+    private TextField sobrenomeCliente;
 
-  @FXML
-  private Button clienteButton;
+    @FXML
+    private Button finishCadButton;
 
-  @FXML
-  private Button pecaButton;
+    @FXML
+    private TextField idCliente;
 
-  //componentes atualizar
-  @FXML
-  private Pane attCliente;
+    @FXML
+    private TextField sobrenomeClienteAtt;
 
-  @FXML
-  private Button cancelAttButton;
+    @FXML
+    private Button openAttButton;
 
-  @FXML
-  private TextField cpfClienteAtt;
+    @FXML
+    private Pane cadCliente;
 
-  @FXML
-  private TextField idCliente;
+    @FXML
+    private Button clienteButtonFunc;
 
-  @FXML
-  private TextField enderecoClienteAtt;
+    @FXML
+    private TextField enderecoCliente;
 
-  @FXML
-  private Button finishAttButton;
+    @FXML
+    private Button servicoButtonFunc;
 
-  @FXML
-  private TextField nomeClienteAtt;
+    @FXML
+    private Button openCad;
 
-  @FXML
-  private Button openAttButton;
+    @FXML
+    private Text userLogin;
 
-  @FXML
-  private TextField sobrenomeClienteAtt;
+    @FXML
+    private TextField cpfCliente;
+
+    @FXML
+    private Button pecaButtonFunc;
+
+    @FXML
+    private TextField nomeCliente;
+
+    @FXML
+    private Pane attCliente;
+
+    @FXML
+    private Button botaoSair;
 
     @FXML
     public void initialize() {
-      LoginController c = new LoginController();
-      receberLogin(c.retornarLogin());
+        LoginController c = new LoginController();
+        receberLogin(c.retornarLogin());
+        setMenu(c.retornarUsuario());
     }
 
     @FXML
-    public void receberLogin(String login){ //Exibe o nome do usuário
-      userLogin.setText(login);
-    }
-
-    // metodos do menu
-    @FXML
-    void chamarTelaAutomoveis(ActionEvent event) throws Exception{
-      Telas.TelaAutomovel();
+    public void receberLogin(String login){
+        userLogin.setText(login);
     }
 
     @FXML
-    void chamarTelaClientes(ActionEvent event) throws Exception{
-      Telas.TelaCliente();
+    public void setMenu(UsuarioVO vo){
+        if (vo instanceof ChefeVO) {
+            //botoes do chefe
+            servicoButtonChefe.setVisible(true);
+            pecaButtonChefe.setVisible(true);
+            clienteButtonChefe.setVisible(true);
+            automovelButtonChefe.setVisible(true);
+            orcamentoButtonChefe.setVisible(true);
+            //botoes do func 
+            servicoButtonFunc.setVisible(false);
+            pecaButtonFunc.setVisible(false);
+            clienteButtonFunc.setVisible(false);
+            automovelButtonFunc.setVisible(false);
+        } else {
+            //botoes do chefe
+            servicoButtonChefe.setVisible(false);
+            pecaButtonChefe.setVisible(false);
+            clienteButtonChefe.setVisible(false);
+            automovelButtonChefe.setVisible(false);
+            orcamentoButtonChefe.setVisible(false);
+            //botoes do func 
+            servicoButtonFunc.setVisible(true);
+            pecaButtonFunc.setVisible(true);
+            clienteButtonFunc.setVisible(true);
+            automovelButtonFunc.setVisible(true);
+        }
+    }
+
+    //menu chefe
+
+    @FXML
+    void chamarChefePeca(ActionEvent event) throws Exception{
+      Telas.telaPecas();
     }
 
     @FXML
-    void chamarTelaOrcamentos(ActionEvent event) throws Exception{
-      Telas.TelaOrcamento();
+    void chamarChefeCliente(ActionEvent event) {
+      
     }
 
     @FXML
-    void chamarTelaPecas(ActionEvent event) throws Exception{
-      Telas.TelaPecas();
+    void chamarChefeAuto(ActionEvent event) throws Exception{
+      Telas.telaAutomovel();
     }
 
     @FXML
-    void chamarTelaServicos(ActionEvent event) throws Exception{
-      Telas.TelaServico();
+    void chamarChefeServ(ActionEvent event) throws Exception{
+      Telas.telaServico();
+    }
+
+    @FXML
+    void chamarOrcamento(ActionEvent event) throws Exception{
+      Telas.telaOrcamento();
+    }
+
+    //menu funcionario
+
+    @FXML
+    void chamarFuncPeca(ActionEvent event) throws Exception{
+        Telas.telaPecas();
+    }
+
+    @FXML
+    void chamarFuncAuto(ActionEvent event) throws Exception{
+        Telas.telaAutomovel();
+    }
+
+    @FXML
+    void chamarFuncServ(ActionEvent event) throws Exception{
+        Telas.telaServico();
+    }
+
+    @FXML
+    void chamarFuncCliente(ActionEvent event) {
+      
     }
 
     //metodos atualizar
+
     @FXML
     void openAtt(ActionEvent event) {
       attCliente.setVisible(true);
@@ -164,6 +231,7 @@ public class TelaClienteController {
     }
 
     //sair
+
     @FXML
     void sair(ActionEvent event) throws Exception {
         Telas.telaLogin();

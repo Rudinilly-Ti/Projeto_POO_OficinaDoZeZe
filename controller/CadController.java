@@ -80,7 +80,8 @@ public class CadController implements Initializable{
                 funcBO.inserir(funcVO);
                 LoginController c = new LoginController();
                 c.receberCad(textoLogin);
-                Telas.MenuFuncionario();
+                c.receberUserCad(funcVO);
+                Telas.mainMenu();
             }
             else{
                 if (cargo.compareTo("Chefe") == 0)  {
@@ -99,7 +100,8 @@ public class CadController implements Initializable{
                     chefeBO.inserir(chefeVO);
                     LoginController c = new LoginController();
                     c.receberCad(textoLogin);
-                    Telas.MenuChefe();
+                    c.receberUserCad(chefeVO);
+                    Telas.mainMenu();
                 }
             }
         } catch (Exception e) {
