@@ -32,6 +32,13 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -42,10 +49,10 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaServicosController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="101.0" stroke="BLACK" strokeType="INSIDE" width="1440.0" />
-      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="22.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="45.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@user_12.png" />
          </image>
@@ -60,14 +67,17 @@
             <Image url="@LetreiroWithoutShadow.png" />
          </image>
       </ImageView>
-      <Button fx:id="botaoSair" layoutX="1350.0" layoutY="40.0" mnemonicParsing="false" onAction="#voltarParaMenu" prefHeight="40.0" prefWidth="56.0">
+      <Button fx:id="botaoSair" layoutX="1365.0" layoutY="30.0" mnemonicParsing="false" onAction="#sair" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
          <graphic>
-            <ImageView fx:id="botaoSair" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@exit%201.png" />
+                  <Image url="@exit%2012.png" />
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="botaoCliente" layoutY="101.0" mnemonicParsing="false" onAction="#pesquisarCliente" prefHeight="50.0" prefWidth="359.0" text="Clientes">
          <graphic>
@@ -77,47 +87,52 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="botaoPecas" layoutX="359.0" layoutY="101.0" mnemonicParsing="false" onAction="#pesquisarPecas" prefHeight="50.0" prefWidth="359.0" text="Peças">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@searching%202.png" />
+                  <Image url="@peca.png" />
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="botaoAutomoveis" layoutX="718.0" layoutY="101.0" mnemonicParsing="false" onAction="#pesquisarCarros" prefHeight="50.0" prefWidth="365.0" text="Automoveis">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@pngegg%201.png" />
+                  <Image url="@auto.png" />
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <Button fx:id="botaoServico" layoutX="1081.0" layoutY="101.0" mnemonicParsing="false" onAction="#PesquisarServicos" prefHeight="50.0" prefWidth="359.0" text="Serviços">
+      <Button fx:id="botaoServico" layoutX="1081.0" layoutY="101.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="359.0" text="Serviços">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@SeekPng%201.png" />
+                  <Image url="@serv.png" />
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="138.0" layoutX="214.0" layoutY="181.0" stroke="BLACK" strokeType="INSIDE" width="1040.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="447.0" layoutX="214.0" layoutY="339.0" stroke="BLACK" strokeType="INSIDE" width="1040.0" />
-      <ImageView fitHeight="36.0" fitWidth="27.0" layoutX="574.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@search%201.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="36.0" fitWidth="27.0" layoutX="1194.0" layoutY="738.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@seta-para-a-direita%20(2)%201.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="nomeDoUsuario" layoutX="85.0" layoutY="43.0" prefHeight="17.0" prefWidth="100.0" />
+      <Label layoutX="100.0" layoutY="35.0" prefHeight="27.0" prefWidth="33.0" text="Olá,">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
       <Label layoutX="291.0" layoutY="235.0" prefHeight="30.0" prefWidth="85.0" text="Nome:">
          <font>
             <Font size="24.0" />
@@ -140,8 +155,6 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="adicionarServico" layoutX="1191.0" layoutY="728.0" mnemonicParsing="false" onAction="#inserirServico" opacity="0.0" prefHeight="48.0" prefWidth="33.0" />
-      <Button fx:id="botaoPesquisarServico" layoutX="578.0" layoutY="241.0" mnemonicParsing="false" onAction="#pesquisarServicosPorNome" opacity="0.0" />
       <Pane fx:id="telaDeCadastro" layoutX="214.0" layoutY="181.0" prefHeight="605.0" prefWidth="1040.0" style="-fx-background-color: ffff;" visible="false">
          <children>
             <Label layoutX="292.0" layoutY="174.0" text="Serviço:">
@@ -160,5 +173,34 @@
             <Button fx:id="voltarParaTelaServico" layoutX="621.0" layoutY="435.0" mnemonicParsing="false" onAction="#voltarTelaServico" prefHeight="24.0" prefWidth="100.0" style="-fx-background-color: d0d0d0;" text="Voltar" textFill="MAROON" />
          </children>
       </Pane>
+      <Text fx:id="userLogin" layoutX="135.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample Text">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button layoutX="559.0" layoutY="234.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@search.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="1150.0" layoutY="738.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="26.0" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@seta-para-a-direita%20(2)%201.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </Pane>

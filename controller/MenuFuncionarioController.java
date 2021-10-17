@@ -37,23 +37,23 @@ public class MenuFuncionarioController {
     }
 
     @FXML
-    void PesquisarServicos(ActionEvent event) { // Direciona para busca de serviços
-
+    void PesquisarServicos(ActionEvent event) throws Exception{ // Direciona para busca de serviços
+        Telas.TelaServico();
     }
 
     @FXML
-    void pesquisarCarros(ActionEvent event) { // Direciona para buscar de automovel
-
+    void pesquisarCarros(ActionEvent event) throws Exception{ // Direciona para buscar de automovel
+        Telas.TelaAutomovel();
     }
 
     @FXML
-    void pesquisarCliente(ActionEvent event) { // Direciona para busca de cliente
-
+    void pesquisarCliente(ActionEvent event) throws Exception{ // Direciona para busca de cliente
+        Telas.TelaCliente();
     }
 
     @FXML
-    void pesquisarPecas(ActionEvent event) { // Direciona para busca de peças
-
+    void pesquisarPecas(ActionEvent event) throws Exception{ // Direciona para busca de peças
+        Telas.TelaPecas();
     }
 
     @FXML

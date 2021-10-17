@@ -32,6 +32,13 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.SubScene?>
 <?import javafx.scene.control.Button?>
@@ -48,10 +55,10 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaOrcamentoController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaOrcamentoController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="101.0" stroke="BLACK" strokeType="INSIDE" width="1440.0" />
-      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="22.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="45.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@user_12.png" />
          </image>
@@ -66,7 +73,7 @@
             <Image url="@LetreiroWithoutShadow.png" />
          </image>
       </ImageView>
-      <Button fx:id="botaoSair" layoutX="1350.0" layoutY="40.0" mnemonicParsing="false" onAction="#voltarParaMenu" prefHeight="40.0" prefWidth="56.0" style="-fx-background-color: transparent;">
+      <Button fx:id="botaoSair" layoutX="1365.0" layoutY="30.0" mnemonicParsing="false" onAction="#sair" prefHeight="40.0" prefWidth="56.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -74,6 +81,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="botaoCliente" layoutY="101.0" mnemonicParsing="false" onAction="#pesquisarCliente" prefHeight="50.0" prefWidth="288.0" text="Clientes">
          <graphic>
@@ -83,6 +93,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="botaoPecas" layoutX="288.0" layoutY="101.0" mnemonicParsing="false" onAction="#pesquisarPecas" prefHeight="50.0" prefWidth="288.0" text="Peças">
          <graphic>
@@ -92,6 +105,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="botaoAutomoveis" layoutX="576.0" layoutY="101.0" mnemonicParsing="false" onAction="#pesquisarCarros" prefHeight="50.0" prefWidth="288.0" text="Automoveis">
          <graphic>
@@ -101,6 +117,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="botaoServico" layoutX="864.0" layoutY="101.0" mnemonicParsing="false" onAction="#PesquisarServicos" prefHeight="50.0" prefWidth="288.0" text="Serviços">
          <graphic>
@@ -110,6 +129,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="138.0" layoutX="214.0" layoutY="181.0" stroke="BLACK" strokeType="INSIDE" width="1040.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="447.0" layoutX="221.0" layoutY="337.0" stroke="BLACK" strokeType="INSIDE" style="fx-background: trasnparent;" width="1034.0" />
@@ -138,7 +160,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="botaoPesquisarDataFinal" layoutX="1127.0" layoutY="253.0" mnemonicParsing="false" onAction="#pesquisarDataFinal" prefHeight="33.0" prefWidth="33.0" style="-fx-background-color: transparent;">
+      <Button fx:id="botaoPesquisarDataFinal" layoutX="1122.0" layoutY="252.0" mnemonicParsing="false" onAction="#pesquisarDataFinal" prefHeight="33.0" prefWidth="33.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="36.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -153,7 +175,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label fx:id="nomeDoUsuario" layoutX="85.0" layoutY="43.0" prefHeight="17.0" prefWidth="100.0" />
+      <Label layoutX="100.0" layoutY="35.0" prefHeight="27.0" prefWidth="33.0" text="Olá,">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
       <Label layoutX="231.0" layoutY="197.0" prefHeight="30.0" prefWidth="218.0" text="Placa automovel:">
          <font>
             <Font size="24.0" />
@@ -182,7 +207,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="botaoServico1" layoutX="1152.0" layoutY="101.0" mnemonicParsing="false" onAction="#PesquisarServicos" prefHeight="50.0" prefWidth="288.0" text="Orçamentos">
+      <Button layoutX="1152.0" layoutY="101.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="288.0" text="Orçamentos">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -190,6 +215,9 @@
                </image>
             </ImageView>
          </graphic>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
       </Button>
       <Label layoutX="754.0" layoutY="197.0" prefHeight="30.0" prefWidth="146.0" text="Data inicial:">
          <font>
@@ -428,5 +456,25 @@
             </AnchorPane>
         </content>
       </ScrollPane>
+      <Text fx:id="userLogin" layoutX="135.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sample Text">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="botaoPesquisarDataInicial" layoutX="1122.0" layoutY="194.0" mnemonicParsing="false" onAction="#pesquisarDataInicial" prefHeight="33.0" prefWidth="33.0" style="-fx-background-color: transparent;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="36.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <image>
+                  <Image url="@search.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </Pane>

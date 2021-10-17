@@ -4,16 +4,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import view.Telas;
 
 public class TelaOrcamentoController {
 
     @FXML
     private TextField Placa;
+
+    @FXML
+    private Text userLogin;
 
     @FXML
     private TextField Placa1;
@@ -43,20 +47,17 @@ public class TelaOrcamentoController {
     private Button botaoPesquisarDataFinal;
 
     @FXML
+    private Button botaoPesquisarDataInicial;
+
+    @FXML
     private Button botaoPesquisarPlaca;
 
     @FXML
     private Button botaoServico;
 
     @FXML
-    private Button botaoServico1;
-
-    @FXML
     private TextField dono;
-    
-    @FXML
-    private Label nomeDoUsuario;
-    
+        
     // componentes cadastrar
     @FXML
     private Pane cadOrcamento;
@@ -131,6 +132,17 @@ public class TelaOrcamentoController {
 
     @FXML
     private Button closeRelatorioButton;
+
+    @FXML
+    public void initialize() {
+        LoginController c = new LoginController();
+        receberLogin(c.retornarLogin());
+    }
+
+    @FXML
+    public void receberLogin(String login){ //Exibe o nome do usuário
+        userLogin.setText(login);
+    }
 
     //metodos cadastrar
     @FXML
@@ -211,18 +223,18 @@ public class TelaOrcamentoController {
 
     //metodos pesquisar
     @FXML
-    void PesquisarServicos(ActionEvent event) {
-
+    void PesquisarServicos(ActionEvent event) throws Exception{
+        Telas.TelaServico();
     }
 
     @FXML
-    void pesquisarCarros(ActionEvent event) {
-
+    void pesquisarCarros(ActionEvent event) throws Exception{
+        Telas.TelaAutomovel();
     }
 
     @FXML
-    void pesquisarCliente(ActionEvent event) {
-
+    void pesquisarCliente(ActionEvent event) throws Exception{
+        Telas.TelaCliente();
     }
 
     @FXML
@@ -231,8 +243,8 @@ public class TelaOrcamentoController {
     }
 
     @FXML
-    void pesquisarPecas(ActionEvent event) {
-
+    void pesquisarPecas(ActionEvent event) throws Exception{
+        Telas.TelaPecas();
     }
 
     @FXML
@@ -240,9 +252,9 @@ public class TelaOrcamentoController {
 
     }
 
+    //sair
     @FXML
-    void voltarParaMenu(ActionEvent event) {
-
+    void sair(ActionEvent event) throws Exception {
+        Telas.telaLogin();
     }
-
 }

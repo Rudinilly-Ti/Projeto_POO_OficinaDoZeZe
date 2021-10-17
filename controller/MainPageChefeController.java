@@ -41,28 +41,28 @@ public class MainPageChefeController{
     }
 
     @FXML
-    void chamarTelaAutomoveis(ActionEvent event) {
-
+    void chamarTelaAutomoveis(ActionEvent event) throws Exception{
+        Telas.TelaAutomovel();
     }
 
     @FXML
-    void chamarTelaClientes(ActionEvent event) {
-
+    void chamarTelaClientes(ActionEvent event) throws Exception {
+        Telas.TelaCliente();
     }
 
     @FXML
-    void chamarTelaOrcamentos(ActionEvent event) {
-
+    void chamarTelaOrcamentos(ActionEvent event) throws Exception {
+        Telas.TelaOrcamento();
     }
 
     @FXML
-    void chamarTelaPecas(ActionEvent event) {
-
+    void chamarTelaPecas(ActionEvent event) throws Exception {
+        Telas.TelaPecas();
     }
 
     @FXML
-    void chamarTelaServicos(ActionEvent event) {
-
+    void chamarTelaServicos(ActionEvent event) throws Exception {
+        Telas.TelaServicoChefe();
     }
     
     @FXML

@@ -3,14 +3,18 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import view.Telas;
 
 public class TelaPecasController {
 
     @FXML
     private TextField Fabricante;
+
+    @FXML
+    private Text userLogin;
 
     @FXML
     private TextField NomePeca;
@@ -44,9 +48,6 @@ public class TelaPecasController {
 
     @FXML
     private Button closeCadButton;
-
-    @FXML
-    private Label nomeDoUsuario;
 
     @FXML
     private Button finishCadButton;
@@ -92,6 +93,17 @@ public class TelaPecasController {
     @FXML
     private TextField idPeca;
 
+    @FXML
+    public void initialize() {
+        LoginController c = new LoginController();
+        receberLogin(c.retornarLogin());
+    }
+
+    @FXML
+    public void receberLogin(String login){ //Exibe o nome do usuário
+        userLogin.setText(login);
+    }
+
     //metodos cadastrar
     @FXML
     void openCad(ActionEvent event) {
@@ -133,18 +145,18 @@ public class TelaPecasController {
 
     //metodos pesquisar
     @FXML
-    void PesquisarServicos(ActionEvent event) {
-
+    void PesquisarServicos(ActionEvent event) throws Exception{
+        Telas.TelaServico();
     }
 
     @FXML
-    void pesquisarCarros(ActionEvent event) {
-
+    void pesquisarCarros(ActionEvent event) throws Exception{
+        Telas.TelaAutomovel();
     }
 
     @FXML
-    void pesquisarCliente(ActionEvent event) {
-
+    void pesquisarCliente(ActionEvent event) throws Exception{
+        Telas.TelaCliente();
     }
 
     @FXML
@@ -158,8 +170,8 @@ public class TelaPecasController {
     }
 
     @FXML
-    void pesquisarPecas(ActionEvent event) {
-
+    void pesquisarPecas(ActionEvent event) throws Exception{
+        Telas.TelaPecas();
     }
 
     @FXML
@@ -167,9 +179,9 @@ public class TelaPecasController {
 
     }
 
+    //sair
     @FXML
-    void voltarParaMenu(ActionEvent event) {
-
+    void sair(ActionEvent event) throws Exception {
+        Telas.telaLogin();
     }
-
 }

@@ -3,10 +3,10 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import view.Telas;
 
 public class TelaServicosController {
     @FXML
@@ -28,13 +28,7 @@ public class TelaServicosController {
     private Button botaoPesquisarServico;
 
     @FXML
-    private ImageView botaoSair;
-
-    @FXML
     private Button botaoServico;
-
-    @FXML
-    private Label nomeDoUsuario;
 
     @FXML
     private Pane telaDeCadastro;
@@ -52,8 +46,20 @@ public class TelaServicosController {
     private Button voltarParaTelaServico;
 
     @FXML
-    void PesquisarServicos(ActionEvent event) { // acontece nada, pois já está na tela servicos
+    private Button botaoSair;
 
+    @FXML
+    private Text userLogin;
+
+    @FXML
+    public void initialize() {
+        LoginController c = new LoginController();
+        receberLogin(c.retornarLogin());
+    }
+
+    @FXML
+    public void receberLogin(String login){ //Exibe o nome do usuário
+        userLogin.setText(login);
     }
 
     @FXML
@@ -62,27 +68,22 @@ public class TelaServicosController {
     }
 
     @FXML
-    void pesquisarCarros(ActionEvent event) { // redireciona para tela automoveis
-
+    void pesquisarCarros(ActionEvent event) throws Exception{ // redireciona para tela automoveis
+        Telas.TelaAutomovel();
     }
 
     @FXML
-    void pesquisarCliente(ActionEvent event) { // redireciona para tela clientes
-
+    void pesquisarCliente(ActionEvent event) throws Exception{ // redireciona para tela clientes
+        Telas.TelaCliente();
     }
 
     @FXML
-    void pesquisarPecas(ActionEvent event) { // redireciona para tela pecas
-
+    void pesquisarPecas(ActionEvent event) throws Exception{ // redireciona para tela pecas
+        Telas.TelaPecas();
     }
 
     @FXML
     void pesquisarServicosPorNome(ActionEvent event) { // lista servicos
-
-    }
-
-    @FXML
-    void voltarParaMenu(ActionEvent event) { // sai
 
     }
 
@@ -94,5 +95,11 @@ public class TelaServicosController {
     @FXML
     void voltarTelaServico(ActionEvent event) { // volta para tela de serviço
 
+    }
+
+    //sair
+    @FXML
+    void sair(ActionEvent event) throws Exception {
+        Telas.telaLogin();
     }
 }

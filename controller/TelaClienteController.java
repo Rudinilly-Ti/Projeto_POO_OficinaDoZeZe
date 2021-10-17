@@ -5,10 +5,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import view.Telas;
 
 public class TelaClienteController {
   @FXML
   private TextField enderecoCliente;
+
+  @FXML
+  private Text userLogin;
+
+  @FXML
+  private Button botaoSair;
 
   @FXML
   private Button orcamentoButton;
@@ -74,30 +82,41 @@ public class TelaClienteController {
   @FXML
   private TextField sobrenomeClienteAtt;
 
+    @FXML
+    public void initialize() {
+      LoginController c = new LoginController();
+      receberLogin(c.retornarLogin());
+    }
+
+    @FXML
+    public void receberLogin(String login){ //Exibe o nome do usuário
+      userLogin.setText(login);
+    }
+
     // metodos do menu
     @FXML
-    void chamarTelaAutomoveis(ActionEvent event) {
-
+    void chamarTelaAutomoveis(ActionEvent event) throws Exception{
+      Telas.TelaAutomovel();
     }
 
     @FXML
-    void chamarTelaClientes(ActionEvent event) {
-
+    void chamarTelaClientes(ActionEvent event) throws Exception{
+      Telas.TelaCliente();
     }
 
     @FXML
-    void chamarTelaOrcamentos(ActionEvent event) {
-
+    void chamarTelaOrcamentos(ActionEvent event) throws Exception{
+      Telas.TelaOrcamento();
     }
 
     @FXML
-    void chamarTelaPecas(ActionEvent event) {
-
+    void chamarTelaPecas(ActionEvent event) throws Exception{
+      Telas.TelaPecas();
     }
 
     @FXML
-    void chamarTelaServicos(ActionEvent event) {
-
+    void chamarTelaServicos(ActionEvent event) throws Exception{
+      Telas.TelaServico();
     }
 
     //metodos atualizar
@@ -142,5 +161,11 @@ public class TelaClienteController {
       System.out.println("Endereco: "+ enderecoCliente.getText());
       System.out.println("CPF: "+ cpfCliente.getText());
       closeCadCliente(event);
+    }
+
+    //sair
+    @FXML
+    void sair(ActionEvent event) throws Exception {
+        Telas.telaLogin();
     }
 }

@@ -2,10 +2,10 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+import view.Telas;
 
 public class TelaAutomovelController {
 
@@ -14,6 +14,9 @@ public class TelaAutomovelController {
 
     @FXML
     private Button adicionarCarro; // botao de inserir novos carros
+
+    @FXML
+    private Button botaoSair; //botao de logout
 
     @FXML
     private Button botaoAutomoveis; // botao, na qual, faz nada, pois já está em buscar carros
@@ -31,16 +34,13 @@ public class TelaAutomovelController {
     private Button botaoPesquisarPlaca; // botão para pesquisar por placa
 
     @FXML
-    private ImageView botaoSair; // botao que volta para o menu principal
-
-    @FXML
     private Button botaoServico; // botao que vai para tela de buscar Serviços
 
     @FXML
     private TextField dono; // Barra de texto, para pesquisar por cliente
 
     @FXML
-    private Label nomeDoUsuario; // label, na qual irá aparecer o nome do usuário
+    private Text userLogin; //Text que exibe o login do usuário
 
     @FXML
     private Button botaoCadastrarNovoCarro;
@@ -69,8 +69,19 @@ public class TelaAutomovelController {
 /*=====================================================================================*/
 
     @FXML
+    public void initialize() {
+        LoginController c = new LoginController();
+        receberLogin(c.retornarLogin());
+    }
+
+    @FXML
+    public void receberLogin(String login){ //Exibe o nome do usuário
+        userLogin.setText(login);
+    }
+
+    @FXML
     void PesquisarServicos(ActionEvent event) throws Exception { // encaminha para TelaServiços
-        //Telas.TelaServico();
+        Telas.TelaServico();
     }
 
     @FXML
@@ -79,13 +90,8 @@ public class TelaAutomovelController {
     }
 
     @FXML
-    void pesquisarCarros(ActionEvent event) throws Exception { // não faz nada, retorna mensagem -> "vocẽ já está na aba de carros"
-        //Telas.TelaAutomovel();
-    }
-
-    @FXML
     void pesquisarCliente(ActionEvent event) throws Exception { // encaminha para TelaCliente
-        //Telas.TelaCliente();
+        Telas.TelaCliente();
     }
 
     @FXML
@@ -94,18 +100,13 @@ public class TelaAutomovelController {
     }
 
     @FXML
-    void pesquisarPecas(ActionEvent event) { // encaminha para TelaPecas
-
+    void pesquisarPecas(ActionEvent event) throws Exception{ // encaminha para TelaPecas
+        Telas.TelaPecas();
     }
 
     @FXML
     void pesquisarPlaca(ActionEvent event) { // pesquisa no BD por placa
 
-    }
-
-    @FXML
-    void voltarParaMenu(ActionEvent event) throws Exception { // encaminha para TelaMenu
-        //Telas.menu();
     }
 
     @FXML
@@ -116,5 +117,10 @@ public class TelaAutomovelController {
     @FXML
     void voltarTelaAutomovel(ActionEvent event) { // volta para tela de automovel
 
+    }
+
+    @FXML
+    void sair(ActionEvent event) throws Exception { //volta para o login
+        Telas.telaLogin();
     }
 }
