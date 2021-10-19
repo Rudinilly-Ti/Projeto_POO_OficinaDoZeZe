@@ -45,6 +45,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -271,6 +272,33 @@
                      </cursor>
                   </Button>
                   <TextField fx:id="idCliente" disable="true" layoutX="703.0" layoutY="366.0" visible="false" />
+               </children>
+            </Pane>
+            <Pane fx:id="deletarItem" layoutX="378.0" layoutY="101.0" prefHeight="110.0" prefWidth="261.0" visible="false">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="110.0" stroke="BLACK" strokeType="INSIDE" width="261.0" />
+                  <Label layoutX="11.0" layoutY="15.0" prefHeight="35.0" prefWidth="240.0" text="Deseja realmente deletar este item?">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="confirmarDeletarButton" layoutX="27.0" layoutY="71.0" mnemonicParsing="false" onAction="#confirmarDeletar" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #800;" text="Sim" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="cancelarDeletarButton" layoutX="146.0" layoutY="71.0" mnemonicParsing="false" onAction="#cancelarDeletar" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #a4a4a4;" text="Não" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <TextField fx:id="idItemDeletar" layoutX="110.0" layoutY="43.0" prefHeight="14.0" prefWidth="40.0" visible="false" />
                </children>
             </Pane>
          </children>
