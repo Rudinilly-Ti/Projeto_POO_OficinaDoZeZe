@@ -133,8 +133,17 @@ public class ClienteBO implements BaseInterBO<ClienteVO>{
 
   //Alteração
     public void editarCPF(ClienteVO vo) throws UpgradeException{
+        ResultSet rs = dao.findByCPF(vo);
     	try {
-    		dao.editarCPF(vo);
+            if(rs.next()){
+                if(rs.getLong("id") == vo.getId()){
+                    dao.editarCPF(vo);
+                } else{
+                    throw new UpgradeException("CPF já cadastrado");
+                }
+            }else{
+                dao.editarCPF(vo);
+            }
         } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
