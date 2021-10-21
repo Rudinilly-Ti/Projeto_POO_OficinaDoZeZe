@@ -32,15 +32,11 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -48,8 +44,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaAutomovelController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaAutomovelController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1440.0" />
       <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="45.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
@@ -144,24 +141,9 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="dono" layoutX="899.0" layoutY="237.0" prefHeight="27.0" prefWidth="177.0" style="-fx-background-color: #c4c4c4;" />
-      <Line endX="550.0" layoutX="511.0" layoutY="401.0" startX="-152.0" />
-      <Label layoutX="414.0" layoutY="371.0" text="Marca">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="687.0" layoutY="371.0" text="Ano">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="938.0" layoutY="371.0" text="Dono">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="966.0" layoutY="734.0" text="Adicionar automóvel">
+      <TextField fx:id="Dono" layoutX="899.0" layoutY="237.0" prefHeight="27.0" prefWidth="177.0" style="-fx-background-color: #c4c4c4;" />
+      <Line endX="584.7332763671875" endY="3.0517578125E-5" layoutX="511.0" layoutY="401.0" startX="-152.0" />
+      <Label layoutX="360.0" layoutY="367.0" text="Listagem de automoveis">
          <font>
             <Font size="24.0" />
          </font>
@@ -171,51 +153,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Pane fx:id="telaDeCadastro" layoutX="214.0" layoutY="180.0" prefHeight="607.0" prefWidth="1040.0" style="-fx-background-color: ffff;" visible="false">
-         <children>
-            <Label layoutX="135.0" layoutY="149.0" text="Marca:">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="135.0" layoutY="240.0" text="Cor:">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="131.0" layoutY="337.0" text="Quilometragem:">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="534.0" layoutY="149.0" text="Placa:">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="543.0" layoutY="240.0" text="Ano:">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <TextField fx:id="carroMarcaNova" layoutX="225.0" layoutY="152.0" prefHeight="24.0" prefWidth="227.0" style="-fx-background-color: d0d0d0;" />
-            <TextField fx:id="carroCorNova" layoutX="192.0" layoutY="243.0" prefHeight="24.0" prefWidth="261.0" style="-fx-background-color: d0d0d0;" />
-            <TextField fx:id="carroQuilometragemNova" layoutX="327.0" layoutY="340.0" prefHeight="24.0" prefWidth="126.0" style="-fx-background-color: d0d0d0;" />
-            <TextField fx:id="carroPlacaNova" layoutX="616.0" layoutY="152.0" prefHeight="24.0" prefWidth="227.0" style="-fx-background-color: d0d0d0;" />
-            <TextField fx:id="carroAnoNovo" layoutX="606.0" layoutY="243.0" prefHeight="24.0" prefWidth="240.0" style="-fx-background-color: d0d0d0;" />
-            <Button fx:id="botaoCadastrarNovoCarro" layoutX="298.0" layoutY="456.0" mnemonicParsing="false" onAction="#cadastrarNovoCarro" prefHeight="33.0" prefWidth="155.0" style="-fx-background-color: #800000;" text="Cadastrar" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-            <Button fx:id="botaoVoltar" layoutX="597.0" layoutY="456.0" mnemonicParsing="false" onAction="#voltarTelaAutomovel" prefHeight="24.0" prefWidth="120.0" style="-fx-background-color: d0d0d0;" text="Voltar" textFill="MAROON">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
-         </children>
-      </Pane>
-      <Button layoutX="1186.0" layoutY="734.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="27.0" style="-fx-background-color: transparent;">
+      <Button fx:id="openTelaCadastroButton" contentDisplay="RIGHT" layoutX="914.0" layoutY="738.0" mnemonicParsing="false" onAction="#openTelaCadastro" prefHeight="43.0" prefWidth="270.0" style="-fx-background-color: transparent;" text="Adicionar automóvel">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -226,8 +164,24 @@
                </image>
             </ImageView>
          </graphic>
+         <font>
+            <Font size="20.0" />
+         </font>
       </Button>
-      <Button layoutX="559.0" layoutY="233.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+      <TableView fx:id="tableAutomoveis" layoutX="359.0" layoutY="419.0" prefHeight="319.0" prefWidth="741.0">
+        <columns>
+          <TableColumn fx:id="marcaCol" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="Marca" />
+          <TableColumn fx:id="anoCol" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" text="Ano" />
+            <TableColumn fx:id="placaCol" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Placa" />
+            <TableColumn fx:id="donoCol" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" resizable="false" text="Dono" />
+            <TableColumn fx:id="attCol" prefWidth="75.0" text="Atualizar" />
+            <TableColumn fx:id="delCol" prefWidth="75.0" text="Deletar" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Button fx:id="pesquisarPlacaButton" layoutX="559.0" layoutY="233.0" mnemonicParsing="false" onAction="#pesquisarPlaca" style="-fx-background-color: transparent;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -239,7 +193,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="1076.0" layoutY="230.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
+      <Button fx:id="pesquisarDonoButton" layoutX="1076.0" layoutY="230.0" mnemonicParsing="false" onAction="#pesquisarDono" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -299,6 +253,62 @@
             </ImageView>
          </graphic>
       </Button>
+      <Pane fx:id="telaDeCadastro" layoutX="214.0" layoutY="180.0" prefHeight="607.0" prefWidth="1040.0" style="-fx-background-color: ffff;" visible="false">
+         <children>
+            <Label layoutX="106.0" layoutY="104.0" text="Marca:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="106.0" layoutY="228.0" text="Cor:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="106.0" layoutY="335.0" text="Quilometragem:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="537.0" layoutY="104.0" text="Placa:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="542.0" layoutY="228.0" text="Ano:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="carroMarcaNova" layoutX="197.0" layoutY="109.0" prefHeight="25.0" prefWidth="250.0" style="-fx-background-color: d0d0d0;" />
+            <TextField fx:id="carroCorNova" layoutX="202.0" layoutY="233.0" prefHeight="25.0" prefWidth="240.0" style="-fx-background-color: d0d0d0;" />
+            <TextField fx:id="carroQuilometragemNova" layoutX="298.0" layoutY="340.0" prefHeight="24.0" prefWidth="126.0" style="-fx-background-color: d0d0d0;" />
+            <TextField fx:id="carroPlacaNova" layoutX="613.0" layoutY="109.0" prefHeight="24.0" prefWidth="227.0" style="-fx-background-color: d0d0d0;" />
+            <TextField fx:id="carroAnoNovo" layoutX="613.0" layoutY="233.0" prefHeight="25.0" prefWidth="227.0" style="-fx-background-color: d0d0d0;" />
+            <Button fx:id="botaoCadastrarNovoCarro" layoutX="298.0" layoutY="456.0" mnemonicParsing="false" onAction="#cadastrarNovoCarro" prefHeight="33.0" prefWidth="155.0" style="-fx-background-color: #800000;" text="Cadastrar" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="botaoVoltar" layoutX="597.0" layoutY="456.0" mnemonicParsing="false" onAction="#voltarTelaAutomovel" prefHeight="24.0" prefWidth="120.0" style="-fx-background-color: d0d0d0;" text="Voltar" textFill="MAROON">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <TextField fx:id="carroDonoNovo" layoutX="613.0" layoutY="341.0" prefHeight="25.0" prefWidth="227.0" style="-fx-background-color: d4d4d4;" />
+            <Label layoutX="534.0" layoutY="336.0" text="Dono:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
       <Button fx:id="orcamentoButtonChefe" layoutX="1152.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarOrcamento" prefHeight="50.0" prefWidth="288.0" text="Orçamentos">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -311,5 +321,83 @@
             </ImageView>
          </graphic>
       </Button>
+      <Pane fx:id="telaAtt" layoutX="214.0" layoutY="176.0" prefHeight="607.0" prefWidth="1040.0" style="-fx-background-color: ffff;" visible="false">
+         <children>
+            <Label layoutX="108.0" layoutY="100.0" text="Marca:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="111.0" layoutY="238.0" text="Cor:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="117.0" layoutY="335.0" text="Quilometragem:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="539.0" layoutY="99.0" text="Placa:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="543.0" layoutY="240.0" text="Ano:">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="carroMarcaAtt" layoutX="197.0" layoutY="109.0" prefHeight="25.0" prefWidth="250.0" style="-fx-background-color: d0d0d0;" />
+            <TextField fx:id="carroCorAtt" layoutX="204.0" layoutY="244.0" prefHeight="25.0" prefWidth="254.0" style="-fx-background-color: d0d0d0;" />
+            <TextField fx:id="carroQuilometragemAtt" layoutX="324.0" layoutY="339.0" prefHeight="25.0" prefWidth="140.0" style="-fx-background-color: d0d0d0;" />
+            <TextField fx:id="carroPlacaAtt" layoutX="613.0" layoutY="106.0" prefHeight="25.0" prefWidth="187.0" style="-fx-background-color: d0d0d0;" />
+            <TextField fx:id="carroAnoAtt" layoutX="618.0" layoutY="245.0" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: d0d0d0;" />
+            <Button fx:id="finishAttButton" layoutX="284.0" layoutY="475.0" mnemonicParsing="false" onAction="#finishAtt" prefHeight="33.0" prefWidth="155.0" style="-fx-background-color: #800000;" text="Atualizar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="closeAttButton" layoutX="597.0" layoutY="475.0" mnemonicParsing="false" onAction="#closeAtt" prefHeight="40.0" prefWidth="142.0" style="-fx-background-color: d0d0d0;" text="Voltar" textFill="MAROON">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <TextField fx:id="idAutomovelAtt" editable="false" layoutX="622.0" layoutY="340.0" prefHeight="25.0" prefWidth="53.0" visible="false" />
+         </children>
+      </Pane>
+      <Pane fx:id="deletarItem" layoutX="599.0" layoutY="364.0" prefHeight="110.0" prefWidth="261.0" visible="false">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="110.0" stroke="BLACK" strokeType="INSIDE" width="261.0" />
+            <Label layoutX="11.0" layoutY="15.0" prefHeight="35.0" prefWidth="240.0" text="Deseja realmente deletar este item?">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Button fx:id="confirmarDeletarButton" layoutX="27.0" layoutY="71.0" mnemonicParsing="false" onAction="#confirmarDeletar" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #800;" text="Sim" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="cancelarDeletarButton" layoutX="146.0" layoutY="71.0" mnemonicParsing="false" onAction="#cancelarDeletar" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #a4a4a4;" text="Não" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <TextField fx:id="idItemDeletar" layoutX="110.0" layoutY="43.0" prefHeight="14.0" prefWidth="40.0" visible="false" />
+         </children>
+      </Pane>
    </children>
 </Pane>

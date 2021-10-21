@@ -269,7 +269,6 @@ public class TelaClienteController implements Initializable{
       tableClientes.setItems(FXCollections.observableArrayList(
         new ClienteBO().listar()
       ));
-      tableClientes.refresh();
       closeAtt(event);
     }
     //metodos cadastrar
@@ -297,7 +296,6 @@ public class TelaClienteController implements Initializable{
       tableClientes.setItems(FXCollections.observableArrayList(
         new ClienteBO().listar()
       ));
-      tableClientes.refresh();
       closeCadCliente(event);
     }
 

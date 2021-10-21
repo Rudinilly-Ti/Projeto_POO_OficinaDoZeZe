@@ -42,6 +42,11 @@ public class AutomovelBO implements BaseInterBO<AutomovelVO>{
                     vo2.setID(rs.getLong("id"));
                     vo2.setAno(rs.getInt("ano"));
                     vo2.getCliente().setId(rs.getLong("id_cliente"));
+                    ClienteBO bocliente = new ClienteBO();
+                    List<ClienteVO> cliente = bocliente.buscarPorId(vo2.getCliente());
+                    vo2.getCliente().setNome(cliente.get(0).getNome());
+                    vo2.getCliente().setEndereco(cliente.get(0).getEndereco());
+                    vo2.getCliente().setCPF(cliente.get(0).getCPF());
                     vo2.setCor(rs.getString("cor"));
                     vo2.setMarca(rs.getString("marca"));
                     vo2.setPlaca(rs.getString("placa"));
@@ -69,6 +74,11 @@ public class AutomovelBO implements BaseInterBO<AutomovelVO>{
                     vo2.setID(rs.getLong("id"));
                     vo2.setAno(rs.getInt("ano"));
                     vo2.getCliente().setId(rs.getLong("id_cliente"));
+                    ClienteBO bocliente = new ClienteBO();
+                    List<ClienteVO> cliente = bocliente.buscarPorId(vo2.getCliente());
+                    vo2.getCliente().setNome(cliente.get(0).getNome());
+                    vo2.getCliente().setEndereco(cliente.get(0).getEndereco());
+                    vo2.getCliente().setCPF(cliente.get(0).getCPF());
                     vo2.setCor(rs.getString("cor"));
                     vo2.setMarca(rs.getString("marca"));
                     vo2.setPlaca(rs.getString("placa"));
@@ -91,6 +101,11 @@ public class AutomovelBO implements BaseInterBO<AutomovelVO>{
                 vo2.setID(rs.getLong("id"));
                 vo2.setAno(rs.getInt("ano"));
                 vo2.getCliente().setId(rs.getLong("id_cliente"));
+                ClienteBO bocliente = new ClienteBO();
+                List<ClienteVO> cliente = bocliente.buscarPorId(vo2.getCliente());
+                vo2.getCliente().setNome(cliente.get(0).getNome());
+                vo2.getCliente().setEndereco(cliente.get(0).getEndereco());
+                vo2.getCliente().setCPF(cliente.get(0).getCPF());
                 vo2.setCor(rs.getString("cor"));
                 vo2.setMarca(rs.getString("marca"));
                 vo2.setPlaca(rs.getString("placa"));
@@ -120,6 +135,11 @@ public class AutomovelBO implements BaseInterBO<AutomovelVO>{
                     vo2.setID(rs.getLong("id"));
                     vo2.setAno(rs.getInt("ano"));
                     vo2.getCliente().setId(rs.getLong("id_cliente"));
+                    ClienteBO bocliente = new ClienteBO();
+                    List<ClienteVO> cliente = bocliente.buscarPorId(vo2.getCliente());
+                    vo2.getCliente().setNome(cliente.get(0).getNome());
+                    vo2.getCliente().setEndereco(cliente.get(0).getEndereco());
+                    vo2.getCliente().setCPF(cliente.get(0).getCPF());
                     vo2.setCor(rs.getString("cor"));
                     vo2.setMarca(rs.getString("marca"));
                     vo2.setPlaca(rs.getString("placa"));
@@ -145,7 +165,16 @@ public class AutomovelBO implements BaseInterBO<AutomovelVO>{
     //Alteração
     public void editarPlaca(AutomovelVO vo) throws UpgradeException{
         try {
-            dao.editarPlaca(vo);
+            ResultSet rs = dao.findByPlaca(vo);
+            if (rs.next()) {
+                if(rs.getString("placa") == vo.getPlaca()){
+                    dao.editarPlaca(vo);        
+                }else {
+                    throw new InsertException("Impossível editar, pois já existe automóvel com essa placa.\n");
+                }
+            }else{
+                dao.editarPlaca(vo);    
+            }
         } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
