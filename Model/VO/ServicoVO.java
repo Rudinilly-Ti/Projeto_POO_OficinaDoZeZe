@@ -18,6 +18,23 @@ public class ServicoVO {
     public ServicoVO(){
     
     }
+    
+    // função que converte String em double
+    
+    public double fromStringToDouble(String str) {
+    	double dbl;
+    	str.replaceAll(",", ".");
+    	dbl = Double.parseDouble(str);
+    	return dbl;
+    }
+    
+    // função que converte double em String
+    
+    public String fromDoubleToString(double dbl) {
+    	String str;
+    	str = Double.toString(dbl);
+    	return str;
+    }
 
     // set's e get's da classe
     public String getNome(){
