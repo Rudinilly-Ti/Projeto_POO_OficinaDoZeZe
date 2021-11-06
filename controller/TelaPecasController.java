@@ -51,9 +51,6 @@ public class TelaPecasController implements Initializable {
     private Button botaoPesqNome;
 
     @FXML
-    private Button botaoPesqPlaca;
-
-    @FXML
     private Button botaoSair;
 
     @FXML
@@ -302,19 +299,43 @@ public class TelaPecasController implements Initializable {
     //metodos pesquisar
     
     @FXML
-    void pesquisarFabricante(ActionEvent event) {
+    void pesquisarFabricante(ActionEvent event) throws Exception{
+    	PecaVO vo = new PecaVO();
+    	PecaBO bo = new PecaBO();
+    	String fabricante = Fabricante.getText();
+    	
+    	if(fabricante.isBlank() || fabricante == null) {
+            tablePecas.setItems(FXCollections.observableArrayList(
+                bo.listar()
+            ));
+           
+        } else {
+            vo.setFabricante(fabricante);
 
+            tablePecas.setItems(FXCollections.observableArrayList(
+                bo.buscarPorFabricante(vo)
+            ));
+        }
     }
 
     @FXML
-    void pesquisarNome(ActionEvent event) {
+    void pesquisarNome(ActionEvent event) throws Exception {
+    	PecaVO vo = new PecaVO();
+    	PecaBO bo = new PecaBO();
+    	String nome = NomePeca.getText();
+    	
+    	if(nome.isBlank() || nome == null) {
+            tablePecas.setItems(FXCollections.observableArrayList(
+                bo.listar()
+            ));
+           
+        } else {
+            vo.setNome(nome);
 
-    }
-
-
-    @FXML
-    void pesquisarPlaca(ActionEvent event) {
-
+            tablePecas.setItems(FXCollections.observableArrayList(
+                bo.buscarPorNome(vo)
+            ));
+        }
     }
 
     //menu chefe
