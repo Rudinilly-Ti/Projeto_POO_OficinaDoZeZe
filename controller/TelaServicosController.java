@@ -129,6 +129,7 @@ public class TelaServicosController implements Initializable {
     @FXML
     private TableColumn<ServicoVO, Double> colunaValor;
     
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	colunaNome.setCellValueFactory(new PropertyValueFactory<ServicoVO, String>("nome"));
@@ -298,8 +299,20 @@ public class TelaServicosController implements Initializable {
     void pesquisarServicosPorNome(ActionEvent event) throws Exception { // lista servicos
     	ServicoVO vo = new ServicoVO();
     	ServicoBO bo = new ServicoBO();
-    	vo.setNome(NomeServico.getText());
-    	bo.buscarPorNome(vo);
+    	String nome = NomeServico.getText();
+    	
+    	if(nome.isBlank() || nome == null) {
+            TableViewServico.setItems(FXCollections.observableArrayList(
+                bo.listar()
+            ));
+           
+        } else {
+            vo.setNome(nome);
+
+            TableViewServico.setItems(FXCollections.observableArrayList(
+                bo.buscarPorNome(vo)
+            ));
+        }
     }
 
     @FXML
