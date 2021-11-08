@@ -167,7 +167,12 @@ public class TelaPecasController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    	col_nome.setCellValueFactory(new PropertyValueFactory<PecaVO, String>("nome"));
+    	
+        LoginController c = new LoginController();
+        receberLogin(c.retornarLogin());
+        setMenu(c.retornarUsuario());
+        
+        col_nome.setCellValueFactory(new PropertyValueFactory<PecaVO, String>("nome"));
     	col_preco.setCellValueFactory(new PropertyValueFactory<PecaVO, Double>("preco"));
     	col_fabricante.setCellValueFactory(new PropertyValueFactory<PecaVO, String>("fabricante"));
     	
@@ -197,12 +202,12 @@ public class TelaPecasController implements Initializable {
     	return pecas;
     }
 
-    @FXML
-    public void initialize() {
-        LoginController c = new LoginController();
-        receberLogin(c.retornarLogin());
-        setMenu(c.retornarUsuario());
-    }
+    // @FXML
+    // public void initialize() {
+    //     LoginController c = new LoginController();
+    //     receberLogin(c.retornarLogin());
+    //     setMenu(c.retornarUsuario());
+    // }
 
     @FXML
     public void receberLogin(String login){

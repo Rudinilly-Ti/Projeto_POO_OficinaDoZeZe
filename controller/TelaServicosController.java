@@ -132,7 +132,12 @@ public class TelaServicosController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    	colunaNome.setCellValueFactory(new PropertyValueFactory<ServicoVO, String>("nome"));
+    	
+        LoginController c = new LoginController();
+        receberLogin(c.retornarLogin());
+        setMenu(c.retornarUsuario());
+        
+        colunaNome.setCellValueFactory(new PropertyValueFactory<ServicoVO, String>("nome"));
     	colunaValor.setCellValueFactory(new PropertyValueFactory<ServicoVO, Double>("preco"));
     	//colunaAtualizar.set
     	
@@ -187,12 +192,12 @@ public class TelaServicosController implements Initializable {
     	Telas.telaServico();
     }
 
-    @FXML
-    public void initialize() {
-        LoginController c = new LoginController();
-        receberLogin(c.retornarLogin());
-        setMenu(c.retornarUsuario());
-    }
+    // @FXML
+    // public void initialize() {
+    //     LoginController c = new LoginController();
+    //     receberLogin(c.retornarLogin());
+    //     setMenu(c.retornarUsuario());
+    // }
 
     @FXML
     public void receberLogin(String login){

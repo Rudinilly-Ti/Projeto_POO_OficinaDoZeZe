@@ -135,12 +135,12 @@ public class TelaClienteController implements Initializable{
     @FXML
     private Button botaoSair;
 
-    @FXML
-    public void initialize() {
-        LoginController c = new LoginController();
-        receberLogin(c.retornarLogin());
-        setMenu(c.retornarUsuario());
-    }
+    // @FXML
+    // public void initialize() {
+    //     LoginController c = new LoginController();
+    //     receberLogin(c.retornarLogin());
+    //     setMenu(c.retornarUsuario());
+    // }
 
     @FXML
     public void receberLogin(String login){
@@ -310,6 +310,11 @@ public class TelaClienteController implements Initializable{
     //METODOS INICIALIZAR LISTAGEM
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+      
+      LoginController c = new LoginController();
+      receberLogin(c.retornarLogin());
+      setMenu(c.retornarUsuario());
+      
       nomeCol.setCellValueFactory(
         new PropertyValueFactory<>("nome"));
       enderecoCol.setCellValueFactory(

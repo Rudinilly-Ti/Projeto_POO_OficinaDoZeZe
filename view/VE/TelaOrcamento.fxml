@@ -133,7 +133,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="138.0" layoutX="214.0" layoutY="181.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1040.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="138.0" layoutX="220.0" layoutY="181.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1034.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="447.0" layoutX="221.0" layoutY="337.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="fx-background: trasnparent;" width="1034.0" />
       <Button fx:id="botaoPesquisarPlaca" focusTraversable="false" layoutX="679.0" layoutY="200.0" mnemonicParsing="false" onAction="#pesquisarPlaca" style="-fx-background-color: transparent;">
          <graphic>
@@ -160,21 +160,6 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="botaoPesquisarDataFinal" layoutX="1122.0" layoutY="252.0" mnemonicParsing="false" onAction="#pesquisarDataFinal" prefHeight="33.0" prefWidth="33.0" style="-fx-background-color: transparent;">
-         <graphic>
-            <ImageView fitHeight="36.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@search.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-         </graphic>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
       <Label layoutX="100.0" layoutY="35.0" prefHeight="27.0" prefWidth="33.0" text="Olá,">
          <font>
             <Font size="18.0" />
@@ -192,17 +177,7 @@
       </Label>
       <TextField fx:id="dono" layoutX="331.0" layoutY="255.0" prefHeight="27.0" prefWidth="340.0" style="-fx-background-color: #c4c4c4;" />
       <Line endX="550.0" layoutX="511.0" layoutY="401.0" startX="-152.0" />
-      <Label layoutX="375.0" layoutY="371.0" text="Veiculo">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="659.0" layoutY="371.0" text="Cliente">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Label layoutX="938.0" layoutY="371.0" text="Periodo">
+      <Label layoutX="359.0" layoutY="367.0" text="Listagem de orçamentos">
          <font>
             <Font size="24.0" />
          </font>
@@ -219,38 +194,27 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label layoutX="754.0" layoutY="197.0" prefHeight="30.0" prefWidth="146.0" text="Data inicial:">
+      <Label layoutX="835.0" layoutY="194.0" prefHeight="30.0" prefWidth="146.0" text="Data inicial:">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="Placa1" layoutX="899.0" layoutY="199.0" prefHeight="27.0" prefWidth="224.0" style="-fx-background-color: #c4c4c4;" />
-      <Label layoutX="754.0" layoutY="255.0" prefHeight="30.0" prefWidth="128.0" text="Data final:">
+      <Label layoutX="835.0" layoutY="232.0" prefHeight="30.0" prefWidth="128.0" text="Data final:">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="Placa11" layoutX="882.0" layoutY="257.0" prefHeight="27.0" prefWidth="240.0" style="-fx-background-color: #c4c4c4;" />
-      <Line endX="586.0" layoutX="511.0" layoutY="704.0" startX="-112.0" />
-      <Label layoutX="444.0" layoutY="715.0" text=": Serviço concluido" />
-      <Label layoutX="629.0" layoutY="715.0" text=": Pagamento efetuado" />
-      <Label layoutX="848.0" layoutY="715.0" text=": finalizar serviço/registrar pagamento" />
-      <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="405.0" layoutY="710.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@checked%201.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="595.0" layoutY="710.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@valid%201.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="814.0" layoutY="710.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@edit%201.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="openCadButton" contentDisplay="RIGHT" layoutX="883.0" layoutY="640.0" maxHeight="40.0" maxWidth="240.0" mnemonicParsing="false" onAction="#openCad" prefHeight="40.0" prefWidth="240.0" style="-fx-background-color: #fafafa;" text="Adicionar Orçamento">
+      <TableView fx:id="tableOrcamento" layoutX="356.0" layoutY="419.0" prefHeight="268.0" prefWidth="703.0">
+        <columns>
+          <TableColumn fx:id="placaCol" prefWidth="120.0" text="Placa do veiculo" />
+          <TableColumn fx:id="clienteCol" prefWidth="200.0" text="Cliente" />
+            <TableColumn fx:id="dataIniCol" prefWidth="100.0" text="Data inicial" />
+            <TableColumn fx:id="dataFimCol" prefWidth="100.0" text="Data final" />
+            <TableColumn fx:id="attCol" text="Atualizar" />
+            <TableColumn fx:id="delCol" text="Deletar" />
+        </columns>
+      </TableView>
+      <Button fx:id="openCadButton" contentDisplay="RIGHT" layoutX="914.0" layoutY="738.0" maxHeight="40.0" maxWidth="240.0" mnemonicParsing="false" onAction="#openCad" prefHeight="40.0" prefWidth="240.0" style="-fx-background-color: #fafafa;" text="Adicionar Orçamento">
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -265,21 +229,34 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="openAttButton" layoutX="1072.0" layoutY="437.0" mnemonicParsing="false" onAction="#openAtt" prefHeight="23.0" prefWidth="32.0" style="-fx-background-color: transaparent;">
-         <graphic>
-            <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@botao-editar%201.png" />
-               </image>
-            </ImageView>
-         </graphic>
+      <Button fx:id="openRelatorioButton" layoutX="1265.0" layoutY="181.0" mnemonicParsing="false" onAction="#openRelatorio" prefHeight="53.0" prefWidth="131.0" style="-fx-background-color: #800;" text="Gerar Relatorio" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Pane fx:id="cadOrcamento" layoutX="215.0" layoutY="183.0" prefHeight="600.0" prefWidth="1039.0" visible="false">
+      <Button fx:id="botaoPesquisarPeriodo" layoutX="1150.0" layoutY="230.0" mnemonicParsing="false" onAction="#pesquisarPeriodo" prefHeight="33.0" prefWidth="33.0" style="-fx-background-color: transparent;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="36.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <image>
+                  <Image url="@search.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <DatePicker fx:id="dataFim" layoutX="970.0" layoutY="240.0" />
+      <DatePicker fx:id="dataIni" layoutX="970.0" layoutY="200.0" />
+      <Pane fx:id="attOrcamento" layoutX="212.0" layoutY="181.0" prefHeight="606.0" prefWidth="1044.0" visible="false">
          <children>
-            <SubScene height="606.0" layoutX="-3.0" layoutY="-3.0" width="1043.0">
+            <SubScene height="610.0" width="1045.0">
               <root>
                 <Region />
               </root>
@@ -289,86 +266,19 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="automovelOrca" layoutX="243.0" layoutY="69.0" prefHeight="30.0" prefWidth="240.0" />
-            <Label layoutX="91.0" layoutY="168.0" prefHeight="37.0" prefWidth="74.0" text="Peças">
+            <TextField fx:id="addAutoPlacaATT" layoutX="243.0" layoutY="69.0" prefHeight="30.0" prefWidth="240.0" promptText="Placa do automovel" />
+            <Label layoutX="87.0" layoutY="112.0" prefHeight="37.0" prefWidth="74.0" text="Peças">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="581.0" layoutY="169.0" prefHeight="37.0" prefWidth="96.0" text="Serviços">
+            <Label layoutX="87.0" layoutY="156.0" prefHeight="37.0" prefWidth="96.0" text="Serviços">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="pecaToAdd" layoutX="245.0" layoutY="174.0" prefHeight="30.0" prefWidth="240.0" />
-            <TextField fx:id="servicoToAdd" layoutX="715.0" layoutY="174.0" prefHeight="30.0" prefWidth="240.0" />
-            <Button fx:id="finishCadButton" layoutX="109.0" layoutY="493.0" mnemonicParsing="false" onAction="#finishCad" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #800;" text="Cadastrar" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="closeCadButton" layoutX="358.0" layoutY="493.0" mnemonicParsing="false" onAction="#closeCad" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #a4a4a4;" text="Voltar" textFill="#880000">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="addPecaButton" layoutX="500.0" layoutY="169.0" mnemonicParsing="false" onAction="#addPeca" prefHeight="36.0" prefWidth="38.0" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="43.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@pngegg.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button fx:id="addServicoButton" layoutX="968.0" layoutY="169.0" mnemonicParsing="false" onAction="#addServico" prefHeight="36.0" prefWidth="38.0" style="-fx-background-color: transparent;">
-               <graphic>
-                  <ImageView fitHeight="43.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@pngegg.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </Pane>
-      <Pane fx:id="attOrcamento" layoutX="212.0" layoutY="181.0" prefHeight="606.0" prefWidth="1044.0" visible="false">
-         <children>
-            <SubScene height="610.0" width="1045.0">
-              <root>
-                <Region />
-              </root>
-            </SubScene>
-            <Label layoutX="97.0" layoutY="76.0" prefHeight="37.0" prefWidth="120.0" text="Automovel">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <TextField fx:id="automovelOrcaAtt" layoutX="253.0" layoutY="79.0" prefHeight="30.0" prefWidth="240.0" />
-            <Label layoutX="101.0" layoutY="178.0" prefHeight="37.0" prefWidth="74.0" text="Peças">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="591.0" layoutY="179.0" prefHeight="37.0" prefWidth="96.0" text="Serviços">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <TextField fx:id="pecaToAddAtt" layoutX="255.0" layoutY="184.0" prefHeight="30.0" prefWidth="240.0" />
-            <TextField fx:id="servicoToAddAtt" layoutX="725.0" layoutY="184.0" prefHeight="30.0" prefWidth="240.0" />
+            <TextField fx:id="pecaIdATT" layoutX="243.0" layoutY="116.0" prefHeight="30.0" prefWidth="240.0" promptText="id da peça" />
+            <TextField fx:id="servIdATT" layoutX="243.0" layoutY="160.0" prefHeight="30.0" prefWidth="240.0" promptText="id do serviço" />
             <Button fx:id="finishAttButton" layoutX="119.0" layoutY="503.0" mnemonicParsing="false" onAction="#finishAtt" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #800;" text="Atualizar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -385,7 +295,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="addPecaAttButton" layoutX="510.0" layoutY="179.0" mnemonicParsing="false" onAction="#addPecaAtt" prefHeight="36.0" prefWidth="38.0" style="-fx-background-color: transparent;">
+            <Button fx:id="addPecaButtonATT" layoutX="480.0" layoutY="110.0" mnemonicParsing="false" onAction="#addPecaATT" prefHeight="36.0" prefWidth="38.0" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="43.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -397,7 +307,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="addServicoAttButton" layoutX="978.0" layoutY="179.0" mnemonicParsing="false" onAction="#addServicoAtt" prefHeight="36.0" prefWidth="38.0" style="-fx-background-color: transparent;">
+            <Button fx:id="addServButtonATT" layoutX="480.0" layoutY="153.0" mnemonicParsing="false" onAction="#addServATT" prefHeight="36.0" prefWidth="38.0" style="-fx-background-color: transparent;">
                <graphic>
                   <ImageView fitHeight="43.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -410,31 +320,167 @@
                </cursor>
             </Button>
             <TextField fx:id="idOrcamento" editable="false" layoutX="758.0" layoutY="82.0" prefHeight="25.0" prefWidth="62.0" visible="false" />
-         </children>
-      </Pane>
-      <Button fx:id="openRelatorioButton" layoutX="1265.0" layoutY="181.0" mnemonicParsing="false" onAction="#openRelatorio" prefHeight="53.0" prefWidth="131.0" style="-fx-background-color: #800;" text="Gerar Relatorio" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="botaoPesquisarDataInicial" layoutX="1122.0" layoutY="194.0" mnemonicParsing="false" onAction="#pesquisarDataInicial" prefHeight="33.0" prefWidth="33.0" style="-fx-background-color: transparent;">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitHeight="36.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+            <CheckBox fx:id="pagEfetuadoATT" layoutX="87.0" layoutY="287.0" mnemonicParsing="false" text="Pagamento efetuado">
+               <font>
+                  <Font size="18.0" />
+               </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-               <image>
-                  <Image url="@search.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+            </CheckBox>
+            <CheckBox fx:id="servFinalizadoATT" layoutX="87.0" layoutY="335.0" mnemonicParsing="false" text="Serviço finalizado">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </CheckBox>
+            <Button fx:id="delPecaButtonATT" layoutX="530.0" layoutY="110.0" mnemonicParsing="false" onAction="#delPecaATT" prefHeight="36.0" prefWidth="38.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="43.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@botao-excluir.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="delServButtonATT" layoutX="530.0" layoutY="153.0" mnemonicParsing="false" onAction="#delServATT" prefHeight="36.0" prefWidth="38.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="43.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@botao-excluir.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <TableView fx:id="tablePecaNServATT" layoutX="596.0" layoutY="66.0" prefHeight="200.0" prefWidth="400.0">
+              <columns>
+                <TableColumn fx:id="pecaColATT" prefWidth="200.0" text="Peças" />
+                <TableColumn fx:id="servColATT" prefWidth="200.0" text="Serviços" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <Pane fx:id="cadOrcamento" layoutX="215.0" layoutY="183.0" prefHeight="600.0" prefWidth="1039.0" visible="false">
+         <children>
+            <SubScene height="606.0" layoutX="-3.0" layoutY="-3.0" width="1043.0">
+              <root>
+                <Region />
+              </root>
+            </SubScene>
+            <Label layoutX="87.0" layoutY="66.0" prefHeight="37.0" prefWidth="120.0" text="Automovel">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="addAutoPlacaCAD" layoutX="243.0" layoutY="69.0" prefHeight="30.0" prefWidth="240.0" promptText="Placa do automovel" />
+            <Label layoutX="87.0" layoutY="112.0" prefHeight="37.0" prefWidth="74.0" text="Peças">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="87.0" layoutY="156.0" prefHeight="37.0" prefWidth="96.0" text="Serviços">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="pecaIdCAD" layoutX="243.0" layoutY="116.0" prefHeight="30.0" prefWidth="240.0" promptText="id da peça" />
+            <TextField fx:id="servIdCAD" layoutX="243.0" layoutY="160.0" prefHeight="30.0" prefWidth="240.0" promptText="id do serviço" />
+            <Button fx:id="finishCadButton" layoutX="109.0" layoutY="493.0" mnemonicParsing="false" onAction="#finishCad" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #800;" text="Cadastrar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="closeCadButton" layoutX="358.0" layoutY="493.0" mnemonicParsing="false" onAction="#closeCad" prefHeight="30.0" prefWidth="175.0" style="-fx-background-color: #a4a4a4;" text="Voltar" textFill="#880000">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="addPecaButtonCAD" layoutX="480.0" layoutY="110.0" mnemonicParsing="false" onAction="#addPecaCAD" prefHeight="36.0" prefWidth="38.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="43.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@pngegg.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="addServButtonCAD" layoutX="480.0" layoutY="153.0" mnemonicParsing="false" onAction="#addServCAD" prefHeight="36.0" prefWidth="38.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="43.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@pngegg.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <CheckBox fx:id="pagEfetuadoCAD" layoutX="87.0" layoutY="287.0" mnemonicParsing="false" text="Pagamento efetuado">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </CheckBox>
+            <CheckBox fx:id="servFinalizadoCAD" layoutX="87.0" layoutY="342.0" mnemonicParsing="false" text="Serviço finalizado">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </CheckBox>
+            <TableView fx:id="tablePecaNServCAD" layoutX="596.0" layoutY="66.0" prefHeight="200.0" prefWidth="400.0">
+              <columns>
+                <TableColumn fx:id="pecaColCAD" prefWidth="200.0" text="Peças" />
+                <TableColumn fx:id="servColCAD" prefWidth="200.0" text="Serviços" />
+              </columns>
+            </TableView>
+            <Button fx:id="delPecaButtonCAD" layoutX="530.0" layoutY="110.0" mnemonicParsing="false" onAction="#delPecaCAD" prefHeight="36.0" prefWidth="38.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="43.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@botao-excluir.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="delServButtonCAD" layoutX="530.0" layoutY="153.0" mnemonicParsing="false" onAction="#delServCAD" prefHeight="36.0" prefWidth="38.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="43.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@botao-excluir.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
       <ScrollPane fx:id="relatorioPainel" layoutX="212.0" layoutY="179.0" prefHeight="607.0" prefWidth="1043.0" visible="false">
         <content>
           <AnchorPane fx:id="painelAncoraRelatorio" minHeight="0.0" minWidth="0.0" prefHeight="610.0" prefWidth="1027.0">

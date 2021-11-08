@@ -174,12 +174,12 @@ public class TelaAutomovelController implements Initializable {
 
 /*=====================================================================================*/
 
-    @FXML
-    public void initialize() {
-        LoginController c = new LoginController();
-        receberLogin(c.retornarLogin());
-        setMenu(c.retornarUsuario());
-    }
+    // @FXML
+    // public void initialize() {
+    //     LoginController c = new LoginController();
+    //     receberLogin(c.retornarLogin());
+    //     setMenu(c.retornarUsuario());
+    // }
 
     @FXML
     public void receberLogin(String login){
@@ -412,6 +412,11 @@ public class TelaAutomovelController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        
+        LoginController c = new LoginController();
+        receberLogin(c.retornarLogin());
+        setMenu(c.retornarUsuario());
+        
         marcaCol.setCellValueFactory(
             new PropertyValueFactory<>("marca"));
         anoCol.setCellValueFactory(
