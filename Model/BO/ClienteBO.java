@@ -97,6 +97,30 @@ public class ClienteBO implements BaseInterBO<ClienteVO>{
         }
         return lista;
     }
+
+    public List<ClienteVO> buscarPorCPF (ClienteVO vo) throws FindException{
+        List<ClienteVO> lista = new ArrayList<ClienteVO>();
+        try {
+        	ResultSet rs = dao.findByCPF(vo);
+            if (!rs.next()) {
+                throw new FindException("Não foi encotrado nenhum cliente com esse CPF.\n");
+            }
+            else{
+            	rs = dao.findByCPF(vo);
+                while(rs.next()){
+                	ClienteVO vo2 = new ClienteVO();
+                    vo2.setId(rs.getLong("id"));
+                    vo2.setNome(rs.getString("nome"));
+                    vo2.setEndereco(rs.getString("endereco"));
+                    vo2.setCPF(rs.getString("cpf"));
+                    lista.add(vo2);
+                }
+            }
+        } catch (SQLException e) {
+            throw new FindException(e.getMessage());
+        }
+        return lista;
+    }
     
     public List<ClienteVO> listar() throws FindException{
         List<ClienteVO> lista = new ArrayList<ClienteVO>();

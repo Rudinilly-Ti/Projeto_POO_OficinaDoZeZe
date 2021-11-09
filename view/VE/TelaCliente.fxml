@@ -32,13 +32,6 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.SubScene?>
 <?import javafx.scene.control.Button?>
@@ -56,7 +49,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: D0D0D0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaClienteController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: D0D0D0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaClienteController">
    <children>
       <AnchorPane prefHeight="100.0" prefWidth="1440.0" style="-fx-background-color: fafafa;">
          <children>
@@ -159,9 +152,9 @@
             </ImageView>
          </graphic>
       </Button>
-      <Pane layoutX="226.0" layoutY="170.0" prefHeight="609.0" prefWidth="1040.0" style="-fx-background-color: #fff;">
+      <Pane layoutX="219.0" layoutY="293.0" prefHeight="492.0" prefWidth="1040.0" style="-fx-background-color: #fff;">
          <children>
-            <TableView fx:id="tableClientes" layoutX="125.0" layoutY="143.0" prefHeight="385.0" prefWidth="785.0">
+            <TableView fx:id="tableClientes" layoutX="125.0" layoutY="118.0" prefHeight="320.0" prefWidth="785.0">
               <columns>
                 <TableColumn fx:id="nomeCol" maxWidth="199.0" minWidth="80.0" prefWidth="100.0" text="Nome" />
                 <TableColumn fx:id="enderecoCol" maxWidth="199.0" minWidth="80.0" prefWidth="75.0" text="Endereço" />
@@ -173,13 +166,13 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Label layoutX="129.0" layoutY="75.0" prefHeight="35.0" prefWidth="240.0" text="Listagem de Clientes">
+            <Label layoutX="124.0" layoutY="48.0" prefHeight="35.0" prefWidth="240.0" text="Listagem de Clientes">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Line endX="680.4666748046875" endY="3.0517578125E-5" layoutX="231.0" layoutY="123.0" startX="-100.0" />
-            <Button fx:id="openCad" contentDisplay="RIGHT" layoutX="780.0" layoutY="532.0" mnemonicParsing="false" onAction="#openCadClient" style="-fx-background-color: fff;" text="Adicionar Cliente">
+            <Line endX="680.4666748046875" endY="3.0517578125E-5" layoutX="226.0" layoutY="96.0" startX="-100.0" />
+            <Button fx:id="openCad" contentDisplay="RIGHT" layoutX="780.0" layoutY="442.0" mnemonicParsing="false" onAction="#openCadClient" style="-fx-background-color: fff;" text="Adicionar Cliente">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -194,9 +187,9 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Pane fx:id="cadCliente" layoutX="-3.0" layoutY="-1.0" prefHeight="610.0" prefWidth="1044.0" visible="false">
+            <Pane fx:id="cadCliente" layoutX="-3.0" layoutY="-132.0" prefHeight="627.0" prefWidth="1044.0" visible="false">
                <children>
-                  <SubScene height="611.0" width="1043.0">
+                  <SubScene height="627.0" width="1043.0">
                     <root>
                       <Region />
                     </root>
@@ -237,9 +230,9 @@
                   </Button>
                </children>
             </Pane>
-            <Pane fx:id="attCliente" layoutX="-3.0" layoutY="-1.0" prefHeight="613.0" prefWidth="1043.0" visible="false">
+            <Pane fx:id="attCliente" layoutX="-3.0" layoutY="-129.0" prefHeight="741.0" prefWidth="1043.0" visible="false">
                <children>
-                  <SubScene height="611.0" layoutX="-2.0" layoutY="1.0" width="1047.0">
+                  <SubScene height="627.0" layoutX="-2.0" width="1047.0">
                     <root>
                       <Region />
                     </root>
@@ -358,5 +351,27 @@
             </ImageView>
          </graphic>
       </Button>
+      <Pane fx:id="painelPesquisar" layoutX="218.0" layoutY="165.0" prefHeight="111.0" prefWidth="1043.0" style="-fx-background-color: #fff;">
+         <children>
+            <TextField fx:id="CPFPesquisar" layoutX="130.0" layoutY="41.0" prefHeight="30.0" />
+            <Label layoutX="74.0" layoutY="37.0" text="CPF">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="pesquisarButton" layoutX="281.0" layoutY="36.0" mnemonicParsing="false" onAction="#pesquisarCPF" prefHeight="38.0" prefWidth="32.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@search.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
    </children>
 </Pane>
