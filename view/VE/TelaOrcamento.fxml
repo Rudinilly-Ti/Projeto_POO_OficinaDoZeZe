@@ -320,7 +320,7 @@
                </cursor>
             </Button>
             <TextField fx:id="idOrcamento" editable="false" layoutX="758.0" layoutY="82.0" prefHeight="25.0" prefWidth="62.0" visible="false" />
-            <CheckBox fx:id="pagEfetuadoATT" layoutX="87.0" layoutY="287.0" mnemonicParsing="false" text="Pagamento efetuado">
+            <CheckBox fx:id="pagEfetuadoATT" layoutX="87.0" layoutY="350.0" mnemonicParsing="false" text="Pagamento efetuado">
                <font>
                   <Font size="18.0" />
                </font>
@@ -328,7 +328,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </CheckBox>
-            <CheckBox fx:id="servFinalizadoATT" layoutX="87.0" layoutY="335.0" mnemonicParsing="false" text="Serviço finalizado">
+            <CheckBox fx:id="servFinalizadoATT" layoutX="87.0" layoutY="400.0" mnemonicParsing="false" text="Serviço finalizado">
                <font>
                   <Font size="18.0" />
                </font>
@@ -360,15 +360,39 @@
                   </ImageView>
                </graphic>
             </Button>
-            <TableView fx:id="tablePecaNServATT" layoutX="596.0" layoutY="66.0" prefHeight="200.0" prefWidth="400.0">
+            <TableView fx:id="tablePecaATT" layoutX="600.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0">
               <columns>
                 <TableColumn fx:id="pecaColATT" prefWidth="200.0" text="Peças" />
+              </columns>
+            </TableView>
+            <TableView fx:id="tableServATT" layoutX="799.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0">
+              <columns>
                 <TableColumn fx:id="servColATT" prefWidth="200.0" text="Serviços" />
               </columns>
             </TableView>
+            <Label layoutX="87.0" layoutY="210.0" text="Data de inicio">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="textoDataFimATT" layoutX="87.0" layoutY="250.0" text="Data da finalização">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="selectDataIniATT" layoutX="243.0" layoutY="211.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </DatePicker>
+            <DatePicker fx:id="selectDataFimATT" layoutX="243.0" layoutY="251.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </DatePicker>
          </children>
       </Pane>
-      <Pane fx:id="cadOrcamento" layoutX="215.0" layoutY="183.0" prefHeight="600.0" prefWidth="1039.0" visible="false">
+      <Pane fx:id="cadOrcamento" layoutX="215.0" layoutY="183.0" prefHeight="600.0" prefWidth="1039.0">
          <children>
             <SubScene height="606.0" layoutX="-3.0" layoutY="-3.0" width="1043.0">
               <root>
@@ -433,7 +457,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <CheckBox fx:id="pagEfetuadoCAD" layoutX="87.0" layoutY="287.0" mnemonicParsing="false" text="Pagamento efetuado">
+            <CheckBox fx:id="pagEfetuadoCAD" layoutX="87.0" layoutY="350.0" mnemonicParsing="false" text="Pagamento efetuado">
                <font>
                   <Font size="18.0" />
                </font>
@@ -441,7 +465,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </CheckBox>
-            <CheckBox fx:id="servFinalizadoCAD" layoutX="87.0" layoutY="342.0" mnemonicParsing="false" text="Serviço finalizado">
+            <CheckBox fx:id="servFinalizadoCAD" layoutX="87.0" layoutY="400.0" mnemonicParsing="false" text="Serviço finalizado">
                <font>
                   <Font size="18.0" />
                </font>
@@ -449,10 +473,9 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </CheckBox>
-            <TableView fx:id="tablePecaNServCAD" layoutX="596.0" layoutY="66.0" prefHeight="200.0" prefWidth="400.0">
+            <TableView fx:id="tablePecaCAD" layoutX="600.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0">
               <columns>
                 <TableColumn fx:id="pecaColCAD" prefWidth="200.0" text="Peças" />
-                <TableColumn fx:id="servColCAD" prefWidth="200.0" text="Serviços" />
               </columns>
             </TableView>
             <Button fx:id="delPecaButtonCAD" layoutX="530.0" layoutY="110.0" mnemonicParsing="false" onAction="#delPecaCAD" prefHeight="36.0" prefWidth="38.0" style="-fx-background-color: transparent;">
@@ -479,6 +502,28 @@
                   </ImageView>
                </graphic>
             </Button>
+            <TableView fx:id="tableServCAD" layoutX="799.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="servColCAD" prefWidth="200.0" text="Serviços" />
+              </columns>
+            </TableView>
+            <DatePicker fx:id="selectDataIniCAD" layoutX="243.0" layoutY="211.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></DatePicker>
+            <Label layoutX="87.0" layoutY="210.0" text="Data de inicio">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label fx:id="textoDataFimCAD" layoutX="87.0" layoutY="250.0" text="Data da finalização">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="selectDataFimCAD" layoutX="243.0" layoutY="251.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></DatePicker>
          </children>
       </Pane>
       <ScrollPane fx:id="relatorioPainel" layoutX="212.0" layoutY="179.0" prefHeight="607.0" prefWidth="1043.0" visible="false">

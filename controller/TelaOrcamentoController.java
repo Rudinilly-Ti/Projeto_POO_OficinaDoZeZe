@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -44,7 +45,10 @@ public class TelaOrcamentoController implements Initializable {
     private CheckBox servFinalizadoATT;
 
     @FXML
-    private TableView<OrcamentoVO> tablePecaNServCAD;
+    private TableView<OrcamentoVO> tablePecaCAD;
+
+    @FXML
+    private TableView<OrcamentoVO> tableServCAD;
 
     @FXML
     private TableColumn<OrcamentoVO, Integer> pecaColCAD;
@@ -167,7 +171,28 @@ public class TelaOrcamentoController implements Initializable {
     private Button botaoPesquisarPeriodo;
 
     @FXML
-    private TableView<OrcamentoVO> tablePecaNServATT;
+    private TableView<OrcamentoVO> tablePecaATT;
+
+    @FXML
+    private Label textoDataFimCAD;
+
+    @FXML
+    private DatePicker selectDataIniCAD;
+
+    @FXML
+    private DatePicker selectDataFimCAD;
+
+    @FXML
+    private Label textoDataFimATT;
+
+    @FXML
+    private DatePicker selectDataIniATT;
+
+    @FXML
+    private DatePicker selectDataFimATT;
+
+    @FXML
+    private TableView<OrcamentoVO> tableServATT;
 
     @FXML
     private TableColumn<OrcamentoVO, Integer> servColCAD;
