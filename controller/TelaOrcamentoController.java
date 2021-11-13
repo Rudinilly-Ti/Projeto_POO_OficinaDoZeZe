@@ -2,30 +2,23 @@ package controller;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import javax.swing.tree.VariableHeightLayoutCache;
-
 import Model.BO.AutomovelBO;
 import Model.BO.OrcamentoBO;
 import Model.BO.PecaBO;
 import Model.BO.PecasNoOrcamentoBO;
 import Model.BO.ServicoBO;
 import Model.BO.ServicosNoOrcamentoBO;
-import Model.VO.AutomovelVO;
 import Model.VO.OrcamentoVO;
 import Model.VO.PecasNoOrcamentoVO;
-import Model.VO.ServicoVO;
 import Model.VO.ServicosNoOrcamentoVO;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,12 +31,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
-import javafx.util.converter.LocalDateStringConverter;
 import view.Buttons;
 import view.Telas;
 

@@ -18,27 +18,20 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO> {
     // inserir
     public void inserir(OrcamentoVO vo) throws InsertException {
         boolean repetido = false;
-        java.sql.Date DateSqlIni = new java.sql.Date(vo.getDataInicio().getTimeInMillis());
-        java.sql.Date DateSqlFim = new java.sql.Date(vo.getDataFim().getTimeInMillis());
-
         try {
-            ResultSet rs = dao.listar();// Optei por utilizar uma sequencia de testes para verificar se existe um
-                                        // orçamento igual ao inserido
+            ResultSet rs = dao.findByPeriodo(vo);
             while (rs.next()) {
-                if (vo.getCliente().getId() == rs.getLong("id_cliente")) {
-                    if (vo.getCarro().getID() == rs.getLong("id_automovel")) {
-                        if (DateSqlIni == rs.getDate("data_inicio")) {
-                            if (DateSqlFim == rs.getDate("data_fim")) {
-                                repetido = true;
-                            }
-                        }
-                    }
+                if(rs.getLong("id_cliente") == vo.getCliente().getId()) {
+                    if(rs.getLong("id_automovel") == vo.getCarro().getID()) {
+                        repetido = true;    
+                    }    
                 }
             }
-            if (repetido) {
-                throw new InsertException("Um orçamento com esses dados já existe!\n.");
-            } else {
+            if (!repetido) {
                 dao.inserir(vo);
+            }
+            else{
+                throw new InsertException("Já existe um orçamento com esses dados!");
             }
         } catch (Exception e) {
             throw new InsertException(e.getMessage());
@@ -405,6 +398,24 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO> {
         } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
+    }
+
+    //método usado para retornar o id de um orçamento a partir de seus demais atributos
+    public OrcamentoVO retornarId(OrcamentoVO vo) throws InsertException {
+        OrcamentoVO vo2 = new OrcamentoVO();
+        try {
+            ResultSet rs = dao.findByPeriodo(vo);
+            while (rs.next()) {
+                if(rs.getLong("id_cliente") == vo.getCliente().getId()) {
+                    if(rs.getLong("id_automovel") == vo.getCarro().getID()) {
+                        vo2.setId(rs.getLong("id"));    
+                    }    
+                }
+            } 
+        } catch (Exception e) {
+            throw new FindException(e.getMessage());
+        }
+        return vo2;
     }
 
     // Registrar pagamento
