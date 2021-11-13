@@ -65,6 +65,18 @@ public class TelaOrcamentoController implements Initializable {
 	private TableColumn<PecasNoOrcamentoVO, String> pecaColCAD;
 
 	@FXML
+	private TableColumn<PecasNoOrcamentoVO, Integer> qntPecaColCAD;
+
+	@FXML
+	private TableColumn<ServicosNoOrcamentoVO, Integer> qntServColCAD;
+
+	@FXML
+	private TableColumn<PecasNoOrcamentoVO, Integer> qntPecaColATT;
+
+	@FXML
+	private TableColumn<ServicosNoOrcamentoVO, Integer> qntServColATT;
+
+	@FXML
 	private AnchorPane painelAncoraRelatorio;
 
 	@FXML
