@@ -12,27 +12,28 @@ import Exceptions.UpgradeException;
 import Model.DAO.*;
 import Model.VO.*;
 
-public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
+public class OrcamentoBO implements BaseInterBO<OrcamentoVO> {
     OrcamentoDAO dao = new OrcamentoDAO();
-    
-    //inserir
-    public void inserir(OrcamentoVO vo) throws InsertException{
+
+    // inserir
+    public void inserir(OrcamentoVO vo) throws InsertException {
         boolean repetido = false;
         java.sql.Date DateSqlIni = new java.sql.Date(vo.getDataInicio().getTimeInMillis());
         java.sql.Date DateSqlFim = new java.sql.Date(vo.getDataFim().getTimeInMillis());
 
         try {
-            ResultSet rs = dao.listar();//Optei por utilizar uma sequencia de testes para verificar se existe um orçamento igual ao inserido
-            while(rs.next()){
-                if (vo.getCliente().getId() == rs.getLong("id_cliente")){
-                    if (vo.getCarro().getID() == rs.getLong("id_automovel")){
-                        if (DateSqlIni == rs.getDate("data_inicio")){
-                            if (DateSqlFim == rs.getDate("data_fim")){
+            ResultSet rs = dao.listar();// Optei por utilizar uma sequencia de testes para verificar se existe um
+                                        // orçamento igual ao inserido
+            while (rs.next()) {
+                if (vo.getCliente().getId() == rs.getLong("id_cliente")) {
+                    if (vo.getCarro().getID() == rs.getLong("id_automovel")) {
+                        if (DateSqlIni == rs.getDate("data_inicio")) {
+                            if (DateSqlFim == rs.getDate("data_fim")) {
                                 repetido = true;
-                            }          
+                            }
                         }
                     }
-                } 
+                }
             }
             if (repetido) {
                 throw new InsertException("Um orçamento com esses dados já existe!\n.");
@@ -44,12 +45,12 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
         }
     }
 
-    //listagem
-    public List<OrcamentoVO> listar() throws FindException{
+    // listagem
+    public List<OrcamentoVO> listar() throws FindException {
         List<OrcamentoVO> lista = new ArrayList<OrcamentoVO>();
         try {
             ResultSet rs = dao.listar();
-            while(rs.next()){
+            while (rs.next()) {
                 OrcamentoVO vo = new OrcamentoVO();
                 Calendar dataIni = Calendar.getInstance();
                 Calendar dataFim = Calendar.getInstance();
@@ -61,7 +62,21 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
                 vo.setDataFim(dataFim);
                 vo.setValor(rs.getDouble("valor"));
                 vo.getCarro().setID(rs.getLong("id_automovel"));
+                // settar automovel
+                AutomovelBO boAuto = new AutomovelBO();
+                List<AutomovelVO> carro = boAuto.buscarPorId(vo.getCarro());
+                vo.getCarro().setAno(carro.get(0).getAno());
+                vo.getCarro().setCor(carro.get(0).getCor());
+                vo.getCarro().setMarca(carro.get(0).getMarca());
+                vo.getCarro().setPlaca(carro.get(0).getPlaca());
+                vo.getCarro().setQuilometragem(carro.get(0).getQuilometragem());
                 vo.getCliente().setId(rs.getLong("id_cliente"));
+                // settar dono
+                ClienteBO boCliente = new ClienteBO();
+                List<ClienteVO> dono = boCliente.buscarPorId(vo.getCliente());
+                vo.getCliente().setNome(dono.get(0).getNome());
+                vo.getCliente().setCPF(dono.get(0).getCPF());
+                vo.getCliente().setEndereco(dono.get(0).getEndereco());
                 lista.add(vo);
             }
         } catch (SQLException e) {
@@ -70,16 +85,15 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
         return lista;
     }
 
-    public List<OrcamentoVO> buscarPorId(OrcamentoVO vo) throws FindException{
+    public List<OrcamentoVO> buscarPorId(OrcamentoVO vo) throws FindException {
         List<OrcamentoVO> lista = new ArrayList<OrcamentoVO>();
         try {
             ResultSet rs = dao.findById(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhum orçamento com esse Id.\n");
-            }
-            else{
-                rs = dao.findById(vo); 
-                while(rs.next()){
+            } else {
+                rs = dao.findById(vo);
+                while (rs.next()) {
                     OrcamentoVO vo2 = new OrcamentoVO();
                     Calendar dataIni = Calendar.getInstance();
                     Calendar dataFim = Calendar.getInstance();
@@ -91,7 +105,21 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
                     vo2.setDataFim(dataFim);
                     vo2.setValor(rs.getDouble("valor"));
                     vo2.getCarro().setID(rs.getLong("id_automovel"));
+                    // settar automovel
+                    AutomovelBO boAuto = new AutomovelBO();
+                    List<AutomovelVO> carro = boAuto.buscarPorId(vo2.getCarro());
+                    vo2.getCarro().setAno(carro.get(0).getAno());
+                    vo2.getCarro().setCor(carro.get(0).getCor());
+                    vo2.getCarro().setMarca(carro.get(0).getMarca());
+                    vo2.getCarro().setPlaca(carro.get(0).getPlaca());
+                    vo2.getCarro().setQuilometragem(carro.get(0).getQuilometragem());
                     vo2.getCliente().setId(rs.getLong("id_cliente"));
+                    // settar dono
+                    ClienteBO boCliente = new ClienteBO();
+                    List<ClienteVO> dono = boCliente.buscarPorId(vo2.getCliente());
+                    vo2.getCliente().setNome(dono.get(0).getNome());
+                    vo2.getCliente().setCPF(dono.get(0).getCPF());
+                    vo2.getCliente().setEndereco(dono.get(0).getEndereco());
                     lista.add(vo2);
                 }
             }
@@ -101,20 +129,19 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
         return lista;
     }
 
-    public List<OrcamentoVO> buscarPorPeriodo(OrcamentoVO vo) throws FindException{
+    public List<OrcamentoVO> buscarPorPeriodo(OrcamentoVO vo) throws FindException {
         List<OrcamentoVO> lista = new ArrayList<OrcamentoVO>();
         try {
             ResultSet rs = dao.findByPeriodo(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhum orçamento dentro desse periodo.\n");
-            }
-            else{
+            } else {
                 rs = dao.findByPeriodo(vo);
-                while(rs.next()){
+                while (rs.next()) {
                     OrcamentoVO vo2 = new OrcamentoVO();
                     Calendar dataIni = Calendar.getInstance();
                     Calendar dataFim = Calendar.getInstance();
-                
+
                     vo2.setId(rs.getLong("id"));
                     dataIni.setTimeInMillis(rs.getDate("data_inicio").getTime());
                     vo2.setDataInicio(dataIni);
@@ -122,9 +149,23 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
                     vo2.setDataFim(dataFim);
                     vo2.setValor(rs.getDouble("valor"));
                     vo2.getCarro().setID(rs.getLong("id_automovel"));
+                    // settar automovel
+                    AutomovelBO boAuto = new AutomovelBO();
+                    List<AutomovelVO> carro = boAuto.buscarPorId(vo2.getCarro());
+                    vo2.getCarro().setAno(carro.get(0).getAno());
+                    vo2.getCarro().setCor(carro.get(0).getCor());
+                    vo2.getCarro().setMarca(carro.get(0).getMarca());
+                    vo2.getCarro().setPlaca(carro.get(0).getPlaca());
+                    vo2.getCarro().setQuilometragem(carro.get(0).getQuilometragem());
                     vo2.getCliente().setId(rs.getLong("id_cliente"));
+                    // settar dono
+                    ClienteBO boCliente = new ClienteBO();
+                    List<ClienteVO> dono = boCliente.buscarPorId(vo2.getCliente());
+                    vo2.getCliente().setNome(dono.get(0).getNome());
+                    vo2.getCliente().setCPF(dono.get(0).getCPF());
+                    vo2.getCliente().setEndereco(dono.get(0).getEndereco());
                     lista.add(vo2);
-                }   
+                }
             }
         } catch (Exception e) {
             throw new FindException(e.getMessage());
@@ -132,19 +173,19 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
         return lista;
     }
 
-    public List<OrcamentoVO> buscarPorAutomovel(AutomovelVO voCar) throws FindException{
+    public List<OrcamentoVO> buscarPorAutomovel(AutomovelVO voCar) throws FindException {
         OrcamentoVO vo = new OrcamentoVO();
-        vo.getCarro().setID(voCar.getID());//Passa o valor do id inserido para o id de automovel em orcamento;
-        
+        AutomovelBO findCarro = new AutomovelBO();
+        vo.getCarro().setID(findCarro.buscarPorPlaca(voCar).get(0).getID());
+
         List<OrcamentoVO> lista = new ArrayList<OrcamentoVO>();
         try {
             ResultSet rs = dao.findByAutomovelId(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhum orçamento com esse veículo.\n");
-            }
-            else{ 
+            } else {
                 rs = dao.findByAutomovelId(vo);
-                while(rs.next()){
+                while (rs.next()) {
                     OrcamentoVO vo2 = new OrcamentoVO();
                     Calendar dataIni = Calendar.getInstance();
                     Calendar dataFim = Calendar.getInstance();
@@ -156,7 +197,21 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
                     vo2.setDataFim(dataFim);
                     vo2.setValor(rs.getDouble("valor"));
                     vo2.getCarro().setID(rs.getLong("id_automovel"));
+                    // settar automovel
+                    AutomovelBO boAuto = new AutomovelBO();
+                    List<AutomovelVO> carro = boAuto.buscarPorId(vo2.getCarro());
+                    vo2.getCarro().setAno(carro.get(0).getAno());
+                    vo2.getCarro().setCor(carro.get(0).getCor());
+                    vo2.getCarro().setMarca(carro.get(0).getMarca());
+                    vo2.getCarro().setPlaca(carro.get(0).getPlaca());
+                    vo2.getCarro().setQuilometragem(carro.get(0).getQuilometragem());
                     vo2.getCliente().setId(rs.getLong("id_cliente"));
+                    // settar dono
+                    ClienteBO boCliente = new ClienteBO();
+                    List<ClienteVO> dono = boCliente.buscarPorId(vo2.getCliente());
+                    vo2.getCliente().setNome(dono.get(0).getNome());
+                    vo2.getCliente().setCPF(dono.get(0).getCPF());
+                    vo2.getCliente().setEndereco(dono.get(0).getEndereco());
                     lista.add(vo2);
                 }
             }
@@ -166,19 +221,19 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
         return lista;
     }
 
-    public List<OrcamentoVO> buscarPorDono(ClienteVO voCli) throws FindException{
+    public List<OrcamentoVO> buscarPorDono(ClienteVO voCli) throws FindException {
         OrcamentoVO vo = new OrcamentoVO();
-        vo.getCliente().setId(voCli.getId());//Passa o valor do id inserido para o id de cliente em orcamento;
-        
+        ClienteBO findCliente = new ClienteBO();
+        vo.getCliente().setId(findCliente.buscarPorNome(voCli).get(0).getId());
+
         List<OrcamentoVO> lista = new ArrayList<OrcamentoVO>();
         try {
             ResultSet rs = dao.findByClienteId(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhum orçamento com esse cliente.\n");
-            }
-            else{
-                rs = dao.findByClienteId(vo); 
-                while(rs.next()){
+            } else {
+                rs = dao.findByClienteId(vo);
+                while (rs.next()) {
                     OrcamentoVO vo2 = new OrcamentoVO();
                     Calendar dataIni = Calendar.getInstance();
                     Calendar dataFim = Calendar.getInstance();
@@ -190,7 +245,21 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
                     vo2.setDataFim(dataFim);
                     vo2.setValor(rs.getDouble("valor"));
                     vo2.getCarro().setID(rs.getLong("id_automovel"));
+                    // settar automovel
+                    AutomovelBO boAuto = new AutomovelBO();
+                    List<AutomovelVO> carro = boAuto.buscarPorId(vo2.getCarro());
+                    vo2.getCarro().setAno(carro.get(0).getAno());
+                    vo2.getCarro().setCor(carro.get(0).getCor());
+                    vo2.getCarro().setMarca(carro.get(0).getMarca());
+                    vo2.getCarro().setPlaca(carro.get(0).getPlaca());
+                    vo2.getCarro().setQuilometragem(carro.get(0).getQuilometragem());
                     vo2.getCliente().setId(rs.getLong("id_cliente"));
+                    // settar dono
+                    ClienteBO boCliente = new ClienteBO();
+                    List<ClienteVO> dono = boCliente.buscarPorId(vo2.getCliente());
+                    vo2.getCliente().setNome(dono.get(0).getNome());
+                    vo2.getCliente().setCPF(dono.get(0).getCPF());
+                    vo2.getCliente().setEndereco(dono.get(0).getEndereco());
                     lista.add(vo2);
                 }
             }
@@ -200,16 +269,15 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
         return lista;
     }
 
-    public List<OrcamentoVO> buscarPorSituaçãoDoPagamento(OrcamentoVO vo) throws FindException{
+    public List<OrcamentoVO> buscarPorSituaçãoDoPagamento(OrcamentoVO vo) throws FindException {
         List<OrcamentoVO> lista = new ArrayList<OrcamentoVO>();
         try {
             ResultSet rs = dao.findByPagamentoEfetuado(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhum orçamento com o pagamento nessa situação.\n");
-            }
-            else{
-                rs = dao.findById(vo); 
-                while(rs.next()){
+            } else {
+                rs = dao.findById(vo);
+                while (rs.next()) {
                     OrcamentoVO vo2 = new OrcamentoVO();
                     Calendar dataIni = Calendar.getInstance();
                     Calendar dataFim = Calendar.getInstance();
@@ -221,7 +289,21 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
                     vo2.setDataFim(dataFim);
                     vo2.setValor(rs.getDouble("valor"));
                     vo2.getCarro().setID(rs.getLong("id_automovel"));
+                    // settar automovel
+                    AutomovelBO boAuto = new AutomovelBO();
+                    List<AutomovelVO> carro = boAuto.buscarPorId(vo2.getCarro());
+                    vo2.getCarro().setAno(carro.get(0).getAno());
+                    vo2.getCarro().setCor(carro.get(0).getCor());
+                    vo2.getCarro().setMarca(carro.get(0).getMarca());
+                    vo2.getCarro().setPlaca(carro.get(0).getPlaca());
+                    vo2.getCarro().setQuilometragem(carro.get(0).getQuilometragem());
                     vo2.getCliente().setId(rs.getLong("id_cliente"));
+                    // settar dono
+                    ClienteBO boCliente = new ClienteBO();
+                    List<ClienteVO> dono = boCliente.buscarPorId(vo2.getCliente());
+                    vo2.getCliente().setNome(dono.get(0).getNome());
+                    vo2.getCliente().setCPF(dono.get(0).getCPF());
+                    vo2.getCliente().setEndereco(dono.get(0).getEndereco());
                     lista.add(vo2);
                 }
             }
@@ -231,16 +313,15 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
         return lista;
     }
 
-    public List<OrcamentoVO> buscarPorSituaçãoDoServico(OrcamentoVO vo) throws FindException{
+    public List<OrcamentoVO> buscarPorSituaçãoDoServico(OrcamentoVO vo) throws FindException {
         List<OrcamentoVO> lista = new ArrayList<OrcamentoVO>();
         try {
             ResultSet rs = dao.findByServicoConcluido(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhum orçamento com o serviço nessa situação.\n");
-            }
-            else{
-                rs = dao.findById(vo); 
-                while(rs.next()){
+            } else {
+                rs = dao.findById(vo);
+                while (rs.next()) {
                     OrcamentoVO vo2 = new OrcamentoVO();
                     Calendar dataIni = Calendar.getInstance();
                     Calendar dataFim = Calendar.getInstance();
@@ -252,7 +333,21 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
                     vo2.setDataFim(dataFim);
                     vo2.setValor(rs.getDouble("valor"));
                     vo2.getCarro().setID(rs.getLong("id_automovel"));
+                    // settar automovel
+                    AutomovelBO boAuto = new AutomovelBO();
+                    List<AutomovelVO> carro = boAuto.buscarPorId(vo2.getCarro());
+                    vo2.getCarro().setAno(carro.get(0).getAno());
+                    vo2.getCarro().setCor(carro.get(0).getCor());
+                    vo2.getCarro().setMarca(carro.get(0).getMarca());
+                    vo2.getCarro().setPlaca(carro.get(0).getPlaca());
+                    vo2.getCarro().setQuilometragem(carro.get(0).getQuilometragem());
                     vo2.getCliente().setId(rs.getLong("id_cliente"));
+                    // settar dono
+                    ClienteBO boCliente = new ClienteBO();
+                    List<ClienteVO> dono = boCliente.buscarPorId(vo2.getCliente());
+                    vo2.getCliente().setNome(dono.get(0).getNome());
+                    vo2.getCliente().setCPF(dono.get(0).getCPF());
+                    vo2.getCliente().setEndereco(dono.get(0).getEndereco());
                     lista.add(vo2);
                 }
             }
@@ -262,8 +357,8 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
         return lista;
     }
 
-    //Remoção por id
-    public void deletar(OrcamentoVO vo) throws DeleteException{
+    // Remoção por id
+    public void deletar(OrcamentoVO vo) throws DeleteException {
         try {
             dao.removerById(vo);
         } catch (SQLException e) {
@@ -271,36 +366,40 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
         }
     }
 
-    //Alteração
-    public void editarDataInicial(OrcamentoVO vo) throws UpgradeException{
+    // Alteração
+    public void editarDataInicial(OrcamentoVO vo) throws UpgradeException {
         try {
             dao.editarDataInicial(vo);
         } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
-    public void editarDataFinal(OrcamentoVO vo) throws UpgradeException{
+
+    public void editarDataFinal(OrcamentoVO vo) throws UpgradeException {
         try {
             dao.editarDataFinal(vo);
         } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
-    public void editarValor(OrcamentoVO vo) throws UpgradeException{
+
+    public void editarValor(OrcamentoVO vo) throws UpgradeException {
         try {
             dao.editarValor(vo);
         } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
-    public void editarClienteId(OrcamentoVO vo) throws UpgradeException{
+
+    public void editarClienteId(OrcamentoVO vo) throws UpgradeException {
         try {
             dao.editarClienteId(vo);
         } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
-    public void editarAutomovelId(OrcamentoVO vo) throws UpgradeException{
+
+    public void editarAutomovelId(OrcamentoVO vo) throws UpgradeException {
         try {
             dao.editarAutomovelId(vo);
         } catch (Exception e) {
@@ -308,9 +407,9 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
         }
     }
 
-    //Registrar pagamento
-    public void registrarPagamento(OrcamentoVO vo) throws UpgradeException{
-        //Quando invocado no programa significa que o pagamento foi efetuado
+    // Registrar pagamento
+    public void registrarPagamento(OrcamentoVO vo) throws UpgradeException {
+        // Quando invocado no programa significa que o pagamento foi efetuado
         try {
             dao.editarPagamentoEfetuado(vo);
         } catch (Exception e) {
@@ -318,9 +417,9 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO>{
         }
     }
 
-    //Finalizar serviço e cadastrar Data final do serviço
-    public void finalizarServico(OrcamentoVO vo) throws UpgradeException{
-        //Quando invocado no programa significa que o serviço foi finalizado
+    // Finalizar serviço e cadastrar Data final do serviço
+    public void finalizarServico(OrcamentoVO vo) throws UpgradeException {
+        // Quando invocado no programa significa que o serviço foi finalizado
         try {
             dao.editarServicoConcluido(vo);
             dao.editarDataFinal(vo);
