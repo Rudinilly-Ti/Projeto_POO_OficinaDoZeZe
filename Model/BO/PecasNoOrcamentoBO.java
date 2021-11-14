@@ -53,10 +53,40 @@ public class PecasNoOrcamentoBO implements BaseInterBO<PecasNoOrcamentoVO> {
 					PecaBO boPeca = new PecaBO();
 					List<PecaVO> peca = boPeca.buscarPorId(vo2.getPeca());
 					vo2.getPeca().setNome(peca.get(0).getNome());
+					vo2.getPeca().setPreco(peca.get(0).getPreco());
 					lista.add(vo2);
 				}
 			}
 		} catch (SQLException e) {
+			throw new FindException(e.getMessage());
+		}
+		return lista;
+	}
+
+	public List<PecasNoOrcamentoVO> buscarPorOrcId(PecasNoOrcamentoVO vo) throws FindException {
+		ResultSet rs;
+		List<PecasNoOrcamentoVO> lista = new ArrayList<PecasNoOrcamentoVO>();
+		try {
+			rs = dao.findByOrcamentoId(vo);
+			if (!rs.next()) {
+				throw new FindException("Não foi encotrado nenhuma peça com esse Id de orçamento.\n");
+			} else {
+				rs = dao.findByOrcamentoId(vo);
+				while (rs.next()) {
+					PecasNoOrcamentoVO vo2 = new PecasNoOrcamentoVO();
+					vo2.setId(rs.getLong("id"));
+					vo2.setQuantidade(rs.getInt("quantidade"));
+					vo2.setValor(rs.getDouble("valor"));
+					vo2.getOrcamento().setId(rs.getLong("id_orcamento"));
+					vo2.getPeca().setId(rs.getLong("id_peca"));
+					PecaBO boPeca = new PecaBO();
+					List<PecaVO> peca = boPeca.buscarPorId(vo2.getPeca());
+					vo2.getPeca().setNome(peca.get(0).getNome());
+					vo2.getPeca().setPreco(peca.get(0).getPreco());
+					lista.add(vo2);
+				}
+			}
+		} catch (Exception e) {
 			throw new FindException(e.getMessage());
 		}
 		return lista;
@@ -91,6 +121,7 @@ public class PecasNoOrcamentoBO implements BaseInterBO<PecasNoOrcamentoVO> {
 						PecaBO boPeca = new PecaBO();
 						List<PecaVO> peca = boPeca.buscarPorId(vo2.getPeca());
 						vo2.getPeca().setNome(peca.get(0).getNome());
+						vo2.getPeca().setPreco(peca.get(0).getPreco());
 						lista.add(vo2);
 					}
 				}

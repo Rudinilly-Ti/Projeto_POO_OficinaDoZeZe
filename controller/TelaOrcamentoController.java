@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -31,10 +32,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+import javafx.util.converter.LocalDateStringConverter;
 import view.Buttons;
 import view.Telas;
 
@@ -65,16 +68,16 @@ public class TelaOrcamentoController implements Initializable {
 	private TableColumn<PecasNoOrcamentoVO, String> pecaColCAD;
 
 	@FXML
-	private TableColumn<PecasNoOrcamentoVO, Integer> qntPecaColCAD;
+	private TableColumn<PecasNoOrcamentoVO, String> qntPecaColCAD;
 
 	@FXML
-	private TableColumn<ServicosNoOrcamentoVO, Integer> qntServColCAD;
+	private TableColumn<ServicosNoOrcamentoVO, String> qntServColCAD;
 
 	@FXML
-	private TableColumn<PecasNoOrcamentoVO, Integer> qntPecaColATT;
+	private TableColumn<PecasNoOrcamentoVO, String> qntPecaColATT;
 
 	@FXML
-	private TableColumn<ServicosNoOrcamentoVO, Integer> qntServColATT;
+	private TableColumn<ServicosNoOrcamentoVO, String> qntServColATT;
 
 	@FXML
 	private AnchorPane painelAncoraRelatorio;
@@ -289,39 +292,88 @@ public class TelaOrcamentoController implements Initializable {
 			public ObservableValue<String> call(CellDataFeatures<OrcamentoVO, String> c) {
 				return new SimpleStringProperty(new SimpleDateFormat("dd/MM/yyyy").format(c.getValue().getDataFim().getTime()));
 			}
-		});
 
+		});
+		// tabela de pecas
+		pecaColATT
+				.setCellValueFactory(new Callback<CellDataFeatures<PecasNoOrcamentoVO, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<PecasNoOrcamentoVO, String> c) {
+						return new SimpleStringProperty(c.getValue().getPeca().getNome());
+					}
+				});
+
+		qntPecaColATT
+				.setCellValueFactory(new Callback<CellDataFeatures<PecasNoOrcamentoVO, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<PecasNoOrcamentoVO, String> c) {
+						return new SimpleStringProperty(String.valueOf(c.getValue().getQuantidade()));
+					}
+				});
+
+		// tabela de serviços
+		servColATT
+				.setCellValueFactory(new Callback<CellDataFeatures<ServicosNoOrcamentoVO, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<ServicosNoOrcamentoVO, String> c) {
+						return new SimpleStringProperty(c.getValue().getServico().getNome());
+					}
+				});
+
+		qntServColATT
+				.setCellValueFactory(new Callback<CellDataFeatures<ServicosNoOrcamentoVO, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<ServicosNoOrcamentoVO, String> c) {
+						return new SimpleStringProperty(String.valueOf(c.getValue().getQuantidade()));
+					}
+				});
 		tableOrcamento.setItems(FXCollections.observableArrayList(new OrcamentoBO().listar()));
 
 		Buttons.initButtons(attCol, 20, ATT_ICON, "svg-gray", (OrcamentoVO orc, ActionEvent event) -> {
+			orcamentoATT.setId(orc.getId());
+			orcamentoATT.getCarro().setID(orc.getCarro().getID());
+			orcamentoATT.getCarro().setPlaca(orc.getCarro().getPlaca());
+			orcamentoATT.getCliente().setId(orc.getCliente().getId());
+			orcamentoATT.setDataInicio(orc.getDataInicio());
+			orcamentoATT.setDataFim(orc.getDataFim());
+			orcamentoATT.setPagamentoEfetuado(orc.getPagamentoEfetuado());
+			orcamentoATT.setServicoConcluido(orc.getServicoConcluido());
+			orcamentoATT.setValor(orc.getValor());
+
 			attOrcamento.setVisible(true);
 			idOrcamento.setText(orc.getId().toString());
 			addAutoPlacaATT.setText(orc.getCarro().getPlaca());
+
+			if (orc.getPagamentoEfetuado()) {
+				pagEfetuadoATT.setSelected(true);
+			}
+
+			if (orc.getServicoConcluido()) {
+				servFinalizadoATT.setSelected(true);
+			}
 
 			selectDataIniATT.setValue(LocalDateTime
 					.ofInstant(orc.getDataInicio().toInstant(), orc.getDataInicio().getTimeZone().toZoneId()).toLocalDate());
 			selectDataFimATT.setValue(LocalDateTime
 					.ofInstant(orc.getDataFim().toInstant(), orc.getDataFim().getTimeZone().toZoneId()).toLocalDate());
-			// tabela de pecas
-			pecaColATT
-					.setCellValueFactory(new Callback<CellDataFeatures<PecasNoOrcamentoVO, String>, ObservableValue<String>>() {
-						@Override
-						public ObservableValue<String> call(CellDataFeatures<PecasNoOrcamentoVO, String> c) {
-							return new SimpleStringProperty(c.getValue().getPeca().getNome());
-						}
-					});
-			tablePecaATT
-					.setItems(FXCollections.observableArrayList(new PecasNoOrcamentoBO().buscarPorAutomovel(orc.getCarro())));
-			// tabela de serviços
-			servColATT.setCellValueFactory(
-					new Callback<CellDataFeatures<ServicosNoOrcamentoVO, String>, ObservableValue<String>>() {
-						@Override
-						public ObservableValue<String> call(CellDataFeatures<ServicosNoOrcamentoVO, String> c) {
-							return new SimpleStringProperty(c.getValue().getServico().getNome());
-						}
-					});
-			tableServATT
-					.setItems(FXCollections.observableArrayList(new ServicosNoOrcamentoBO().buscarPorAutomovel(orc.getCarro())));
+
+			PecasNoOrcamentoVO peca = new PecasNoOrcamentoVO();
+			peca.getOrcamento().setId(orc.getId());
+			try {
+				novasPecasATT = new PecasNoOrcamentoBO().buscarPorOrcId(peca);
+				tablePecaATT.setItems(FXCollections.observableArrayList(novasPecasATT));
+			} catch (Exception e) {
+			}
+
+			ServicosNoOrcamentoVO serv = new ServicosNoOrcamentoVO();
+			serv.getOrcamento().setId(orc.getId());
+			try {
+				novosServicosATT = new ServicosNoOrcamentoBO().buscarPorOrcId(serv);
+				tableServATT.setItems(FXCollections.observableArrayList(novosServicosATT));
+			} catch (Exception e) {
+
+			}
+
 		});
 
 		Buttons.initButtons(delCol, 20, DEL_ICON, "svg-red", (OrcamentoVO auto, ActionEvent event) -> {
@@ -350,6 +402,14 @@ public class TelaOrcamentoController implements Initializable {
 					}
 				});
 
+		qntPecaColCAD
+				.setCellValueFactory(new Callback<CellDataFeatures<PecasNoOrcamentoVO, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<PecasNoOrcamentoVO, String> c) {
+						return new SimpleStringProperty(String.valueOf(c.getValue().getQuantidade()));
+					}
+				});
+
 		tablePecaCAD.setItems(FXCollections.observableArrayList(novasPecas));
 
 		servColCAD
@@ -360,6 +420,13 @@ public class TelaOrcamentoController implements Initializable {
 					}
 				});
 
+		qntServColCAD
+				.setCellValueFactory(new Callback<CellDataFeatures<ServicosNoOrcamentoVO, String>, ObservableValue<String>>() {
+					@Override
+					public ObservableValue<String> call(CellDataFeatures<ServicosNoOrcamentoVO, String> c) {
+						return new SimpleStringProperty(String.valueOf(c.getValue().getQuantidade()));
+					}
+				});
 		tableServCAD.setItems(FXCollections.observableArrayList(novosServicos));
 		cadOrcamento.setVisible(true);
 	}
@@ -369,6 +436,8 @@ public class TelaOrcamentoController implements Initializable {
 		addAutoPlacaCAD.setText("");
 		pecaIdCAD.setText("");
 		servIdCAD.setText("");
+		pagEfetuadoCAD.setSelected(false);
+		servFinalizadoCAD.setSelected(false);
 		novasPecas.clear();
 		novosServicos.clear();
 		cadOrcamento.setVisible(false);
@@ -377,28 +446,56 @@ public class TelaOrcamentoController implements Initializable {
 	@FXML
 	void addPecaCAD(ActionEvent event) {
 		long novapeca = Long.parseLong(pecaIdCAD.getText());
-		PecasNoOrcamentoVO vo = new PecasNoOrcamentoVO();
-		vo.getPeca().setId(novapeca);
-		vo.getPeca().setNome(new PecaBO().buscarPorId(vo.getPeca()).get(0).getNome());
-		vo.getPeca().setPreco(new PecaBO().buscarPorId(vo.getPeca()).get(0).getPreco());
-		vo.setQuantidade(1);
-		vo.setValor(vo.getPeca().getPreco() * vo.getQuantidade());
+		boolean exist = false;
+		for (int i = 0; i < novasPecas.size(); i++) {
+			if (novasPecas.get(i).getPeca().getId() == novapeca) {
+				int qnt = novasPecas.get(i).getQuantidade() + 1;
+				novasPecas.get(i).setQuantidade(qnt);
+				novasPecas.get(i).setValor(novasPecas.get(i).getValor() * qnt);
+				exist = true;
+				tablePecaCAD.refresh();
+			}
+		}
+		if (!exist) {
+			PecasNoOrcamentoVO vo = new PecasNoOrcamentoVO();
+			vo.getPeca().setId(novapeca);
+			vo.getPeca().setNome(new PecaBO().buscarPorId(vo.getPeca()).get(0).getNome());
+			vo.getPeca().setPreco(new PecaBO().buscarPorId(vo.getPeca()).get(0).getPreco());
+			vo.setQuantidade(1);
+			vo.setValor(vo.getPeca().getPreco() * vo.getQuantidade());
 
-		novasPecas.add(vo);
-		tablePecaCAD.setItems(FXCollections.observableArrayList(novasPecas));
+			novasPecas.add(vo);
+
+			tablePecaCAD.setItems(FXCollections.observableArrayList(novasPecas));
+		}
+
 	}
 
 	@FXML
 	void addServCAD(ActionEvent event) {
 		long novoServico = Long.parseLong(servIdCAD.getText());
-		ServicosNoOrcamentoVO vo = new ServicosNoOrcamentoVO();
-		vo.getServico().setId(novoServico);
-		vo.getServico().setNome(new ServicoBO().buscarPorId(vo.getServico()).get(0).getNome());
-		vo.getServico().setPreco(new ServicoBO().buscarPorId(vo.getServico()).get(0).getPreco());
-		vo.setQuantidade(1);
-		vo.setValor(vo.getServico().getPreco() * vo.getQuantidade());
-		novosServicos.add(vo);
-		tableServCAD.setItems(FXCollections.observableArrayList(novosServicos));
+		boolean exist = false;
+
+		for (int i = 0; i < novosServicos.size(); i++) {
+			if (novosServicos.get(i).getServico().getId() == novoServico) {
+				int qnt = novosServicos.get(i).getQuantidade() + 1;
+				novosServicos.get(i).setQuantidade(qnt);
+				novosServicos.get(i).setValor(novosServicos.get(i).getValor() * qnt);
+				tableServCAD.refresh();
+				exist = true;
+			}
+		}
+
+		if (!exist) {
+			ServicosNoOrcamentoVO vo = new ServicosNoOrcamentoVO();
+			vo.getServico().setId(novoServico);
+			vo.getServico().setNome(new ServicoBO().buscarPorId(vo.getServico()).get(0).getNome());
+			vo.getServico().setPreco(new ServicoBO().buscarPorId(vo.getServico()).get(0).getPreco());
+			vo.setQuantidade(1);
+			vo.setValor(vo.getServico().getPreco() * vo.getQuantidade());
+			novosServicos.add(vo);
+			tableServCAD.setItems(FXCollections.observableArrayList(novosServicos));
+		}
 	}
 
 	@FXML
@@ -406,8 +503,13 @@ public class TelaOrcamentoController implements Initializable {
 		long item = Long.parseLong(pecaIdCAD.getText());
 		for (int i = 0; i < novasPecas.size(); i++) {
 			if (novasPecas.get(i).getPeca().getId() == item) {
-				novasPecas.remove(i);
-				tablePecaCAD.setItems(FXCollections.observableArrayList(novasPecas));
+				if (novasPecas.get(i).getQuantidade() == 1) {
+					novasPecas.remove(i);
+					tablePecaCAD.setItems(FXCollections.observableArrayList(novasPecas));
+				} else {
+					novasPecas.get(i).setQuantidade(novasPecas.get(i).getQuantidade() - 1);
+					tablePecaCAD.refresh();
+				}
 			}
 		}
 
@@ -418,8 +520,13 @@ public class TelaOrcamentoController implements Initializable {
 		long item = Long.parseLong(servIdCAD.getText());
 		for (int i = 0; i < novosServicos.size(); i++) {
 			if (novosServicos.get(i).getServico().getId() == item) {
-				novosServicos.remove(i);
-				tableServCAD.setItems(FXCollections.observableArrayList(novosServicos));
+				if (novosServicos.get(i).getQuantidade() == 1) {
+					novosServicos.remove(i);
+					tableServCAD.setItems(FXCollections.observableArrayList(novosServicos));
+				} else {
+					novosServicos.get(i).setQuantidade(novosServicos.get(i).getQuantidade() - 1);
+					tableServCAD.refresh();
+				}
 			}
 		}
 	}
@@ -427,7 +534,7 @@ public class TelaOrcamentoController implements Initializable {
 	@FXML
 	void finishCad(ActionEvent event) {
 		OrcamentoVO vo = new OrcamentoVO();
-		vo.setValor(0);
+		OrcamentoBO bo = new OrcamentoBO();
 		for (PecasNoOrcamentoVO pecas : novasPecas) {
 			vo.setValor(vo.getValor() + pecas.getValor());
 		}
@@ -436,28 +543,46 @@ public class TelaOrcamentoController implements Initializable {
 			vo.setValor(vo.getValor() + servicos.getValor());
 		}
 
-		vo.getCarro().setPlaca(addAutoPlacaATT.getText().toLowerCase());
+		vo.getCarro().setPlaca(addAutoPlacaCAD.getText().toLowerCase());
 		vo.getCarro().setID(new AutomovelBO().buscarPorPlaca(vo.getCarro()).get(0).getID());
 		vo.getCliente().setId(new AutomovelBO().buscarPorPlaca(vo.getCarro()).get(0).getCliente().getId());
 
 		vo.setDataInicio(new Calendar.Builder().setDate(selectDataIniCAD.getValue().getYear(),
-				selectDataIniCAD.getValue().getMonthValue(), selectDataIniCAD.getValue().getDayOfMonth()).build());
+				selectDataIniCAD.getValue().getMonthValue() - 1, selectDataIniCAD.getValue().getDayOfMonth()).build());
 
 		vo.setDataFim(new Calendar.Builder().setDate(selectDataFimCAD.getValue().getYear(),
-				selectDataFimCAD.getValue().getMonthValue(), selectDataFimCAD.getValue().getDayOfMonth()).build());
-		new OrcamentoBO().inserir(vo);
+				selectDataFimCAD.getValue().getMonthValue() - 1, selectDataFimCAD.getValue().getDayOfMonth()).build());
+		bo.inserir(vo);
+		vo.setId(bo.retornarId(vo).getId());
 
 		if (pagEfetuadoCAD.isSelected()) {
-
+			vo.setPagamentoEfetuado(true);
+			bo.registrarPagamento(vo);
 		}
 
 		if (servFinalizadoCAD.isSelected()) {
-
+			vo.setServicoConcluido(true);
+			bo.finalizarServico(vo);
 		}
+
+		PecasNoOrcamentoBO bopecas = new PecasNoOrcamentoBO();
+		for (int i = 0; i < novasPecas.size(); i++) {
+			novasPecas.get(i).getOrcamento().setId(vo.getId());
+			bopecas.inserir(novasPecas.get(i));
+		}
+
+		ServicosNoOrcamentoBO boserv = new ServicosNoOrcamentoBO();
+		for (int i = 0; i < novosServicos.size(); i++) {
+			novosServicos.get(i).getOrcamento().setId(vo.getId());
+			boserv.inserir(novosServicos.get(i));
+		}
+		tableOrcamento.setItems(FXCollections.observableArrayList(new OrcamentoBO().listar()));
 		closeCad(event);
 	}
 
 	// metodos atualizar
+	List<PecasNoOrcamentoVO> novasPecasATT = new ArrayList<PecasNoOrcamentoVO>();
+	List<ServicosNoOrcamentoVO> novosServicosATT = new ArrayList<ServicosNoOrcamentoVO>();
 
 	@FXML
 	void openAtt(ActionEvent event) {
@@ -466,32 +591,220 @@ public class TelaOrcamentoController implements Initializable {
 
 	@FXML
 	void closeAtt(ActionEvent event) {
+		novosServicosATT.clear();
+		novasPecasATT.clear();
 		addAutoPlacaATT.setText("");
+		pecaIdATT.setText("");
+		servIdATT.setText("");
+		servFinalizadoATT.setSelected(false);
+		pagEfetuadoATT.setSelected(false);
 		attOrcamento.setVisible(false);
 	}
 
 	@FXML
 	void addPecaATT(ActionEvent event) {
+		long novapeca = Long.parseLong(pecaIdATT.getText());
+		boolean exist = false;
+		for (int i = 0; i < novasPecasATT.size(); i++) {
+			if (novasPecasATT.get(i).getPeca().getId() == novapeca) {
+				int qnt = novasPecasATT.get(i).getQuantidade() + 1;
+				novasPecasATT.get(i).setQuantidade(qnt);
+				novasPecasATT.get(i).setValor(novasPecasATT.get(i).getValor() * qnt);
+				exist = true;
+				tablePecaATT.refresh();
+			}
+		}
+		if (!exist) {
+			PecasNoOrcamentoVO vo = new PecasNoOrcamentoVO();
+			vo.getPeca().setId(novapeca);
+			vo.getPeca().setNome(new PecaBO().buscarPorId(vo.getPeca()).get(0).getNome());
+			vo.getPeca().setPreco(new PecaBO().buscarPorId(vo.getPeca()).get(0).getPreco());
+			vo.getOrcamento().setId(orcamentoATT.getId());
+			vo.setQuantidade(1);
+			vo.setValor(vo.getPeca().getPreco() * vo.getQuantidade());
+
+			novasPecasATT.add(vo);
+
+			tablePecaATT.setItems(FXCollections.observableArrayList(novasPecasATT));
+		}
 
 	}
 
 	@FXML
 	void addServATT(ActionEvent event) {
+		long novoServico = Long.parseLong(servIdATT.getText());
+		boolean exist = false;
 
+		for (int i = 0; i < novosServicosATT.size(); i++) {
+			if (novosServicosATT.get(i).getServico().getId() == novoServico) {
+				int qnt = novosServicosATT.get(i).getQuantidade() + 1;
+				novosServicosATT.get(i).setQuantidade(qnt);
+				novosServicosATT.get(i).setValor(novosServicosATT.get(i).getValor() * qnt);
+				tableServATT.refresh();
+				exist = true;
+			}
+		}
+
+		if (!exist) {
+			ServicosNoOrcamentoVO vo = new ServicosNoOrcamentoVO();
+			vo.getServico().setId(novoServico);
+			vo.getServico().setNome(new ServicoBO().buscarPorId(vo.getServico()).get(0).getNome());
+			vo.getServico().setPreco(new ServicoBO().buscarPorId(vo.getServico()).get(0).getPreco());
+			vo.setQuantidade(1);
+			vo.setValor(vo.getServico().getPreco() * vo.getQuantidade());
+			vo.getOrcamento().setId(orcamentoATT.getId());
+			novosServicosATT.add(vo);
+			tableServATT.setItems(FXCollections.observableArrayList(novosServicosATT));
+		}
 	}
 
 	@FXML
 	void delPecaATT(ActionEvent event) {
-
+		long item = Long.parseLong(pecaIdATT.getText());
+		for (int i = 0; i < novasPecasATT.size(); i++) {
+			if (novasPecasATT.get(i).getPeca().getId() == item) {
+				if (novasPecasATT.get(i).getQuantidade() == 1) {
+					novasPecasATT.remove(i);
+					tablePecaATT.setItems(FXCollections.observableArrayList(novasPecasATT));
+				} else {
+					novasPecasATT.get(i).setQuantidade(novasPecasATT.get(i).getQuantidade() - 1);
+					tablePecaATT.refresh();
+				}
+			}
+		}
 	}
 
 	@FXML
 	void delServATT(ActionEvent event) {
-
+		long item = Long.parseLong(servIdATT.getText());
+		for (int i = 0; i < novosServicosATT.size(); i++) {
+			if (novosServicosATT.get(i).getServico().getId() == item) {
+				if (novosServicosATT.get(i).getQuantidade() == 1) {
+					novosServicosATT.remove(i);
+					tableServATT.setItems(FXCollections.observableArrayList(novosServicosATT));
+				} else {
+					novosServicosATT.get(i).setQuantidade(novosServicosATT.get(i).getQuantidade() - 1);
+					tableServATT.refresh();
+				}
+			}
+		}
 	}
+
+	OrcamentoVO orcamentoATT = new OrcamentoVO();
 
 	@FXML
 	void finishAtt(ActionEvent event) {
+		// inserir novas peças
+		PecasNoOrcamentoBO pecas = new PecasNoOrcamentoBO();
+
+		PecasNoOrcamentoVO voPeca = new PecasNoOrcamentoVO();
+		voPeca.getOrcamento().setId(orcamentoATT.getId());
+		Double valor = 0.0;
+
+		for (int i = 0; i < novasPecasATT.size(); i++) {
+			valor += novasPecasATT.get(i).getValor();
+
+		}
+		try {
+			List<PecasNoOrcamentoVO> pecasAtuais = pecas.buscarPorOrcId(voPeca);
+
+			for (int i = 0; i < novasPecasATT.size(); i++) {
+				for (int j = 0; j < pecasAtuais.size(); j++) {
+					if (novasPecasATT.get(i).getId() == pecasAtuais.get(j).getId()) {
+						if (novasPecasATT.get(i).getQuantidade() != pecasAtuais.get(j).getQuantidade()) {
+							pecas.editarQuantidade(novasPecasATT.get(i));
+						}
+						if (novasPecasATT.get(i).getValor() != pecasAtuais.get(j).getValor()) {
+							pecas.editarValor(novasPecasATT.get(i));
+						}
+						novasPecasATT.remove(i);
+					}
+				}
+			}
+		} catch (Exception e) {
+		}
+
+		for (int i = 0; i < novasPecasATT.size(); i++) {
+			pecas.inserir(novasPecasATT.get(i));
+		}
+
+		// inserir novos servicos
+		ServicosNoOrcamentoBO serv = new ServicosNoOrcamentoBO();
+
+		ServicosNoOrcamentoVO voServ = new ServicosNoOrcamentoVO();
+		voServ.getOrcamento().setId(orcamentoATT.getId());
+		for (int i = 0; i < novosServicosATT.size(); i++) {
+			valor += novosServicosATT.get(i).getValor();
+		}
+		try {
+			List<ServicosNoOrcamentoVO> servAtuais = serv.buscarPorOrcId(voServ);
+
+			for (int i = 0; i < novosServicosATT.size(); i++) {
+				for (int j = 0; j < servAtuais.size(); j++) {
+					if (novosServicosATT.get(i).getId() == servAtuais.get(j).getId()) {
+						if (novosServicosATT.get(i).getQuantidade() != servAtuais.get(j).getQuantidade()) {
+							serv.editarQuantidade(novosServicosATT.get(i));
+						}
+						if (novosServicosATT.get(i).getValor() != servAtuais.get(j).getValor()) {
+							serv.editarValor(novosServicosATT.get(i));
+						}
+						novosServicosATT.remove(i);
+					}
+				}
+			}
+		} catch (Exception e) {
+		}
+
+		for (int i = 0; i < novosServicosATT.size(); i++) {
+			serv.inserir(novosServicosATT.get(i));
+		}
+
+		OrcamentoBO boOrca = new OrcamentoBO();
+
+		if (servFinalizadoATT.isSelected() != orcamentoATT.getServicoConcluido()) {
+			orcamentoATT.setServicoConcluido(servFinalizadoATT.isSelected());
+			boOrca.finalizarServico(orcamentoATT);
+		}
+
+		if (pagEfetuadoATT.isSelected() != orcamentoATT.getPagamentoEfetuado()) {
+			orcamentoATT.setPagamentoEfetuado(pagEfetuadoATT.isSelected());
+			boOrca.registrarPagamento(orcamentoATT);
+		}
+		// atualizar datas
+		Calendar inicialATT = new Calendar.Builder().setDate(selectDataIniATT.getValue().getYear(),
+				selectDataIniATT.getValue().getMonthValue() - 1, selectDataIniATT.getValue().getDayOfMonth()).build();
+
+		Calendar finalATT = new Calendar.Builder().setDate(selectDataFimATT.getValue().getYear(),
+				selectDataFimATT.getValue().getMonthValue() - 1, selectDataFimATT.getValue().getDayOfMonth()).build();
+
+		if (inicialATT != orcamentoATT.getDataInicio()) {
+			orcamentoATT.setDataInicio(inicialATT);
+			boOrca.editarDataInicial(orcamentoATT);
+		}
+
+		if (finalATT != orcamentoATT.getDataFim()) {
+			orcamentoATT.setDataFim(finalATT);
+			boOrca.editarDataFinal(orcamentoATT);
+		}
+
+		String placa = addAutoPlacaATT.getText();
+
+		if (!placa.equals(orcamentoATT.getCarro().getPlaca())) {
+			orcamentoATT.getCarro().setPlaca(placa);
+			orcamentoATT.getCarro().setID(new AutomovelBO().buscarPorPlaca(orcamentoATT.getCarro()).get(0).getID());
+			orcamentoATT.getCliente()
+					.setId(new AutomovelBO().buscarPorPlaca(orcamentoATT.getCarro()).get(0).getCliente().getId());
+			boOrca.editarAutomovelId(orcamentoATT);
+			boOrca.editarClienteId(orcamentoATT);
+		}
+
+		if (valor != orcamentoATT.getValor()) {
+			orcamentoATT.setValor(valor);
+			boOrca.editarValor(orcamentoATT);
+		}
+
+		tableOrcamento.setItems(FXCollections.observableArrayList(new OrcamentoBO().listar()));
+
 		closeAtt(event);
 	}
 

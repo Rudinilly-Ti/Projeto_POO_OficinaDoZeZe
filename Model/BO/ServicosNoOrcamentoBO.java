@@ -60,6 +60,35 @@ public class ServicosNoOrcamentoBO {
 		return lista;
 	}
 
+	public List<ServicosNoOrcamentoVO> buscarPorOrcId(ServicosNoOrcamentoVO vo) throws FindException {
+		ResultSet rs;
+		List<ServicosNoOrcamentoVO> lista = new ArrayList<ServicosNoOrcamentoVO>();
+		try {
+			rs = dao.findByOrcamentoId(vo);
+			if (!rs.next()) {
+				throw new FindException("Não foi encotrado nenhum serviço com esse Id.\n");
+			} else {
+				rs = dao.findByOrcamentoId(vo);
+				while (rs.next()) {
+					ServicosNoOrcamentoVO vo2 = new ServicosNoOrcamentoVO();
+					vo2.setId(rs.getLong("id"));
+					vo2.setQuantidade(rs.getInt("quantidade"));
+					vo2.setValor(rs.getDouble("valor"));
+					vo2.getOrcamento().setId(rs.getLong("id_orcamento"));
+					vo2.getServico().setId(rs.getLong("id_servico"));
+					ServicoBO boServico = new ServicoBO();
+					List<ServicoVO> peca = boServico.buscarPorId(vo2.getServico());
+					vo2.getServico().setNome(peca.get(0).getNome());
+					vo2.getServico().setPreco(peca.get(0).getPreco());
+					lista.add(vo2);
+				}
+			}
+		} catch (Exception e) {
+			throw new FindException(e.getMessage());
+		}
+		return lista;
+	}
+
 	public List<ServicosNoOrcamentoVO> buscarPorAutomovel(AutomovelVO voCar) throws FindException {
 		OrcamentoVO voOrc = new OrcamentoVO();
 		OrcamentoDAO daoOrc = new OrcamentoDAO();

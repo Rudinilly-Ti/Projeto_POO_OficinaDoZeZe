@@ -21,16 +21,15 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO> {
         try {
             ResultSet rs = dao.findByPeriodo(vo);
             while (rs.next()) {
-                if(rs.getLong("id_cliente") == vo.getCliente().getId()) {
-                    if(rs.getLong("id_automovel") == vo.getCarro().getID()) {
-                        repetido = true;    
-                    }    
+                if (rs.getLong("id_cliente") == vo.getCliente().getId()) {
+                    if (rs.getLong("id_automovel") == vo.getCarro().getID()) {
+                        repetido = true;
+                    }
                 }
             }
             if (!repetido) {
                 dao.inserir(vo);
-            }
-            else{
+            } else {
                 throw new InsertException("Já existe um orçamento com esses dados!");
             }
         } catch (Exception e) {
@@ -54,6 +53,8 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO> {
                 dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
                 vo.setDataFim(dataFim);
                 vo.setValor(rs.getDouble("valor"));
+                vo.setPagamentoEfetuado(rs.getBoolean("pagamentoefetuado"));
+                vo.setServicoConcluido(rs.getBoolean("servicoconcluido"));
                 vo.getCarro().setID(rs.getLong("id_automovel"));
                 // settar automovel
                 AutomovelBO boAuto = new AutomovelBO();
@@ -96,6 +97,8 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO> {
                     vo2.setDataInicio(dataIni);
                     dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
                     vo2.setDataFim(dataFim);
+                    vo2.setPagamentoEfetuado(rs.getBoolean("pagamentoefetuado"));
+                    vo2.setServicoConcluido(rs.getBoolean("servicoconcluido"));
                     vo2.setValor(rs.getDouble("valor"));
                     vo2.getCarro().setID(rs.getLong("id_automovel"));
                     // settar automovel
@@ -141,6 +144,8 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO> {
                     dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
                     vo2.setDataFim(dataFim);
                     vo2.setValor(rs.getDouble("valor"));
+                    vo2.setPagamentoEfetuado(rs.getBoolean("pagamentoefetuado"));
+                    vo2.setServicoConcluido(rs.getBoolean("servicoconcluido"));
                     vo2.getCarro().setID(rs.getLong("id_automovel"));
                     // settar automovel
                     AutomovelBO boAuto = new AutomovelBO();
@@ -189,6 +194,8 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO> {
                     dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
                     vo2.setDataFim(dataFim);
                     vo2.setValor(rs.getDouble("valor"));
+                    vo2.setPagamentoEfetuado(rs.getBoolean("pagamentoefetuado"));
+                    vo2.setServicoConcluido(rs.getBoolean("servicoconcluido"));
                     vo2.getCarro().setID(rs.getLong("id_automovel"));
                     // settar automovel
                     AutomovelBO boAuto = new AutomovelBO();
@@ -237,6 +244,8 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO> {
                     dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
                     vo2.setDataFim(dataFim);
                     vo2.setValor(rs.getDouble("valor"));
+                    vo2.setPagamentoEfetuado(rs.getBoolean("pagamentoefetuado"));
+                    vo2.setServicoConcluido(rs.getBoolean("servicoconcluido"));
                     vo2.getCarro().setID(rs.getLong("id_automovel"));
                     // settar automovel
                     AutomovelBO boAuto = new AutomovelBO();
@@ -281,6 +290,8 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO> {
                     dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
                     vo2.setDataFim(dataFim);
                     vo2.setValor(rs.getDouble("valor"));
+                    vo2.setPagamentoEfetuado(rs.getBoolean("pagamentoefetuado"));
+                    vo2.setServicoConcluido(rs.getBoolean("servicoconcluido"));
                     vo2.getCarro().setID(rs.getLong("id_automovel"));
                     // settar automovel
                     AutomovelBO boAuto = new AutomovelBO();
@@ -325,6 +336,8 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO> {
                     dataFim.setTimeInMillis(rs.getDate("data_fim").getTime());
                     vo2.setDataFim(dataFim);
                     vo2.setValor(rs.getDouble("valor"));
+                    vo2.setPagamentoEfetuado(rs.getBoolean("pagamentoefetuado"));
+                    vo2.setServicoConcluido(rs.getBoolean("servicoconcluido"));
                     vo2.getCarro().setID(rs.getLong("id_automovel"));
                     // settar automovel
                     AutomovelBO boAuto = new AutomovelBO();
@@ -400,18 +413,19 @@ public class OrcamentoBO implements BaseInterBO<OrcamentoVO> {
         }
     }
 
-    //método usado para retornar o id de um orçamento a partir de seus demais atributos
+    // método usado para retornar o id de um orçamento a partir de seus demais
+    // atributos
     public OrcamentoVO retornarId(OrcamentoVO vo) throws InsertException {
         OrcamentoVO vo2 = new OrcamentoVO();
         try {
             ResultSet rs = dao.findByPeriodo(vo);
             while (rs.next()) {
-                if(rs.getLong("id_cliente") == vo.getCliente().getId()) {
-                    if(rs.getLong("id_automovel") == vo.getCarro().getID()) {
-                        vo2.setId(rs.getLong("id"));    
-                    }    
+                if (rs.getLong("id_cliente") == vo.getCliente().getId()) {
+                    if (rs.getLong("id_automovel") == vo.getCarro().getID()) {
+                        vo2.setId(rs.getLong("id"));
+                    }
                 }
-            } 
+            }
         } catch (Exception e) {
             throw new FindException(e.getMessage());
         }
