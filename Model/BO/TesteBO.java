@@ -2,11 +2,13 @@ package Model.BO;
 
 // import java.util.Calendar;
 // import Model.VO.OrcamentoVO;
+// import Model.VO.PecaVO;
+// import Model.VO.PecasNoOrcamentoVO;
 
 public class TesteBO {
   public static void main(String[] args) {
-  // OrcamentoBO bo = new OrcamentoBO();
-  // OrcamentoVO vo = new OrcamentoVO();
+  // PecasNoOrcamentoBO bo = new PecasNoOrcamentoBO();
+  // PecasNoOrcamentoVO vo = new PecasNoOrcamentoVO();
 
   // Calendar dataIni = Calendar.getInstance();
   // Calendar dataFim = Calendar.getInstance();
@@ -27,8 +29,15 @@ public class TesteBO {
 
   // vo.setValor(159.23);
 
-  // OrcamentoVO vo2 = bo.retornarId(vo);
-  // vo.setId(vo2.getId());
-  // bo.editarValor(vo);
+  // vo.getOrcamento().setId(new Long(1));
+  // PecaVO pvo = new PecaVO();
+  // PecaBO pbo = new PecaBO();
+  // for(PecasNoOrcamentoVO vo2 : bo.buscarPorOrcId(vo)){
+  //   pvo.setId(vo2.getPeca().getId());
+  //   for(PecaVO pvo2 : pbo.buscarPorId(pvo)){
+  //     System.out.println(pvo2.getNome());
+  //   }
+  // }
+
   }
 }
