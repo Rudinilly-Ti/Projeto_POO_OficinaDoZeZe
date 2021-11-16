@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
-
+import com.itextpdf.kernel.pdf.*;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
 import Exceptions.FindException;
 import Model.BO.AutomovelBO;
 import Model.BO.OrcamentoBO;
@@ -281,6 +283,8 @@ public class TelaOrcamentoController implements Initializable {
 
 	@FXML
 	private TableView<OrcamentoVO> tableOrcamento;
+
+	public static final String DEST = "view/VE/relatorio";
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -889,8 +893,51 @@ public class TelaOrcamentoController implements Initializable {
 	}
 
 	@FXML
-	void gerarRelatorio(ActionEvent event) {
-		closeRelatorio(event);
+	void gerarRelatorio(ActionEvent event) throws Exception{
+		
+		Calendar calIni = Calendar.getInstance();
+		Calendar calFim = Calendar.getInstance();
+		Double valorTotal = 0.0;
+		OrcamentoVO vo = new OrcamentoVO();
+		OrcamentoBO bo = new OrcamentoBO();
+
+		calIni.set(Calendar.DAY_OF_MONTH, dataInicial.getValue().getDayOfMonth());
+		calIni.set(Calendar.MONTH, (dataInicial.getValue().getMonthValue() - 1));
+		calIni.set(Calendar.YEAR, dataInicial.getValue().getYear());
+
+		calFim.set(Calendar.DAY_OF_MONTH, dataFinal.getValue().getDayOfMonth());
+		calFim.set(Calendar.MONTH, (dataFinal.getValue().getMonthValue() - 1));
+		calFim.set(Calendar.YEAR, dataFinal.getValue().getYear());
+
+		vo.setDataInicio(calIni);
+		vo.setDataFim(calFim);
+
+		PdfDocument pdf = new PdfDocument(new PdfWriter(DEST + dataInicial.getEditor().getText() +  
+		" - " + dataFinal.getEditor().getText() + ".pdf"));
+    	Document document = new Document(pdf);
+		String line = "**Oficina do Zezé**\n\nDATA DE INÍCIO: " + dataInicial.getEditor().getText() 
+			+ "\nDATA FINAL: " + dataFinal.getEditor().getText() + "\n--------------------\n";
+		document.add(new Paragraph(line));
+
+		for(OrcamentoVO vo2 : bo.buscarPorPeriodo(vo)){
+			valorTotal += vo2.getValor();
+
+			line = "Placa do carro : " + vo2.getCarro().getPlaca() + 
+				"\nNome do cliente: " + vo2.getCliente().getNome() + 
+				" | CPF: " + vo2.getCliente().getCPF() + 
+				"\nValor: R$" + vo2.getValor() + 
+				"Data de início: " + 
+				new SimpleDateFormat("dd/MM/yyyy").format(vo2.getDataInicio().getTime()) + 
+				"Data de finalização: " + 
+				new SimpleDateFormat("dd/MM/yyyy").format(vo2.getDataFim().getTime()) + 
+				"\n--------------------\n"
+			;
+			document.add(new Paragraph(line));
+		}
+		line = "\nValor total no período: R$" + valorTotal.toString();
+		document.add(new Paragraph(line));
+    	
+    	document.close();
 	}
 
 	@FXML
