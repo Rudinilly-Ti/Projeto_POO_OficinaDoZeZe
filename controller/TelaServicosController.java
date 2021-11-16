@@ -332,13 +332,18 @@ public class TelaServicosController implements Initializable {
     	ServicoBO bo = new ServicoBO();
     	
     	vo.setNome(NomeServicoNovo.getText());
-    	vo.setPreco(vo.fromStringToDouble(ValorServicoNovo.getText()));
+    	vo.setPreco(Double.parseDouble(ValorServicoNovo.getText()));
     	bo.inserir(vo);
+        voltarTelaServico(event);
     }
 
     @FXML
     void voltarTelaServico(ActionEvent event) throws Exception { // volta para tela de serviço
-    	Telas.telaServico();
+    	NomeServicoNovo.setText("");
+        ValorServicoNovo.setText("");
+        telaDeCadastro.setVisible(false);
+        TableViewServico.setVisible(true);
+        TableViewServico.setItems(FXCollections.observableArrayList(new ServicoBO().listar()));
     }
 
     //sair
