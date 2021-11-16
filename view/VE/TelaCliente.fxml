@@ -166,7 +166,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Label layoutX="124.0" layoutY="48.0" prefHeight="35.0" prefWidth="240.0" text="Listagem de Clientes">
+            <Label layoutX="124.0" layoutY="48.0" prefHeight="35.0" prefWidth="261.0" text="Listagem de Clientes">
                <font>
                   <Font size="24.0" />
                </font>
@@ -274,15 +274,15 @@
                   <TextField fx:id="idCliente" disable="true" layoutX="703.0" layoutY="366.0" visible="false" />
                </children>
             </Pane>
-            <Pane fx:id="deletarItem" layoutX="378.0" layoutY="101.0" prefHeight="110.0" prefWidth="261.0" visible="false">
+            <Pane fx:id="deletarItem" layoutX="371.0" layoutY="101.0" prefHeight="110.0" prefWidth="288.0" visible="false">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="110.0" stroke="BLACK" strokeType="INSIDE" width="261.0" />
-                  <Label layoutX="11.0" layoutY="15.0" prefHeight="35.0" prefWidth="240.0" text="Deseja realmente deletar este item?">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="110.0" stroke="BLACK" width="288.0" />
+                  <Label layoutX="10.0" layoutY="14.0" prefHeight="35.0" prefWidth="281.0" text="Deseja realmente deletar este item?">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Button fx:id="confirmarDeletarButton" layoutX="27.0" layoutY="71.0" mnemonicParsing="false" onAction="#confirmarDeletar" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #800;" text="Sim" textFill="WHITE">
+                  <Button fx:id="confirmarDeletarButton" layoutX="14.0" layoutY="71.0" mnemonicParsing="false" onAction="#confirmarDeletar" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #800;" text="Sim" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -290,7 +290,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="cancelarDeletarButton" layoutX="146.0" layoutY="71.0" mnemonicParsing="false" onAction="#cancelarDeletar" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #a4a4a4;" text="Não" textFill="WHITE">
+                  <Button fx:id="cancelarDeletarButton" layoutX="177.0" layoutY="71.0" mnemonicParsing="false" onAction="#cancelarDeletar" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #a4a4a4;" text="Não" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -359,7 +359,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button fx:id="pesquisarButton" layoutX="281.0" layoutY="36.0" mnemonicParsing="false" onAction="#pesquisarCPF" prefHeight="38.0" prefWidth="32.0" style="-fx-background-color: transparent;">
+            <Button fx:id="pesquisarButton" layoutX="300.0" layoutY="37.0" mnemonicParsing="false" onAction="#pesquisarCPF" prefHeight="38.0" prefWidth="32.0" style="-fx-background-color: transparent;">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
