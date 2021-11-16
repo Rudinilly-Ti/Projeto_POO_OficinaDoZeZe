@@ -180,7 +180,8 @@ public class TelaServicosController implements Initializable {
 
     @FXML
     void cancelar(ActionEvent event) throws Exception {
-    	Telas.telaServico();
+    	idItemDeletar.setText("");
+		dllPane.setVisible(false);
     }
     
     @FXML
@@ -189,7 +190,8 @@ public class TelaServicosController implements Initializable {
     	ServicoBO bo = new ServicoBO();
     	vo.setId((long) Integer.parseInt(idItemDeletar.getText()));
     	bo.deletar(vo);
-    	Telas.telaServico();
+    	TableViewServico.setItems(FXCollections.observableArrayList(new ServicoBO().listar()));
+    	cancelar(event);
     }
 
     // @FXML

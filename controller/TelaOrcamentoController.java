@@ -3,11 +3,12 @@ package controller;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import Exceptions.FindException;
 import Model.BO.AutomovelBO;
 import Model.BO.OrcamentoBO;
 import Model.BO.PecaBO;
@@ -32,12 +33,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
-import javafx.util.converter.LocalDateStringConverter;
 import view.Buttons;
 import view.Telas;
 
@@ -51,6 +50,18 @@ public class TelaOrcamentoController implements Initializable {
 
 	@FXML
 	private TextField addAutoPlacaATT;
+
+	@FXML
+    private Pane dllPane;
+
+	@FXML
+    private Button buttonCancelar;
+
+    @FXML
+    private Button buttonDeletar;
+
+    @FXML
+    private TextField idItemDeletar;
 
 	@FXML
 	private DatePicker dataFim;
@@ -340,6 +351,7 @@ public class TelaOrcamentoController implements Initializable {
 			orcamentoATT.setServicoConcluido(orc.getServicoConcluido());
 			orcamentoATT.setValor(orc.getValor());
 
+			openRelatorioButton.setVisible(false);
 			attOrcamento.setVisible(true);
 			idOrcamento.setText(orc.getId().toString());
 			addAutoPlacaATT.setText(orc.getCarro().getPlaca());
@@ -376,10 +388,9 @@ public class TelaOrcamentoController implements Initializable {
 
 		});
 
-		Buttons.initButtons(delCol, 20, DEL_ICON, "svg-red", (OrcamentoVO auto, ActionEvent event) -> {
-			cadOrcamento.setVisible(true);
-			addAutoPlacaCAD.setText(auto.getCarro().getPlaca());
-			// espaço para adicionar as peças e serviços no tableView
+		Buttons.initButtons(delCol, 20, DEL_ICON, "svg-red", (OrcamentoVO orc, ActionEvent event) -> {
+			dllPane.setVisible(true);
+			idItemDeletar.setText(orc.getId().toString());
 		});
 	}
 
@@ -387,6 +398,41 @@ public class TelaOrcamentoController implements Initializable {
 	public void receberLogin(String login) {
 		userLogin.setText(login);
 	}
+
+	@FXML
+    void cancelar(ActionEvent event) throws Exception {
+    	idItemDeletar.setText("");
+		dllPane.setVisible(false);
+    }
+    
+    @FXML
+    void deletar(ActionEvent event) throws Exception {
+    	OrcamentoVO vo = new OrcamentoVO();
+		PecasNoOrcamentoVO pVo = new PecasNoOrcamentoVO();
+		ServicosNoOrcamentoVO sVo = new ServicosNoOrcamentoVO();
+
+		vo.setId((long) Integer.parseInt(idItemDeletar.getText()));
+		pVo.setOrcamento(vo);
+		sVo.setOrcamento(vo);
+		
+		try {
+			for(PecasNoOrcamentoVO pVo2 : new PecasNoOrcamentoBO().buscarPorOrcId(pVo)){
+				new PecasNoOrcamentoBO().deletar(pVo2);
+			}
+	
+			for(ServicosNoOrcamentoVO sVo2 : new ServicosNoOrcamentoBO().buscarPorOrcId(sVo)){
+				new ServicosNoOrcamentoBO().deletar(sVo2);
+			}
+		} catch (FindException e) {
+			
+		}
+
+    	OrcamentoBO bo = new OrcamentoBO();
+    	vo.setId((long) Integer.parseInt(idItemDeletar.getText()));
+    	bo.deletar(vo);
+		tableOrcamento.setItems(FXCollections.observableArrayList(new OrcamentoBO().listar()));
+    	cancelar(event);
+    }
 
 	// metodos cadastrar
 	List<PecasNoOrcamentoVO> novasPecas = new ArrayList<PecasNoOrcamentoVO>();
@@ -428,6 +474,7 @@ public class TelaOrcamentoController implements Initializable {
 					}
 				});
 		tableServCAD.setItems(FXCollections.observableArrayList(novosServicos));
+		openRelatorioButton.setVisible(false);
 		cadOrcamento.setVisible(true);
 	}
 
@@ -441,6 +488,7 @@ public class TelaOrcamentoController implements Initializable {
 		novasPecas.clear();
 		novosServicos.clear();
 		cadOrcamento.setVisible(false);
+		openRelatorioButton.setVisible(true);
 	}
 
 	@FXML
@@ -586,7 +634,7 @@ public class TelaOrcamentoController implements Initializable {
 
 	@FXML
 	void openAtt(ActionEvent event) {
-		attOrcamento.setVisible(true);
+		attOrcamento.setVisible(true);	
 	}
 
 	@FXML
@@ -599,6 +647,7 @@ public class TelaOrcamentoController implements Initializable {
 		servFinalizadoATT.setSelected(false);
 		pagEfetuadoATT.setSelected(false);
 		attOrcamento.setVisible(false);
+		openRelatorioButton.setVisible(true);
 	}
 
 	@FXML
@@ -833,30 +882,29 @@ public class TelaOrcamentoController implements Initializable {
 
 	@FXML
 	void pesquisarPeriodo(ActionEvent event) throws Exception {
-		OrcamentoVO vo = new OrcamentoVO();
-		OrcamentoBO bo = new OrcamentoBO();
+		String textDataIni = dataIni.getEditor().getText();
+		String textDataFim = dataFim.getEditor().getText();
 
-		if (dataFim.getValue().toString().isBlank() || dataFim.getValue().toString() == null) {
-			tableOrcamento.setItems(FXCollections.observableArrayList(bo.listar()));
-
-		} else {
+		if (textDataIni != null && textDataFim != null) {
+			OrcamentoVO vo = new OrcamentoVO();
+			OrcamentoBO bo = new OrcamentoBO();
 
 			Calendar dataIn = Calendar.getInstance();
 			dataIn.set(Calendar.DAY_OF_MONTH, dataIni.getValue().getDayOfMonth());
-			dataIn.set(Calendar.MONTH, (dataIni.getValue().getMonthValue() - 1));// Subtrai o valor para atender a
-																																						// escala de meses do Calendar
+			dataIn.set(Calendar.MONTH, (dataIni.getValue().getMonthValue() - 1));
 			dataIn.set(Calendar.YEAR, dataIni.getValue().getYear());
 
 			Calendar dataFi = Calendar.getInstance();
 			dataFi.set(Calendar.DAY_OF_MONTH, dataFim.getValue().getDayOfMonth());
-			dataFi.set(Calendar.MONTH, (dataFim.getValue().getMonthValue() - 1));// Subtrai o valor para atender a
-																																						// escala de meses do Calendar
+			dataFi.set(Calendar.MONTH, (dataFim.getValue().getMonthValue() - 1));
 			dataFi.set(Calendar.YEAR, dataFim.getValue().getYear());
 
 			vo.setDataInicio(dataIn);
-			vo.setDataInicio(dataFi);
+			vo.setDataFim(dataFi);
 
 			tableOrcamento.setItems(FXCollections.observableArrayList(bo.buscarPorPeriodo(vo)));
+		} else {
+			tableOrcamento.setItems(FXCollections.observableArrayList(new OrcamentoBO().listar()));
 		}
 	}
 

@@ -396,7 +396,8 @@ public class TelaPecasController implements Initializable {
 
     @FXML
     void cancelar(ActionEvent event) throws Exception {
-        Telas.telaPecas();
+        idItemDeletar.setText("");
+		paneDeletar.setVisible(false);
     }
 
     @FXML
@@ -405,7 +406,8 @@ public class TelaPecasController implements Initializable {
         PecaBO bo = new PecaBO();
         vo.setId((long) Integer.parseInt(idItemDeletar.getText()));
         bo.deletar(vo);
-        Telas.telaPecas();
+        tablePecas.setItems(FXCollections.observableArrayList(new PecaBO().listar()));
+    	cancelar(event);
     }
 
 }

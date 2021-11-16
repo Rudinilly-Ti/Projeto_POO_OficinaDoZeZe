@@ -208,6 +208,14 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <Button fx:id="openRelatorioButton" layoutX="1265.0" layoutY="181.0" mnemonicParsing="false" onAction="#openRelatorio" prefHeight="53.0" prefWidth="131.0" style="-fx-background-color: #800;" text="Gerar Relatorio" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
       <TableView fx:id="tableOrcamento" layoutX="356.0" layoutY="419.0" prefHeight="268.0" prefWidth="703.0">
         <columns>
           <TableColumn fx:id="placaCol" prefWidth="120.0" text="Placa do veiculo" />
@@ -228,14 +236,6 @@
          </graphic>
          <font>
             <Font size="18.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="openRelatorioButton" layoutX="1265.0" layoutY="181.0" mnemonicParsing="false" onAction="#openRelatorio" prefHeight="53.0" prefWidth="131.0" style="-fx-background-color: #800;" text="Gerar Relatorio" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="15.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -575,5 +575,13 @@
             <Font size="18.0" />
          </font>
       </Text>
+      <Pane fx:id="dllPane" layoutX="572.0" layoutY="401.0" prefHeight="100.0" prefWidth="308.0" style="-fx-background-color: ffff;" visible="false">
+         <children>
+            <Label layoutX="26.0" layoutY="1.0" prefHeight="27.0" prefWidth="257.0" text="Deseja realemente deletar este item ?" />
+            <Button fx:id="buttonDeletar" layoutX="77.0" layoutY="64.0" mnemonicParsing="false" onAction="#deletar" prefHeight="28.0" prefWidth="50.0" style="-fx-background-color: #800000;" text="Sim" textFill="#d0d0d0" />
+            <Button fx:id="buttonCancelar" layoutX="181.0" layoutY="63.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="30.0" prefWidth="50.0" style="-fx-background-color: d0d0d0;" text="Nao" textFill="MAROON" />
+            <TextField fx:id="idItemDeletar" layoutX="133.0" layoutY="28.0" prefHeight="24.0" prefWidth="44.0" style="-fx-background-color: transparent;" />
+         </children>
+      </Pane>
    </children>
 </Pane>
