@@ -9,17 +9,16 @@ import Model.DAO.AutomovelDAO;
 import Model.VO.AutomovelVO;
 import Model.VO.ClienteVO;
 
-public class AutomovelBO implements BaseInterBO<AutomovelVO>{
+public class AutomovelBO implements BaseInterBO<AutomovelVO> {
     AutomovelDAO dao = new AutomovelDAO();
-    
-    //inserir
-    public void inserir(AutomovelVO vo) throws InsertException{
+
+    // inserir
+    public void inserir(AutomovelVO vo) throws InsertException {
         try {
             ResultSet rs = dao.findByPlaca(vo);
             if (rs.next()) {
                 throw new InsertException("Impossível cadastrar, pois já existe automóvel com essa placa.\n");
-            }
-            else{
+            } else {
                 dao.inserir(vo);
             }
         } catch (Exception e) {
@@ -27,17 +26,16 @@ public class AutomovelBO implements BaseInterBO<AutomovelVO>{
         }
     }
 
-    //listagem
-    public List<AutomovelVO> buscarPorId (AutomovelVO vo) throws FindException{
+    // listagem
+    public List<AutomovelVO> buscarPorId(AutomovelVO vo) throws FindException {
         List<AutomovelVO> lista = new ArrayList<AutomovelVO>();
         try {
             ResultSet rs = dao.findById(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhum carro com esse Id.\n");
-            }
-            else{
+            } else {
                 rs = dao.findById(vo);
-                while(rs.next()){
+                while (rs.next()) {
                     AutomovelVO vo2 = new AutomovelVO();
                     vo2.setID(rs.getLong("id"));
                     vo2.setAno(rs.getInt("ano"));
@@ -60,16 +58,15 @@ public class AutomovelBO implements BaseInterBO<AutomovelVO>{
         return lista;
     }
 
-    public List<AutomovelVO> buscarPorPlaca (AutomovelVO vo) throws FindException{
+    public List<AutomovelVO> buscarPorPlaca(AutomovelVO vo) throws FindException {
         List<AutomovelVO> lista = new ArrayList<AutomovelVO>();
         try {
             ResultSet rs = dao.findByPlaca(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhum carro com essa placa.\n");
-            }
-            else{
+            } else {
                 rs = dao.findByPlaca(vo);
-                while(rs.next()){
+                while (rs.next()) {
                     AutomovelVO vo2 = new AutomovelVO();
                     vo2.setID(rs.getLong("id"));
                     vo2.setAno(rs.getInt("ano"));
@@ -91,12 +88,12 @@ public class AutomovelBO implements BaseInterBO<AutomovelVO>{
         }
         return lista;
     }
-    
-    public List<AutomovelVO> listar() throws FindException{
+
+    public List<AutomovelVO> listar() throws FindException {
         List<AutomovelVO> lista = new ArrayList<AutomovelVO>();
         try {
             ResultSet rs = dao.listar();
-            while(rs.next()){
+            while (rs.next()) {
                 AutomovelVO vo2 = new AutomovelVO();
                 vo2.setID(rs.getLong("id"));
                 vo2.setAno(rs.getInt("ano"));
@@ -118,19 +115,18 @@ public class AutomovelBO implements BaseInterBO<AutomovelVO>{
         return lista;
     }
 
-    public List<AutomovelVO> buscarPorDono(ClienteVO voCli) throws FindException{
+    public List<AutomovelVO> buscarPorDono(ClienteVO voCli) throws FindException {
         AutomovelVO vo = new AutomovelVO();
-        vo.getCliente().setId(voCli.getId());//Passa o valor do id inserido para o id de cliente em automovel;
-        
+        vo.getCliente().setId(voCli.getId());// Passa o valor do id inserido para o id de cliente em automovel;
+
         List<AutomovelVO> lista = new ArrayList<AutomovelVO>();
         try {
             ResultSet rs = dao.findByClienteId(vo);
             if (!rs.next()) {
                 throw new FindException("Não foi encotrado nenhum carro com esse dono.\n");
-            }
-            else{
-                rs = dao.findByClienteId(vo); 
-                while(rs.next()){
+            } else {
+                rs = dao.findByClienteId(vo);
+                while (rs.next()) {
                     AutomovelVO vo2 = new AutomovelVO();
                     vo2.setID(rs.getLong("id"));
                     vo2.setAno(rs.getInt("ano"));
@@ -153,8 +149,8 @@ public class AutomovelBO implements BaseInterBO<AutomovelVO>{
         return lista;
     }
 
-    //Remoção por id
-    public void deletar(AutomovelVO vo) throws DeleteException{
+    // Remoção por id
+    public void deletar(AutomovelVO vo) throws DeleteException {
         try {
             dao.removerById(vo);
         } catch (SQLException e) {
@@ -162,52 +158,57 @@ public class AutomovelBO implements BaseInterBO<AutomovelVO>{
         }
     }
 
-    //Alteração
-    public void editarPlaca(AutomovelVO vo) throws UpgradeException{
+    // Alteração
+    public void editarPlaca(AutomovelVO vo) throws UpgradeException {
         try {
             ResultSet rs = dao.findByPlaca(vo);
             if (rs.next()) {
-                if(rs.getString("placa") == vo.getPlaca()){
-                    dao.editarPlaca(vo);        
-                }else {
+                if (rs.getLong("id") == vo.getID()) {
+                    dao.editarPlaca(vo);
+                } else {
                     throw new InsertException("Impossível editar, pois já existe automóvel com essa placa.\n");
                 }
-            }else{
-                dao.editarPlaca(vo);    
+            } else {
+                dao.editarPlaca(vo);
             }
         } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
-    public void editarMarca(AutomovelVO vo) throws UpgradeException{
+
+    public void editarMarca(AutomovelVO vo) throws UpgradeException {
         try {
             dao.editarMarca(vo);
         } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
-    public void editarCor(AutomovelVO vo) throws UpgradeException{
+
+    public void editarCor(AutomovelVO vo) throws UpgradeException {
         try {
             dao.editarCor(vo);
         } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
-    public void editarAno(AutomovelVO vo) throws UpgradeException{
+
+    public void editarAno(AutomovelVO vo) throws UpgradeException {
         try {
             dao.editarAno(vo);
         } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
-    public void editarClienteId(AutomovelVO vo) throws UpgradeException{
+
+    public void editarClienteId(AutomovelVO vo) throws UpgradeException {
         try {
             dao.editarClienteId(vo);
         } catch (Exception e) {
             throw new UpgradeException(e.getMessage());
         }
     }
-    public void editarQuilometragem(AutomovelVO vo) throws UpgradeException{
+
+    public void editarQuilometragem(AutomovelVO vo) throws UpgradeException {
         try {
             dao.editarQuilometragem(vo);
         } catch (Exception e) {

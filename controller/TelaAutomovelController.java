@@ -244,7 +244,7 @@ public class TelaAutomovelController implements Initializable {
 		vo.getCliente().setId(lista.get(0).getId());
 		;
 		bo.inserir(vo);
-		tableAutomoveis.setItems(FXCollections.observableArrayList(bo.buscarPorPlaca(vo)));
+		tableAutomoveis.setItems(FXCollections.observableArrayList(bo.listar()));
 		voltarTelaAutomovel(event);
 	}
 

@@ -267,7 +267,8 @@ public class TelaPecasController implements Initializable {
         vo.setPreco(fromStringToDouble(precoPeca.getText()));
         vo.setFabricante(fabricantePeca.getText());
         bo.inserir(vo);
-        cadPecaPane.setVisible(false);
+        tablePecas.setItems(FXCollections.observableArrayList(bo.listar()));
+        closeCad(event);
     }
 
     // metodos atualizar
@@ -299,8 +300,8 @@ public class TelaPecasController implements Initializable {
         bo.editarNome(vo);
         bo.editarPreco(vo);
         bo.editarFabricante(vo);
-        tablePecas.refresh();
-        Telas.telaServico();
+        tablePecas.setItems(FXCollections.observableArrayList(bo.listar()));
+        closeAtt(event);
     }
 
     // metodos pesquisar
