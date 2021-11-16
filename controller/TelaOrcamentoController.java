@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.FileOutputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -7,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
-import com.itextpdf.kernel.pdf.*;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
 import Exceptions.FindException;
 import Model.BO.AutomovelBO;
 import Model.BO.OrcamentoBO;
@@ -912,11 +913,15 @@ public class TelaOrcamentoController implements Initializable {
 		vo.setDataInicio(calIni);
 		vo.setDataFim(calFim);
 
-		PdfDocument pdf = new PdfDocument(new PdfWriter(DEST + dataInicial.getEditor().getText() +  
-		" - " + dataFinal.getEditor().getText() + ".pdf"));
-    	Document document = new Document(pdf);
+		
+		Document document = new Document();
+		PdfWriter.getInstance(document, new FileOutputStream(
+			DEST +	new SimpleDateFormat("dd-MM-yyyy").format(vo.getDataInicio().getTime()) 
+			+ " ate " +	new SimpleDateFormat("dd-MM-yyyy").format(vo.getDataFim().getTime()) +".pdf"));
 		String line = "**Oficina do Zezé**\n\nDATA DE INÍCIO: " + dataInicial.getEditor().getText() 
 			+ "\nDATA FINAL: " + dataFinal.getEditor().getText() + "\n--------------------\n";
+
+		document.open();
 		document.add(new Paragraph(line));
 
 		for(OrcamentoVO vo2 : bo.buscarPorPeriodo(vo)){
@@ -926,9 +931,9 @@ public class TelaOrcamentoController implements Initializable {
 				"\nNome do cliente: " + vo2.getCliente().getNome() + 
 				" | CPF: " + vo2.getCliente().getCPF() + 
 				"\nValor: R$" + vo2.getValor() + 
-				"Data de início: " + 
+				"\nData de início: " + 
 				new SimpleDateFormat("dd/MM/yyyy").format(vo2.getDataInicio().getTime()) + 
-				"Data de finalização: " + 
+				"\nData de finalização: " + 
 				new SimpleDateFormat("dd/MM/yyyy").format(vo2.getDataFim().getTime()) + 
 				"\n--------------------\n"
 			;
