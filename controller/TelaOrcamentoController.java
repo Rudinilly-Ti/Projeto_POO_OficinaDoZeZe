@@ -52,16 +52,16 @@ public class TelaOrcamentoController implements Initializable {
 	private TextField addAutoPlacaATT;
 
 	@FXML
-    private Pane dllPane;
+	private Pane dllPane;
 
 	@FXML
-    private Button buttonCancelar;
+	private Button buttonCancelar;
 
-    @FXML
-    private Button buttonDeletar;
+	@FXML
+	private Button buttonDeletar;
 
-    @FXML
-    private TextField idItemDeletar;
+	@FXML
+	private TextField idItemDeletar;
 
 	@FXML
 	private DatePicker dataFim;
@@ -400,39 +400,39 @@ public class TelaOrcamentoController implements Initializable {
 	}
 
 	@FXML
-    void cancelar(ActionEvent event) throws Exception {
-    	idItemDeletar.setText("");
+	void cancelar(ActionEvent event) throws Exception {
+		idItemDeletar.setText("");
 		dllPane.setVisible(false);
-    }
-    
-    @FXML
-    void deletar(ActionEvent event) throws Exception {
-    	OrcamentoVO vo = new OrcamentoVO();
+	}
+
+	@FXML
+	void deletar(ActionEvent event) throws Exception {
+		OrcamentoVO vo = new OrcamentoVO();
 		PecasNoOrcamentoVO pVo = new PecasNoOrcamentoVO();
 		ServicosNoOrcamentoVO sVo = new ServicosNoOrcamentoVO();
 
 		vo.setId((long) Integer.parseInt(idItemDeletar.getText()));
 		pVo.setOrcamento(vo);
 		sVo.setOrcamento(vo);
-		
+
 		try {
-			for(PecasNoOrcamentoVO pVo2 : new PecasNoOrcamentoBO().buscarPorOrcId(pVo)){
+			for (PecasNoOrcamentoVO pVo2 : new PecasNoOrcamentoBO().buscarPorOrcId(pVo)) {
 				new PecasNoOrcamentoBO().deletar(pVo2);
 			}
-	
-			for(ServicosNoOrcamentoVO sVo2 : new ServicosNoOrcamentoBO().buscarPorOrcId(sVo)){
+
+			for (ServicosNoOrcamentoVO sVo2 : new ServicosNoOrcamentoBO().buscarPorOrcId(sVo)) {
 				new ServicosNoOrcamentoBO().deletar(sVo2);
 			}
 		} catch (FindException e) {
-			
+
 		}
 
-    	OrcamentoBO bo = new OrcamentoBO();
-    	vo.setId((long) Integer.parseInt(idItemDeletar.getText()));
-    	bo.deletar(vo);
+		OrcamentoBO bo = new OrcamentoBO();
+		vo.setId((long) Integer.parseInt(idItemDeletar.getText()));
+		bo.deletar(vo);
 		tableOrcamento.setItems(FXCollections.observableArrayList(new OrcamentoBO().listar()));
-    	cancelar(event);
-    }
+		cancelar(event);
+	}
 
 	// metodos cadastrar
 	List<PecasNoOrcamentoVO> novasPecas = new ArrayList<PecasNoOrcamentoVO>();
@@ -634,11 +634,13 @@ public class TelaOrcamentoController implements Initializable {
 
 	@FXML
 	void openAtt(ActionEvent event) {
-		attOrcamento.setVisible(true);	
+		attOrcamento.setVisible(true);
 	}
 
 	@FXML
 	void closeAtt(ActionEvent event) {
+		tableServATT.getItems().clear();
+		tablePecaATT.getItems().clear();
 		novosServicosATT.clear();
 		novasPecasATT.clear();
 		addAutoPlacaATT.setText("");
