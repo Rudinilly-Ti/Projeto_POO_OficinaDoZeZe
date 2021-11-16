@@ -209,14 +209,15 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TableView fx:id="tableOrcamento" layoutX="356.0" layoutY="419.0" prefHeight="268.0" prefWidth="703.0">
+      <TableView fx:id="tableOrcamento" layoutX="343.0" layoutY="419.0" prefHeight="268.0" prefWidth="771.0">
         <columns>
-          <TableColumn fx:id="placaCol" prefWidth="120.0" text="Placa do veiculo" />
-          <TableColumn fx:id="clienteCol" prefWidth="200.0" text="Cliente" />
-            <TableColumn fx:id="dataIniCol" prefWidth="100.0" text="Data inicial" />
-            <TableColumn fx:id="dataFimCol" prefWidth="100.0" text="Data final" />
-            <TableColumn fx:id="attCol" text="Atualizar" />
-            <TableColumn fx:id="delCol" text="Deletar" />
+          <TableColumn fx:id="placaCol" prefWidth="129.0" text="Placa do veiculo" />
+          <TableColumn fx:id="clienteCol" prefWidth="129.0" text="Cliente" />
+            <TableColumn fx:id="dataIniCol" prefWidth="114.0" text="Data inicial" />
+            <TableColumn fx:id="dataFimCol" prefWidth="118.0" text="Data final" />
+            <TableColumn fx:id="attCol" prefWidth="98.0" text="Atualizar" />
+            <TableColumn fx:id="delCol" prefWidth="92.0" text="Deletar" />
+            <TableColumn fx:id="valorCol" prefWidth="90.0" text="Valor" />
         </columns>
       </TableView>
       <Button fx:id="openCadButton" contentDisplay="RIGHT" layoutX="914.0" layoutY="738.0" maxHeight="40.0" maxWidth="240.0" mnemonicParsing="false" onAction="#openCad" prefHeight="40.0" prefWidth="240.0" style="-fx-background-color: #fafafa;" text="Adicionar Orçamento">
@@ -234,20 +235,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="botaoPesquisarPeriodo" layoutX="1150.0" layoutY="230.0" mnemonicParsing="false" onAction="#pesquisarPeriodo" prefHeight="33.0" prefWidth="33.0" style="-fx-background-color: transparent;">
+      <Button fx:id="botaoPesquisarPeriodo" layoutX="1173.0" layoutY="237.0" mnemonicParsing="false" onAction="#pesquisarPeriodo" prefHeight="33.0" prefWidth="33.0" style="-fx-background-color: transparent;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
-         <graphic>
-            <ImageView fitHeight="36.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <image>
-                  <Image url="@search.png" />
-               </image>
-            </ImageView>
-         </graphic>
       </Button>
       <DatePicker fx:id="dataFim" layoutX="970.0" layoutY="240.0" />
       <DatePicker fx:id="dataIni" layoutX="970.0" layoutY="200.0" />
@@ -586,5 +577,13 @@
             <TextField fx:id="idItemDeletar" layoutX="133.0" layoutY="28.0" prefHeight="24.0" prefWidth="44.0" style="-fx-background-color: transparent;" />
          </children>
       </Pane>
+      <ImageView fitHeight="36.0" fitWidth="27.0" layoutX="1176.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <image>
+            <Image url="@search.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
