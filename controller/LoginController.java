@@ -59,6 +59,7 @@ public class LoginController{
                 Telas.mainMenu();
             }
         } catch (Exception e) {
+            errorLogin.setVisible(false);
             errorLogin.setText("Usuário e/ou senha inválidos!");
             errorLogin.setVisible(true);
         }

@@ -109,6 +109,15 @@ public class TelaOrcamentoController implements Initializable {
 	private Pane attOrcamento;
 
 	@FXML
+    private Label findPeriodoErrorText;
+
+	@FXML
+    private Label findCarroErrorText;
+
+	@FXML
+    private Label findClienteErrorText;
+
+	@FXML
 	private Button addPecaButtonATT;
 
 	@FXML
@@ -116,6 +125,9 @@ public class TelaOrcamentoController implements Initializable {
 
 	@FXML
 	private TableColumn<OrcamentoVO, String> clienteCol;
+
+	@FXML
+	private TableColumn<OrcamentoVO, String> valorCol;
 
 	@FXML
 	private TextField servIdCAD;
@@ -287,6 +299,13 @@ public class TelaOrcamentoController implements Initializable {
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<OrcamentoVO, String> c) {
 				return new SimpleStringProperty(c.getValue().getCliente().getNome());
+			}
+		});
+
+		valorCol.setCellValueFactory(new Callback<CellDataFeatures<OrcamentoVO, String>, ObservableValue<String>>() {
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<OrcamentoVO, String> c) {
+				return new SimpleStringProperty(String.valueOf(c.getValue().getValor()));
 			}
 		});
 
@@ -887,25 +906,36 @@ public class TelaOrcamentoController implements Initializable {
 		String textDataIni = dataIni.getEditor().getText();
 		String textDataFim = dataFim.getEditor().getText();
 
-		if (textDataIni != null && textDataFim != null) {
-			OrcamentoVO vo = new OrcamentoVO();
-			OrcamentoBO bo = new OrcamentoBO();
+		if (textDataIni != null && textDataFim != null && !textDataIni.isBlank() && !textDataFim.isBlank()) {
+			
+			try {
+				OrcamentoVO vo = new OrcamentoVO();
+				OrcamentoBO bo = new OrcamentoBO();
 
-			Calendar dataIn = Calendar.getInstance();
-			dataIn.set(Calendar.DAY_OF_MONTH, dataIni.getValue().getDayOfMonth());
-			dataIn.set(Calendar.MONTH, (dataIni.getValue().getMonthValue() - 1));
-			dataIn.set(Calendar.YEAR, dataIni.getValue().getYear());
+				Calendar dataIn = Calendar.getInstance();
+				dataIn.set(Calendar.DAY_OF_MONTH, dataIni.getValue().getDayOfMonth());
+				dataIn.set(Calendar.MONTH, (dataIni.getValue().getMonthValue() - 1));
+				dataIn.set(Calendar.YEAR, dataIni.getValue().getYear());
 
-			Calendar dataFi = Calendar.getInstance();
-			dataFi.set(Calendar.DAY_OF_MONTH, dataFim.getValue().getDayOfMonth());
-			dataFi.set(Calendar.MONTH, (dataFim.getValue().getMonthValue() - 1));
-			dataFi.set(Calendar.YEAR, dataFim.getValue().getYear());
+				Calendar dataFi = Calendar.getInstance();
+				dataFi.set(Calendar.DAY_OF_MONTH, dataFim.getValue().getDayOfMonth());
+				dataFi.set(Calendar.MONTH, (dataFim.getValue().getMonthValue() - 1));
+				dataFi.set(Calendar.YEAR, dataFim.getValue().getYear());
 
-			vo.setDataInicio(dataIn);
-			vo.setDataFim(dataFi);
+				vo.setDataInicio(dataIn);
+				vo.setDataFim(dataFi);
 
-			tableOrcamento.setItems(FXCollections.observableArrayList(bo.buscarPorPeriodo(vo)));
+				findClienteErrorText.setVisible(false);
+				findCarroErrorText.setVisible(false);
+				findPeriodoErrorText.setVisible(false);
+				tableOrcamento.setItems(FXCollections.observableArrayList(bo.buscarPorPeriodo(vo)));
+			} catch (FindException e) {
+				findPeriodoErrorText.setVisible(true);
+			}
 		} else {
+			findClienteErrorText.setVisible(false);
+			findCarroErrorText.setVisible(false);
+			findPeriodoErrorText.setVisible(false);
 			tableOrcamento.setItems(FXCollections.observableArrayList(new OrcamentoBO().listar()));
 		}
 	}
@@ -920,12 +950,22 @@ public class TelaOrcamentoController implements Initializable {
 		String placa = Placa.getText();
 
 		if (placa != null && !placa.isBlank()) {
-			OrcamentoBO bo = new OrcamentoBO();
-			OrcamentoVO vo = new OrcamentoVO();
-			vo.getCarro().setPlaca(placa);
+			try {
+				OrcamentoBO bo = new OrcamentoBO();
+				OrcamentoVO vo = new OrcamentoVO();
+				vo.getCarro().setPlaca(placa);
 
-			tableOrcamento.setItems((FXCollections.observableArrayList(bo.buscarPorAutomovel(vo.getCarro()))));
+				findClienteErrorText.setVisible(false);
+				findCarroErrorText.setVisible(false);
+				findPeriodoErrorText.setVisible(false);
+				tableOrcamento.setItems((FXCollections.observableArrayList(bo.buscarPorAutomovel(vo.getCarro()))));
+			} catch (FindException e) {
+				findCarroErrorText.setVisible(true);
+			}
 		} else {
+			findClienteErrorText.setVisible(false);
+			findCarroErrorText.setVisible(false);
+			findPeriodoErrorText.setVisible(false);
 			tableOrcamento.setItems((FXCollections.observableArrayList(new OrcamentoBO().listar())));
 		}
 	}
@@ -935,12 +975,22 @@ public class TelaOrcamentoController implements Initializable {
 		String cliente = dono.getText();
 
 		if (cliente != null && !cliente.isBlank()) {
-			OrcamentoBO bo = new OrcamentoBO();
-			OrcamentoVO vo = new OrcamentoVO();
-			vo.getCliente().setNome(cliente);
+			try {
+				OrcamentoBO bo = new OrcamentoBO();
+				OrcamentoVO vo = new OrcamentoVO();
+				vo.getCliente().setNome(cliente);
 
-			tableOrcamento.setItems((FXCollections.observableArrayList(bo.buscarPorDono(vo.getCliente()))));
+				findClienteErrorText.setVisible(false);
+				findCarroErrorText.setVisible(false);
+				findPeriodoErrorText.setVisible(false);
+				tableOrcamento.setItems((FXCollections.observableArrayList(bo.buscarPorDono(vo.getCliente()))));
+			} catch (FindException e) {
+				findClienteErrorText.setVisible(true);
+			}
 		} else {
+			findClienteErrorText.setVisible(false);
+			findCarroErrorText.setVisible(false);
+			findPeriodoErrorText.setVisible(false);
 			tableOrcamento.setItems((FXCollections.observableArrayList(new OrcamentoBO().listar())));
 		}
 	}

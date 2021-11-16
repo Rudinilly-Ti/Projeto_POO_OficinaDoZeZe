@@ -2,6 +2,8 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import Exceptions.FindException;
 import Model.BO.PecaBO;
 import Model.VO.ChefeVO;
 import Model.VO.PecaVO;
@@ -12,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
@@ -40,6 +43,12 @@ public class TelaPecasController implements Initializable {
 
     @FXML
     private Button automovelButtonChefe;
+
+    @FXML
+    private Label findNomeErrorText;
+    
+    @FXML
+    private Label findFabErrorText;
 
     @FXML
     private Button automovelButtonFunc;
@@ -313,12 +322,20 @@ public class TelaPecasController implements Initializable {
         String fabricante = Fabricante.getText();
 
         if (fabricante.isBlank() || fabricante == null) {
+            findFabErrorText.setVisible(false);
+            findNomeErrorText.setVisible(false);
             tablePecas.setItems(FXCollections.observableArrayList(bo.listar()));
 
         } else {
-            vo.setFabricante(fabricante);
+            try {
+                vo.setFabricante(fabricante);
 
-            tablePecas.setItems(FXCollections.observableArrayList(bo.buscarPorFabricante(vo)));
+                findFabErrorText.setVisible(false);
+                findNomeErrorText.setVisible(false);
+                tablePecas.setItems(FXCollections.observableArrayList(bo.buscarPorFabricante(vo)));
+            } catch (FindException e) {
+                findFabErrorText.setVisible(true);
+            }
         }
     }
 
@@ -329,12 +346,20 @@ public class TelaPecasController implements Initializable {
         String nome = NomePeca.getText();
 
         if (nome.isBlank() || nome == null) {
+            findFabErrorText.setVisible(false);
+            findNomeErrorText.setVisible(false);
             tablePecas.setItems(FXCollections.observableArrayList(bo.listar()));
 
         } else {
-            vo.setNome(nome);
+            try {
+                vo.setNome(nome);
 
-            tablePecas.setItems(FXCollections.observableArrayList(bo.buscarPorNome(vo)));
+                findFabErrorText.setVisible(false);
+                findNomeErrorText.setVisible(false);
+                tablePecas.setItems(FXCollections.observableArrayList(bo.buscarPorNome(vo)));
+            } catch (FindException e) {
+                findNomeErrorText.setVisible(true);
+            }
         }
     }
 

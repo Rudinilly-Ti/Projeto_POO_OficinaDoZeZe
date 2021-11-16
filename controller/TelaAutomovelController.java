@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import Exceptions.FindException;
 import Model.BO.AutomovelBO;
 import Model.BO.ClienteBO;
 import Model.VO.AutomovelVO;
@@ -17,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -104,6 +106,12 @@ public class TelaAutomovelController implements Initializable {
 
 	@FXML
 	private TextField carroPlacaNova;
+
+	@FXML
+	private Label findPlacaErrorText;
+
+	@FXML
+	private Label findDonoErrorText;
 
 	@FXML
 	private Button servicoButtonChefe;
@@ -322,12 +330,20 @@ public class TelaAutomovelController implements Initializable {
 		String placa = Placa.getText();
 
 		if (placa.isBlank() || placa == null) {
+			findDonoErrorText.setVisible(false);
+			findPlacaErrorText.setVisible(false);
 			tableAutomoveis.setItems(FXCollections.observableArrayList(bo.listar()));
 
 		} else {
-			vo.setPlaca(placa);
+			try {
+				vo.setPlaca(placa);
 
-			tableAutomoveis.setItems(FXCollections.observableArrayList(bo.buscarPorPlaca(vo)));
+				findDonoErrorText.setVisible(false);
+				findPlacaErrorText.setVisible(false);
+				tableAutomoveis.setItems(FXCollections.observableArrayList(bo.buscarPorPlaca(vo)));
+			} catch (FindException e) {
+				findPlacaErrorText.setVisible(true);
+			}
 		}
 
 	}
@@ -339,14 +355,23 @@ public class TelaAutomovelController implements Initializable {
 		AutomovelVO vo2 = new AutomovelVO();
 		AutomovelBO boautomovel = new AutomovelBO();
 		String dono = Dono.getText();
+
 		if (dono.isBlank() || dono == null) {
+			findDonoErrorText.setVisible(false);
+			findPlacaErrorText.setVisible(false);
 			tableAutomoveis.setItems(FXCollections.observableArrayList(boautomovel.listar()));
 		} else {
-			vo.setNome(dono);
-			List<ClienteVO> lista = bocliente.buscarPorNome(vo);
-			vo2.setCliente(lista.get(0));
+			try {
+				vo.setNome(dono);
+				List<ClienteVO> lista = bocliente.buscarPorNome(vo);
+				vo2.setCliente(lista.get(0));
 
-			tableAutomoveis.setItems(FXCollections.observableArrayList(boautomovel.buscarPorDono(vo2.getCliente())));
+				findDonoErrorText.setVisible(false);
+				findPlacaErrorText.setVisible(false);
+				tableAutomoveis.setItems(FXCollections.observableArrayList(boautomovel.buscarPorDono(vo2.getCliente())));
+			} catch (FindException e) {
+				findDonoErrorText.setVisible(true);
+			}
 		}
 	}
 

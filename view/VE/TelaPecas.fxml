@@ -32,6 +32,13 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.SubScene?>
 <?import javafx.scene.control.Button?>
@@ -48,7 +55,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaPecasController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaPecasController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1440.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="138.0" layoutX="214.0" layoutY="181.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1040.0" />
@@ -369,5 +376,7 @@
             <TextField fx:id="idItemDeletar" layoutX="64.0" layoutY="33.0" visible="false" />
          </children>
       </Pane>
+      <Label fx:id="findNomeErrorText" layoutX="331.0" layoutY="268.0" text="Nenhuma peça com esse nome encontrada." textFill="#970000" visible="false" />
+      <Label fx:id="findFabErrorText" layoutX="866.0" layoutY="268.0" text="Nenhuma peça com esse fabricante encontrada." textFill="#970000" visible="false" />
    </children>
 </Pane>

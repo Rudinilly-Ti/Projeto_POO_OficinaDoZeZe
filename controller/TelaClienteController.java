@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Exceptions.FindException;
 import Model.BO.ClienteBO;
 import Model.VO.ChefeVO;
 import Model.VO.UsuarioVO;
@@ -12,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -90,6 +92,9 @@ public class TelaClienteController implements Initializable{
 
     @FXML
     private Button automovelButtonFunc;
+
+    @FXML
+    private Label findCpfErrorText;
 
     @FXML
     private Button automovelButtonChefe;
@@ -242,12 +247,18 @@ public class TelaClienteController implements Initializable{
 
       String cpf = CPFPesquisar.getText();
       if(cpf != null && !cpf.isBlank()){
-        vo.setCPF(cpf);
-        tableClientes.setItems(FXCollections.observableArrayList(
-          bo.buscarPorCPF(vo)
-        ));
+        try {
+          vo.setCPF(cpf);
+          findCpfErrorText.setVisible(false);
+          tableClientes.setItems(FXCollections.observableArrayList(
+            bo.buscarPorCPF(vo)
+          ));
+        } catch (FindException e) {
+          findCpfErrorText.setVisible(true);
+        }
         
       } else{
+        findCpfErrorText.setVisible(false);
         tableClientes.setItems(FXCollections.observableArrayList(
           bo.listar()
         ));

@@ -32,6 +32,13 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.SubScene?>
 <?import javafx.scene.control.Button?>
@@ -52,7 +59,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaOrcamentoController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaOrcamentoController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1440.0" />
       <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="45.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
@@ -132,6 +139,7 @@
       </Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="138.0" layoutX="220.0" layoutY="181.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1034.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="447.0" layoutX="221.0" layoutY="337.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="fx-background: trasnparent;" width="1034.0" />
+      <Label fx:id="findPeriodoErrorText" layoutX="970.0" layoutY="276.0" text="Nenhum orçamento nesse periodo encontrado." textFill="#9e0000" visible="false" />
       <Button fx:id="botaoPesquisarPlaca" focusTraversable="false" layoutX="679.0" layoutY="200.0" mnemonicParsing="false" onAction="#pesquisarPlaca" style="-fx-background-color: transparent;">
          <graphic>
             <ImageView fitHeight="36.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
@@ -215,9 +223,9 @@
           <TableColumn fx:id="clienteCol" prefWidth="129.0" text="Cliente" />
             <TableColumn fx:id="dataIniCol" prefWidth="114.0" text="Data inicial" />
             <TableColumn fx:id="dataFimCol" prefWidth="118.0" text="Data final" />
-            <TableColumn fx:id="attCol" prefWidth="98.0" text="Atualizar" />
-            <TableColumn fx:id="delCol" prefWidth="92.0" text="Deletar" />
-            <TableColumn fx:id="valorCol" prefWidth="90.0" text="Valor" />
+            <TableColumn fx:id="valorCol" prefWidth="98.0" text="Valor" />
+            <TableColumn fx:id="attCol" prefWidth="92.0" text="Atualizar" />
+            <TableColumn fx:id="delCol" prefWidth="90.0" text="Deletar" />
         </columns>
       </TableView>
       <Button fx:id="openCadButton" contentDisplay="RIGHT" layoutX="914.0" layoutY="738.0" maxHeight="40.0" maxWidth="240.0" mnemonicParsing="false" onAction="#openCad" prefHeight="40.0" prefWidth="240.0" style="-fx-background-color: #fafafa;" text="Adicionar Orçamento">
@@ -235,10 +243,20 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="botaoPesquisarPeriodo" layoutX="1173.0" layoutY="237.0" mnemonicParsing="false" onAction="#pesquisarPeriodo" prefHeight="33.0" prefWidth="33.0" style="-fx-background-color: transparent;">
+      <Button fx:id="botaoPesquisarPeriodo" layoutX="1155.0" layoutY="233.0" mnemonicParsing="false" onAction="#pesquisarPeriodo" prefHeight="33.0" prefWidth="33.0" style="-fx-background-color: transparent;">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <graphic>
+            <ImageView fitHeight="36.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <image>
+                  <Image url="@search.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
       <DatePicker fx:id="dataFim" layoutX="970.0" layoutY="240.0" />
       <DatePicker fx:id="dataIni" layoutX="970.0" layoutY="200.0" />
@@ -577,13 +595,7 @@
             <TextField fx:id="idItemDeletar" layoutX="133.0" layoutY="28.0" prefHeight="24.0" prefWidth="44.0" style="-fx-background-color: transparent;" />
          </children>
       </Pane>
-      <ImageView fitHeight="36.0" fitWidth="27.0" layoutX="1176.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <image>
-            <Image url="@search.png" />
-         </image>
-      </ImageView>
+      <Label fx:id="findCarroErrorText" layoutX="451.0" layoutY="233.0" text="Nenhum orçamento para esse carro encontrado." textFill="#9e0000" visible="false" />
+      <Label fx:id="findClienteErrorText" layoutX="331.0" layoutY="290.0" text="Nenhum orçamento para esse cliente encontrado." textFill="#9e0000" visible="false" />
    </children>
 </Pane>

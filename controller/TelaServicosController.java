@@ -3,6 +3,7 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Exceptions.FindException;
 import Model.BO.ServicoBO;
 import Model.VO.ChefeVO;
 import Model.VO.ServicoVO;
@@ -13,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
@@ -89,6 +91,9 @@ public class TelaServicosController implements Initializable {
 
     @FXML
     private Button pecaButtonChefe;
+
+    @FXML
+    private Label findNomeErrorText;
 
     @FXML
     private Text userLogin;
@@ -193,13 +198,6 @@ public class TelaServicosController implements Initializable {
     	TableViewServico.setItems(FXCollections.observableArrayList(new ServicoBO().listar()));
     	cancelar(event);
     }
-
-    // @FXML
-    // public void initialize() {
-    //     LoginController c = new LoginController();
-    //     receberLogin(c.retornarLogin());
-    //     setMenu(c.retornarUsuario());
-    // }
 
     @FXML
     public void receberLogin(String login){
@@ -309,16 +307,22 @@ public class TelaServicosController implements Initializable {
     	String nome = NomeServico.getText();
     	
     	if(nome.isBlank() || nome == null) {
+            findNomeErrorText.setVisible(false);
             TableViewServico.setItems(FXCollections.observableArrayList(
                 bo.listar()
             ));
            
         } else {
-            vo.setNome(nome);
+            try {
+                vo.setNome(nome);
 
-            TableViewServico.setItems(FXCollections.observableArrayList(
-                bo.buscarPorNome(vo)
-            ));
+                findNomeErrorText.setVisible(false);
+                TableViewServico.setItems(FXCollections.observableArrayList(
+                    bo.buscarPorNome(vo)
+                ));
+            } catch (FindException e) {
+                findNomeErrorText.setVisible(true);
+            }
         }
     }
 

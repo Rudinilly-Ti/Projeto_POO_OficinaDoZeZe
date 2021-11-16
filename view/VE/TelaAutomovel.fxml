@@ -32,6 +32,13 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -46,7 +53,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaAutomovelController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #d0d0d0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaAutomovelController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafafa" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1440.0" />
       <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="45.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
@@ -399,5 +406,7 @@
             <TextField fx:id="idItemDeletar" layoutX="110.0" layoutY="43.0" prefHeight="14.0" prefWidth="40.0" visible="false" />
          </children>
       </Pane>
+      <Label fx:id="findPlacaErrorText" layoutX="382.0" layoutY="271.0" text="Nenhum carro com essa placa encontrado." textFill="#830000" visible="false" />
+      <Label fx:id="findDonoErrorText" layoutX="900.0" layoutY="271.0" text="Nenhum carro com esse dono encontrado." textFill="#830000" visible="false" />
    </children>
 </Pane>

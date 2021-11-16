@@ -32,6 +32,13 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.SubScene?>
 <?import javafx.scene.control.Button?>
@@ -49,7 +56,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: D0D0D0;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaClienteController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: D0D0D0;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaClienteController">
    <children>
       <AnchorPane prefHeight="100.0" prefWidth="1440.0" style="-fx-background-color: fafafa;">
          <children>
@@ -152,6 +159,77 @@
             </ImageView>
          </graphic>
       </Button>
+      <Button fx:id="clienteButtonFunc" layoutY="100.0" mnemonicParsing="false" onAction="#chamarFuncCliente" prefHeight="50.0" prefWidth="360.0" text="Clientes">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@SeekPng_1.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="automovelButtonFunc" layoutX="360.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarFuncAuto" prefHeight="50.0" prefWidth="360.0" text="Automoveis">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@auto.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="pecaButtonFunc" layoutX="720.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarFuncPeca" prefHeight="50.0" prefWidth="360.0" text="Peças">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@peca.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="servicoButtonFunc" layoutX="1080.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarFuncServ" prefHeight="50.0" prefWidth="360.0" text="Serviços">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@serv.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Pane fx:id="painelPesquisar" layoutX="218.0" layoutY="165.0" prefHeight="111.0" prefWidth="1043.0" style="-fx-background-color: #fff;">
+         <children>
+            <TextField fx:id="CPFPesquisar" layoutX="130.0" layoutY="41.0" prefHeight="27.0" prefWidth="150.0" style="-fx-background-color: #c4c4c4;" />
+            <Label layoutX="74.0" layoutY="37.0" text="CPF">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="pesquisarButton" layoutX="300.0" layoutY="37.0" mnemonicParsing="false" onAction="#pesquisarCPF" prefHeight="38.0" prefWidth="32.0" style="-fx-background-color: transparent;">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@search.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label fx:id="findCpfErrorText" layoutX="130.0" layoutY="75.0" text="Nenhum cliente com esse CPF encontrado." textFill="#830000" visible="false" />
+         </children>
+      </Pane>
       <Pane layoutX="219.0" layoutY="293.0" prefHeight="492.0" prefWidth="1040.0" style="-fx-background-color: #fff;">
          <children>
             <TableView fx:id="tableClientes" layoutX="125.0" layoutY="118.0" prefHeight="320.0" prefWidth="785.0">
@@ -301,76 +379,6 @@
                   <TextField fx:id="idItemDeletar" layoutX="110.0" layoutY="43.0" prefHeight="14.0" prefWidth="40.0" visible="false" />
                </children>
             </Pane>
-         </children>
-      </Pane>
-      <Button fx:id="clienteButtonFunc" layoutY="100.0" mnemonicParsing="false" onAction="#chamarFuncCliente" prefHeight="50.0" prefWidth="360.0" text="Clientes">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@SeekPng_1.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="automovelButtonFunc" layoutX="360.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarFuncAuto" prefHeight="50.0" prefWidth="360.0" text="Automoveis">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@auto.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="pecaButtonFunc" layoutX="720.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarFuncPeca" prefHeight="50.0" prefWidth="360.0" text="Peças">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@peca.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="servicoButtonFunc" layoutX="1080.0" layoutY="100.0" mnemonicParsing="false" onAction="#chamarFuncServ" prefHeight="50.0" prefWidth="360.0" text="Serviços">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <graphic>
-            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@serv.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Pane fx:id="painelPesquisar" layoutX="218.0" layoutY="165.0" prefHeight="111.0" prefWidth="1043.0" style="-fx-background-color: #fff;">
-         <children>
-            <TextField fx:id="CPFPesquisar" layoutX="130.0" layoutY="41.0" prefHeight="30.0" />
-            <Label layoutX="74.0" layoutY="37.0" text="CPF">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Button fx:id="pesquisarButton" layoutX="300.0" layoutY="37.0" mnemonicParsing="false" onAction="#pesquisarCPF" prefHeight="38.0" prefWidth="32.0" style="-fx-background-color: transparent;">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@search.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
          </children>
       </Pane>
    </children>

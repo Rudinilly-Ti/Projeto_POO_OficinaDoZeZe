@@ -105,6 +105,7 @@ public class CadController implements Initializable{
                 }
             }
         } catch (Exception e) {
+            cadError.setVisible(false);
             cadError.setText("Usuário já existe no sistema!");
             cadError.setVisible(true);
         }
