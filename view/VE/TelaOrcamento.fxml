@@ -572,7 +572,7 @@
                   </Button>
                   <ScrollPane layoutX="120.0" layoutY="166.0" prefHeight="355.0" prefWidth="827.0">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="350.0" prefWidth="827.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="827.0">
                            <children>
                               <ImageView fx:id="letreiroRelatorio" fitHeight="150.0" fitWidth="350.0" layoutX="239.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>

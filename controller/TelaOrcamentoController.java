@@ -960,6 +960,7 @@ public class TelaOrcamentoController implements Initializable {
 		PecasNoOrcamentoVO pVo = new PecasNoOrcamentoVO();
 
 		letreiroRelatorio.setVisible(true);
+		relatorioTexto.setText("");
 
 		calIni.set(Calendar.DAY_OF_MONTH, dataInicial.getValue().getDayOfMonth());
 		calIni.set(Calendar.MONTH, (dataInicial.getValue().getMonthValue() - 1));
@@ -971,7 +972,6 @@ public class TelaOrcamentoController implements Initializable {
 
 		vo.setDataInicio(calIni);
 		vo.setDataFim(calFim);
-		textoRel = "";
 		
 		Document document = new Document();
 		PdfWriter.getInstance(document, new FileOutputStream(
@@ -986,10 +986,12 @@ public class TelaOrcamentoController implements Initializable {
 		for(OrcamentoVO vo2 : bo.buscarPorPeriodo(vo)){
 			valorTotal += vo2.getValor();
 
+			Double valortmp = BigDecimal.valueOf(vo2.getValor()).setScale(2, RoundingMode.HALF_UP).doubleValue();
+
 			line = "Placa do carro : " + vo2.getCarro().getPlaca().toUpperCase() + 
 				"\nNome do cliente: " + vo2.getCliente().getNome() + 
 				" | CPF: " + vo2.getCliente().getCPF() + 
-				"\nValor: R$ " + vo2.getValor() + 
+				"\nValor: R$ " + valortmp + 
 				"\nData de início: " + 
 				new SimpleDateFormat("dd/MM/yyyy").format(vo2.getDataInicio().getTime()) + 
 				"\nData de finalização: " + 
@@ -998,13 +1000,14 @@ public class TelaOrcamentoController implements Initializable {
 			;
 			pVo.getOrcamento().setId(vo2.getId());
 			for(PecasNoOrcamentoVO pVo2 : pBo.buscarPorOrcId(pVo)){
-				line += "\n" + pVo2.getPeca().getNome() + ";";
+				line += "\n * " + pVo2.getPeca().getNome() + ";";
 			}
 			line += "\n--------------------\n";
 			textoRel += line;
 			document.add(new Paragraph(line));
 		}
-		line = "\nValor total no período: R$ " + valorTotal.toString();
+		Double valortmp = BigDecimal.valueOf(valorTotal).setScale(2, RoundingMode.HALF_UP).doubleValue();
+		line = "\nValor total no período: R$ " + valortmp.toString();
 		textoRel += line;
 		relatorioTexto.setText(textoRel);
 		document.add(new Paragraph(line));
@@ -1016,6 +1019,7 @@ public class TelaOrcamentoController implements Initializable {
 	void openRelatorio(ActionEvent event) {
 		openRelatorioButton.setVisible(false);
 		relatorioPainel.setVisible(true);
+		relatorioTexto.setText("");
 	}
 
 	// metodos pesquisar
