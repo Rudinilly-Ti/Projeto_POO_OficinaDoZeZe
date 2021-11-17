@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.FileOutputStream;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -12,6 +14,8 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import Exceptions.FindException;
+import Exceptions.InsertException;
+import Exceptions.SetterException;
 import Model.BO.AutomovelBO;
 import Model.BO.OrcamentoBO;
 import Model.BO.PecaBO;
@@ -69,6 +73,12 @@ public class TelaOrcamentoController implements Initializable {
 
 	@FXML
 	private DatePicker dataFim;
+
+	@FXML
+	private Label textoDataErrorCAD;
+
+	@FXML
+	private Label textoDataErrorATT;
 
 	@FXML
 	private CheckBox servFinalizadoATT;
@@ -317,7 +327,8 @@ public class TelaOrcamentoController implements Initializable {
 		valorCol.setCellValueFactory(new Callback<CellDataFeatures<OrcamentoVO, String>, ObservableValue<String>>() {
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<OrcamentoVO, String> c) {
-				return new SimpleStringProperty(String.valueOf(c.getValue().getValor()));
+				Double valortmp = BigDecimal.valueOf(c.getValue().getValor()).setScale(2, RoundingMode.HALF_UP).doubleValue();
+				return new SimpleStringProperty(String.valueOf(valortmp));
 			}
 		});
 
@@ -393,6 +404,7 @@ public class TelaOrcamentoController implements Initializable {
 
 			if (orc.getServicoConcluido()) {
 				servFinalizadoATT.setSelected(true);
+				selectDataFimATT.setDisable(false);
 			}
 
 			selectDataIniATT.setValue(LocalDateTime
@@ -423,6 +435,16 @@ public class TelaOrcamentoController implements Initializable {
 			dllPane.setVisible(true);
 			idItemDeletar.setText(orc.getId().toString());
 		});
+	}
+
+	@FXML
+	void servFinalizadoATT(ActionEvent event){
+		if (servFinalizadoATT.isSelected()) {
+			selectDataFimATT.setDisable(false);
+		}
+		else{
+			selectDataFimATT.setDisable(true);
+		}
 	}
 
 	@FXML
@@ -510,6 +532,16 @@ public class TelaOrcamentoController implements Initializable {
 	}
 
 	@FXML
+	void servFinalizadoCAD(ActionEvent event){
+		if (servFinalizadoCAD.isSelected()) {
+			selectDataFimCAD.setDisable(false);
+		}
+		else{
+			selectDataFimCAD.setDisable(true);
+		}
+	}
+
+	@FXML
 	void closeCad(ActionEvent event) {
 		addAutoPlacaCAD.setText("");
 		pecaIdCAD.setText("");
@@ -520,6 +552,7 @@ public class TelaOrcamentoController implements Initializable {
 		novosServicos.clear();
 		cadOrcamento.setVisible(false);
 		openRelatorioButton.setVisible(true);
+		textoDataErrorCAD.setVisible(false);
 	}
 
 	@FXML
@@ -611,7 +644,7 @@ public class TelaOrcamentoController implements Initializable {
 	}
 
 	@FXML
-	void finishCad(ActionEvent event) {
+	void finishCad(ActionEvent event) throws InsertException{
 		OrcamentoVO vo = new OrcamentoVO();
 		OrcamentoBO bo = new OrcamentoBO();
 		for (PecasNoOrcamentoVO pecas : novasPecas) {
@@ -626,12 +659,19 @@ public class TelaOrcamentoController implements Initializable {
 		vo.getCarro().setID(new AutomovelBO().buscarPorPlaca(vo.getCarro()).get(0).getID());
 		vo.getCliente().setId(new AutomovelBO().buscarPorPlaca(vo.getCarro()).get(0).getCliente().getId());
 
-		vo.setDataInicio(new Calendar.Builder().setDate(selectDataIniCAD.getValue().getYear(),
-				selectDataIniCAD.getValue().getMonthValue() - 1, selectDataIniCAD.getValue().getDayOfMonth()).build());
+		try {
+			vo.setDataInicio(new Calendar.Builder().setDate(selectDataIniCAD.getValue().getYear(),
+				selectDataIniCAD.getValue().getMonthValue() - 1, selectDataIniCAD.getValue().getDayOfMonth()).build())
+			;
+			vo.setDataFim(new Calendar.Builder().setDate(selectDataFimCAD.getValue().getYear(),
+				selectDataFimCAD.getValue().getMonthValue() - 1, selectDataFimCAD.getValue().getDayOfMonth()).build())
+			;
+			bo.inserir(vo);
+			textoDataErrorCAD.setVisible(false);
+		} catch (SetterException e) {
+			textoDataErrorCAD.setVisible(true);
+		}
 
-		vo.setDataFim(new Calendar.Builder().setDate(selectDataFimCAD.getValue().getYear(),
-				selectDataFimCAD.getValue().getMonthValue() - 1, selectDataFimCAD.getValue().getDayOfMonth()).build());
-		bo.inserir(vo);
 		vo.setId(bo.retornarId(vo).getId());
 
 		if (pagEfetuadoCAD.isSelected()) {
@@ -681,6 +721,7 @@ public class TelaOrcamentoController implements Initializable {
 		pagEfetuadoATT.setSelected(false);
 		attOrcamento.setVisible(false);
 		openRelatorioButton.setVisible(true);
+		textoDataErrorATT.setVisible(false);
 	}
 
 	@FXML
@@ -853,20 +894,25 @@ public class TelaOrcamentoController implements Initializable {
 			boOrca.registrarPagamento(orcamentoATT);
 		}
 		// atualizar datas
-		Calendar inicialATT = new Calendar.Builder().setDate(selectDataIniATT.getValue().getYear(),
+		try {
+			Calendar inicialATT = new Calendar.Builder().setDate(selectDataIniATT.getValue().getYear(),
 				selectDataIniATT.getValue().getMonthValue() - 1, selectDataIniATT.getValue().getDayOfMonth()).build();
 
-		Calendar finalATT = new Calendar.Builder().setDate(selectDataFimATT.getValue().getYear(),
+			Calendar finalATT = new Calendar.Builder().setDate(selectDataFimATT.getValue().getYear(),
 				selectDataFimATT.getValue().getMonthValue() - 1, selectDataFimATT.getValue().getDayOfMonth()).build();
 
-		if (inicialATT != orcamentoATT.getDataInicio()) {
-			orcamentoATT.setDataInicio(inicialATT);
-			boOrca.editarDataInicial(orcamentoATT);
-		}
+			if (inicialATT != orcamentoATT.getDataInicio()) {
+				orcamentoATT.setDataInicio(inicialATT);
+				boOrca.editarDataInicial(orcamentoATT);
+			}
 
-		if (finalATT != orcamentoATT.getDataFim()) {
-			orcamentoATT.setDataFim(finalATT);
-			boOrca.editarDataFinal(orcamentoATT);
+			if (finalATT != orcamentoATT.getDataFim()) {
+				orcamentoATT.setDataFim(finalATT);
+				boOrca.editarDataFinal(orcamentoATT);
+			}
+			textoDataErrorATT.setVisible(false);
+		} catch (SetterException e) {
+			textoDataErrorATT.setVisible(true);
 		}
 
 		String placa = addAutoPlacaATT.getText();
@@ -910,6 +956,8 @@ public class TelaOrcamentoController implements Initializable {
 		String textoRel = new String();
 		OrcamentoVO vo = new OrcamentoVO();
 		OrcamentoBO bo = new OrcamentoBO();
+		PecasNoOrcamentoBO pBo = new PecasNoOrcamentoBO();
+		PecasNoOrcamentoVO pVo = new PecasNoOrcamentoVO();
 
 		letreiroRelatorio.setVisible(true);
 
@@ -924,7 +972,6 @@ public class TelaOrcamentoController implements Initializable {
 		vo.setDataInicio(calIni);
 		vo.setDataFim(calFim);
 		textoRel = "";
-
 		
 		Document document = new Document();
 		PdfWriter.getInstance(document, new FileOutputStream(
@@ -946,9 +993,14 @@ public class TelaOrcamentoController implements Initializable {
 				"\nData de início: " + 
 				new SimpleDateFormat("dd/MM/yyyy").format(vo2.getDataInicio().getTime()) + 
 				"\nData de finalização: " + 
-				new SimpleDateFormat("dd/MM/yyyy").format(vo2.getDataFim().getTime()) + 
-				"\n--------------------\n"
+				new SimpleDateFormat("dd/MM/yyyy").format(vo2.getDataFim().getTime()) +
+				"\nPeças utilizadas no carro: "
 			;
+			pVo.getOrcamento().setId(vo2.getId());
+			for(PecasNoOrcamentoVO pVo2 : pBo.buscarPorOrcId(pVo)){
+				line += "\n" + pVo2.getPeca().getNome() + ";";
+			}
+			line += "\n--------------------\n";
 			textoRel += line;
 			document.add(new Paragraph(line));
 		}

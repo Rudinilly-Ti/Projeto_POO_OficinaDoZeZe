@@ -50,6 +50,29 @@ public class PecaBO implements BaseInterBO<PecaVO>{
         }
         return lista;
     }
+
+    public List<PecaVO> buscarBackupPorId (PecaVO vo) throws FindException{
+        List<PecaVO> lista = new ArrayList<PecaVO>();
+        try {
+        	ResultSet rs = dao.findBackupById(vo);
+            if (!rs.next()) {
+                throw new FindException("Não foi encotrado nenhuma peça com esse Id.\n");
+            }
+            else{
+            	rs = dao.findBackupById(vo);
+                while(rs.next()){
+                	PecaVO vo2 = new PecaVO();
+                    vo2.setId(rs.getLong("id") - 1);
+                    vo2.setNome(rs.getString("nome"));
+                    vo2.setPreco(rs.getDouble("preco"));
+                    lista.add(vo2);
+                }
+            }
+        } catch (SQLException e) {
+            throw new FindException(e.getMessage());
+        }
+        return lista;
+    }
     
     public List<PecaVO> buscarPorNome (PecaVO vo) throws FindException{
         List<PecaVO> lista = new ArrayList<PecaVO>();

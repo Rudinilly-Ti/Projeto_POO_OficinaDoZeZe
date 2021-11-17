@@ -110,6 +110,23 @@ public class ServicoDAO extends BaseDAO<ServicoVO>{
         return rs;
     }
 
+    public ResultSet findBackupById(ServicoVO vo){
+        Connection conn = getConnection();
+        String sql = "select * from servicobackup where id = ?";
+        PreparedStatement pdst;
+        ResultSet rs = null;
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getId());
+            rs = pdst.executeQuery();
+            
+        } catch (SQLException e) {
+            //TODO: handle exception
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
     public ResultSet findByNome(ServicoVO vo){
         Connection conn = getConnection();
         String sql = "select * from servico where nome = ?";

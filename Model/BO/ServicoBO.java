@@ -50,6 +50,29 @@ public class ServicoBO implements BaseInterBO<ServicoVO> {
         return lista;
     }
 
+    public List<ServicoVO> buscarBackupPorId (ServicoVO vo) throws FindException{
+        List<ServicoVO> lista = new ArrayList<ServicoVO>();
+        try {
+        	ResultSet rs = dao.findBackupById(vo);
+            if (!rs.next()) {
+                throw new FindException("Não foi encotrado nenhum serviço com esse Id.\n");
+            }
+            else{
+            	rs = dao.findBackupById(vo);
+                while(rs.next()){
+                	ServicoVO vo2 = new ServicoVO();
+                    vo2.setId(rs.getLong("id") - 1);
+                    vo2.setNome(rs.getString("nome"));
+                    vo2.setPreco(rs.getDouble("preco"));
+                    lista.add(vo2);
+                }
+            }
+        } catch (SQLException e) {
+            throw new FindException(e.getMessage());
+        }
+        return lista;
+    }
+
     public List<ServicoVO> buscarPorNome (ServicoVO vo) throws FindException{
         List<ServicoVO> lista = new ArrayList<ServicoVO>();
         try {

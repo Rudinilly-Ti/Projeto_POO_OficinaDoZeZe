@@ -334,7 +334,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </CheckBox>
-            <CheckBox fx:id="servFinalizadoATT" layoutX="87.0" layoutY="400.0" mnemonicParsing="false" text="Serviço finalizado">
+            <CheckBox fx:id="servFinalizadoATT" layoutX="87.0" layoutY="400.0" mnemonicParsing="false" onAction="#servFinalizadoATT" text="Serviço finalizado">
                <font>
                   <Font size="18.0" />
                </font>
@@ -393,11 +393,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </DatePicker>
-            <DatePicker fx:id="selectDataFimATT" layoutX="243.0" layoutY="251.0">
+            <DatePicker fx:id="selectDataFimATT" disable="true" layoutX="243.0" layoutY="251.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </DatePicker>
+            <Label fx:id="textoDataErrorATT" layoutX="237.0" layoutY="286.0" text="A data inicial deve ser anterior a final." textFill="#650000" visible="false" />
          </children>
       </Pane>
       <Pane fx:id="cadOrcamento" layoutX="215.0" layoutY="183.0" prefHeight="600.0" prefWidth="1039.0" visible="false">
@@ -473,7 +474,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </CheckBox>
-            <CheckBox fx:id="servFinalizadoCAD" layoutX="87.0" layoutY="400.0" mnemonicParsing="false" text="Serviço finalizado">
+            <CheckBox fx:id="servFinalizadoCAD" layoutX="87.0" layoutY="400.0" mnemonicParsing="false" onAction="#servFinalizadoCAD" text="Serviço finalizado">
                <font>
                   <Font size="18.0" />
                </font>
@@ -530,10 +531,11 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <DatePicker fx:id="selectDataFimCAD" layoutX="243.0" layoutY="251.0">
+            <DatePicker fx:id="selectDataFimCAD" disable="true" layoutX="243.0" layoutY="251.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></DatePicker>
+            <Label fx:id="textoDataErrorCAD" layoutX="237.0" layoutY="292.0" text="Data inicial deve ser anterior a final" textFill="#680000" visible="false" />
          </children>
       </Pane>
       <ScrollPane fx:id="relatorioPainel" layoutX="212.0" layoutY="179.0" prefHeight="607.0" prefWidth="1043.0" visible="false">

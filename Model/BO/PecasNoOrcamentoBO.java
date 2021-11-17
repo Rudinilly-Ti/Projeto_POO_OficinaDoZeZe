@@ -51,7 +51,7 @@ public class PecasNoOrcamentoBO implements BaseInterBO<PecasNoOrcamentoVO> {
 					vo2.getOrcamento().setId(rs.getLong("id_orcamento"));
 					vo2.getPeca().setId(rs.getLong("id_peca"));
 					PecaBO boPeca = new PecaBO();
-					List<PecaVO> peca = boPeca.buscarPorId(vo2.getPeca());
+					List<PecaVO> peca = boPeca.buscarBackupPorId(vo2.getPeca());
 					vo2.getPeca().setNome(peca.get(0).getNome());
 					vo2.getPeca().setPreco(peca.get(0).getPreco());
 					lista.add(vo2);
@@ -78,9 +78,9 @@ public class PecasNoOrcamentoBO implements BaseInterBO<PecasNoOrcamentoVO> {
 					vo2.setQuantidade(rs.getInt("quantidade"));
 					vo2.setValor(rs.getDouble("valor"));
 					vo2.getOrcamento().setId(rs.getLong("id_orcamento"));
-					vo2.getPeca().setId(rs.getLong("id_peca"));
+					vo2.getPeca().setId(rs.getLong("id_peca") + 1);
 					PecaBO boPeca = new PecaBO();
-					List<PecaVO> peca = boPeca.buscarPorId(vo2.getPeca());
+					List<PecaVO> peca = boPeca.buscarBackupPorId(vo2.getPeca());
 					vo2.getPeca().setNome(peca.get(0).getNome());
 					vo2.getPeca().setPreco(peca.get(0).getPreco());
 					lista.add(vo2);
@@ -119,7 +119,7 @@ public class PecasNoOrcamentoBO implements BaseInterBO<PecasNoOrcamentoVO> {
 						vo2.getOrcamento().setId(rs2.getLong("id_orcamento"));
 						vo2.getPeca().setId(rs2.getLong("id_peca"));
 						PecaBO boPeca = new PecaBO();
-						List<PecaVO> peca = boPeca.buscarPorId(vo2.getPeca());
+						List<PecaVO> peca = boPeca.buscarBackupPorId(vo2.getPeca());
 						vo2.getPeca().setNome(peca.get(0).getNome());
 						vo2.getPeca().setPreco(peca.get(0).getPreco());
 						lista.add(vo2);
@@ -146,7 +146,7 @@ public class PecasNoOrcamentoBO implements BaseInterBO<PecasNoOrcamentoVO> {
 				vo.getOrcamento().setId(rs.getLong("id_orcamento"));
 				vo.getPeca().setId(rs.getLong("id_peca"));
 				PecaBO boPeca = new PecaBO();
-				List<PecaVO> peca = boPeca.buscarPorId(vo.getPeca());
+				List<PecaVO> peca = boPeca.buscarBackupPorId(vo.getPeca());
 				vo.getPeca().setNome(peca.get(0).getNome());
 				lista.add(vo);
 			}

@@ -51,6 +51,10 @@ public class ServicosNoOrcamentoBO {
 					vo2.setValor(rs.getDouble("valor"));
 					vo2.getOrcamento().setId(rs.getLong("id_orcamento"));
 					vo2.getServico().setId(rs.getLong("id_servico"));
+					ServicoBO boServico = new ServicoBO();
+					List<ServicoVO> serv = boServico.buscarBackupPorId(vo2.getServico());
+					vo2.getServico().setNome(serv.get(0).getNome());
+					vo2.getServico().setPreco(serv.get(0).getPreco());
 					lista.add(vo2);
 				}
 			}
@@ -75,11 +79,11 @@ public class ServicosNoOrcamentoBO {
 					vo2.setQuantidade(rs.getInt("quantidade"));
 					vo2.setValor(rs.getDouble("valor"));
 					vo2.getOrcamento().setId(rs.getLong("id_orcamento"));
-					vo2.getServico().setId(rs.getLong("id_servico"));
+					vo2.getServico().setId(rs.getLong("id_servico") + 1);
 					ServicoBO boServico = new ServicoBO();
-					List<ServicoVO> peca = boServico.buscarPorId(vo2.getServico());
-					vo2.getServico().setNome(peca.get(0).getNome());
-					vo2.getServico().setPreco(peca.get(0).getPreco());
+					List<ServicoVO> serv = boServico.buscarBackupPorId(vo2.getServico());
+					vo2.getServico().setNome(serv.get(0).getNome());
+					vo2.getServico().setPreco(serv.get(0).getPreco());
 					lista.add(vo2);
 				}
 			}
@@ -116,8 +120,9 @@ public class ServicosNoOrcamentoBO {
 						vo2.getOrcamento().setId(rs2.getLong("id_orcamento"));
 						vo2.getServico().setId(rs2.getLong("id_servico"));
 						ServicoBO boServico = new ServicoBO();
-						List<ServicoVO> peca = boServico.buscarPorId(vo2.getServico());
-						vo2.getServico().setNome(peca.get(0).getNome());
+						List<ServicoVO> serv = boServico.buscarBackupPorId(vo2.getServico());
+						vo2.getServico().setNome(serv.get(0).getNome());
+						vo2.getServico().setPreco(serv.get(0).getPreco());
 						lista.add(vo2);
 					}
 				}
@@ -140,6 +145,10 @@ public class ServicosNoOrcamentoBO {
 				vo.setValor(rs.getDouble("valor"));
 				vo.getOrcamento().setId(rs.getLong("id_orcamento"));
 				vo.getServico().setId(rs.getLong("id_servico"));
+				ServicoBO boServico = new ServicoBO();
+				List<ServicoVO> serv = boServico.buscarBackupPorId(vo.getServico());
+				vo.getServico().setNome(serv.get(0).getNome());
+				vo.getServico().setPreco(serv.get(0).getPreco());
 				lista.add(vo);
 			}
 		} catch (SQLException e) {

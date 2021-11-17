@@ -209,4 +209,21 @@ public class PecaDAO extends BaseDAO<PecaVO>{
             e.printStackTrace();
         }
     }
+
+    public ResultSet findBackupById(PecaVO vo){
+        conn = getConnection();
+        String sql = "select * from pecabackup where id = ?";
+        PreparedStatement pdst;
+        ResultSet rs = null;
+        try {
+            pdst = conn.prepareStatement(sql);
+            pdst.setLong(1, vo.getId());
+            rs = pdst.executeQuery();
+            
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return rs;
+    }
 }
