@@ -196,13 +196,14 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <TableView fx:id="tablePecas" layoutX="321.0" layoutY="419.0" prefHeight="317.0" prefWidth="798.0">
+      <TableView fx:id="tablePecas" layoutX="321.0" layoutY="419.0" prefHeight="317.0" prefWidth="800.0">
         <columns>
+            <TableColumn fx:id="idPecaCol" prefWidth="50.0" text="id" />
           <TableColumn fx:id="col_nome" prefWidth="175.0" text="Nome" />
-          <TableColumn fx:id="col_preco" prefWidth="182.0" text="Preço" />
-            <TableColumn fx:id="col_fabricante" minWidth="0.0" prefWidth="137.0" text="Fabricante" />
+          <TableColumn fx:id="col_preco" prefWidth="100.0" text="Preço" />
+            <TableColumn fx:id="col_fabricante" minWidth="0.0" prefWidth="175.0" text="Fabricante" />
             <TableColumn fx:id="col_att" prefWidth="150.0" text="Atualizar" />
-            <TableColumn fx:id="col_dll" prefWidth="153.0" text="Deletar" />
+            <TableColumn fx:id="col_dll" prefWidth="150.0" text="Deletar" />
         </columns>
       </TableView>
       <Pane fx:id="cadPecaPane" layoutX="211.0" layoutY="180.0" prefHeight="607.0" prefWidth="1041.0" visible="false">

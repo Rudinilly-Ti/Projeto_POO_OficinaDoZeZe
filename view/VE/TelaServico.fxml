@@ -243,12 +243,13 @@
             </ImageView>
          </graphic>
       </Button>
-      <TableView fx:id="TableViewServico" layoutX="360.0" layoutY="405.0" prefHeight="331.0" prefWidth="703.0">
+      <TableView fx:id="TableViewServico" layoutX="360.0" layoutY="405.0" prefHeight="331.0" prefWidth="700.0">
         <columns>
-          <TableColumn fx:id="colunaNome" minWidth="175.0" prefWidth="98.0" text="Nome" />
-          <TableColumn fx:id="colunaValor" minWidth="175.0" prefWidth="108.0" text="Valor" />
-            <TableColumn fx:id="colunaAtualizar" minWidth="175.0" prefWidth="75.0" text="Atualizar" />
-            <TableColumn fx:id="colunaDeletar" minWidth="175.0" prefWidth="75.0" text="Deletar" />
+            <TableColumn fx:id="idServCol" prefWidth="50.0" text="id" />
+          <TableColumn fx:id="colunaNome" minWidth="175.0" prefWidth="300.0" text="Nome" />
+          <TableColumn fx:id="colunaValor" prefWidth="150.0" text="Valor" />
+            <TableColumn fx:id="colunaAtualizar" prefWidth="100.0" text="Atualizar" />
+            <TableColumn fx:id="colunaDeletar" prefWidth="100.0" text="Deletar" />
         </columns>
       </TableView>
       <Pane fx:id="telaDeCadastro" layoutX="214.0" layoutY="181.0" prefHeight="605.0" prefWidth="1040.0" style="-fx-background-color: ffff;" visible="false">
@@ -299,11 +300,17 @@
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="buttonVoltar" layoutX="335.0" layoutY="464.0" mnemonicParsing="false" onAction="#voltar" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: d0d0d0;" text="Voltar" textFill="MAROON">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <TextField fx:id="idServico" layoutX="397.0" layoutY="96.0" visible="false" />
          </children>

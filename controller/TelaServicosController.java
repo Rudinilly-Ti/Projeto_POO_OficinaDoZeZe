@@ -129,6 +129,9 @@ public class TelaServicosController implements Initializable {
     private TableColumn<ServicoVO, ServicoVO> colunaDeletar;
 
     @FXML
+    private TableColumn<ServicoVO, Long> idServCol;
+
+    @FXML
     private TableColumn<ServicoVO, String> colunaNome;
 
     @FXML
@@ -144,6 +147,8 @@ public class TelaServicosController implements Initializable {
         
         colunaNome.setCellValueFactory(new PropertyValueFactory<ServicoVO, String>("nome"));
     	colunaValor.setCellValueFactory(new PropertyValueFactory<ServicoVO, Double>("preco"));
+        idServCol.setCellValueFactory(new PropertyValueFactory<ServicoVO, Long>("id"));
+
     	//colunaAtualizar.set
     	
     	Buttons.initButtons(colunaAtualizar, 20, ATT_ICON, "svg-gray", (ServicoVO servico, ActionEvent event) -> {

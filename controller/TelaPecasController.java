@@ -90,6 +90,9 @@ public class TelaPecasController implements Initializable {
     private TableColumn<PecaVO, PecaVO> col_dll;
 
     @FXML
+    private TableColumn<PecaVO, Long> idPecaCol;
+
+    @FXML
     private TableColumn<PecaVO, String> col_fabricante;
 
     @FXML
@@ -184,6 +187,7 @@ public class TelaPecasController implements Initializable {
         col_nome.setCellValueFactory(new PropertyValueFactory<PecaVO, String>("nome"));
         col_preco.setCellValueFactory(new PropertyValueFactory<PecaVO, Double>("preco"));
         col_fabricante.setCellValueFactory(new PropertyValueFactory<PecaVO, String>("fabricante"));
+        idPecaCol.setCellValueFactory(new PropertyValueFactory<PecaVO, Long>("id"));
 
         Buttons.initButtons(col_att, 20, ATT_ICON, "svg-gray", (PecaVO peca, ActionEvent event) -> {
             attPecaPane.setVisible(true);

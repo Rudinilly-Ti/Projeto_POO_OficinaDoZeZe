@@ -36,6 +36,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -116,6 +117,12 @@ public class TelaOrcamentoController implements Initializable {
 
 	@FXML
     private Label findCarroErrorText;
+
+	@FXML
+    private Label relatorioTexto;
+
+	@FXML
+	private ImageView letreiroRelatorio;
 
 	@FXML
     private Label findClienteErrorText;
@@ -890,6 +897,7 @@ public class TelaOrcamentoController implements Initializable {
 		dataInicial.setValue(null);
 		dataFinal.setValue(null);
 		openRelatorioButton.setVisible(true);
+		letreiroRelatorio.setVisible(false);
 		relatorioPainel.setVisible(false);
 	}
 
@@ -899,8 +907,11 @@ public class TelaOrcamentoController implements Initializable {
 		Calendar calIni = Calendar.getInstance();
 		Calendar calFim = Calendar.getInstance();
 		Double valorTotal = 0.0;
+		String textoRel = new String();
 		OrcamentoVO vo = new OrcamentoVO();
 		OrcamentoBO bo = new OrcamentoBO();
+
+		letreiroRelatorio.setVisible(true);
 
 		calIni.set(Calendar.DAY_OF_MONTH, dataInicial.getValue().getDayOfMonth());
 		calIni.set(Calendar.MONTH, (dataInicial.getValue().getMonthValue() - 1));
@@ -912,6 +923,7 @@ public class TelaOrcamentoController implements Initializable {
 
 		vo.setDataInicio(calIni);
 		vo.setDataFim(calFim);
+		textoRel = "";
 
 		
 		Document document = new Document();
@@ -927,19 +939,22 @@ public class TelaOrcamentoController implements Initializable {
 		for(OrcamentoVO vo2 : bo.buscarPorPeriodo(vo)){
 			valorTotal += vo2.getValor();
 
-			line = "Placa do carro : " + vo2.getCarro().getPlaca() + 
+			line = "Placa do carro : " + vo2.getCarro().getPlaca().toUpperCase() + 
 				"\nNome do cliente: " + vo2.getCliente().getNome() + 
 				" | CPF: " + vo2.getCliente().getCPF() + 
-				"\nValor: R$" + vo2.getValor() + 
+				"\nValor: R$ " + vo2.getValor() + 
 				"\nData de início: " + 
 				new SimpleDateFormat("dd/MM/yyyy").format(vo2.getDataInicio().getTime()) + 
 				"\nData de finalização: " + 
 				new SimpleDateFormat("dd/MM/yyyy").format(vo2.getDataFim().getTime()) + 
 				"\n--------------------\n"
 			;
+			textoRel += line;
 			document.add(new Paragraph(line));
 		}
-		line = "\nValor total no período: R$" + valorTotal.toString();
+		line = "\nValor total no período: R$ " + valorTotal.toString();
+		textoRel += line;
+		relatorioTexto.setText(textoRel);
 		document.add(new Paragraph(line));
     	
     	document.close();
